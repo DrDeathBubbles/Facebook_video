@@ -9,6 +9,8 @@ import boto3
 import botocore
 import os
 import json 
+import time
+
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
@@ -39,25 +41,36 @@ if __name__ == '__main__':
 
 #Setting up the connection to monitor SQS 
 
-conn = initialise_connection()
-q = conn.create_queue('DS_AJM_VIDEO')
+    conn = initialise_connection()
+    q = conn.create_queue('DS_AJM_VIDEO')
 
-    while true:
+    while True:
         messages = []
         rs = q.get_messages()
         for m in rs:
-            temp = json.loads(m)
-            messages.append(m.get_body())
+            temp = json.loads(m.get_body())
+            q.delete_message(m)
+            try:
+                temp = temp['Records'][0]['s3']['object']['key']
+            except KeyError as ke:
+                logging.error('A key error {} has occured while trying\
+                to access the S3 filename.')
+            messages.append(temp)
+
+        for message in messages:
+            retrieve_from_s3(message)
+
+        time.sleep(60)
 
 
 
 
-    conn = initialise_connection()
-    q = conn.create_queue('DS_AJM_VIDEO')
-    rs = q.get_messages()
-    m = rs[0]
-    m.get_body()
-
+#    conn = initialise_connection()
+#    q = conn.create_queue('DS_AJM_VIDEO')
+#    rs = q.get_messages()
+#    m = rs[0]
+#    m.get_body()
+#
 
 
 
