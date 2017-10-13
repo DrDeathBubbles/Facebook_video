@@ -14,6 +14,10 @@ import time
 import requests
 import os 
 
+from moviepy.editor import *
+import moviepy
+
+
 
 access_token = os.environ['ACCESSTOKEN_VIDEO_2']
 #file_location = '~/Desktop/Testing_folder/{}'
@@ -60,7 +64,13 @@ def adding_description(post_id,description):
     flag = requests.post(url,json=data)
     return flag
 
+def video_processing(video_file,start_time, end_time,output):
 
+    clip = VideoFileClip(video_file)
+    clip = clip.subclip(start_time,end_time)
+    clip = moviepy.video.fx.all.fadein(clip,3)
+    clip = moviepy.video.fx.all.fadeout(clip,3)
+    clip.write_videofile(output)
 
 if __name__ == '__main__':
 
