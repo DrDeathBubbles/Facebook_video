@@ -11,11 +11,21 @@ import os
 import json 
 import time
 
+import requests
+import os 
+
+
+access_token = os.environ['ACCESSTOKEN_VIDEO_2']
+#file_location = '~/Desktop/Testing_folder/{}'
+file_location = '/mnt/'
+
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
                     filename='/tmp/myapp.log',
                     filemode='w')
+
+
 
 
 
@@ -35,6 +45,21 @@ def initialise_connection():
         logging.error('A keyerror {} has occured'.format(ke))
 
     return conn
+
+
+def upload_video(video_path):
+    url = 'https://graph-video.facebook.com/LSWSTST/videos?access_token={}'.format(access_token_2) 
+    _file = {'file':open(video_path,'rb')}
+    flag = requests.post(url,files=_file) 
+    return flag
+
+
+def adding_description(post_id,description):
+    data = {'description':description}
+    url = 'https://graph.facebook.com/v2.10/{}?access_token={}'.format(post_id,access_token)
+    flag = requests.post(url,json=data)
+    return flag
+
 
 
 if __name__ == '__main__':
@@ -59,18 +84,11 @@ if __name__ == '__main__':
 
         for message in messages:
             retrieve_from_s3(message)
+            upload_video(file_location+message)        
+
 
         time.sleep(60)
 
-
-
-
-#    conn = initialise_connection()
-#    q = conn.create_queue('DS_AJM_VIDEO')
-#    rs = q.get_messages()
-#    m = rs[0]
-#    m.get_body()
-#
 
 
 
