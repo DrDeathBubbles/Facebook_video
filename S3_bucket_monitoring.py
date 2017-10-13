@@ -19,7 +19,7 @@ import moviepy
 
 
 
-access_token = os.environ['ACCESSTOKEN_VIDEO_2']
+access_token_2 = os.environ['ACCESSTOKEN_VIDEO_2']
 #file_location = '~/Desktop/Testing_folder/{}'
 file_location = '/mnt/'
 
@@ -52,6 +52,9 @@ def initialise_connection():
 
 
 def upload_video(video_path):
+    """
+    Json body contains the id of the facebook video which has been uploaded.
+    """
     url = 'https://graph-video.facebook.com/LSWSTST/videos?access_token={}'.format(access_token_2) 
     _file = {'file':open(video_path,'rb')}
     flag = requests.post(url,files=_file) 
@@ -59,15 +62,18 @@ def upload_video(video_path):
 
 
 def adding_description(post_id,description):
+    """
+    The return is either true or false.
+    """
     data = {'description':description}
-    url = 'https://graph.facebook.com/v2.10/{}?access_token={}'.format(post_id,access_token)
+    url = 'https://graph.facebook.com/v2.10/{}?access_token={}'.format(post_id,access_token_2)
     flag = requests.post(url,json=data)
     return flag
 
-def video_processing(video_file,start_time, end_time,output):
+def video_processing(video_file, output, start_time = 0, end_time = 10):
 
     clip = VideoFileClip(video_file)
-    clip = clip.subclip(start_time,end_time)
+#    clip = clip.subclip(start_time,end_time)
     clip = moviepy.video.fx.all.fadein(clip,3)
     clip = moviepy.video.fx.all.fadeout(clip,3)
     clip.write_videofile(output)
@@ -94,7 +100,10 @@ if __name__ == '__main__':
 
         for message in messages:
             retrieve_from_s3(message)
-            upload_video(file_location+message)        
+            video_processing(file_location+message,file_location+message)
+            post = upload_video(file_location+message)
+            adding_description(post.json()['id'],'This is a test of the automated tagging of videos')
+
 
 
         time.sleep(60)
