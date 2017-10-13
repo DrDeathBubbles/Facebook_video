@@ -7,6 +7,7 @@ def video_processing(video_file,start_time, end_time,output):
     clip = VideoFileClip(video_file)
     clip = clip.subclip(start_time,end_time)
     clip = moviepy.video.fx.all.fadein(clip,3)
+    clip = moviepy.video.fx.all.fadeout(clip,3)
     clip.write_videofile(output)
 
 if __name__ == '__main__':
