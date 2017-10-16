@@ -17,6 +17,9 @@ import os
 from moviepy.editor import *
 import moviepy
 
+import time
+
+
 
 
 access_token_2 = os.environ['ACCESSTOKEN_VIDEO_2']
@@ -30,12 +33,9 @@ logging.basicConfig(level=logging.DEBUG,
                     filemode='w')
 
 
-
-
-
 def retrieve_from_s3(filename):
     os.system('s4cmd get s3://ds.ajm.videos/{} \
-    ~/Desktop/Testing_folder/{}'.format(filename,filename))
+    /mnt/{}'.format(filename,filename))
 
 
 def initialise_connection():
