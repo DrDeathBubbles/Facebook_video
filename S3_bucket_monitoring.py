@@ -24,7 +24,7 @@ import time
 
 access_token_2 = os.environ['ACCESSTOKEN_VIDEO_2']
 #file_location = '~/Desktop/Testing_folder/{}'
-file_location = '/mnt/'
+file_location = '~/video_files/'
 
 
 logging.basicConfig(level=logging.DEBUG,
