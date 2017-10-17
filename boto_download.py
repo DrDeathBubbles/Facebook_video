@@ -12,12 +12,16 @@ my_bucket = s3.Bucket('ds.ajm.videos')
 for objects in my_bucket.objects.all():
     keys.append(objects.key)
 
-a = my_bucket.download_file(keys[2],keys[2])
+a = my_bucket.download_file(keys[3],keys[3])
 
-#try:
-#    s3.Bucket(BUCKET_NAME).download_file(KEY, 'downloaded_file.mp4')
-#except botocore.exceptions.ClientError as e:
-#    if e.response['Error']['Code'] == "404":
-#        print("The object does not exist.")
-#    else:
-#        raise
+
+
+bucket_name = 'ds.ajm.videos'
+path_to_videos = "/Users/aaronmeagher/AJM/video_files/"
+path_to_videos = '/home/ubuntu/AJM/video_files'
+s3 = boto3.resource('s3')
+
+def retrieve_from_s3(filename):
+    my_bucket = s3.Bucket('ds.ajm.videos')
+    a = my_bucket.download_file(filename,path_to_videos + filename)
+    return a

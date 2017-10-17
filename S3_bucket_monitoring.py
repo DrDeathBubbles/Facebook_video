@@ -19,8 +19,10 @@ import moviepy
 
 import time
 
-
-
+bucket_name = 'ds.ajm.videos'
+#path_to_videos = "/Users/aaronmeagher/AJM/video_files/"'
+path_to_videos = "/home/ubuntu/AJM/video_files/"
+s3 = boto3.resource('s3')
 
 access_token_2 = os.environ['ACCESSTOKEN_VIDEO_2']
 #file_location = '~/Desktop/Testing_folder/{}'
@@ -33,9 +35,16 @@ logging.basicConfig(level=logging.DEBUG,
                     filemode='w')
 
 
+#def retrieve_from_s3(filename):
+#    os.system('s4cmd get s3://ds.ajm.videos/{} \
+#    ~/video_files/{}'.format(filename,filename))
+#
+
+
 def retrieve_from_s3(filename):
-    os.system('s4cmd get s3://ds.ajm.videos/{} \
-    ~/video_files/{}'.format(filename,filename))
+    my_bucket = s3.Bucket('ds.ajm.videos')
+    a = my_bucket.download_file(filename,path_to_videos + filename)
+    return a    
 
 
 def initialise_connection():
