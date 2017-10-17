@@ -110,7 +110,7 @@ if __name__ == '__main__':
 
         for message in messages:
             retrieve_from_s3(message)
-            video_processing(file_location+message,file_location+message)
+            #video_processing(file_location+message,file_location+message)
             post = upload_video(file_location+message)
             adding_description(post.json()['id'],'This is a test of the automated tagging of videos')
 
