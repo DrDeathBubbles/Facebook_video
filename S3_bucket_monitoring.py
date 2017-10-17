@@ -26,7 +26,7 @@ s3 = boto3.resource('s3')
 
 access_token_2 = os.environ['ACCESSTOKEN_VIDEO_2']
 #file_location = '~/Desktop/Testing_folder/{}'
-file_location = '/home/ubuntu/AJM/video_file/'
+file_location = '/home/ubuntu/AJM/video_files/'
 
 
 logging.basicConfig(level=logging.DEBUG,
