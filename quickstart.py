@@ -3,7 +3,8 @@ from __future__ import print_function
 import httplib2
 import os
 
-from apiclient import discovery
+#from apiclient import discovery
+from googleapiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
@@ -17,7 +18,7 @@ except ImportError:
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/gmail-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
-CLIENT_SECRET_FILE = 'client_secret.json'
+CLIENT_SECRET_FILE = 'gmail_client_secret.json'
 APPLICATION_NAME = 'Gmail API Python Quickstart'
 
 
