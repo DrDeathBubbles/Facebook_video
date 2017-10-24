@@ -113,8 +113,8 @@ def main():
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
-    message = create_message('aaron.meagher@cilabs.com','steve@cilabs.com',
-    'Test of gmail api sending SUBJECT', 'Test of gmail api sending BODY')
+    message = create_message('aaron.meagher@cilabs.com','aaron.meagher@cilabs.com',
+    'Test of gmail api sending SUBJECT', 'Test of gmail api sending  \n and the new line \n www.facebook.com')
 
     send_message(service,'aaron.meagher@cilabs.com',message)
 
