@@ -10,6 +10,9 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
+from email.mime import text 
+import base64
+
 try:
     import argparse
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
@@ -18,7 +21,8 @@ except ImportError:
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/gmail-python-quickstart.json
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+#SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+SCOPES = 'https://mail.google.com/'
 CLIENT_SECRET_FILE = 'gmail_client_secret.json'
 APPLICATION_NAME = 'Gmail API Python Quickstart'
 
@@ -65,11 +69,17 @@ def create_message(sender, to, subject, message_text):
   Returns:
     An object containing a base64url encoded email object.
   """
-  message = MIMEText(message_text)
+  message = text.MIMEText(message_text)
   message['to'] = to
   message['from'] = sender
   message['subject'] = subject
-  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  raw = base64.urlsafe_b64encode(message.as_bytes()) 
+  raw = raw.decode()
+  return {'raw': raw}
+  #return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  #return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
+  #return {'raw': base64.urlsafe_b64encode(str.encode(message.as_string()))}
+
 
 
 def send_message(service, user_id, message):
@@ -87,11 +97,11 @@ def send_message(service, user_id, message):
   try:
     message = (service.users().messages().send(userId=user_id, body=message)
                .execute())
-    print 'Message Id: %s' % message['id']
+    print('Message Id: %s' % message['id'])
     return message
-  except errors.HttpError, error:
-    print 'An error occurred: %s' % error
-
+  except:
+   # print('An error occurred:{}'.format(error))
+    print('OOPS!')
 
 def main():
     """Shows basic usage of the Gmail API.
@@ -103,17 +113,23 @@ def main():
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
+    message = create_message('aaron.meagher@cilabs.com','steve@cilabs.com',
+    'Test of gmail api sending SUBJECT', 'Test of gmail api sending BODY')
+
+    send_message(service,'aaron.meagher@cilabs.com',message)
 
 
-    results = service.users().labels().list(userId='me').execute()
-    labels = results.get('labels', [])
 
-    if not labels:
-        print('No labels found.')
-    else:
-      print('Labels:')
-      for label in labels:
-        print(label['name'])
+
+#    results = service.users().labels().list(userId='me').execute()
+#    labels = results.get('labels', [])
+#
+#    if not labels:
+#        print('No labels found.')
+#    else:
+#      print('Labels:')
+#      for label in labels:
+#        print(label['name'])
 
 
 if __name__ == '__main__':
