@@ -103,6 +103,20 @@ def send_message(service, user_id, message):
    # print('An error occurred:{}'.format(error))
     print('OOPS!')
 
+
+def send_email(email_address, facebook_video_link):
+
+    credentials = get_credentials()
+    http = credentials.authorize(httplib2.Http())
+    service = discovery.build('gmail', 'v1', http=http)
+
+    message = create_message('aaron.meagher@cilabs.com',email_address,
+    'Test of gmail api sending SUBJECT', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
+
+    message = send_message(service,'aaron.meagher@cilabs.com',message)
+    
+    return message 
+
 def main():
     """Shows basic usage of the Gmail API.
 
