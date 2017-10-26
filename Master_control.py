@@ -41,6 +41,28 @@ logging.basicConfig(level=logging.DEBUG,
 #    ~/video_files/{}'.format(filename,filename))
 #
 
+def get_spreadsheets():
+    scope = ['https://spreadsheets.google.com/feeds']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+    client = gspread.authorize(creds)
+
+    # Find a workbook by name and open the first sheet
+    # Make sure you use the right name here.
+    speaker_talk_sheet = client.open('WS_16_Speakers').sheet1
+    speaker_email_sheet = client.open('Copy of List of speakers - WS stages & Forum').sheet1
+    # Extract and print all of the values
+    hashes_speaker_talk_sheet = speaker_talk_sheet.get_all_records()
+    speaker_talk_sheet = pd.DataFrame(hashes_speaker_talk_sheet)
+    speaker_talk_sheet.columns = speaker_talk_sheet.ix[0]
+
+    #
+    hashes_speaker_email_sheet = speaker_email_sheet.get_all_records()
+    speaker_email_sheet = pd.DataFrame(hashes_speaker_email_sheet)
+    return [speaker_talk_sheet,speaker_email_sheet]  
+
+
+
+
 
 def retrieve_from_s3(filename):
     my_bucket = s3.Bucket('ds.ajm.videos')
@@ -101,8 +123,16 @@ if __name__ == '__main__':
 
     conn = initialise_connection()
     q = conn.create_queue('DS_AJM_VIDEO')
+    i = 0
 
     while True:
+        i = i + 1
+        if i % 60 == 0:
+            speaker_talk_sheet = 
+            speaker_email_sheet =            
+
+
+
         messages = []
         rs = q.get_messages()
         for m in rs:

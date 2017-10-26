@@ -5,6 +5,29 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
 
+
+def get_spreadsheets():
+    scope = ['https://spreadsheets.google.com/feeds']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+    client = gspread.authorize(creds)
+
+    # Find a workbook by name and open the first sheet
+    # Make sure you use the right name here.
+    speaker_talk_sheet = client.open('WS_16_Speakers').sheet1
+    speaker_email_sheet = client.open('Copy of List of speakers - WS stages & Forum').sheet1
+    # Extract and print all of the values
+    hashes_speaker_talk_sheet = speaker_talk_sheet.get_all_records()
+    speaker_talk_sheet = pd.DataFrame(hashes_speaker_talk_sheet)
+    speaker_talk_sheet.columns = speaker_talk_sheet.ix[0]
+
+    #
+    hashes_speaker_email_sheet = speaker_email_sheet.get_all_records()
+    speaker_email_sheet = pd.DataFrame(hashes_speaker_email_sheet)
+    return [speaker_talk_sheet,speaker_email_sheet]  
+
+
+
+
 def get_spreadsheet(spreadsheet):
     # use creds to create a client to interact with the Google Drive API
     scope = ['https://spreadsheets.google.com/feeds']
@@ -49,6 +72,12 @@ def get_email(speaker_name):
 
 
 
+
+
+
+
+
+
 ##def get_speakers(talk_title,data):
 #    data = get_spreadsheet('WS_16_Speakers')
 #    speakers = get_speakers(talk_title)
@@ -57,8 +86,8 @@ def get_email(speaker_name):
 
 
 if __name__ == '__main__':
-    data = get_spreadsheet('WS_16_Speakers')
-    speakers = get_speakers('Marketing in a mobile first world',data)
+   # data = get_spreadsheet('WS_16_Speakers')
+    #speakers = get_speakers('Marketing in a mobile first world',data)
 
     """
     Need now to lookup the email addresses of these people 
