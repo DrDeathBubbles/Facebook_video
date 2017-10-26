@@ -111,7 +111,7 @@ def send_email(email_address, facebook_video_link):
     service = discovery.build('gmail', 'v1', http=http)
 
     message = create_message('aaron.meagher@cilabs.com',email_address,
-    'Test of gmail api sending SUBJECT', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
+    'Your Web Summit talk is live on Favebook', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
 
     message = send_message(service,'aaron.meagher@cilabs.com',message)
     

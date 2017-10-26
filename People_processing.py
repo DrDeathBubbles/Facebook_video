@@ -22,9 +22,17 @@ def get_spreadsheet(spreadsheet):
     return data 
 
 def fuzzy_matching(talk_title, file_title):
+    """
+    Fuzzy matching taking the talk title as the input
+    And the field_title as the title which is supplied
+    """
      return fuzz.ratio(talk_title, file_title)
 
 def get_speakers(field_title,data):
+    """
+    Getting the speakers for a given talk
+    """
+
     location = data['Title'].apply(fuzzy_matching,file_title=field_title)
     location = location.idxmax()
     speakers = []
@@ -35,6 +43,10 @@ def get_speakers(field_title,data):
             speakers.append(speaker[0])
 
     return speakers
+
+def
+
+
 
 if __name__ == '__main__':
     data = get_spreadsheet('WS_16_Speakers')
