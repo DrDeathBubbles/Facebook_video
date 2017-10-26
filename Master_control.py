@@ -18,6 +18,7 @@ from moviepy.editor import *
 import moviepy
 
 import time
+from People_processing import *
 
 bucket_name = 'ds.ajm.videos'
 #path_to_videos = "/Users/aaronmeagher/AJM/video_files/"'
@@ -120,9 +121,11 @@ if __name__ == '__main__':
             video_processing(file_location+message,file_location+message)
             post = upload_video(file_location+message)
             adding_description(post.json()['id'],'This is a test of the automated tagging of videos')
-
-
-
+            video_url = reading_video_url(post.json()['id'])
+            people_to_be_emailed = get_speakers(message) 
+            print(people_to_be_emailed)
+        
+        
         time.sleep(60)
 
 

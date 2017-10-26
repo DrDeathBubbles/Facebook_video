@@ -26,7 +26,7 @@ def fuzzy_matching(talk_title, file_title):
     Fuzzy matching taking the talk title as the input
     And the field_title as the title which is supplied
     """
-     return fuzz.ratio(talk_title, file_title)
+    return fuzz.ratio(talk_title, file_title)
 
 def get_speakers(field_title,data):
     """
@@ -44,7 +44,10 @@ def get_speakers(field_title,data):
 
     return speakers
 
-def
+def get_speakers(talk_title):
+    data = get_spreadsheet('WS_16_Speakers')
+    speakers = get_speakers(talk_title)
+    return speakers
 
 
 
