@@ -44,10 +44,15 @@ def get_speakers(field_title,data):
 
     return speakers
 
-def get_speakers(talk_title):
-    data = get_spreadsheet('WS_16_Speakers')
-    speakers = get_speakers(talk_title)
-    return speakers
+def get_email(speaker_name):
+    data = get_spreadsheet('Copy of List of speakers - WS stages & Forum')
+
+
+
+##def get_speakers(talk_title,data):
+#    data = get_spreadsheet('WS_16_Speakers')
+#    speakers = get_speakers(talk_title)
+#    return speakers
 
 
 
