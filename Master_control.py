@@ -126,12 +126,10 @@ if __name__ == '__main__':
     i = 0
 
     while True:
-        i = i + 1
         if i % 60 == 0:
-            speaker_talk_sheet = 
-            speaker_email_sheet =            
-
-
+            speaker_talk_sheet, speaker_email_sheet = get_spreadsheets()
+            i = 0
+        i = i+1
 
         messages = []
         rs = q.get_messages()

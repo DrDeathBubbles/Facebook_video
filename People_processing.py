@@ -14,7 +14,7 @@ def get_spreadsheets():
     # Find a workbook by name and open the first sheet
     # Make sure you use the right name here.
     speaker_talk_sheet = client.open('WS_16_Speakers').sheet1
-    speaker_email_sheet = client.open('Copy of List of speakers - WS stages & Forum').sheet1
+    speaker_email_sheet = client.open('Speaker Intro Working Sheet').sheet1
     # Extract and print all of the values
     hashes_speaker_talk_sheet = speaker_talk_sheet.get_all_records()
     speaker_talk_sheet = pd.DataFrame(hashes_speaker_talk_sheet)
@@ -24,8 +24,6 @@ def get_spreadsheets():
     hashes_speaker_email_sheet = speaker_email_sheet.get_all_records()
     speaker_email_sheet = pd.DataFrame(hashes_speaker_email_sheet)
     return [speaker_talk_sheet,speaker_email_sheet]  
-
-
 
 
 def get_spreadsheet(spreadsheet):
@@ -67,37 +65,27 @@ def get_speakers(field_title,data):
 
     return speakers
 
-def get_email(speaker_name):
-    data = get_spreadsheet('Copy of List of speakers - WS stages & Forum')
-
-
-
-
-
-
-
-
-
-##def get_speakers(talk_title,data):
-#    data = get_spreadsheet('WS_16_Speakers')
-#    speakers = get_speakers(talk_title)
-#    return speakers
-
+def get_emails(speakers,data):
+    """
+    Gets the email addresses for a given set of speakers
+    """
+    emails = []
+    for speaker in speakers:
+        location = data['Full Name'].apply(fuzzy_matching, field_title = speaker)
+        location = location.idxmax()
+        emails.append(data.ix[location]['email'])
+    return emails
 
 
 if __name__ == '__main__':
-   # data = get_spreadsheet('WS_16_Speakers')
-    #speakers = get_speakers('Marketing in a mobile first world',data)
+    # Getting spreadsheets
+    print('Get spreadsheets')
+    speaker_talk_sheet,speaker_email_sheet = get_spreadsheets()
 
-    """
-    Need now to lookup the email addresses of these people 
-    """
-#    location = data['Title'].apply(fuzzy_matching,file_title='How to prevent a cyberwar')
-#    location = location.idxmax()
-#    speakers = []
-#    for i in range(1,5):
-#        speaker = data.ix[location]['Speaker' + str(i)]
-#        if len(speaker) > 0:
-#            speaker = speaker.split(',')
-#            speakers.append(speaker)
-#
+    # Get speakers
+    print('Get speakers')
+    speakers = get_speakers('Plastics: reuse, recycle, redesign',speaker_talk_sheet)
+    
+    #Get emails
+    print('Get emails')
+    emails = get_emails(speakers, speaker_email_sheet)
