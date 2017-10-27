@@ -26,7 +26,8 @@ def reading_video_url(post_id):
     {'id': '1450967228357958',
     'permalink_url': '/LSWSTST/videos/1450967228357958/'}
     """
+
     url = 'https://graph.facebook.com/v2.10/{}?fields=permalink_url&access_token={}'.format(post_id,access_token)
     flag = requests.post(url)
-
+    
     return flag

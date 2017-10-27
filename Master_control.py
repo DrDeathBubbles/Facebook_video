@@ -19,7 +19,7 @@ import moviepy
 
 import time
 from People_processing import *
-
+from Email_processing import * 
 bucket_name = 'ds.ajm.videos'
 #path_to_videos = "/Users/aaronmeagher/AJM/video_files/"'
 path_to_videos = "/home/ubuntu/AJM/video_files/"
@@ -40,29 +40,6 @@ logging.basicConfig(level=logging.DEBUG,
 #    os.system('s4cmd get s3://ds.ajm.videos/{} \
 #    ~/video_files/{}'.format(filename,filename))
 #
-
-def get_spreadsheets():
-    scope = ['https://spreadsheets.google.com/feeds']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
-    client = gspread.authorize(creds)
-
-    # Find a workbook by name and open the first sheet
-    # Make sure you use the right name here.
-    speaker_talk_sheet = client.open('WS_16_Speakers').sheet1
-    speaker_email_sheet = client.open('Copy of List of speakers - WS stages & Forum').sheet1
-    # Extract and print all of the values
-    hashes_speaker_talk_sheet = speaker_talk_sheet.get_all_records()
-    speaker_talk_sheet = pd.DataFrame(hashes_speaker_talk_sheet)
-    speaker_talk_sheet.columns = speaker_talk_sheet.ix[0]
-
-    #
-    hashes_speaker_email_sheet = speaker_email_sheet.get_all_records()
-    speaker_email_sheet = pd.DataFrame(hashes_speaker_email_sheet)
-    return [speaker_talk_sheet,speaker_email_sheet]  
-
-
-
-
 
 def retrieve_from_s3(filename):
     my_bucket = s3.Bucket('ds.ajm.videos')
@@ -150,10 +127,13 @@ if __name__ == '__main__':
             post = upload_video(file_location+message)
             adding_description(post.json()['id'],'This is a test of the automated tagging of videos')
             video_url = reading_video_url(post.json()['id'])
-            people_to_be_emailed = get_speakers(message) 
+            people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
+            emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
+            for email in emails:
+                send_email(email,video_url)
             print(people_to_be_emailed)
         
-        
+        i = i + 1        
         time.sleep(60)
 
 

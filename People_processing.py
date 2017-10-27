@@ -71,7 +71,7 @@ def get_emails(speakers,data):
     """
     emails = []
     for speaker in speakers:
-        location = data['Full Name'].apply(fuzzy_matching, field_title = speaker)
+        location = data['Full Name'].apply(fuzzy_matching, file_title = speaker)
         location = location.idxmax()
         emails.append(data.ix[location]['email'])
     return emails

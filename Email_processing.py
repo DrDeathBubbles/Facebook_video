@@ -110,10 +110,13 @@ def send_email(email_address, facebook_video_link):
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
-    message = create_message('aaron.meagher@cilabs.com',email_address,
+    message = create_message('talkbot@websummit.com',email_address,
     'Your Web Summit talk is live on Favebook', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
 
-    message = send_message(service,'aaron.meagher@cilabs.com',message)
+#    message = create_message('aaron.meagher@cilabs.com',email_address,
+#    'Your Web Summit talk is live on Favebook', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
+
+    message = send_message(service,'ta',message)
     
     return message 
 
@@ -127,23 +130,12 @@ def main():
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
-    message = create_message('aaron.meagher@cilabs.com','aaron.meagher@cilabs.com',
+    message = create_message('talkbot@websummit.com','aaron.meagher@cilabs.com',
     'Test of gmail api sending SUBJECT', 'Test of gmail api sending  \n and the new line \n www.facebook.com')
 
-    send_message(service,'aaron.meagher@cilabs.com',message)
+    send_message(service,'talkbot@websummit.com',message)
 
 
-
-
-#    results = service.users().labels().list(userId='me').execute()
-#    labels = results.get('labels', [])
-#
-#    if not labels:
-#        print('No labels found.')
-#    else:
-#      print('Labels:')
-#      for label in labels:
-#        print(label['name'])
 
 
 if __name__ == '__main__':
