@@ -123,7 +123,7 @@ if __name__ == '__main__':
 
         for message in messages:
             retrieve_from_s3(message)
-            video_processing(file_location+message,file_location+message)
+            #video_processing(file_location+message,file_location+message)
             post = upload_video(file_location+message)
             description = get_description(message, speaker_talk_sheet)
             adding_description(post.json()['id'], description)
