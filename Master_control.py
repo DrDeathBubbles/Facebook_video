@@ -10,7 +10,7 @@ import botocore
 import os
 import json 
 import time
-
+from urllib import parse
 import requests
 import os 
 
