@@ -114,9 +114,12 @@ def send_email(email_address, facebook_video_link):
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
-    message = create_message('talkbot@websummit.com',email_address,
-    'Your Web Summit talk is live on Favebook', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
+    #message = create_message('talkbot@websummit.com',email_address,
+    #'Your Web Summit talk is live on Favebook', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
 
+    
+    message = create_message('talkbot@websummit.com','aaron.meagher@cilabs.com',
+    'Your Web Summit talk is live on Favebook', 'Hello {}!\nPlease find the link to your talk at Web Summit below \n {}'.format(email_address, facebook_video_link))
 
     message = send_message(service,'talkbot@websummit.com',message)
     
