@@ -78,14 +78,11 @@ def get_emails(speakers,data):
 
 
 def get_description(field_title,data):
-    """
-    Getting the speakers for a given talk
-    """
-
     location = data['Title'].apply(fuzzy_matching,file_title=field_title)
     location = location.idxmax()
     talk_title = data.ix[location]['Description']
-
+    if len(talk_title) == 0:
+        talk_title = field_title
     return talk_title
 
 
