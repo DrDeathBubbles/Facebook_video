@@ -36,10 +36,6 @@ logging.basicConfig(level=logging.DEBUG,
                     filemode='w')
 
 
-#def retrieve_from_s3(filename):
-#    os.system('s4cmd get s3://ds.ajm.videos/{} \
-#    ~/video_files/{}'.format(filename,filename))
-#
 
 def retrieve_from_s3(filename):
     my_bucket = s3.Bucket('ds.ajm.videos')
@@ -94,6 +90,21 @@ def video_processing(video_file, output, start_time = 0, end_time = 10):
     clip = moviepy.video.fx.all.fadeout(clip,3)
     clip.write_videofile(output)
 
+def processing_message(message):
+    """
+    Processes the message which is sent 
+    """
+    retrieve_from_s3(message)
+    video_processing(file_location+message,file_location+message)
+    post = upload_video(file_location+message)
+    description = get_description(message, speaker_talk_sheet)
+    adding_description(post.json()['id'], description)
+    video_url = reading_video_url(post.json()['id'])
+    people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
+    emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
+    for email in emails:
+        send_email(email,video_url)
+
 if __name__ == '__main__':
 
 #Setting up the connection to monitor SQS 
@@ -126,18 +137,8 @@ if __name__ == '__main__':
             messages.append(temp)
 
         for message in messages:
-            retrieve_from_s3(message)
-            video_processing(file_location+message,file_location+message)
-            post = upload_video(file_location+message)
-            description = get_description(message, speaker_talk_sheet)
-            adding_description(post.json()['id'], description)
-            video_url = reading_video_url(post.json()['id'])
-            people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
-            emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
-            for email in emails:
-                send_email(email,video_url)
-            print(people_to_be_emailed)
-        
+            processing_message(message)
+
         i = i + 1        
         time.sleep(60)
 
