@@ -104,6 +104,7 @@ if __name__ == '__main__':
 
     while True:
         if i % 60 == 0:
+            print('Acquiring sheets')
             speaker_talk_sheet, speaker_email_sheet = get_spreadsheets()
             i = 0
             print('Sheets acquired')
