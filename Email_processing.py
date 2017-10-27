@@ -144,4 +144,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    send_email('test@websummit.com','blah blah blah')
