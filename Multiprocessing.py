@@ -67,8 +67,8 @@ for single_task in task_list:
 sleep(5)
 
 # Quit the worker processes by sending them -1
-for i in range(num_processes):  
-    tasks.put(-1)
+#for i in range(num_processes):  
+#    tasks.put(-1)
 
 # Read calculation results
 num_finished_processes = 0  
