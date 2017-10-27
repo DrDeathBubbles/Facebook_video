@@ -77,6 +77,18 @@ def get_emails(speakers,data):
     return emails
 
 
+def get_description(field_title,data):
+    """
+    Getting the speakers for a given talk
+    """
+
+    location = data['Title'].apply(fuzzy_matching,file_title=field_title)
+    location = location.idxmax()
+    talk_title = data.ix[location]['Description']
+
+    return talk_title
+
+
 if __name__ == '__main__':
     # Getting spreadsheets
     print('Get spreadsheets')
