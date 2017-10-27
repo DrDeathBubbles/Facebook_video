@@ -83,7 +83,7 @@ def adding_description(post_id,description):
 def reading_video_url(post_id):
     url = 'https://graph.facebook.com/v2.10/{}?fields=permalink_url&access_token={}'.format(post_id,access_token_2)
     flag = requests.post(url)
-    flag = 'www.facebook.com'+video_url.json()['permalink_url']
+    flag = 'www.facebook.com'+flag.json()['permalink_url']
     return flag
 
 def video_processing(video_file, output, start_time = 0, end_time = 10):
