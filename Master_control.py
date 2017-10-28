@@ -114,6 +114,7 @@ if __name__ == '__main__':
         rs = q.get_messages()
         for m in rs:
             temp = json.loads(m.get_body())
+            print(m.get_body())
             print(temp)
             q.delete_message(m)
             try:
