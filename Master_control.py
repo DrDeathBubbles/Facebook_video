@@ -88,7 +88,7 @@ def video_processing(video_file, output, start_time = 0, end_time = 10):
 #    clip = clip.subclip(start_time,end_time)
     clip = moviepy.video.fx.all.fadein(clip,3)
     clip = moviepy.video.fx.all.fadeout(clip,3)
-    clip.write_videofile(output)
+    clip.write_videofile(output, progress_bar = False, verbose = False)
 
 def processing_message(message):
     """
