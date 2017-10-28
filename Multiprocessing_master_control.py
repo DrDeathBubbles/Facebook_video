@@ -101,6 +101,7 @@ def processing_message(process_name,tasks,results):
         if message == 0:
             print('{} process quits'.format(process_name))
         else:
+            print('{} recieved {}'.format(process_name,message))
             retrieve_from_s3(message)
             video_processing(file_location+message,file_location+message)
             post = upload_video(file_location+message)
@@ -110,6 +111,7 @@ def processing_message(process_name,tasks,results):
             people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
             emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
             results.put(emails)
+            print('{} process finishes {}'.format(process_name, message))
     return
 
 
@@ -122,17 +124,12 @@ if __name__ == '__main__':
     results = manager.Queue()
 
     num_processes = 4
-    pool = multiprocessing.Pool(process=num_processes)
-
-    processes = []
 
     for i in range(num_processes):
 
         process_name = 'P{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(process_name, tasks, results))
-
-        process.append(new_process)
 
         new_process.start()
 

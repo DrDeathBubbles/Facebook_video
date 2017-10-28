@@ -16,7 +16,7 @@ def calculate(process_name, tasks, results):
         else:
             # Compute result and mimic a long-running task
             compute = new_value * new_value
-            sleep(0.02*new_value)
+            sleep(60)
 
             # Output which process received the value
             # and the calculation result
@@ -39,8 +39,8 @@ if __name__ == "__main__":
 
     # Create process pool with four processes
     num_processes = 4  
-    pool = multiprocessing.Pool(processes=num_processes)  
-    processes = []
+    #pool = multiprocessing.Pool(processes=num_processes)  
+   # processes = []
     
 
     for i in range(num_processes):
@@ -52,7 +52,7 @@ if __name__ == "__main__":
       new_process = multiprocessing.Process(target=calculate, args=(process_name,tasks,results))
 
       # Add new process to the list of processes
-      processes.append(new_process)
+     # processes.append(new_process)
 
       # Start the process
       new_process.start()
@@ -62,6 +62,7 @@ if __name__ == "__main__":
 task_list = [43, 1, 780, 256, 142, 68, 183, 334, 325, 3]  
 for single_task in task_list:  
     tasks.put(single_task)
+    print('single task {}'.format(single_task))
 
 # Wait while the workers process
 sleep(5)
