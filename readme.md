@@ -31,7 +31,9 @@
     1. Using title find speakers
     2. From speaker find email
     3. Email link to speaker
-    
+
+
+{'Records': [{'eventName': 'ObjectCreated:Put', 'eventVersion': '2.0', 'requestParameters': {'sourceIPAddress': '79.78.94.143'}, 'userIdentity': {'principalId': 'AWS:AIDAJSJVDM427OYOMDUSA'}, 'awsRegion': 'eu-west-1', 's3': {'object': {'versionId': 'GT.re_lQxBodFxFCFVclKgwyrpUsZBlP', 'key': 'Right+metrics+and+wrong+metrics%3A+Is+there+such+a+thing4%3F.mp4', 'eTag': 'b194a0b04d2bc3f99e2b5e19c22a9db3', 'sequencer': '0059F48C8677435203', 'size': 296886272}, 'bucket': {'ownerIdentity': {'principalId': 'A3MRBPFDOQ44CE'}, 'arn': 'arn:aws:s3:::ds.ajm.videos', 'name': 'ds.ajm.videos'}, 's3SchemaVersion': '1.0', 'configurationId': 'DS_AJM_VIDEO_UPLOAD'}, 'eventSource': 'aws:s3', 'eventTime': '2017-10-28T14:48:09.027Z', 'responseElements': {'x-amz-request-id': '0728132753C26972', 'x-amz-id-2': 'lYJBz1Z/gurduD90C21Zj9wHvzPqk0ulzWtA3vCVm1iJ2g5YnqOGSNKeB3DSMyY1q4VvW5lu2oY='}}]}    
 
 
 
