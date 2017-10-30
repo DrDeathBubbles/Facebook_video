@@ -1,7 +1,9 @@
 import requests
 import os 
 access_token = os.environ['ACCESSTOKEN_VIDEO_2']
+#access_token = 'EAACEdEose0cBADejnZAydvACpx9dX8kZCZCWdh2Nfb5OW0e6AZCHKmZA7UsicIOee3ffDRTrq0xI2ZBnfouw1wpQgLSgBloglZCoNZCwdyZAcTrMLu1dI3xe6L2OgZClNcLS1Dpug1kjwSAAKuyrvfgsGJUkEuacoZAZAcZA4doZBsTGdYT7evj95ZAN8RxSsgJav5JlP1w3UQxaoVBZAgZDZD'
 
+#access_token = '2222EAACEdEose0cBADejnZAydvACpx9dX8kZCZCWdh2Nfb5OW0e6AZCHKmZA7UsicIOee3ffDRTrq0xI2ZBnfouw1wpQgLSgBloglZCoNZCwdyZAcTrMLu1dI3xe6L2OgZClNcLS1Dpug1kjwSAAKuyrvfgsGJUkEuacoZAZAcZA4doZBsTGdYT7evj95ZAN8RxSsgJav5JlP1w3UQxaoVBZAgZDZD'
 def upload_video(video_path):
     """
     Returns {'id': '1450967228357958'}
@@ -11,6 +13,21 @@ def upload_video(video_path):
     _file = {'file':open(video_path,'rb')}
     flag = requests.post(url,files=_file) 
     return flag
+
+def upload_video_2(video_path):
+    """
+    Returns {'id': '1450967228357958'}
+    """
+
+    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={}'.format(access_token) 
+    _file = {'file':open(video_path,'rb')}
+    flag = requests.post(url,files=_file) 
+    return flag
+
+
+
+
+
 
 
 def adding_description(post_id,description):
