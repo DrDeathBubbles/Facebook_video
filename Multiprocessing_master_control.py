@@ -97,7 +97,7 @@ def processing_message(process_name,tasks,results):
     Processes the message which is sent 
     """
     while True:
-        message = task.get()
+        message = tasks.get()
         if message == 0:
             print('{} process quits'.format(process_name))
         else:
