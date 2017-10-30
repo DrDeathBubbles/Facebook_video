@@ -93,9 +93,8 @@ def video_processing(video_file, output, start_time = 0, end_time = 10):
 
 def message_processing(message):
             retrieve_from_s3(message)
-            #test = call(['python3','video_processing.py',file_location+message,'0','10',file_location+message])
-            video_processing(file_location+message,file_location+'1'+message)
-            post = upload_video(file_location+message)
+            video_processing(file_location+message,file_location+'edited_videos/'+message)
+            post = upload_video(file_location+'edited_videos/'+message)
             description = get_description(message, speaker_talk_sheet)
             adding_description(post.json()['id'], description)
             video_url = reading_video_url(post.json()['id'])
