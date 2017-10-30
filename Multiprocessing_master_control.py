@@ -97,7 +97,10 @@ def processing_message(process_name,tasks,results):
     Processes the message which is sent 
     """
     while True:
-        message = tasks.get()
+        tasks = tasks.get()
+        message = tasks[0]
+        speaker_talk_sheet = tasks[1]
+        speaker_email_sheet = tasks[2]
         if message == 0:
             print('{} process quits'.format(process_name))
         else:
@@ -164,7 +167,7 @@ if __name__ == '__main__':
             messages.append(temp)
 
         for message in messages:
-            tasks.put(message)
+            tasks.put([message,speaker_talk_sheet,speaker_email_sheet])
 
         i = i + 1        
         time.sleep(60)

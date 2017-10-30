@@ -7,6 +7,8 @@ def calculate(process_name, tasks, results):
 
     while True:
         new_value = tasks.get()
+        print('This is {}'.format(new_value[1]))
+        new_value = new_value[0]
         if new_value < 0:
             print('[%s] evaluation routine quits' % process_name)
 
@@ -40,7 +42,7 @@ if __name__ == "__main__":
     # Create process pool with four processes
     num_processes = 4  
     #pool = multiprocessing.Pool(processes=num_processes)  
-   # processes = []
+    processes = []
     
 
     for i in range(num_processes):
@@ -52,7 +54,7 @@ if __name__ == "__main__":
       new_process = multiprocessing.Process(target=calculate, args=(process_name,tasks,results))
 
       # Add new process to the list of processes
-     # processes.append(new_process)
+      processes.append(new_process)
 
       # Start the process
       new_process.start()
@@ -61,7 +63,7 @@ if __name__ == "__main__":
 # Fill task queue
 task_list = [43, 1, 780, 256, 142, 68, 183, 334, 325, 3]  
 for single_task in task_list:  
-    tasks.put(single_task)
+    tasks.put([single_task,'hello'])
     print('single task {}'.format(single_task))
 
 # Wait while the workers process
@@ -69,7 +71,7 @@ sleep(5)
 
 # Quit the worker processes by sending them -1
 #for i in range(num_processes):  
-#    tasks.put(-1)
+tasks.put(-1)
 
 # Read calculation results
 num_finished_processes = 0  
