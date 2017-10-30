@@ -107,6 +107,7 @@ def processing_message(process_name,tasks,results):
             print('{} recieved {}'.format(process_name,message))
             retrieve_from_s3(message)
             video_processing(file_location+message,file_location +'edited_videos/'+message)
+            os.remove(file_location + message)
             post = upload_video(file_location + 'edited_videos/' + message)
             description = get_description(message, speaker_talk_sheet)
             adding_description(post.json()['id'], description)
