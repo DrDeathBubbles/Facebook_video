@@ -137,7 +137,7 @@ if __name__ == '__main__':
     tasks = manager.Queue()
     results = manager.Queue()
 
-    num_processes = 4
+    num_processes = 8 
 
     for i in range(num_processes):
 
