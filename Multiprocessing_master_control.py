@@ -44,6 +44,13 @@ def retrieve_from_s3(filename):
     return a    
 
 
+def post_to_s3(file_location,message):
+    my_bucket = s3.Bucket('webdev.websummit.com')
+    a = my_bucket.upload_file(file_location +'edited_videos/'+message,'videos/'+message)
+    return a
+
+
+
 def initialise_connection():
     try:
         conn = boto.sqs.connect_to_region(
@@ -107,6 +114,7 @@ def processing_message(process_name,tasks,results):
             print('{} recieved {}'.format(process_name,message))
             retrieve_from_s3(message)
             video_processing(file_location+message,file_location +'edited_videos/'+message)
+            post_to_s3(file_location,message)
             os.remove(file_location + message)
             post = upload_video(file_location + 'edited_videos/' + message)
             description = get_description(message, speaker_talk_sheet)
@@ -115,6 +123,8 @@ def processing_message(process_name,tasks,results):
             people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
             emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
             results.put(emails)
+            for email in emails:
+                send_email(email,video_url)
             print('{} process finishes {}'.format(process_name, message))
     return
 
