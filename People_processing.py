@@ -98,3 +98,7 @@ if __name__ == '__main__':
     #Get emails
     print('Get emails')
     emails = get_emails(speakers, speaker_email_sheet)
+    
+    #Get description
+    print('Get description')
+    description = get_description('Plastics: reuse, recycle, redesign', speaker_talk_sheet)

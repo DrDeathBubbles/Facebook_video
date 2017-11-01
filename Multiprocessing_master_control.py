@@ -21,7 +21,7 @@ import moviepy
 import time
 from People_processing import *
 from Email_processing import * 
-bucket_name = 'ds.ajm.videos'
+bucket_name = 'ds-ajm-videos'
 #path_to_videos = "/Users/aaronmeagher/AJM/video_files/"'
 path_to_videos = "/home/ubuntu/AJM/video_files/"
 s3 = boto3.resource('s3')
@@ -39,7 +39,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 def retrieve_from_s3(filename):
-    my_bucket = s3.Bucket('ds.ajm.videos')
+    my_bucket = s3.Bucket('ds-ajm-videos')
     a = my_bucket.download_file(filename,path_to_videos + filename)
     return a    
 
@@ -118,9 +118,9 @@ def processing_message(process_name,tasks,results):
             os.remove(file_location + message)
             post = upload_video(file_location + 'edited_videos/' + message)
             description = get_description(message, speaker_talk_sheet)
+            people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
             adding_description(post.json()['id'], description)
             video_url = reading_video_url(post.json()['id'])
-            people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
             emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
             results.put(emails)
             for email in emails:
