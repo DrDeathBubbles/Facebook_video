@@ -161,7 +161,7 @@ def processing_message(process_name,tasks,results):
                     send_email(email,video_url)
             
             except Exception  as e:
-                logging.error('Failed to email speakers for {}'.format(message)
+                logging.error('Failed to email speakers for {}'.format(message))
                 logging.error(e)
             
             
