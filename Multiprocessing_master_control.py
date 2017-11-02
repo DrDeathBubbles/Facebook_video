@@ -109,12 +109,14 @@ def processing_message(process_name,tasks,results):
         message = task[0]
         speaker_talk_sheet = task[1]
         speaker_email_sheet = task[2]
+        
         if message == 0:
             print('{} process quits'.format(process_name))
         else:
             print('{} recieved {}'.format(process_name,message))
             try:
                 retrieve_from_s3(message)
+                print('retieved from s3')
             except Exception as e:
                logging.error('Problem retrieving {}'.format(message))
                logging.error(e)
