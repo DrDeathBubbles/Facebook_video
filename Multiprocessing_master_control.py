@@ -14,6 +14,7 @@ from urllib import parse
 import requests
 import os
 import multiprocessing 
+import logging
 
 from moviepy.editor import *
 import moviepy
@@ -33,7 +34,7 @@ file_location = '/home/ubuntu/AJM/video_files/'
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    filename='/tmp/myapp.log',
+                    filename='/home/ubuntu/AJM/video_files/talkbot.log',
                     filemode='w')
 
 
@@ -112,9 +113,22 @@ def processing_message(process_name,tasks,results):
             print('{} process quits'.format(process_name))
         else:
             print('{} recieved {}'.format(process_name,message))
-            retrieve_from_s3(message)
-            video_processing(file_location+message,file_location +'edited_videos/'+message)
-            post_to_s3(file_location,message)
+            try:
+                retrieve_from_s3(message)
+            except error as e:
+               logging.error('Problem retrieving {}'.format(message))
+               logging.error(e)
+               continue 
+            
+            try:
+                video_processing(file_location+message,file_location +'edited_videos/'+message)
+            except error as e:
+                logging.error('Problem processing {}'.format(message))
+                logging.error(e)
+                os.rename(file_location+message,file_location +'edited_videos/'+message)
+            
+            try: 
+                post_to_s3(file_location,message)
             os.remove(file_location + message)
             post = upload_video(file_location + 'edited_videos/' + message)
             description = get_description(message, speaker_talk_sheet)
@@ -139,7 +153,9 @@ if __name__ == '__main__':
     tasks = manager.Queue()
     results = manager.Queue()
 
-    num_processes = 8 
+    num_processes = 8
+
+    pool = multiprocessing.Pool() 
 
     for i in range(num_processes):
 
