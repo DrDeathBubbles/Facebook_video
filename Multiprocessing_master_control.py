@@ -91,10 +91,19 @@ def reading_video_url(post_id):
     flag = 'www.facebook.com'+flag.json()['permalink_url']
     return flag
 
-def video_processing(video_file, output, start_time = 0, end_time = 10):
 
+def video_processing(video_file, output):
     clip = VideoFileClip(video_file)
-#    clip = clip.subclip(start_time,end_time)
+
+    temp = video_file.split('_')
+    start_time = temp[1]
+    end_time = temp[2].rstrip('.mp4')
+
+    if len(start_time) ==6  and len(end_time) ==6:
+        start_time = (start_time[0:2],start_time[2:4],star_time[4:6])
+        end_time = (end_time[0:2],end_time[2:4],end_time[4:6])
+        clip = clip.subclip(start_time,end_time)
+
     clip = moviepy.video.fx.all.fadein(clip,3)
     clip = moviepy.video.fx.all.fadeout(clip,3)
     clip.write_videofile(output)
