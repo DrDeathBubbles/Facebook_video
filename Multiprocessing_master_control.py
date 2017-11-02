@@ -167,7 +167,7 @@ def processing_message(process_name,tasks,results):
             try:
                 description = get_description(message, speaker_talk_sheet)
                 people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
-                speakers_formatted = ', '.join(people_to_be_emailed[:-2]) + ' & ' + people_to_be_emailed[-1]
+                speakers_formatted = ', '.join(people_to_be_emailed[:-1]) + ' & ' + people_to_be_emailed[-1]
                 description = speakers_formatted + ' \n ' + description 
                 adding_description(post.json()['id'], description)
 

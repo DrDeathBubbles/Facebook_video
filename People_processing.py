@@ -93,12 +93,11 @@ if __name__ == '__main__':
 
     # Get speakers
     print('Get speakers')
-    speakers = get_speakers('Plastics: reuse, recycle, redesign',speaker_talk_sheet)
+    speakers = get_speakers('Right metrics and wrong metrics: Is there such a thing?',speaker_talk_sheet)
     
     #Get emails
     print('Get emails')
     emails = get_emails(speakers, speaker_email_sheet)
-    
     #Get description
     print('Get description')
-    description = get_description('Plastics: reuse, recycle, redesign', speaker_talk_sheet)
+    description = get_description('Right metrics and wrong metrics: Is there such a thing?', speaker_talk_sheet)
