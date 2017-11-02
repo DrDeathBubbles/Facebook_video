@@ -130,7 +130,7 @@ def processing_message(process_name,tasks,results):
             try: 
                 post_to_s3(file_location,message)
             
-            except error as e:
+            except Exception as e:
                 logging.error('Failed to post to S3')
                 logging.error(e)
 
@@ -159,7 +159,8 @@ def processing_message(process_name,tasks,results):
                 results.put(emails)
                 for email in emails:
                     send_email(email,video_url)
-            except error as e:
+            
+            except Exception  as e:
                 logging.error('Failed to email speakers for {}'.format(message)
                 logging.error(e)
             
