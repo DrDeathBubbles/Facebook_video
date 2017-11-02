@@ -134,10 +134,17 @@ def processing_message(process_name,tasks,results):
                 logging.error('Failed to post to S3')
                 logging.error(e)
 
-            #os.remove(file_location + message)
+
+            try:
+                os.remove(file_location + message)
+
+            except:
+                logging.error('Failed to delete the local copy of the file')
+                continue
 
             try:
                 post = upload_video(file_location + 'edited_videos/' + message)
+
             except Exception as e:
                 logging.error('Failed to post to facebook')
                 logging.error(e)
@@ -151,7 +158,6 @@ def processing_message(process_name,tasks,results):
                 adding_description(post.json()['id'], description)
 
             except Exception  as e:
-
                 logging.error('Failed to add description')
                 logging.error(e)
 
