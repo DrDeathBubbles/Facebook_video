@@ -32,7 +32,7 @@ access_token_2 = os.environ['ACCESSTOKEN_VIDEO_2']
 file_location = '/home/ubuntu/AJM/video_files/'
 
 
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s',
                     filename='/home/ubuntu/AJM/video_files/talkbot.log',
                     filemode='w')
@@ -119,6 +119,7 @@ def processing_message(process_name,tasks,results):
                logging.error('Problem retrieving {}'.format(message))
                logging.error(e)
                continue 
+            print('{} retrieves from S3'.format(process_name))
             
             try:
                 video_processing(file_location+message,file_location +'edited_videos/'+message)
@@ -126,7 +127,9 @@ def processing_message(process_name,tasks,results):
                 logging.error('Problem processing {}'.format(message))
                 logging.error(e)
                 os.rename(file_location+message,file_location +'edited_videos/'+message)
-            
+
+            print('{} processed video'.format(process_name))           
+
             try: 
                 post_to_s3(file_location,message)
             
