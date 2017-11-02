@@ -129,18 +129,42 @@ def processing_message(process_name,tasks,results):
             
             try: 
                 post_to_s3(file_location,message)
-            os.remove(file_location + message)
-            post = upload_video(file_location + 'edited_videos/' + message)
-            description = get_description(message, speaker_talk_sheet)
-            people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
-            speakers_formatted = ', '.join(people_to_be_emailed[:-2]) + ' & ' + people_to_be_emailed[-1]
-            description = speakers_formatted + ' \n ' + description 
-            adding_description(post.json()['id'], description)
-            video_url = reading_video_url(post.json()['id'])
-            emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
-            results.put(emails)
-            for email in emails:
-                send_email(email,video_url)
+            
+            except error as e:
+                logging.error('Failed to post to S3')
+                logging.error(e)
+
+            #os.remove(file_location + message)
+
+            try:
+                post = upload_video(file_location + 'edited_videos/' + message)
+            except error as e:
+                logging.error('Failed to post to facebook')
+                logging.error(e)
+                continue
+            
+            try:
+                description = get_description(message, speaker_talk_sheet)
+                people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
+                speakers_formatted = ', '.join(people_to_be_emailed[:-2]) + ' & ' + people_to_be_emailed[-1]
+                description = speakers_formatted + ' \n ' + description 
+                adding_description(post.json()['id'], description)
+            except error as e:
+                logging.error('Failed to add description')
+                logging.error(e)
+
+            try:    
+                video_url = reading_video_url(post.json()['id'])
+                emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
+                results.put(emails)
+                for email in emails:
+                    send_email(email,video_url)
+            except error as e:
+                logging.error('Failed to email speakers for {}'.format(message)
+                logging.error(e)
+            
+            
+            
             print('{} process finishes {}'.format(process_name, message))
     return
 
@@ -158,6 +182,8 @@ if __name__ == '__main__':
     pool = multiprocessing.Pool() 
 
     for i in range(num_processes):
+
+
 
         process_name = 'P{}'.format(str(i))
 
