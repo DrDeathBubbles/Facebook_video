@@ -119,6 +119,8 @@ def processing_message(process_name,tasks,results):
             post = upload_video(file_location + 'edited_videos/' + message)
             description = get_description(message, speaker_talk_sheet)
             people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
+            speakers_formatted = ', '.join(people_to_be_emailed[:-2]) + ' & ' + people_to_be_emailed[-1]
+            description = speakers_formatted + ' \n ' + description 
             adding_description(post.json()['id'], description)
             video_url = reading_video_url(post.json()['id'])
             emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
