@@ -230,7 +230,7 @@ if __name__ == '__main__':
                 temp = temp['Records'][0]['s3']['object']['key']
                 temp = parse.unquote(temp)
                 temp = temp.replace('+',' ')
-                temp = temp.replace(':',' ')
+                #temp = temp.replace(':',' ')
             except KeyError as ke:
                 logging.error('A key error {} has occured while trying\
                 to access the S3 filename.')
