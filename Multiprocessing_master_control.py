@@ -115,14 +115,14 @@ def processing_message(process_name,tasks,results):
             print('{} recieved {}'.format(process_name,message))
             try:
                 retrieve_from_s3(message)
-            except error as e:
+            except Exception as e:
                logging.error('Problem retrieving {}'.format(message))
                logging.error(e)
                continue 
             
             try:
                 video_processing(file_location+message,file_location +'edited_videos/'+message)
-            except error as e:
+            except Exception as e:
                 logging.error('Problem processing {}'.format(message))
                 logging.error(e)
                 os.rename(file_location+message,file_location +'edited_videos/'+message)
@@ -138,7 +138,7 @@ def processing_message(process_name,tasks,results):
 
             try:
                 post = upload_video(file_location + 'edited_videos/' + message)
-            except error as e:
+            except Exception as e:
                 logging.error('Failed to post to facebook')
                 logging.error(e)
                 continue
@@ -149,7 +149,9 @@ def processing_message(process_name,tasks,results):
                 speakers_formatted = ', '.join(people_to_be_emailed[:-2]) + ' & ' + people_to_be_emailed[-1]
                 description = speakers_formatted + ' \n ' + description 
                 adding_description(post.json()['id'], description)
-            except error as e:
+
+            except Exception  as e:
+
                 logging.error('Failed to add description')
                 logging.error(e)
 
