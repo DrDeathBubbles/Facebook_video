@@ -100,7 +100,7 @@ def get_description(field_title,data):
     talk_title = data.ix[location]['Description']
     if len(talk_title) == 0:
         talk_title = field_title
-    return talk_title
+    return [talk_title,location]
 
 
 if __name__ == '__main__':
