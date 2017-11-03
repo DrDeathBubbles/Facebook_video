@@ -51,7 +51,7 @@ def update_spreadsheet(location, facebook_url):
     # Find a workbook by name and open the first sheet
     # Make sure you use the right name here.
     sheet = client.open('WS_16_Speakers').sheet1
-    sheet.update_acell(location,facebook_url)
+    sheet.update_acell('Y' + str(2+int(location)),facebook_url)
     # Extract and print all of the values
     #list_of_hashes = sheet.get_all_records()
     #data = pd.DataFrame(list_of_hashes)
@@ -117,5 +117,5 @@ if __name__ == '__main__':
     emails = get_emails(speakers, speaker_email_sheet)
     #Get description
     print('Get description')
-    description = get_description('Right metrics and wrong metrics: Is there such a thing?', speaker_talk_sheet)
+    description = get_description('Bringing a startup mentality to sport', speaker_talk_sheet)
     

@@ -178,7 +178,7 @@ def processing_message(process_name,tasks,results):
                 continue
             
             try:
-                description = get_description(message, speaker_talk_sheet)
+                description, location = get_description(message, speaker_talk_sheet)
                 people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
                 speakers_formatted = speaker_formatting(people_to_be_emailed) 
                 description = speakers_formatted + ' \n ' + description 
@@ -194,7 +194,13 @@ def processing_message(process_name,tasks,results):
                 results.put(emails)
                 for email in emails:
                     send_email(email,video_url)
-            
+
+            try:
+                update_spreadsheet(location, video_url)
+
+            except Exception as e:
+                logging.error('Failed to update spreadsheet')    
+
             except Exception  as e:
                 logging.error('Failed to email speakers for {}'.format(message))
                 logging.error(e)
