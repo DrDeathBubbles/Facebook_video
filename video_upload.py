@@ -24,6 +24,15 @@ def long_lasting_token_2():
 
     return flag
 
+def long_lasting_token_3():
+    access_token= 'EAAXukhZA5tLEBAJVT8Q387MuANPhRNkjnEEC1rb6jcZBlU5ZBqZB2RYbBfu2IdjC6TgFcZBPNszOUNcqnZBdMkCKBAhYdXMv2fC2Jxb5Tpd5HtvrDLnSOGvE2p5WZAFcxri3TsZCZCRtgFNFEDeH3XaZC0jtZCui3yktMZB2DQnlBQ5ZA7G1iOE0Xe8xWKvgj1c9ZB3S0ZD'
+    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=fb_exchange_token&fb_exchange_token={}'.format(os.environ['APPID_EXPERIMENTS'],os.environ['APPSECRET_EXPERIMENTS'],access_token)
+
+    flag = requests.get(url)
+
+    return flag
+
+
 
 
 access_token = 'EAAXukhZA5tLEBAOJ4EYUzZAQxazrHNfRZCe2iIDRCJ3T2dRvv6eZCN4QZAFXZAGAvhtktz0fKOznN9nIFkHE7EfWnpkgtFjlZCwIA1MFkIWkIIhYeQgHSORrRVRq9slf0v0AbyZC70si8nk4djYmVeMKbrSaMJ9mRoLmIPa012gNl2V3WvJKvPeZCPpAp0TCAk0UZD'

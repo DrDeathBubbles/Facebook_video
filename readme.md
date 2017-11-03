@@ -17,7 +17,8 @@
 
 # To do
 1. Add to gspread the link to the video
-2. Change the access token to a long lasting access token
+2. Change facebook posting to WebSummitHQ
+
 
 3. Problem with :
     1. Run through all talk names - make sure there is no problem with their names
