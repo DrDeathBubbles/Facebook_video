@@ -3,7 +3,7 @@ import os
 
 
 def making_files(filename):
-    os.system('cp test_trimmed.mp4 ../video_files/test/{}.mp4'.format(filename))
+    os.system('cp test.mp4 ../video_files/test/{}.mp4'.format(filename))
 
 
 
