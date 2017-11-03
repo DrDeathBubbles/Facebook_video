@@ -16,8 +16,10 @@
 
 
 # To do
-3. Add to gspread the link to the video
-4. Problem with :
+1. Add to gspread the link to the video
+2. Change the access token to a long lasting access token
+
+3. Problem with :
     1. Run through all talk names - make sure there is no problem with their names
 
 3. UPDATE SPREADSHEET WITH URL
