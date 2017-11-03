@@ -9,18 +9,16 @@
 7. Get link
 8. Lookup talk in spreadsheet
     1. Update spreadsheet with link to video
-    2. Email speakers the link to the video
+    2. Email speakers the link to thgie video
 9. Delete local video file
 10. Delete mesage from queue.    
 
 
 
 # To do
-1. Delete local copy of files
-2. Add speakers name to descriptiomn
 3. Add to gspread the link to the video
-
-2. FIX URL
+4. Problem with :
+    1. Run through all talk names - make sure there is no problem with their names
 
 3. UPDATE SPREADSHEET WITH URL
 

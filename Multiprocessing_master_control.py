@@ -109,6 +109,19 @@ def video_processing(video_file, output):
     clip.write_videofile(output)
 
 
+def speaker_formatting(speaker_list):
+    if len(speaker_list) == 1:
+        temp = speaker_list[0]
+        return temp 
+
+    if len(speaker_list) == 2:
+        temp = speaker_list[0] + ' & ' + speaker_list[1]
+        return temp 
+
+    if len(speaker_list) > 2:
+        temp = ', '.join(speaker_list[:-1]) + ' & ' + speaker_list[-1]
+        return temp
+
 def processing_message(process_name,tasks,results):
     """
     Processes the message which is sent 
@@ -167,7 +180,7 @@ def processing_message(process_name,tasks,results):
             try:
                 description = get_description(message, speaker_talk_sheet)
                 people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
-                speakers_formatted = ', '.join(people_to_be_emailed[:-1]) + ' & ' + people_to_be_emailed[-1]
+                speakers_formatted = speaker_formatting(people_to_be_emailed) 
                 description = speakers_formatted + ' \n ' + description 
                 adding_description(post.json()['id'], description)
 
