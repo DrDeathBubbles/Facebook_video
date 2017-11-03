@@ -195,17 +195,16 @@ def processing_message(process_name,tasks,results):
                 for email in emails:
                     send_email(email,video_url)
 
-            try:
-                update_spreadsheet(location, video_url)
-
-            except Exception as e:
-                logging.error('Failed to update spreadsheet')    
-
             except Exception  as e:
                 logging.error('Failed to email speakers for {}'.format(message))
                 logging.error(e)
             
-            
+            try:
+                update_spreadsheet(location, video_url)
+
+            except Exception as e:
+                logging.error('Failed to update spreadsheet') 
+
             
             print('{} process finishes {}'.format(process_name, message))
     return
