@@ -9,8 +9,8 @@ def slugify(value):
     """
     
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
-    value = unicode(re.sub('[^\w\s-]', '', value).strip().lower())
-    value = unicode(re.sub('[-\s]+', '-', value))
+    value = str(re.sub('[^\w\s-]', '', value).strip().lower())
+    value = str(re.sub('[-\s]+', '-', value))
 
 
 
