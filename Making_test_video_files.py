@@ -4,7 +4,7 @@ import os
 
 def making_files(filename):
     print(filename)
-    os.system('cp test.mp4 ../video_files/test/{}.mp4'.format(filename))
+    os.system('cp test.mp4 /home/ubuntu/AJM/video_files/test/{}.mp4'.format(filename))
 
 
 
