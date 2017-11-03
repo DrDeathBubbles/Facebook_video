@@ -10,4 +10,4 @@ def making_files(filename):
 
 
 data = pd.read_csv('./WS_16_Speakers.csv', skiprows=1)
-data['Title'].apply(making_files)
+data['Title'].dropna().apply(making_files)
