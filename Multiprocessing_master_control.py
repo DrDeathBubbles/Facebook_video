@@ -46,7 +46,7 @@ def retrieve_from_s3(filename):
 
 
 def post_to_s3(file_location,message):
-    my_bucket = s3.Bucket('webdev.websummit.com')
+    my_bucket = s3.Bucket('ws17-videos')
     a = my_bucket.upload_file(file_location +'edited_videos/'+message,'videos/'+message)
     return a
 
