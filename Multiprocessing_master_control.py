@@ -138,17 +138,18 @@ def processing_message(process_name,tasks,results):
             print('{} recieved {}'.format(process_name,message))
             try:
                 retrieve_from_s3(message)
-                print('retieved from s3')
+                print('{} retrieves from S3'.format(process_name))
             except Exception as e:
                logging.error('Problem retrieving {}'.format(message))
                logging.error(e)
+               print('Problem retrieving {}'.format(message))
                continue 
-            print('{} retrieves from S3'.format(process_name))
             
             try:
                 video_processing(file_location+message,file_location +'edited_videos/'+message)
             except Exception as e:
                 logging.error('Problem processing {}'.format(message))
+                print('Problem processing {}'.format(message))
                 logging.error(e)
                 os.rename(file_location+message,file_location +'edited_videos/'+message)
 
@@ -156,7 +157,7 @@ def processing_message(process_name,tasks,results):
 
             try: 
                 post_to_s3(file_location,message)
-            
+                print('Successfully posted to S3') 
             except Exception as e:
                 logging.error('Failed to post to S3')
                 logging.error(e)
@@ -167,11 +168,10 @@ def processing_message(process_name,tasks,results):
 
             except:
                 logging.error('Failed to delete the local copy of the file')
-                continue
 
             try:
                 post = upload_video(file_location + 'edited_videos/' + message)
-
+                print('Uploaded to Facebook')
             except Exception as e:
                 logging.error('Failed to post to facebook')
                 logging.error(e)
@@ -251,7 +251,6 @@ if __name__ == '__main__':
         rs = q.get_messages()
         for m in rs:
             temp = json.loads(m.get_body())
-            print(temp)
             q.delete_message(m)
             try:
                 temp = temp['Records'][0]['s3']['object']['key']

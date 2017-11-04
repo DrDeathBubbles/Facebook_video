@@ -7,8 +7,7 @@ from shutil import copyfile
 
 def making_files(filename):
     filename = filename.replace('/',' ')
-
-    copyfile('test_trimmed.mp4',filename +'.mp4')
+    copyfile('/Users/aaronmeagher/Desktop/test.mp4','/Users/aaronmeagher/Work/Facebook_test_videos/' +filename +'_000000'+'_000008'+'.mp4')
 
 
 
