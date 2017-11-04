@@ -165,7 +165,7 @@ def processing_message(process_name,tasks,results):
 
             try:
                 os.remove(file_location + message)
-                os.remove
+                os.remove(file_location + 'edited_videos/' + message)
 
             except:
                 logging.error('Failed to delete the local copy of the file')
@@ -180,7 +180,7 @@ def processing_message(process_name,tasks,results):
             
             try:
                 description, location = get_description(message, speaker_talk_sheet)
-                people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
+                people_to_be_emailed = get_speakers(message, speaker_email_sheet)
                 speakers_formatted = speaker_formatting(people_to_be_emailed) 
                 description = speakers_formatted + ' \n ' + description 
                 adding_description(post.json()['id'], description)
