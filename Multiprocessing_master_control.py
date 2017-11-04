@@ -163,20 +163,24 @@ def processing_message(process_name,tasks,results):
                 logging.error(e)
 
 
+        
+
+            try:
+                post = upload_video(file_location + 'edited_videos/' + message)
+                print('Uploaded to Facebook')
+           
+           
+            except Exception as e:
+                logging.error('Failed to post to facebook')
+                logging.error(e)
+                continue
+
             try:
                 os.remove(file_location + message)
                 os.remove(file_location + 'edited_videos/' + message)
 
             except:
                 logging.error('Failed to delete the local copy of the file')
-
-            try:
-                post = upload_video(file_location + 'edited_videos/' + message)
-                print('Uploaded to Facebook')
-            except Exception as e:
-                logging.error('Failed to post to facebook')
-                logging.error(e)
-                continue
             
             try:
                 description, location = get_description(message, speaker_talk_sheet)
