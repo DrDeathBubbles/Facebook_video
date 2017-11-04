@@ -1,26 +1,14 @@
 import pandas as pd 
 import os
-import unicodedata
-
-def slugify(value):
-    """
-    Normalizes string, converts to lowercase, removes non-alpha characters,
-    and converts spaces to hyphens.
-    """
-    
-    value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
-    value = str(re.sub('[^\w\s-]', '', value).strip().lower())
-    value = str(re.sub('[-\s]+', '-', value))
+from shutil import copyfile
 
 
 
 
 def making_files(filename):
-    print(filename)
-    filename = slugify(filename)
-    print(filename)
-    os.system('cp test.mp4 /home/ubuntu/AJM/video_files/test/{}.mp4'.format(filename))
+    filename = filename.replace('/',' ')
 
+    copyfile('test_trimmed.mp4',filename +'.mp4')
 
 
 
