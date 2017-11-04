@@ -240,7 +240,7 @@ if __name__ == '__main__':
     i = 0
 
     while True:
-        if i % 60 == 0:
+        if i % 60*12 == 0:
             print('Acquiring sheets')
             speaker_talk_sheet, speaker_email_sheet = get_spreadsheets()
             i = 0
@@ -266,7 +266,7 @@ if __name__ == '__main__':
             tasks.put([message,speaker_talk_sheet,speaker_email_sheet])
 
         i = i + 1        
-        time.sleep(60)
+        time.sleep(5)
 
 
 
