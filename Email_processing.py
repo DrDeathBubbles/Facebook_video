@@ -119,7 +119,7 @@ def send_email(email_address, facebook_video_link):
 
     
     message = create_message('talkbot@websummit.com','aaron.meagher@cilabs.com',
-    'Video of your talk', """Good news! We’ve edited down a video of your talk, which some might say is now perfect for sharing. Want to share your talk with your network? You can find your edited video here {}.""" .format( facebook_video_link))
+    'Video of your talk', """Good news! We’ve edited down a video of your talk, which some might say is now perfect for sharing. Want to share your talk with your network? You can find your edited video here {}.""" .format(facebook_video_link))
 
     message = send_message(service,'talkbot@websummit.com',message)
     
