@@ -47,7 +47,7 @@ def retrieve_from_s3(filename):
 
 def post_to_s3(file_location,message):
     my_bucket = s3.Bucket('ws17-videos')
-    a = my_bucket.upload_file(file_location +'edited_videos/'+message,'videos/'+message)
+    a = my_bucket.upload_file(file_location +'edited_videos/'+message,message)
     return a
 
 
@@ -165,6 +165,7 @@ def processing_message(process_name,tasks,results):
 
             try:
                 os.remove(file_location + message)
+                os.remove
 
             except:
                 logging.error('Failed to delete the local copy of the file')
