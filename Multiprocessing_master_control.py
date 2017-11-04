@@ -264,6 +264,7 @@ if __name__ == '__main__':
             messages.append(temp)
 
         for message in messages:
+            print(message)
             tasks.put([message,speaker_talk_sheet,speaker_email_sheet])
 
         i = i + 1        
