@@ -95,6 +95,7 @@ def get_emails(speakers,data):
 
 
 def get_description(field_title,data):
+    field_title = field_title.split('_')[0]
     location = data['Title'].apply(fuzzy_matching,file_title=field_title)
     location = location.idxmax()
     talk_title = data.ix[location]['Description']
