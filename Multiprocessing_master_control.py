@@ -79,7 +79,7 @@ def upload_video(video_path):
     Returns {'id': '1450967228357958'}
     """
     access_token = 'EAAXukhZA5tLEBAPLoLKICA5DUJPnHvlaZCTXiZAbgcCwKcFbckSY45BnsQ2D5GayXZB48FWNQV4RLpZBjwMYkzew4nGZCSZBKxGXBsjKQlE7xYu1jTjyPePCGHQRapcmixUrVGYZCiMPLfnsRbodyA3aS2VKIZAc8gmbFIHONvHjoVQZDZD'
-    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={u'.format(access_token) 
+    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={}'.format(access_token) 
     _file = {'file':open(video_path,'rb')}
     flag = requests.post(url,files=_file) 
     return flag
@@ -178,7 +178,7 @@ def processing_message(process_name,tasks,results):
             try:
                 post = upload_video(file_location + 'edited_videos/' + message)
                 print('Uploaded to Facebook') 
-                if post.status_code = '400'
+                if post.status_code == '400':
                     print('Uploads are blocked')
                     time.sleep(60*60*6)
            
