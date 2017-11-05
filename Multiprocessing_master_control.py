@@ -89,6 +89,7 @@ def adding_description(post_id,description):
     """
     The return is either true or false.
     """
+    access_token = 'EAAXukhZA5tLEBAPLoLKICA5DUJPnHvlaZCTXiZAbgcCwKcFbckSY45BnsQ2D5GayXZB48FWNQV4RLpZBjwMYkzew4nGZCSZBKxGXBsjKQlE7xYu1jTjyPePCGHQRapcmixUrVGYZCiMPLfnsRbodyA3aS2VKIZAc8gmbFIHONvHjoVQZDZD'
     data = {'description':description}
     url = 'https://graph.facebook.com/v2.10/{}?access_token={}'.format(post_id,access_token_2)
     flag = requests.post(url,json=data)
@@ -96,6 +97,7 @@ def adding_description(post_id,description):
 
 
 def reading_video_url(post_id):
+    access_token = 'EAAXukhZA5tLEBAPLoLKICA5DUJPnHvlaZCTXiZAbgcCwKcFbckSY45BnsQ2D5GayXZB48FWNQV4RLpZBjwMYkzew4nGZCSZBKxGXBsjKQlE7xYu1jTjyPePCGHQRapcmixUrVGYZCiMPLfnsRbodyA3aS2VKIZAc8gmbFIHONvHjoVQZDZD'
     url = 'https://graph.facebook.com/v2.10/{}?fields=permalink_url&access_token={}'.format(post_id,access_token_2)
     flag = requests.post(url)
     flag = 'www.facebook.com'+flag.json()['permalink_url']
