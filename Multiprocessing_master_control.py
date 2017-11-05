@@ -178,7 +178,7 @@ def processing_message(process_name,tasks,results):
             try:
                 post = upload_video(file_location + 'edited_videos/' + message)
                 print('Uploaded to Facebook') 
-                if post.status_code = '400'
+                if post.status_code == '400':
                     print('Uploads are blocked')
                     time.sleep(60*60*6)
            
