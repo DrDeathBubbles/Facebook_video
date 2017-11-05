@@ -65,11 +65,21 @@ def initialise_connection():
     return conn
 
 
+#def upload_video(video_path):
+#    """
+#    Json body contains the id of the facebook video which has been uploaded.
+#    """
+#    url = 'https://graph-video.facebook.com/LSWSTST/videos?access_token={}'.format(access_token_2) 
+#    _file = {'file':open(video_path,'rb')}
+#    flag = requests.post(url,files=_file) 
+#    return flag
+
 def upload_video(video_path):
     """
-    Json body contains the id of the facebook video which has been uploaded.
+    Returns {'id': '1450967228357958'}
     """
-    url = 'https://graph-video.facebook.com/LSWSTST/videos?access_token={}'.format(access_token_2) 
+    access_token = 'EAAXukhZA5tLEBAPLoLKICA5DUJPnHvlaZCTXiZAbgcCwKcFbckSY45BnsQ2D5GayXZB48FWNQV4RLpZBjwMYkzew4nGZCSZBKxGXBsjKQlE7xYu1jTjyPePCGHQRapcmixUrVGYZCiMPLfnsRbodyA3aS2VKIZAc8gmbFIHONvHjoVQZDZD'
+    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={u'.format(access_token) 
     _file = {'file':open(video_path,'rb')}
     flag = requests.post(url,files=_file) 
     return flag
@@ -167,13 +177,16 @@ def processing_message(process_name,tasks,results):
 
             try:
                 post = upload_video(file_location + 'edited_videos/' + message)
-                print('Uploaded to Facebook')
-           
+                print('Uploaded to Facebook') 
+                if post.status_code = '400'
+                    print('Uploads are blocked')
+                    time.sleep(60*60*6)
            
             except Exception as e:
                 logging.error('Failed to post to facebook')
                 logging.error(e)
                 continue
+
 
             try:
                 os.remove(file_location + message)
@@ -184,9 +197,10 @@ def processing_message(process_name,tasks,results):
             
             try:
                 description, location = get_description(message, speaker_talk_sheet)
-                people_to_be_emailed = get_speakers(message, speaker_email_sheet)
+                people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
                 speakers_formatted = speaker_formatting(people_to_be_emailed) 
-                description = speakers_formatted + ' \n ' + description 
+                description = speakers_formatted + ' \n ' + description
+                print(description)
                 adding_description(post.json()['id'], description)
 
             except Exception  as e:
