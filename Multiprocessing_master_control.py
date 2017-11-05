@@ -34,7 +34,8 @@ file_location = '/home/ubuntu/AJM/video_files/'
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    filename='/home/ubuntu/AJM/video_files/talkbot.log',
+                    #filename='/home/ubuntu/AJM/video_files/talkbot.log',
+                    filename = './talkbot.log',
                     filemode='w')
 
 
@@ -79,7 +80,7 @@ def upload_video(video_path):
     Returns {'id': '1450967228357958'}
     """
     access_token = 'EAAXukhZA5tLEBAPLoLKICA5DUJPnHvlaZCTXiZAbgcCwKcFbckSY45BnsQ2D5GayXZB48FWNQV4RLpZBjwMYkzew4nGZCSZBKxGXBsjKQlE7xYu1jTjyPePCGHQRapcmixUrVGYZCiMPLfnsRbodyA3aS2VKIZAc8gmbFIHONvHjoVQZDZD'
-    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={'.format(access_token) 
+    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={}'.format(access_token) 
     _file = {'file':open(video_path,'rb')}
     flag = requests.post(url,files=_file) 
     return flag
@@ -159,6 +160,7 @@ def processing_message(process_name,tasks,results):
             
             try:
                 video_processing(file_location+message,file_location +'edited_videos/'+message)
+                print('Video processing successful')
             except Exception as e:
                 logging.error('Problem processing {}'.format(message))
                 print('Problem processing {}'.format(message))
@@ -172,6 +174,7 @@ def processing_message(process_name,tasks,results):
                 print('Successfully posted to S3') 
             except Exception as e:
                 logging.error('Failed to post to S3')
+                print('Failed to upload video to S3')
                 logging.error(e)
 
 
@@ -186,6 +189,7 @@ def processing_message(process_name,tasks,results):
            
             except Exception as e:
                 logging.error('Failed to post to facebook')
+                print('Failed to post to facebook')
                 logging.error(e)
                 continue
 
@@ -193,9 +197,11 @@ def processing_message(process_name,tasks,results):
             try:
                 os.remove(file_location + message)
                 os.remove(file_location + 'edited_videos/' + message)
+                print('removed local files')
 
             except:
                 logging.error('Failed to delete the local copy of the file')
+                print('Failed to remove local copies')
             
             try:
                 description, location = get_description(message, speaker_talk_sheet)
@@ -208,6 +214,7 @@ def processing_message(process_name,tasks,results):
                 adding_description(post.json()['id'], description)
 
             except Exception  as e:
+                print('Failed to add description')
                 logging.error('Failed to add description')
                 logging.error(e)
 
@@ -221,14 +228,17 @@ def processing_message(process_name,tasks,results):
                     send_email(email,video_url)
 
             except Exception  as e:
+                print('Failed to email speakers')
                 logging.error('Failed to email speakers for {}'.format(message))
                 logging.error(e)
             
             try:
                 update_spreadsheet(location, video_url)
+                print('updated spreadsheets successfully')
 
             except Exception as e:
                 logging.error('Failed to update spreadsheet') 
+                print('Failed to update spreadsheets')
 
             
             print('{} process finishes {}'.format(process_name, message))
