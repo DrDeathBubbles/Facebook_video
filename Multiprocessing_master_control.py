@@ -109,7 +109,7 @@ def video_processing(video_file, output):
     clip = VideoFileClip(video_file)
 
     temp = video_file.split('_')
-    start_time = temp[1]
+    start_time = temp[4]
     end_time = temp[2].rstrip('.mp4')
 
     if len(start_time) ==6  and len(end_time) ==6:
