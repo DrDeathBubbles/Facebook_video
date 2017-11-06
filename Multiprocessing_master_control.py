@@ -186,6 +186,7 @@ def processing_message(process_name,tasks,results):
                 if post.status_code == '400':
                     print('Uploads are blocked')
                     time.sleep(60*60*6)
+                    continue
            
             except Exception as e:
                 logging.error('Failed to post to facebook')
