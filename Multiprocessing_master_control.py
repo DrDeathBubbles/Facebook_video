@@ -79,7 +79,11 @@ def upload_video(video_path):
     Returns {'id': '1450967228357958'}
     """
     access_token = 'EAAXukhZA5tLEBAPLoLKICA5DUJPnHvlaZCTXiZAbgcCwKcFbckSY45BnsQ2D5GayXZB48FWNQV4RLpZBjwMYkzew4nGZCSZBKxGXBsjKQlE7xYu1jTjyPePCGHQRapcmixUrVGYZCiMPLfnsRbodyA3aS2VKIZAc8gmbFIHONvHjoVQZDZD'
+<<<<<<< HEAD
     url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={}'.format(access_token) 
+=======
+    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={'.format(access_token) 
+>>>>>>> 9ccf0de0b1d1ce89b19c220a2b0202f9ae427fb7
     _file = {'file':open(video_path,'rb')}
     flag = requests.post(url,files=_file) 
     return flag
@@ -201,6 +205,8 @@ def processing_message(process_name,tasks,results):
                 speakers_formatted = speaker_formatting(people_to_be_emailed) 
                 description = speakers_formatted + ' \n ' + description
                 print(description)
+                print(people_to_be_emailed)
+                print(post.json()['id'])
                 adding_description(post.json()['id'], description)
 
             except Exception  as e:
@@ -209,7 +215,9 @@ def processing_message(process_name,tasks,results):
 
             try:    
                 video_url = reading_video_url(post.json()['id'])
+                print(video_url)
                 emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
+                print(emails)
                 results.put(emails)
                 for email in emails:
                     send_email(email,video_url)
