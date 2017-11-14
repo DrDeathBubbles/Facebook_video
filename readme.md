@@ -1,28 +1,62 @@
-# Flow
+#Talkbot
 
-1. Listen to queue
+
+
+
+
+## Flow
+
+1. Setup parallel process with 8 workers
+2. Establish connection to SQS
+3. Acquire the spreadsheets every hour
+    * *Speaker talk sheet* which links to _WS\_16\_Speakers_
+    * *Speaker email sheet* which links to _Speaker intro Working sheet_
+1. Listen to SQS queue 
 2. Get message
+3. Populate  parallel processing task queue with messages
+4. Delete SQS messages 
+5. Begin parallel processing section 
 3. Move file from S3 to local storage
 4. Video process
-5. Upload video to facebook
+    * Cut video to start\_time and end\_time
+    * Add 3 second fade to the start and end of the video 
+    * Save edited video to disk
+5. Post processed video to S3 video library bucket
+6. Upload video to facebook
+    * Check to see if we get a 200 response or 400
+    * If 400, wait 6 hours then continue
+7. Remove local video file 
+8. Get the descripton of the video from spreadsheet and the location of this entry in the spreadsheet
+9. Get the speakers of the video
+    * Format the speakers into a correct string
+10. Format description to include the speakers names
+11. Add the description to the facebook video 
+12. Get the url of the facebook video
+13. Email the speakers the link to the facebook video 
+14. Update *speaker talk sheet* with the link to the facebook url
+
+
 6. Add description
 7. Get link
 8. Lookup talk in spreadsheet
     1. Update spreadsheet with link to video
-    2. Email speakers the link to the video
+    2. Email speakers the link to thgie video
 9. Delete local video file
 10. Delete mesage from queue.    
 
 
 
+
+
+
+
+
+
+
 # To do
-1. Delete local copy of files
-2. Add speakers name to descriptiomn
-3. Add to gspread the link to the video
 
-2. FIX URL
 
-3. UPDATE SPREADSHEET WITH URL
+
 
 2. Function to Email participants
     1. Using title find speakers

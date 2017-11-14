@@ -40,7 +40,24 @@ def get_spreadsheet(spreadsheet):
     list_of_hashes = sheet.get_all_records()
     data = pd.DataFrame(list_of_hashes)
     data.columns = data.ix[0]
-    return data 
+    return data
+
+def update_spreadsheet(location, facebook_url):
+    # use creds to create a client to interact with the Google Drive API
+    scope = ['https://spreadsheets.google.com/feeds']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+    client = gspread.authorize(creds)
+
+    # Find a workbook by name and open the first sheet
+    # Make sure you use the right name here.
+    sheet = client.open('WS_16_Speakers').sheet1
+    sheet.update_acell('Y' + str(2+int(location)),facebook_url)
+    # Extract and print all of the values
+    #list_of_hashes = sheet.get_all_records()
+    #data = pd.DataFrame(list_of_hashes)
+    #data.columns = data.ix[0]
+    return sheet 
+
 
 def fuzzy_matching(talk_title, file_title):
     """
@@ -78,12 +95,13 @@ def get_emails(speakers,data):
 
 
 def get_description(field_title,data):
+    field_title = field_title.split('_')[3]
     location = data['Title'].apply(fuzzy_matching,file_title=field_title)
     location = location.idxmax()
     talk_title = data.ix[location]['Description']
     if len(talk_title) == 0:
         talk_title = field_title
-    return talk_title
+    return [talk_title,location]
 
 
 if __name__ == '__main__':
@@ -93,12 +111,12 @@ if __name__ == '__main__':
 
     # Get speakers
     print('Get speakers')
-    speakers = get_speakers('Plastics: reuse, recycle, redesign',speaker_talk_sheet)
-    
+    speakers = get_speakers('Right metrics and wrong metrics: Is there such a thing?',speaker_talk_sheet)
+
     #Get emails
     print('Get emails')
     emails = get_emails(speakers, speaker_email_sheet)
-    
     #Get description
     print('Get description')
-    description = get_description('Plastics: reuse, recycle, redesign', speaker_talk_sheet)
+    description = get_description('Bringing a startup mentality to sport', speaker_talk_sheet)
+    
