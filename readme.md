@@ -2,7 +2,11 @@
 This is a program for the automated processing and upload of videos to Facebook. It is composed of several files, but most notably
 1. Multiprocessing\_master\_control.py 
 2. People\_processing.py
+3. 
 
+
+# Setup
+Test
 
 
 
