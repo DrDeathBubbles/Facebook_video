@@ -177,17 +177,19 @@ def processing_message(process_name,tasks,results):
                 print('Failed to upload video to S3')
                 logging.error(e)
 
-
-        
-
             try:
                 post = upload_video(file_location + 'edited_videos/' + message)
                 print('Uploaded to Facebook') 
                 if post.status_code == '400':
                     print('Uploads are blocked')
                     time.sleep(60*60*6)
+<<<<<<< HEAD
+		              	    
+ 
+=======
                     continue
            
+>>>>>>> f293b72798195b0e10be21137e3690d6ce885d46
             except Exception as e:
                 logging.error('Failed to post to facebook')
                 print('Failed to post to facebook')
