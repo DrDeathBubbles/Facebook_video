@@ -1,13 +1,20 @@
 # Talkbot
-This is a program for the automated processing and upload of videos to Facebook. It is composed of several files, but most notably
-1. Multiprocessing\_master\_control.py 
-2. People\_processing.py
-3. 
+This is a program for the automated processing and upload of videos to Facebook. It is composed of several files, but most notably Multiprocessing\_master\_control.py, People\_processing.py and Email\_processing.py
+
 
 
 # Setup
-Test
 
+Install the python requirements using pip3 install -r requirements.txt in the virtualenv. W
+
+
+1. Install the python requirements using pip3 install -r requirements.txt
+2. Setup the SQS monitoring of the bucket. This is a two step process.
+    1. Create new queue - standard queue. Note, only one type of queue is useable by the bucket feed.
+    1. In the the bucket go to properties/
+    2. Go into events.
+    3. Add notifications and add Put Post, send to SQS queue and select the created queue from above.
+3.  
 
 
 ## Flow
