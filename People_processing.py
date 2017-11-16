@@ -7,6 +7,9 @@ from fuzzywuzzy import process
 
 
 def get_spreadsheets():
+    """
+    Get the speadsheets associated with the speaker talk sheet and the speaker email sheet.
+    """
     scope = ['https://spreadsheets.google.com/feeds']
     creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
     client = gspread.authorize(creds)
