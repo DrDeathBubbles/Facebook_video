@@ -6,11 +6,6 @@ import os
 
 
 
-
-
-
-
-
 def avenger_get_talks():
     """
     This gets the information for all the talks which are in the database
@@ -44,13 +39,22 @@ def avenger_get_locations(timeslot_location_id):
     return out
 
 
+
+#This is the attendee information section 
+
 def avenger_get_attendee_data():
+    """
+    This gets the attendee information for all attendees in Avenger
+    """
     headers = {'Authorization': 'Bearer {}'.format(os.environ['avenger_token'])}
     out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/attendances',headers = headers)
     return out
 
 
 def avenger_get_attendee_data(attendance_id):
+    """
+    This gets the attendee information for a particular attendee in Avenger 
+    """
     headers = {'Authorization': 'Bearer {}'.format(os.environ['avenger_token'])}
     out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/attendances/{}'.format(attendance_id),headers = headers)
     return out
