@@ -91,5 +91,18 @@ class avenger_requests():
 
     def name_processing(self, id):
         talk = self.get_talks_particular(id)
-        return talk
+        speakers = talk.json()['data']['timeslot_participations'] 
+        speakers = [test.get_attendee_data_particular_2(i['attendance_id']).json() for i in speakers]
+        speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
+        return speakers  
+
+
+
+if __name__ == '__main__':
+    test = avenger_requests()
+    a = test.name_processing('2a784db7-f5c7-4418-b895-2de4333efe79')
+    #b = a.json()['data']['timeslot_participations']
+    #c = [test.get_attendee_data_particular_2(i['attendance_id']).json() for i in b]
+
+
 
