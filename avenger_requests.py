@@ -97,6 +97,15 @@ class avenger_requests():
         speakers = ', '.join(speakers) + ' and ' + speakers[-1]
         return speakers  
 
+    def title_processing(self, id):
+        return None
+
+
+    def description_processing(self, id):
+        return None    
+    
+
+
 
 
 if __name__ == '__main__':
