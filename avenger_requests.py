@@ -89,7 +89,20 @@ class avenger_requests():
         return out
 
 
+    #These are the functions required to produce the output for the facebook videos 
+
+
     def name_processing(self, id):
+        """
+        Returns the list of speakers for a particular talk
+
+        Takes the talk id and returns a string of the speakers joined by commas with the last
+        speaker joined to the string with a 'and'.
+
+
+        What if there is only one speaker for the talk?
+
+        """
         talk = self.get_talks_particular(id)
         speakers = talk.json()['data']['timeslot_participations'] 
         speakers = [test.get_attendee_data_particular_2(i['attendance_id']).json() for i in speakers]
