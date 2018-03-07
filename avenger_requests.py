@@ -94,6 +94,7 @@ class avenger_requests():
         speakers = talk.json()['data']['timeslot_participations'] 
         speakers = [test.get_attendee_data_particular_2(i['attendance_id']).json() for i in speakers]
         speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
+        speakers = ', '.join(speakers) + ' and ' + speakers[-1]
         return speakers  
 
 
