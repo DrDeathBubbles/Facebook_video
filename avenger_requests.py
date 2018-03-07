@@ -3,11 +3,26 @@
 import requests
 import json 
 import os 
-
+import datetime 
 
 
 
 class avenger_requests():
+
+    def return_unicode_time(string):
+        """
+        This function returns the epoch time in milliseconds. 
+        """
+        temp_master = re.findall(r"[\w']+", string)
+        temp_1 = temp_master[2].split('T')
+        temp_master.insert(2,temp_1[0])
+        temp_master.insert(3,temp_1[1])
+        temp_master.pop(4)
+        temp_master[-1] = temp_master[-1].rstrip('Z')
+        temp_master = [int(i) for i in temp_master]
+        mydate = datetime.datetime(*temp_master[:-1])
+        mydate = mydate.timestamp()*1000 + temp_master[-1]
+        return mydate
 
 
 
