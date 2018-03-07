@@ -36,6 +36,9 @@ class avenger_requests():
     def get_talks_particular(self, id):
         """
         This gets the information about a single talk identified by its UUID
+        The 'id' refers to the 'timeslot_location_id'
+
+        Returns a response object.
         """
         out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/timeslots/' + str(id))
         return out
@@ -89,7 +92,6 @@ class avenger_requests():
         return out
 
 
-    #These are the functions required to produce the output for the facebook videos 
 
 
     def name_processing(self, id):
@@ -99,11 +101,13 @@ class avenger_requests():
         Takes the talk id and returns a string of the speakers joined by commas with the last
         speaker joined to the string with a 'and'.
 
-
         What if there is only one speaker for the talk?
-
+        This does not work - it has to be fixed for the case when there is just one speaker
         """
         talk = self.get_talks_particular(id)
+        if talk.status_code == 404:
+            print("{} has failed".format(id))
+            raise HTTPError 
         speakers = talk.json()['data']['timeslot_participations'] 
         speakers = [test.get_attendee_data_particular_2(i['attendance_id']).json() for i in speakers]
         speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
