@@ -36,7 +36,7 @@ class avenger_requests():
     def get_talks_particular(self, id):
         """
         This gets the information about a single talk identified by its UUID
-        The 'id' refers to the 'timeslot_location_id'
+        The 'id' refers to the 'id'. The data is got through .json()['data']['key']
 
         Returns a response object.
         """
@@ -82,17 +82,6 @@ class avenger_requests():
         out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/attendances/{}'.format(attendance_id),headers = headers)
         return out
     
-    
-    def get_attendee_data_particular_2(self, attendance_id):
-        """
-        This gets the attendee information for a particular attendee in Avenger 
-        """
-        headers = {'Authorization': 'Bearer {}'.format(os.environ['avenger_token'])}
-        out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/attendances/{}'.format(attendance_id),headers = headers)
-        return out
-
-
-
 
     def name_processing(self, id):
         """
@@ -119,13 +108,22 @@ class avenger_requests():
             return
 
     def title_processing(self, id):
-       
-        return None
+        talk = self.get_talks_particular(id)
+        talk.raise_for_status()
+        if 'data' in talk.json().keys():
+            try:
+                title = talk.json()['data']['title']
+                return title 
+            except:
+                return None 
 
 
     def description_processing(self, id):
         return None    
     
+
+
+
 
 
 
