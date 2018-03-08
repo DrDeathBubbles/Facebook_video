@@ -105,14 +105,18 @@ class avenger_requests():
         This does not work - it has to be fixed for the case when there is just one speaker
         """
         talk = self.get_talks_particular(id)
-        if talk.status_code == 404:
-            print("{} has failed".format(id))
-            raise HTTPError 
-        speakers = talk.json()['data']['timeslot_participations'] 
-        speakers = [test.get_attendee_data_particular_2(i['attendance_id']).json() for i in speakers]
-        speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
-        speakers = ', '.join(speakers) + ' and ' + speakers[-1]
-        return speakers  
+        talk.raise_for_status()
+        if 'data' in talk.json().keys():
+            speakers = talk.json()['data']['timeslot_participations'] 
+            speakers = [test.get_attendee_data_particular_2(i['attendance_id']).json() for i in speakers]
+            speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
+            if len(speakers) > 1:
+                speakers = ', '.join(speakers) + ' and ' + speakers[-1]
+            elif len(speakers) == 1:
+                speakers = speakers[0]
+            return speakers  
+        else:
+            return
 
     def title_processing(self, id):
         return None
