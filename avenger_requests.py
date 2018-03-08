@@ -83,6 +83,10 @@ class avenger_requests():
         return out
     
 
+
+    #This section containd the functions which return the data actually needed by TalkBot
+
+
     def name_processing(self, id):
         """
         Returns the list of speakers for a particular talk
@@ -108,6 +112,9 @@ class avenger_requests():
             return
 
     def title_processing(self, id):
+        """
+        Given a id of a talk, returns the title of the talk.
+        """
         talk = self.get_talks_particular(id)
         talk.raise_for_status()
         if 'data' in talk.json().keys():
@@ -119,6 +126,9 @@ class avenger_requests():
 
 
     def description_processing(self, id):
+        """
+        Given an id of a talk, returns the description of the talk.
+        """
         talk = self.get_talks_particular(id)
         talk.raise_for_status()
         if 'data' in talk.json().keys():
