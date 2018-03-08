@@ -119,18 +119,22 @@ class avenger_requests():
 
 
     def description_processing(self, id):
-        return None    
+        talk = self.get_talks_particular(id)
+        talk.raise_for_status()
+        if 'data' in talk.json().keys():
+            try:
+                title = talk.json()['data']['description']
+                return title 
+            except:
+                return None 
     
-
-
-
-
-
-
 
 if __name__ == '__main__':
     test = avenger_requests()
-    a = test.name_processing('2a784db7-f5c7-4418-b895-2de4333efe79')
+    #a = test.name_processing('2a784db7-f5c7-4418-b895-2de4333efe79')
+    a = test.name_processing('70029a23-f8dc-4eb2-89a4-6d7de7409ad9')
+    b = test.title_processing('70029a23-f8dc-4eb2-89a4-6d7de7409ad9')
+    c = test.description_processing('70029a23-f8dc-4eb2-89a4-6d7de7409ad9')
     #b = a.json()['data']['timeslot_participations']
     #c = [test.get_attendee_data_particular_2(i['attendance_id']).json() for i in b]
 
