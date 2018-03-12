@@ -8,9 +8,31 @@ def video_info():
     return flag
 
 
+def managed_pages(access_token):
+    """
+    Gives a list of the pages which are managed by our access token and the access token associated with these pages
+    """
+    url = 'https://graph.facebook.com/me/accounts?access_token={}'.format(access_token)
+    flag = requests.get(url)
+    return flag
+
+def get_short_term_token():
+    """
+    Don't know what this is 
+    """
+
+    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=client_credentials'.format(os.environ['APPID'],os.environ['APPSECRET'])
+
+    flag = requests.get(url)
+
+    return flag
+
+
 def get_long_lasting_token(short_term_token):
-    url = '''https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={} &grant_type=fb_exchange_token
-    &fb_exchange_token={}'''.format(os.environ['APPID'],os.environ['APPSECRET'],short_term_token)
+    """
+    From a short term page access token get the long term page access token
+    """
+    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=fb_exchange_token&fb_exchange_token={}'.format(os.environ['APPID'],os.environ['APPSECRET'],short_term_token)
 
     flag = requests.get(url)
 
@@ -43,11 +65,17 @@ def upload_video(video_path):
     flag = requests.post(url,files=_file) 
     return flag
 
-
+def upload_video_2(video_path,access_token):
+    url = 'https://graph-video.facebook.com/LSWSTST/videos?access_token={}'.format(access_token) 
+    _file = {'file':open(video_path,'rb')}
+    flag = requests.post(url,files=_file) 
+    return flag
 
 
 
 
 if __name__ == '__main__':
-    out = upload_video('/Users/aaronmeagher/Desktop/test_trimmed.mp4')
+    a = managed_pages(os.environ['ACCESSTOKEN'])
+    access_token = a.json()['data'][0]['access_token']
+    out = upload_video_2('./test_trimmed.mp4',access_token)
     print(out.text)
