@@ -66,7 +66,11 @@ Install the python requirements using pip3 install -r requirements.txt in the vi
 The page access tokens are acquired from the manage_pages function from the FB_access_token_generator module. Run this with the access token 
 associated with the account to get a list of all pages managed by this token and their access tokens.
 
+This is needed for generating the facebook page access tokens
 
+https://stackoverflow.com/questions/20180836/the-access-token-does-not-belong-to-application-trying-to-generate-long-lived
+
+We need stage_id -> (page_id,access_token
 
 
 ## Flow
