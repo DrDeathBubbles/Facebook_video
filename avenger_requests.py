@@ -9,6 +9,8 @@ import datetime
 
 class avenger_requests():
 
+    conf = 'cc18'
+
     def return_unicode_time(string):
         """
         This function returns the epoch time in milliseconds. 
@@ -30,17 +32,18 @@ class avenger_requests():
         """
         This gets the information for all the talks which are in the database
         """
-        out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/timeslots/')
+        out = requests.get('https://avenger.cilabs.net/v1/conferences//timeslots/'.format(conf))
         return out
 
     def get_talks_particular(self, id):
         """
         This gets the information about a single talk identified by its UUID
         The 'id' refers to the 'id'. The data is got through .json()['data']['key']
-
+        The id of the talk is returned in the json response object
+        lo  
         Returns a response object.
         """
-        out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/timeslots/' + str(id))
+        out = requests.get('https://avenger.cilabs.net/v1/conferences/{}/timeslots/'.format(conf) + str(id))
         return out
 
 
@@ -51,14 +54,14 @@ class avenger_requests():
         """
         This gets the information of all the stages and their names 
         """
-        out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/timeslot_locations')
+        out = requests.get('https://avenger.cilabs.net/v1/conferences/{}/timeslot_locations'.format(conf))
         return out
 
     def get_locations_particular(self, timeslot_location_id):
         """
         This gets the stage information, including name, based on the timeslot_location id
         """
-        out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/timeslot_locations/' + str(timeslot_location_id))
+        out = requests.get('https://avenger.cilabs.net/v1/conferences/{}/timeslot_locations/'.format(conf) + str(timeslot_location_id))
         return out
 
 
@@ -70,7 +73,7 @@ class avenger_requests():
         This gets the attendee information for all attendees in Avenger
         """
         headers = {'Authorization': 'Bearer {}'.format(os.environ['avenger_token'])}
-        out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/attendances',headers = headers)
+        out = requests.get('https://avenger.cilabs.net/v1/conferences/{}/attendances'.format(conf),headers = headers)
         return out
 
 
@@ -79,7 +82,7 @@ class avenger_requests():
         This gets the attendee information for a particular attendee in Avenger 
         """
         headers = {'Authorization': 'Bearer {}'.format(os.environ['avenger_token'])}
-        out = requests.get('https://avenger.cilabs.net/v1/conferences/ws17/attendances/{}'.format(attendance_id),headers = headers)
+        out = requests.get('https://avenger.cilabs.net/v1/conferences/{}/attendances/{}'.format(conf,attendance_id),headers = headers)
         return out
     
 
