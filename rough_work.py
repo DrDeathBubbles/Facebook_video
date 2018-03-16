@@ -8,5 +8,8 @@ def search_key_2( stages, key):
     return out            
 
 
-def test():
-    return None 
+class test():
+    a = 1
+
+    def test_method(self):
+        print(a)
