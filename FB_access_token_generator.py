@@ -28,11 +28,11 @@ def get_short_term_token():
     return flag
 
 
-def get_long_lasting_token(short_term_token):
+def get_long_lasting_token(short_term_token, client_id, client_secret):
     """
     From a short term page access token get the long term page access token
     """
-    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=fb_exchange_token&fb_exchange_token={}'.format(os.environ['APPID'],os.environ['APPSECRET'],short_term_token)
+    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=fb_exchange_token&fb_exchange_token={}'.format(client_id, client_secret, short_term_token)
 
     flag = requests.get(url)
 
@@ -71,7 +71,11 @@ def upload_video_2(video_path,access_token):
     flag = requests.post(url,files=_file) 
     return flag
 
-
+def upload_video_2(video_path,access_token):
+    url = 'https://graph-video.facebook.com/LSWSTST/videos?access_token={}'.format(access_token) 
+    _file = {'file':open(video_path,'rb')}
+    flag = requests.post(url,files=_file) 
+    return fla
 
 
 if __name__ == '__main__':
