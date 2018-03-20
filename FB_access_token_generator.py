@@ -38,13 +38,13 @@ def get_long_lasting_token(short_term_token, client_id, client_secret):
 
     return flag
 
-def long_lasting_token():
-    access_token= 'EAAXukhZA5tLEBAE3LQomvcItWAGzQ4hOllmusAvb8R4Q3aISRxEc0nx4zZAz7rAjXpodx8jJHqZCJQWZCg238geZA9GD4XZB0CSZCXTONm7hBdZAWlMlhrXjEI4AtGFvaTz2OBqlFyi1nGg7HNlxrmVsDCAFgIpAnucAJPd9v3OX547JMmfG967iqUdF1C58HuMZD'
-    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=fb_exchange_token&fb_exchange_token={}'.format(os.environ['APPID'],os.environ['APPSECRET'],access_token)
-
-    flag = requests.get(url)
-
-    return flag
+#def long_lasting_token():
+#    access_token= 'EAAXukhZA5tLEBAE3LQomvcItWAGzQ4hOllmusAvb8R4Q3aISRxEc0nx4zZAz7rAjXpodx8jJHqZCJQWZCg238geZA9GD4XZB0CSZCXTONm7hBdZAWlMlhrXjEI4AtGFvaTz2OBqlFyi1nGg7HNlxrmVsDCAFgIpAnucAJPd9v3OX547JMmfG967iqUdF1C58HuMZD'
+#    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=fb_exchange_token&fb_exchange_token={}'.format(os.environ['APPID'],os.environ['APPSECRET'],access_token)
+#
+#    flag = requests.get(url)
+#
+#    return flag
 
 
 def long_lasting_token_2():
