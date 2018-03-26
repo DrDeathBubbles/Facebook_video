@@ -4,14 +4,14 @@ import requests
 import json 
 import os 
 import datetime 
-
+import re
 
 
 class avenger_requests():
 
     conf = 'cc18'
 
-    def return_unicode_time(string):
+    def return_unicode_time(self, string):
         """
         This function returns the epoch time in milliseconds. 
         """
