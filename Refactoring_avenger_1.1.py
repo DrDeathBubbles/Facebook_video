@@ -15,6 +15,9 @@ import requests
 import os
 import multiprocessing 
 import logging
+import pandas as pd
+import avenger_reqests 
+
 
 from moviepy.editor import *
 import moviepy
@@ -90,14 +93,29 @@ def initialise_connection():
 #    flag = requests.post(url,files=_file) 
 #    return flag
 
-def upload_video(video_path):
+#def upload_video(video_path):
+#    """
+#    Returns {'id': '1450967228357958'}
+#    """
+#    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={}'.format(access_token) 
+#    _file = {'file':open(video_path,'rb')}
+#    flag = requests.post(url,files=_file) 
+#    return flag
+
+
+
+def upload_video(video_path, fb_page_id, access_token):
     """
     Returns {'id': '1450967228357958'}
     """
-    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={}'.format(access_token) 
+    url = 'https://graph-video.facebook.com/{}/videos?access_token={}'.format(fb_page_id, access_token) 
     _file = {'file':open(video_path,'rb')}
     flag = requests.post(url,files=_file) 
     return flag
+
+
+
+
 
 
 def adding_description(post_id,description):
@@ -153,8 +171,8 @@ def processing_message(process_name,tasks,results):
     while True:
         task = tasks.get()
         message = task[0]
-        speaker_talk_sheet = task[1]
-        speaker_email_sheet = task[2]
+        #speaker_talk_sheet = task[1]
+        #speaker_email_sheet = task[2]
         
         if message == 0:
             print('{} process quits'.format(process_name))
@@ -188,8 +206,24 @@ def processing_message(process_name,tasks,results):
                 print('Failed to upload video to S3')
                 logging.error(e)
 
+
+#This is where we process the message and get information 
+
             try:
-                post = upload_video(file_location + 'edited_videos/' + message)
+                data = pd.read_csv('CC_18_access_tokens.csv')
+                uuid = message.split('')
+                uuid = processed_message[4].split('.')[0]
+                avenger = avenger_requests.avenger_requests()
+                talk_location_id = avenger.get_timeslot_id(uuid)
+                fb_page_id = data[data['id']==uuid]['page_id']
+                access_token = data[data['id']==uuid]['long_lasting_token']
+
+            except :
+                None 
+
+
+            try:
+                post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
                 print('Uploaded to Facebook') 
                 if post.status_code == '400':
                     print('Uploads are blocked')
