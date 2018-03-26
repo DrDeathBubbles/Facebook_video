@@ -308,7 +308,7 @@ if __name__ == '__main__':
 
         for message in messages:
             print(message)
-            tasks.put([message,speaker_talk_sheet,speaker_email_sheet])
+            tasks.put([message])
 
         i = i + 1        
         time.sleep(5)
