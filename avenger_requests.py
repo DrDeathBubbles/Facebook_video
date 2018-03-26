@@ -114,6 +114,7 @@ class avenger_requests():
         else:
             return
 
+
     def title_processing(self, id):
         """
         Given a id of a talk, returns the title of the talk.
@@ -140,7 +141,20 @@ class avenger_requests():
                 return title 
             except:
                 return None 
-    
+
+
+    def get_timeslot_id(self, id):
+        """
+        Given an id of a talk, returns the timeslot of the talk
+        """    
+        talk = self.get_talks_particular(id)
+        talk.raise_for_status()
+        if 'data' in talk.json().keys():
+            try:
+                timeslot_id = talk.jsonI()['data']['timeslot_location_id']
+                return timeslot_id
+            except:
+                return None 
 
 if __name__ == '__main__':
     test = avenger_requests()
