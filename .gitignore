@@ -102,10 +102,11 @@ ENV/
 # End of https://www.gitignore.io/api/python
 
 
-.csv
+*.csv
 
-.mp4
+*.mp4
 
 
-.json
+*.json
 
+*.xls
