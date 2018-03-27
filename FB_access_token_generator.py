@@ -38,6 +38,21 @@ def get_long_lasting_token(short_term_token, client_id, client_secret):
 
     return flag
 
+
+def get_long_lasting_token_return(short_term_token, client_id =os.environ['APPID_EXPERIMENTS_TEST'], client_secret=os.environ['APPSECRET_EXPERIMENTS_TEST']):
+    """
+    From a short term page access token get the long term page access token
+    """
+    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=fb_exchange_token&fb_exchange_token={}'.format(client_id, client_secret, short_term_token)
+
+    flag = requests.get(url)
+    if 'access_token' in flag.json().keys():
+        flag = flag.json()['access_token']
+        return flag
+    else:
+        return None
+
+
 #def long_lasting_token():
 #    access_token= 'EAAXukhZA5tLEBAE3LQomvcItWAGzQ4hOllmusAvb8R4Q3aISRxEc0nx4zZAz7rAjXpodx8jJHqZCJQWZCg238geZA9GD4XZB0CSZCXTONm7hBdZAWlMlhrXjEI4AtGFvaTz2OBqlFyi1nGg7HNlxrmVsDCAFgIpAnucAJPd9v3OX547JMmfG967iqUdF1C58HuMZD'
 #    url = 'https://graph.facebook.com/oauth/access_token?client_id={}&client_secret={}&grant_type=fb_exchange_token&fb_exchange_token={}'.format(os.environ['APPID'],os.environ['APPSECRET'],access_token)
@@ -71,11 +86,11 @@ def upload_video_2(video_path,access_token):
     flag = requests.post(url,files=_file) 
     return flag
 
-def upload_video_2(video_path,access_token):
+def upload_video_3(video_path,access_token):
     url = 'https://graph-video.facebook.com/LSWSTST/videos?access_token={}'.format(access_token) 
     _file = {'file':open(video_path,'rb')}
     flag = requests.post(url,files=_file) 
-    return fla
+    return flag
 
 
 if __name__ == '__main__':
