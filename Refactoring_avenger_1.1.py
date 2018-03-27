@@ -16,7 +16,7 @@ import os
 import multiprocessing 
 import logging
 import pandas as pd
-import avenger_reqests 
+import avenger_requests 
 
 
 from moviepy.editor import *
@@ -325,7 +325,7 @@ if __name__ == '__main__':
 
     conn = initialise_connection()
     q = conn.create_queue('DS_AJM_VIDEO')
-    i = 0
+   # i = 0
 
     while True:
 #        if i % 60*12 == 0:
