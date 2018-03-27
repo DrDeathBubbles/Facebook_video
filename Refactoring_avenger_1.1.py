@@ -118,18 +118,18 @@ def upload_video(video_path, fb_page_id, access_token):
 
 
 
-def adding_description(post_id,description):
+def adding_description(post_id,description, access_token):
     """
     The return is either true or false.
     """
     data = {'description':description}
-    url = 'https://graph.facebook.com/v2.10/{}?access_token={}'.format(post_id,access_token)
+    url = 'https://graph.facebook.com/v2.10/{}?access_token={}'.format(post_id, access_token)
     flag = requests.post(url,json=data)
     return flag
 
 
 def reading_video_url(post_id):
-    url = 'https://graph.facebook.com/v2.10/{}?fields=permalink_url&access_token={}'.format(post_id,access_token)
+    url = 'https://graph.facebook.com/v2.10/{}?fields=permalink_url&access_token={}'.format(post_id, access_token)
     flag = requests.post(url)
     flag = 'www.facebook.com'+flag.json()['permalink_url']
     return flag
@@ -207,7 +207,8 @@ def processing_message(process_name,tasks,results):
                 logging.error(e)
 
 
-#This is where we process the message and get information 
+            #This is where we process the message and get information regarding the fb_page_id
+            # and the access_token needed for the rest of the upload 
 
             try:
                 data = pd.read_csv('CC_18_access_tokens.csv')
@@ -215,11 +216,13 @@ def processing_message(process_name,tasks,results):
                 uuid = processed_message[4].split('.')[0]
                 avenger = avenger_requests.avenger_requests()
                 talk_location_id = avenger.get_timeslot_id(uuid)
-                fb_page_id = data[data['id']==uuid]['page_id']
-                access_token = data[data['id']==uuid]['long_lasting_token']
+                fb_page_id = data[data['id']==talk_location_id]['page_id']
+                access_token = data[data['id']==talk_location_id]['long_lasting_token']
 
-            except :
-                None 
+            except Exception as e:
+                logging.error('Failed to get the credentials')
+                print('Failed to get credentials')
+                continue 
 
 
             try:
@@ -246,42 +249,49 @@ def processing_message(process_name,tasks,results):
                 logging.error('Failed to delete the local copy of the file')
                 print('Failed to remove local copies')
             
+            
+            #This is where we get the description and speakers for a talk and add
+            # it to the facebook video            
+            
             try:
-                description, location = get_description(message, speaker_talk_sheet)
-                people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
-                speakers_formatted = speaker_formatting(people_to_be_emailed) 
-                description = speakers_formatted + ' \n ' + description
-                print(description)
-                print(people_to_be_emailed)
-                print(post.json()['id'])
-                adding_description(post.json()['id'], description)
+                description = avenger.get_description(uuid)
+                speakers = avenger.name_processing(uuid)
+                #description, location = get_description(message, speaker_talk_sheet)
+                #people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
+                #speakers_formatted = speaker_formatting(people_to_be_emailed) 
+                description = speakers + ' \n ' + description
+                adding_description(post.json()['id'], description, access_token)
 
             except Exception  as e:
                 print('Failed to add description')
                 logging.error('Failed to add description')
                 logging.error(e)
 
+
+            #This is where we get the video url for the facebook video and email it
+            #to the speakers
+
             try:    
                 video_url = reading_video_url(post.json()['id'])
                 print(video_url)
-                emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
-                print(emails)
-                results.put(emails)
-                for email in emails:
-                    send_email(email,video_url)
+                #emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
+                #print(emails)
+                #results.put(emails)
+                #for email in emails:
+                #    send_email(email,video_url)
 
             except Exception  as e:
                 print('Failed to email speakers')
                 logging.error('Failed to email speakers for {}'.format(message))
                 logging.error(e)
             
-            try:
-                update_spreadsheet(location, video_url)
-                print('updated spreadsheets successfully')
+            #try:
+            #    update_spreadsheet(location, video_url)
+            #    print('updated spreadsheets successfully')
 
-            except Exception as e:
-                logging.error('Failed to update spreadsheet') 
-                print('Failed to update spreadsheets')
+            #except Exception as e:
+            #    logging.error('Failed to update spreadsheet') 
+            #    print('Failed to update spreadsheets')
 
             
             print('{} process finishes {}'.format(process_name, message))
