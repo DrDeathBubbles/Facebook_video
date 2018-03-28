@@ -111,8 +111,12 @@ def upload_video(video_path, fb_page_id, access_token):
     """
     url = 'https://graph-video.facebook.com/{}/videos?access_token={}'.format(fb_page_id, access_token) 
     _file = {'file':open(video_path,'rb')}
-    flag = requests.post(url,files=_file) 
-    return flag
+    try:
+        flag = requests.post(url,files=_file)
+        flag.raise_for_status()
+        return flag
+    except requests.exceptions.HTTPError as err:
+        print('Http error {}'.format(err)) 
 
 
 
