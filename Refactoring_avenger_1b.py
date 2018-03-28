@@ -236,11 +236,11 @@ def processing_message(process_name,tasks,results):
                 #    time.sleep(60*60*6)
                 #    continue
            
-            except:
-                logging.error('Failed to post to facebook')
-                print('Failed to post to facebook')
-                logging.error(e)
-                continue
+            #except:
+            #    logging.error('Failed to post to facebook')
+            #    print('Failed to post to facebook')
+            #    logging.error(e)
+            #    continue
 
             except:
                 print('Failed to post to Facebook 2')
