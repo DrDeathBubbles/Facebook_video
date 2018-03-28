@@ -231,14 +231,12 @@ def processing_message(process_name,tasks,results):
 
             try:
                 post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
-                post.raise_for_status()
-
                 #if post.status_code == '400':
                 #    print('Uploads are blocked')
                 #    time.sleep(60*60*6)
                 #    continue
            
-            except requests.exceptions.HTTPError:
+            except:
                 logging.error('Failed to post to facebook')
                 print('Failed to post to facebook')
                 logging.error(e)
