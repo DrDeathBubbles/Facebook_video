@@ -116,6 +116,7 @@ def upload_video(video_path, fb_page_id, access_token):
         flag.raise_for_status()
     except requests.exceptions.HTTPError as err:
         print('Http error {}'.format(err)) 
+        raise Exception
     return flag
 
 
@@ -228,10 +229,12 @@ def processing_message(process_name,tasks,results):
                 continue 
 
 
-            post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
-            print('Post')
-            post
+            try:
+                post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
+            except:
 
+                print('Post to facebook unsuccessful')
+                post
             #try:
             #    post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
             #    #if post.status_code == '400':
