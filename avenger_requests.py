@@ -151,7 +151,7 @@ class avenger_requests():
         talk.raise_for_status()
         if 'data' in talk.json().keys():
             try:
-                timeslot_id = talk.jsonI()['data']['timeslot_location_id']
+                timeslot_id = talk.json()['data']['timeslot_location_id']
                 return timeslot_id
             except:
                 return None 
