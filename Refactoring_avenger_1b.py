@@ -240,6 +240,10 @@ def processing_message(process_name,tasks,results):
                 logging.error(e)
                 continue
 
+            except:
+                print('Failed to post to Facebook 2')
+
+
 
             try:
                 os.remove(file_location + message)
