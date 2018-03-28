@@ -114,10 +114,9 @@ def upload_video(video_path, fb_page_id, access_token):
     try:
         flag = requests.post(url,files=_file)
         flag.raise_for_status()
-        return flag
     except requests.exceptions.HTTPError as err:
         print('Http error {}'.format(err)) 
-
+    return flag
 
 
 
