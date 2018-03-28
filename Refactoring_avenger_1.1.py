@@ -215,8 +215,8 @@ def processing_message(process_name,tasks,results):
                 uuid = message.split('_')[3]
                 avenger = avenger_requests.avenger_requests()
                 talk_location_id = avenger.get_timeslot_id(uuid)
-                fb_page_id = data[data['id']==talk_location_id]['page_id']
-                access_token = data[data['id']==talk_location_id]['long_lasting_token']
+                fb_page_id = int(data[data['id']==talk_location_id]['page_id'])
+                access_token = data[data['id']==talk_location_id]['long_lasting_token'].values[0]
 
             except Exception as e:
                 logging.error('Failed to get the credentials')
