@@ -11,6 +11,7 @@ import os
 import json 
 import time
 from urllib import parse
+import urllib
 import requests
 import os
 import multiprocessing 
@@ -233,7 +234,7 @@ def processing_message(process_name,tasks,results):
                 #    time.sleep(60*60*6)
                 #    continue
            
-            except Exception as e:
+            except requests.exceptions.HTTPError:
                 logging.error('Failed to post to facebook')
                 print('Failed to post to facebook')
                 logging.error(e)
