@@ -212,8 +212,7 @@ def processing_message(process_name,tasks,results):
 
             try:
                 data = pd.read_csv('CC_18_access_tokens.csv')
-                uuid = message.split('_')
-                uuid = processed_message[3].split('.')[0]
+                uuid = message.split('_')[3]
                 avenger = avenger_requests.avenger_requests()
                 talk_location_id = avenger.get_timeslot_id(uuid)
                 fb_page_id = data[data['id']==talk_location_id]['page_id']
