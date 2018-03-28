@@ -228,21 +228,25 @@ def processing_message(process_name,tasks,results):
                 continue 
 
 
-            try:
-                post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
-                #if post.status_code == '400':
-                #    print('Uploads are blocked')
-                #    time.sleep(60*60*6)
-                #    continue
-           
-            #except:
-            #    logging.error('Failed to post to facebook')
-            #    print('Failed to post to facebook')
-            #    logging.error(e)
-            #    continue
+            post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
+            print('Post')
+            post
 
-            except:
-                print('Failed to post to Facebook 2')
+            #try:
+            #    post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
+            #    #if post.status_code == '400':
+            #    #    print('Uploads are blocked')
+            #    #    time.sleep(60*60*6)
+            #    #    continue
+           
+            ##except:
+            ##    logging.error('Failed to post to facebook')
+            ##    print('Failed to post to facebook')
+            ##    logging.error(e)
+            ##    continue
+
+            #except:
+            #    print('Failed to post to Facebook 2')
 
 
 
