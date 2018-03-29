@@ -275,6 +275,7 @@ def processing_message(process_name,tasks,results):
                 #people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
                 #speakers_formatted = speaker_formatting(people_to_be_emailed) 
                 description = speakers + ' \n ' + description
+                print(description)
                 adding_description(post.json()['id'], description, access_token)
 
             except Exception  as e:
