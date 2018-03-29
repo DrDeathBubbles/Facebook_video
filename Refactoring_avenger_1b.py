@@ -234,7 +234,6 @@ def processing_message(process_name,tasks,results):
             except:
 
                 print('Post to facebook unsuccessful')
-                post
             #try:
             #    post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
             #    #if post.status_code == '400':
