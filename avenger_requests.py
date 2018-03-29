@@ -104,7 +104,7 @@ class avenger_requests():
         talk.raise_for_status()
         if 'data' in talk.json().keys():
             speakers = talk.json()['data']['timeslot_participations'] 
-            speakers = [test.get_attendee_data_particular(i['attendance_id']).json() for i in speakers]
+            speakers = [self.get_attendee_data_particular(i['attendance_id']).json() for i in speakers]
             speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
             if len(speakers) > 1:
                 speakers = ', '.join(speakers) + ' and ' + speakers[-1]
@@ -137,8 +137,8 @@ class avenger_requests():
         talk.raise_for_status()
         if 'data' in talk.json().keys():
             try:
-                title = talk.json()['data']['description']
-                return title 
+                description = talk.json()['data']['description']
+                return description 
             except:
                 return None 
 
