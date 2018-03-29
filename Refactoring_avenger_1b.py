@@ -222,7 +222,7 @@ def processing_message(process_name,tasks,results):
                 talk_location_id = avenger.get_timeslot_id(uuid)
                 fb_page_id = int(data[data['id']==talk_location_id]['page_id'])
                 access_token = data[data['id']==talk_location_id]['long_lasting_token'].values[0]
-
+                print('Got credentials')
             except Exception as e:
                 logging.error('Failed to get the credentials')
                 print('Failed to get credentials')
@@ -231,6 +231,7 @@ def processing_message(process_name,tasks,results):
 
             try:
                 post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
+                print('Posted to facebook')
             except:
 
                 print('Post to facebook unsuccessful')
