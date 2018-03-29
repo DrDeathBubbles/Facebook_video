@@ -216,7 +216,7 @@ def processing_message(process_name,tasks,results):
             # and the access_token needed for the rest of the upload 
 
             try:
-                data = pd.read_csv('CC_18_access_tokens1.csv')
+                data = pd.read_csv('CC_18_access_tokens.csv')
                 uuid = message.split('_')[3]
                 avenger = avenger_requests.avenger_requests()
                 talk_location_id = avenger.get_timeslot_id(uuid)
@@ -234,6 +234,7 @@ def processing_message(process_name,tasks,results):
             except:
 
                 print('Post to facebook unsuccessful')
+                continue 
             #try:
             #    post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
             #    #if post.status_code == '400':
