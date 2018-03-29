@@ -269,7 +269,7 @@ def processing_message(process_name,tasks,results):
             # it to the facebook video            
             
             try:
-                description = avenger.get_description(uuid)
+                description = avenger.description_processing(uuid)
                 speakers = avenger.name_processing(uuid)
                 #description, location = get_description(message, speaker_talk_sheet)
                 #people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
