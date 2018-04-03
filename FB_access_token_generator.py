@@ -39,7 +39,7 @@ def get_long_lasting_token(short_term_token, client_id, client_secret):
     return flag
 
 
-def get_long_lasting_token_return(short_term_token, client_id =os.environ['APPID_EXPERIMENTS_TEST'], client_secret=os.environ['APPSECRET_EXPERIMENTS_TEST']):
+def get_long_lasting_token_return(short_term_token, client_id =os.environ['CC_18_APPID'], client_secret=os.environ['CC_18_APPSECRET']):
     """
     From a short term page access token get the long term page access token
     """
@@ -94,7 +94,8 @@ def upload_video_3(video_path,access_token):
 
 
 if __name__ == '__main__':
-    a = managed_pages(os.environ['ACCESSTOKEN'])
-    access_token = a.json()['data'][0]['access_token']
-    out = upload_video_2('./test_trimmed.mp4',access_token)
-    print(out.text)
+    a = get_long_lasting_token(os.environ['CC_18_USER_ACCESSTOKEN'],os.environ['CC_18_APPID'],os.environ['CC_18_APPSECRET'])    
+   # a = managed_pages(os.environ['ACCESSTOKEN'])
+   # access_token = a.json()['data'][0]['access_token']
+   # out = upload_video_2('./test_trimmed.mp4',access_token)
+   # print(out.text)
