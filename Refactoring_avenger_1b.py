@@ -288,7 +288,7 @@ def processing_message(process_name,tasks,results):
             #to the speakers
 
             try:    
-                video_url = reading_video_url(post.json()['id'])
+                video_url = reading_video_url(post.json()['id'], access_token)
                 print(video_url)
                 #emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
                 #print(emails)
