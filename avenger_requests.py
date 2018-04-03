@@ -156,6 +156,14 @@ class avenger_requests():
             except:
                 return None 
 
+
+    def get_timeslot_location(self, id):
+        """
+        Given an id of a talk, returns the string location of that talk
+        """
+
+
+
 if __name__ == '__main__':
     test = avenger_requests()
     #a = test.name_processing('2a784db7-f5c7-4418-b895-2de4333efe79')
