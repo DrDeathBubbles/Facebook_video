@@ -304,7 +304,7 @@ def processing_message(process_name,tasks,results):
                 print('Resourse made')
                 queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
                 print('Queue got')
-                queue.send_message(MessageBody={'body':message},MessageAttributes=message_attributes)
+                queue.send_message(MessageBody="{'body':{}}".format(message),MessageAttributes=message_attributes)
                 print('Queue populated')
                 #emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
                 #print(emails)
