@@ -263,8 +263,8 @@ def processing_message(process_name,tasks,results):
 
 
             try:
-                #os.remove(file_location + message)
-                #os.remove(file_location + 'edited_videos/' + message)
+                os.remove(file_location + message)
+                os.remove(file_location + 'edited_videos/' + message)
                 print('removed local files')
 
             except:
