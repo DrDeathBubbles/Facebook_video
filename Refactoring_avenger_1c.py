@@ -300,7 +300,7 @@ def processing_message(process_name,tasks,results):
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/ws17-videos/' + message
                 message_attributes = processing_output_message(facebook_url, s3_url, uuid)
                 print(message_attributes)
-                sqs = boto3.resource('sqs')
+                sqs = boto3.resource('sqs',region_name='eu-west-1')
                 print('Resourse made')
                 queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
                 print('Queue got')
