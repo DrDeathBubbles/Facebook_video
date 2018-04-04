@@ -150,8 +150,8 @@ def video_processing(video_file, output):
     print(start_time)
     print(end_time)
     if len(start_time) ==6  and len(end_time) ==6:
-        start_time = (int(start_time[0:2]),int(start_time[2:4]),int(start_time[4:6]))
-        end_time = (int(end_time[0:2]),int(end_time[2:4]),int(end_time[4:6]))
+        #start_time = (int(start_time[0:2]),int(start_time[2:4]),int(start_time[4:6]))
+        #end_time = (int(end_time[0:2]),int(end_time[2:4]),int(end_time[4:6]))
         clip = clip.subclip(start_time,end_time)
         print('clip_edited if loup')
     else:
