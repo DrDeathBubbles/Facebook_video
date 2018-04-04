@@ -171,9 +171,9 @@ def speaker_formatting(speaker_list):
 
 
 def processing_output_message(facebook_url, s3_url, uuid):
-    message_attributes = {'facebook_url':{'data_type':'String','string_value': facebook_url},
-    's3_url':{'data_type':'String','string_value': s3_url},
-    'uid':{'data_type':'String', 'string_value': uuid}}
+    message_attributes = {'facebook_url':{'DataType':'String','StringValue': facebook_url},
+    's3_url':{'DataType':'String','StringValue': s3_url},
+    'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
 
 def processing_message(process_name,tasks,results):
@@ -295,8 +295,14 @@ def processing_message(process_name,tasks,results):
             #to the speakers
 
             try:    
-                video_url = reading_video_url(post.json()['id'], access_token)
-                print(video_url)
+                facebook_url = reading_video_url(post.json()['id'], access_token)
+                print(facebook_url)
+                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws17-videos/' + message
+                message_attributes = processing_output_message(facebook_url, s3_url, uuid)
+                sqs = boto3.resource('sqs')
+                queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
+                queue.send_message(MessageBody=message,MessageAttributes=message_attributes)
+                print('Queue populated')
                 #emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
                 #print(emails)
                 #results.put(emails)
