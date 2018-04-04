@@ -299,8 +299,11 @@ def processing_message(process_name,tasks,results):
                 print(facebook_url)
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/ws17-videos/' + message
                 message_attributes = processing_output_message(facebook_url, s3_url, uuid)
+                print(message_attributes)
                 sqs = boto3.resource('sqs')
+                print('Resourse made')
                 queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
+                print('Queue got')
                 queue.send_message(MessageBody=message,MessageAttributes=message_attributes)
                 print('Queue populated')
                 #emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
