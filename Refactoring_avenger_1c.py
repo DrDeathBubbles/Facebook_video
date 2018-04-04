@@ -142,6 +142,7 @@ def reading_video_url(post_id, access_token):
 
 def video_processing(video_file, output):
     clip = VideoFileClip(video_file)
+    print('video file clip name:')
     print(video_file)
     temp = video_file.split('_')
     start_time = temp[4]
