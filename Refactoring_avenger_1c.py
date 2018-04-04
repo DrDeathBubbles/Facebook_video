@@ -154,7 +154,7 @@ def video_processing(video_file, output):
         print('clip not edited ')
     clip = moviepy.video.fx.all.fadein(clip,3)
     clip = moviepy.video.fx.all.fadeout(clip,3)
-    clip.write_videofile(output, temp_audiofile="temp-audio.m4a", remove_temp=True, codec="libx264", audio_codec="aac")
+    clip.write_videofile(output, temp_audiofile="temp-audio.m4a", remove_temp=False, codec="libx264", audio_codec="aac")
 
 def speaker_formatting(speaker_list):
     if len(speaker_list) == 1:
