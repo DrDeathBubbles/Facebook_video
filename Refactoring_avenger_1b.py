@@ -169,6 +169,13 @@ def speaker_formatting(speaker_list):
         temp = ', '.join(speaker_list[:-1]) + ' & ' + speaker_list[-1]
         return temp
 
+
+def processing_output_message(facebook_url, s3_url, uuid):
+    message_attributes = {'facebook_url':{'data_type':'String','string_value': facebook_url},
+    's3_url':{'data_type':'String','string_value': s3_url},
+    'uid':{'data_type':'String', 'string_value': uuid}}
+    return message_attributes
+
 def processing_message(process_name,tasks,results):
     """
     Processes the message which is sent 
