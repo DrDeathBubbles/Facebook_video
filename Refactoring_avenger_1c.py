@@ -151,7 +151,9 @@ def video_processing(video_file, output):
         start_time = (int(start_time[0:2]),int(start_time[2:4]),int(start_time[4:6]))
         end_time = (int(end_time[0:2]),int(end_time[2:4]),int(end_time[4:6]))
         clip = clip.subclip(start_time,end_time)
-
+        print('clip_edited if loup')
+    else:
+        print('clip not edited ')
     clip = moviepy.video.fx.all.fadein(clip,3)
     clip = moviepy.video.fx.all.fadeout(clip,3)
     clip.write_videofile(output, temp_audiofile="temp-audio.m4a", remove_temp=True, codec="libx264", audio_codec="aac")
