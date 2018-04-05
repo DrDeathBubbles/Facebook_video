@@ -176,7 +176,7 @@ def processing_output_message(facebook_url, s3_url, uuid):
     'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
 
-def processing_message(process_name,tasks,results):
+def processing_message(process_name,tasks,results,fb_cred_data):
     """
     Processes the message which is sent 
     """
@@ -337,6 +337,7 @@ if __name__ == '__main__':
 #Setting up the multiprocess processing part
     manager = multiprocessing.Manager()
     
+    fb_cred_data = pd.read_csv('CC_18_access_tokens_2.csv')
     tasks = manager.Queue()
     results = manager.Queue()
 
@@ -350,7 +351,7 @@ if __name__ == '__main__':
 
         process_name = 'P{}'.format(str(i))
 
-        new_process = multiprocessing.Process(target=processing_message, args=(process_name, tasks, results))
+        new_process = multiprocessing.Process(target=processing_message, args=(process_name, tasks, results, fb_cred_data))
 
         new_process.start()
 
@@ -360,7 +361,7 @@ if __name__ == '__main__':
     conn = initialise_connection()
     q = conn.create_queue('DS_AJM_VIDEO')
    # i = 0
-    fb_cred_data = pd.read_csv('CC_18_access_tokens_2.csv')
+    
     while True:
         
 
