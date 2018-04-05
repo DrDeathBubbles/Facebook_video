@@ -358,9 +358,9 @@ if __name__ == '__main__':
     conn = initialise_connection()
     q = conn.create_queue('DS_AJM_VIDEO')
    # i = 0
-
+    fb_cred_data = pd.read_csv('CC_18_access_tokens_2.csv')
     while True:
-        fb_cred_data = pd.read_csv('CC_18_access_tokens_2.csv')
+        
 
 #        if i % 60*12 == 0:
 #            print('Acquiring sheets')
