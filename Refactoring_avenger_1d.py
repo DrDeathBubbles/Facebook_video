@@ -344,7 +344,7 @@ if __name__ == '__main__':
 
     num_processes = 8
 
-    pool = multiprocessing.Pool() 
+#    pool = multiprocessing.Pool() 
 
     for i in range(num_processes):
 
