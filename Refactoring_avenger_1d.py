@@ -306,7 +306,8 @@ def processing_message(process_name,tasks,results,fb_cred_data):
                 print('Resourse made')
                 queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
                 print('Queue got')
-                queue.send_message(MessageBody="{'body':{}}".format(message),MessageAttributes=message_attributes)
+                temp = {'Body':message}
+                queue.send_message(MessageBody=str(temp),MessageAttributes=message_attributes)
                 print('Queue populated')
                 #emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
                 #print(emails)
