@@ -224,6 +224,7 @@ def processing_message(process_name,tasks,results):
 
             try:
                 #data = pd.read_csv('CC_18_access_tokens_2.csv')
+                print(fb_cred_data)
                 uuid = message.split('_')[3]
                 avenger = avenger_requests.avenger_requests()
                 talk_location_id = avenger.get_timeslot_id(uuid)
