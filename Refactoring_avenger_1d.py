@@ -222,6 +222,7 @@ def processing_message(process_name,tasks,results):
             #This is where we process the message and get information regarding the fb_page_id
             # and the access_token needed for the rest of the upload 
 
+            print(fb_cred_data)
             try:
                 #data = pd.read_csv('CC_18_access_tokens_2.csv')
                 print(fb_cred_data)
