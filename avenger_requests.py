@@ -106,10 +106,17 @@ class avenger_requests():
             speakers = talk.json()['data']['timeslot_participations'] 
             speakers = [self.get_attendee_data_particular(i['attendance_id']).json() for i in speakers]
             speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
-            if len(speakers) > 1:
-                speakers = ', '.join(speakers) + ' and ' + speakers[-1]
-            elif len(speakers) == 1:
+            
+            
+            if len(speakers) == 1:
                 speakers = speakers[0]
+
+            elif len(speakers) == 2:
+                speakers = 'and '.join(speakers)
+
+            elif len(speakers) > 2:
+                speakers = ', '.join(speakers[:-1]) + ' and ' + speakers[-1]
+
             return speakers  
         else:
             return
@@ -161,6 +168,14 @@ class avenger_requests():
         """
         Given an id of a talk, returns the string location of that talk
         """
+        talk = self.get_talks_particular(id)
+        talk.raise_for_status()
+        if 'data' in talk.json().keys():
+            try:
+                timeslot_id = talk.json()['data']['timeslot_location_id']
+                return timeslot_id
+            except:
+                return None 
 
 
 
