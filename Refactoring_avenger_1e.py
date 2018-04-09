@@ -85,26 +85,6 @@ def initialise_connection():
     return conn
 
 
-#def upload_video(video_path):
-#    """
-#    Json body contains the id of the facebook video which has been uploaded.
-#    """
-#    url = 'https://graph-video.facebook.com/LSWSTST/videos?access_token={}'.format(access_token_2) 
-#    _file = {'file':open(video_path,'rb')}
-#    flag = requests.post(url,files=_file) 
-#    return flag
-
-#def upload_video(video_path):
-#    """
-#    Returns {'id': '1450967228357958'}
-#    """
-#    url = 'https://graph-video.facebook.com/WebSummitHQ/videos?access_token={}'.format(access_token) 
-#    _file = {'file':open(video_path,'rb')}
-#    flag = requests.post(url,files=_file) 
-#    return flag
-
-
-
 def upload_video(video_path, fb_page_id, access_token):
     """
     Returns {'id': '1450967228357958'}
@@ -118,9 +98,6 @@ def upload_video(video_path, fb_page_id, access_token):
         print('Http error {}'.format(err)) 
         raise Exception
     return flag
-
-
-
 
 
 def adding_description(post_id,description, access_token):
@@ -139,26 +116,6 @@ def reading_video_url(post_id, access_token):
     flag = 'www.facebook.com'+flag.json()['permalink_url']
     return flag
 
-
-
-
-#def video_processing(video_file, output):
-#    clip = VideoFileClip(video_file)
-#    starting_clip = VideoFileClip('C17_Master_20_small.mov')
-#    temp = video_file.split('_')
-#    start_time = temp[-2]
-#    end_time = temp[-1].rstrip('.mp4')
-#    if len(start_time) ==6  and len(end_time) ==6:
-#        start_time = (int(start_time[0:2]),int(start_time[2:4]),int(start_time[4:6]))
-#        end_time = (int(end_time[0:2]),int(end_time[2:4]),int(end_time[4:6]))
-#        clip = clip.subclip(start_time,end_time)
-#        print('clip_edited if loup')
-#    else:
-#        print('clip not edited ')
-#    clip = concatenate_videoclips([starting_clip,clip])    
-#    clip = moviepy.video.fx.all.fadein(clip,6)
-#    clip = moviepy.video.fx.all.fadeout(clip,6)
-#    clip.write_videofile(output, temp_audiofile="temp-audio.m4a", remove_temp=False, codec="libx264", audio_codec="aac")
 
 
 def video_processing(video_file, output):
