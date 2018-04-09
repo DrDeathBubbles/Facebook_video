@@ -263,25 +263,11 @@ def processing_message(process_name,tasks,results,fb_cred_data):
                 temp = {'Body':message}
                 queue.send_message(MessageBody=str(temp),MessageAttributes=message_attributes)
                 print('Queue populated')
-                #emails = get_emails(people_to_be_emailed, speaker_email_sheet) 
-                #print(emails)
-                #results.put(emails)
-                #for email in emails:
-                #    send_email(email,video_url)
 
             except Exception  as e:
                 print('Failed to email speakers')
                 logging.error('Failed to email speakers for {}'.format(message))
                 logging.error(e)
-            
-            #try:
-            #    update_spreadsheet(location, video_url)
-            #    print('updated spreadsheets successfully')
-
-            #except Exception as e:
-            #    logging.error('Failed to update spreadsheet') 
-            #    print('Failed to update spreadsheets')
-
             
             print('{} process finishes {}'.format(process_name, message))
     return
@@ -315,17 +301,8 @@ if __name__ == '__main__':
 
     conn = initialise_connection()
     q = conn.create_queue('DS_AJM_VIDEO')
-   # i = 0
     
     while True:
-        
-
-#        if i % 60*12 == 0:
-#            print('Acquiring sheets')
-#            speaker_talk_sheet, speaker_email_sheet = get_spreadsheets()
-#            i = 0
-#            print('Sheets acquired')
-#        i = i+1
 
         messages = []
         rs = q.get_messages()
