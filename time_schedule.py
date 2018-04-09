@@ -45,8 +45,12 @@ if __name__ == '__main__':
 
         for i in range(0,len(temp)):
             print(i)
-            sheet.insert_row(temp[i],i+2)
-
+            try:
+                sheet.insert_row(temp[i],i+2)
+            except:
+                pring('there has been an interruption')
+                time.sleep(60)
+                continue
 
 
 #    sheet = get_spreadsheet('CC_18_timesheet')
@@ -70,6 +74,8 @@ if __name__ == '__main__':
 #        time.sleep(60*60)
 #
 
+
+#https://stackoverflow.com/questions/45182819/getting-error-when-accessing-a-sheet-in-google-drive-through-api
 
 
 
