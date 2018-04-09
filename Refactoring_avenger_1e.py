@@ -134,8 +134,8 @@ def video_processing(video_file, output):
 
     logo = (ImageClip("Collision_Logo_White.png")
           .set_duration(clip.duration)
-          .resize(height=50) # if you need to resize...
-          .margin(right=8, top=8,bottom =8, left = 8, opacity=0) # (optional) logo-border padding
+          .resize(height=50) 
+          .margin(right=8, top=8,bottom =8, left = 8, opacity=0) 
           .set_pos(("right","bottom")))
 
     clip = CompositeVideoClip([clip, logo])
