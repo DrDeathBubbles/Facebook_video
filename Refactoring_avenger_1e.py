@@ -218,7 +218,6 @@ def processing_message(process_name,tasks,results,fb_cred_data):
             except:
                 logging.error('Failed to post to facebook')
                 print('Failed to post to facebook')
-                logging.error(e)
                 continue
 
             try:
