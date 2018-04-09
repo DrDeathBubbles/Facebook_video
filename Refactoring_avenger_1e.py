@@ -237,9 +237,6 @@ def processing_message(process_name,tasks,results,fb_cred_data):
             try:
                 description = avenger.description_processing(uuid)
                 speakers = avenger.name_processing(uuid)
-                #description, location = get_description(message, speaker_talk_sheet)
-                #people_to_be_emailed = get_speakers(message, speaker_talk_sheet)
-                #speakers_formatted = speaker_formatting(people_to_be_emailed) 
                 description = speakers + ' \n ' + description
                 print(description)
                 adding_description(post.json()['id'], description, access_token)
