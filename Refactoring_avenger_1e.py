@@ -221,14 +221,9 @@ def processing_message(process_name,tasks,results,fb_cred_data):
                 logging.error(e)
                 continue
 
-            #except:
-            #    print('Failed to post to Facebook 2')
-
-
-
             try:
-                #os.remove(file_location + message)
-                #os.remove(file_location + 'edited_videos/' + message)
+                os.remove(file_location + message)
+                os.remove(file_location + 'edited_videos/' + message)
                 print('removed local files')
 
             except:
