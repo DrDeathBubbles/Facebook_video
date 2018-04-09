@@ -323,7 +323,6 @@ if __name__ == '__main__':
             print(message)
             tasks.put([message])
 
-        i = i + 1        
         time.sleep(5)
 
 
