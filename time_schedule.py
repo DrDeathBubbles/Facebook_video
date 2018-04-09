@@ -44,8 +44,9 @@ if __name__ == '__main__':
             temp.append(data.tolist())
 
         for i in range(0,len(temp)):
-            print(i)
+            
             try:
+                print(i)
                 sheet.insert_row(temp[i],i+2)
             except:
                 print('there has been an interruption')
