@@ -146,21 +146,6 @@ def video_processing(video_file, output):
     clip.write_videofile(output, temp_audiofile="temp-audio.m4a", remove_temp=False, codec="libx264", audio_codec="aac")
 
 
-
-def speaker_formatting(speaker_list):
-    if len(speaker_list) == 1:
-        temp = speaker_list[0]
-        return temp 
-
-    if len(speaker_list) == 2:
-        temp = speaker_list[0] + ' & ' + speaker_list[1]
-        return temp 
-
-    if len(speaker_list) > 2:
-        temp = ', '.join(speaker_list[:-1]) + ' & ' + speaker_list[-1]
-        return temp
-
-
 def processing_output_message(facebook_url, s3_url, uuid):
     message_attributes = {'facebook_url':{'DataType':'String','StringValue': facebook_url},
     's3_url':{'DataType':'String','StringValue': s3_url},
@@ -174,8 +159,6 @@ def processing_message(process_name,tasks,results,fb_cred_data):
     while True:
         task = tasks.get()
         message = task[0]
-        #speaker_talk_sheet = task[1]
-        #speaker_email_sheet = task[2]
         
         if message == 0:
             print('{} process quits'.format(process_name))
@@ -213,29 +196,17 @@ def processing_message(process_name,tasks,results,fb_cred_data):
             #This is where we process the message and get information regarding the fb_page_id
             # and the access_token needed for the rest of the upload 
 
-            print(fb_cred_data)
             try:
-                #data = pd.read_csv('CC_18_access_tokens_2.csv')
-                print(fb_cred_data)
                 uuid = message.split('_')[3]
                 avenger = avenger_requests.avenger_requests()
                 talk_location_id = avenger.get_timeslot_id(uuid)
                 fb_page_id = int(fb_cred_data[fb_cred_data['id']==talk_location_id]['page_id'])
                 access_token = fb_cred_data[fb_cred_data['id']==talk_location_id]['long_lasting_token'].values[0]
-                print('Got')
+                print('fb_page_id and access_token acquired.')
             except Exception as e:
                 logging.error('Failed to get the credentials')
                 print('Failed to get credentials')
                 continue 
-
-
-            #try:
-            #    post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
-            #    print('Posted to facebook')
-            #except:
-
-            #    print('Post to facebook unsuccessful')
-            #    continue 
             
             try:
                 post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
