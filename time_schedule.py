@@ -48,7 +48,7 @@ if __name__ == '__main__':
             try:
                 sheet.insert_row(temp[i],i+2)
             except:
-                pring('there has been an interruption')
+                print('there has been an interruption')
                 time.sleep(60)
                 continue
 
