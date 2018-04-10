@@ -22,7 +22,7 @@ def get_spreadsheet(spreadsheet):
     return sheet
 
 
-@tenacity.retry(wait=tenacity.wait_exponential())
+@tenacity.retry(wait=tenacity.wait_exponential(multiplier=60))
 def insert_row(sheet, temp, i):
     try:
         sheet.insert_row(temp[i],i+2)
