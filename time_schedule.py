@@ -3,7 +3,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import avenger_requests
 import time 
-
+import tenacity
 
 def get_spreadsheet(spreadsheet):
     # use creds to create a client to interact with the Google Drive API
@@ -22,6 +22,13 @@ def get_spreadsheet(spreadsheet):
     return sheet
 
 
+@tenacity.retry(wait=tenacity.wait_exponential())
+def insert_row(sheet, temp, i):
+    try:
+        sheet.insert_row(temp[i],i+2)
+        print(i)
+    except:
+        print('there has been an interruption')
 
 
 if __name__ == '__main__':
@@ -44,14 +51,7 @@ if __name__ == '__main__':
             temp.append(data.tolist())
 
         for i in range(0,len(temp)):
-            
-            try:
-                sheet.insert_row(temp[i],i+2)
-                print(i)
-            except:
-                print('there has been an interruption')
-                time.sleep(60)
-                continue
+            insert_row(sheet,temp,i)            
 
 
 #    sheet = get_spreadsheet('CC_18_timesheet')
