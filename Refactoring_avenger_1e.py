@@ -259,8 +259,10 @@ def processing_message(process_name,tasks,results,fb_cred_data):
                 print('Resourse made')
                 queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
                 print('Queue got')
-                temp = {'Body':message}
-                queue.send_message(MessageBody=str(temp),MessageAttributes=message_attributes)
+                data = {}
+                data['Body'] = message
+                data = json.dumps(data)
+                queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
                 print('Queue populated')
 
             except Exception  as e:
