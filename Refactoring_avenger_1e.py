@@ -197,7 +197,7 @@ def processing_message(process_name,tasks,results,fb_cred_data):
             # and the access_token needed for the rest of the upload 
 
             try:
-                uuid = message.split('_')[3]
+                uuid = message.split('_')[-3]
                 avenger = avenger_requests.avenger_requests()
                 talk_location_id = avenger.get_timeslot_id(uuid)
                 fb_page_id = int(fb_cred_data[fb_cred_data['id']==talk_location_id]['page_id'])
