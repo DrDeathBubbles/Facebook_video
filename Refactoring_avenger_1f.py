@@ -189,14 +189,6 @@ def processing_message(process_name,tasks,results,fb_cred_data):
 
             print('{} processed video'.format(process_name))           
 
-            try: 
-                post_to_s3(file_location,message)
-                print('Successfully posted to S3') 
-            except Exception as e:
-                logging.error('Failed to post to S3')
-                print('Failed to upload video to S3')
-                logging.error(e)
-
 
             #This is where we process the message and get information regarding the fb_page_id
             # and the access_token needed for the rest of the upload 
@@ -241,6 +233,7 @@ def processing_message(process_name,tasks,results,fb_cred_data):
             try:
                 description = avenger.description_processing(uuid)
                 speakers = avenger.name_processing(uuid)
+                title = avenger.title_processing(uuid)
                 description = speakers + ' \n ' + description
                 print(description)
                 adding_description(post.json()['id'], description, access_token)
@@ -248,6 +241,14 @@ def processing_message(process_name,tasks,results,fb_cred_data):
             except Exception  as e:
                 print('Failed to add description')
                 logging.error('Failed to add description')
+                logging.error(e)
+
+            try: 
+                post_to_s3(file_location,message, title)
+                print('Successfully posted to S3') 
+            except Exception as e:
+                logging.error('Failed to post to S3')
+                print('Failed to upload video to S3')
                 logging.error(e)
 
 
