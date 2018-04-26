@@ -70,7 +70,9 @@ This is needed for generating the facebook page access tokens
 
 https://stackoverflow.com/questions/20180836/the-access-token-does-not-belong-to-application-trying-to-generate-long-lived
 
-We need stage_id -> (page_id,access_token
+We need stage_id -> (page_id,access_token)
+
+Need to be a page admin to have page appear on the manage_pages method 
 
 
 ## Flow
@@ -115,14 +117,37 @@ We need stage_id -> (page_id,access_token
 
 
 
+When the access tokens for 
 
 
 
 
 
+
+
+#To do new
+1. Upgrade api to new version of api
+2. Develop access token checkers which self heal the auth tokens
+3. Generate access keys json file
+
+
+Hey, yep it will be these ones!
+Center Stage - https://www.facebook.com/collisionconf/
+PandaConf - https://www.facebook.com/PandaConf/
+Creatiff - https://www.facebook.com/creatiffHQ/
+FullSTK - https://www.facebook.com/fullstk/
+Binate.io - https://www.facebook.com/binate.io/
+Startup University - https://www.facebook.com/StartupUniversityConf/
+Planet:tech - https://www.facebook.com/PlanettechConf/
+AutoTech & TalkRobot - https://www.facebook.com/AutoTechConf/
+MusicNotes - https://www.facebook.com/MusicNotesHQ/?ref=br_rs
+Growth Summit - https://www.facebook.com/growthsummitconf/
+Q&A talks will be shared on the main Collision Conf Facebook page.
 
 
 # To do
+
+
 
 
 
