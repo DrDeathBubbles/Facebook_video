@@ -28,7 +28,11 @@ from People_processing import *
 from Email_processing import *
 
 
-bucket_name = 'ds-ajm-videos'
+#bucket_name = 'ds-ajm-videos'
+input_bucket = 'ds-ajm-videos'
+output_bucket = ''
+
+
 #path_to_videos = "/Users/aaronmeagher/AJM/video_files/"'
 path_to_videos = "/home/ubuntu/AJM/video_files/"
 s3 = boto3.resource('s3')
@@ -65,9 +69,10 @@ def retrieve_from_s3(filename):
     return a    
 
 
-def post_to_s3(file_location,message):
-    my_bucket = s3.Bucket('ws17-videos')
-    a = my_bucket.upload_file(file_location +'edited_videos/'+message,message)
+def post_to_s3(file_location, message, output_file_name):
+    my_bucket = s3.Bucket('cc18-videos')
+    a = my_bucket.upload_file(file_location +'edited_videos/'+message, output_file_name)
+
     return a
 
 
