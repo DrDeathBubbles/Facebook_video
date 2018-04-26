@@ -132,6 +132,11 @@ def reading_video_url(post_id, access_token):
 def video_processing(video_file, output):
     clip = VideoFileClip(video_file)
     starting_clip = VideoFileClip('C17_Master_20_small.mov')
+    if clip.size[0] != starting_clip.size[0]:
+        ratio = starting_clip.size[0]/clip.size[0]
+        clip = clip.resize(ratio)
+
+
     temp = video_file.split('_')
     start_time = temp[-2]
     end_time = temp[-1].rstrip('.mp4')
