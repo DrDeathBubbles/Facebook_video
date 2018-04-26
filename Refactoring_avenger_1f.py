@@ -216,16 +216,6 @@ def processing_message(process_name,tasks,results,fb_cred_data):
                 logging.error('Failed to post to facebook')
                 print('Failed to post to facebook')
                 continue
-
-            try:
-                os.remove(file_location + message)
-                os.remove(file_location + 'edited_videos/' + message)
-                print('removed local files')
-
-            except:
-                logging.error('Failed to delete the local copy of the file')
-                print('Failed to remove local copies')
-            
             
             #This is where we get the description and speakers for a talk and add
             # it to the facebook video            
@@ -251,6 +241,16 @@ def processing_message(process_name,tasks,results,fb_cred_data):
                 print('Failed to upload video to S3')
                 logging.error(e)
 
+
+            try:
+                os.remove(file_location + message)
+                os.remove(file_location + 'edited_videos/' + message)
+                print('removed local files')
+
+            except:
+                logging.error('Failed to delete the local copy of the file')
+                print('Failed to remove local copies')
+            
 
             #This is where we get the video url for the facebook video and email it
             #to the speakers
