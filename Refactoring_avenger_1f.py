@@ -18,7 +18,7 @@ import multiprocessing
 import logging
 import pandas as pd
 import avenger_requests 
-
+from string import punctuation 
 
 from moviepy.editor import *
 import moviepy
@@ -53,6 +53,12 @@ logging.basicConfig(level=logging.INFO,
                     #filename='/home/ubuntu/AJM/video_files/talkbot.log',
                     filename = './talkbot.log',
                     filemode='w')
+
+
+def string_processing(s):
+    s = ''.join(c for c in s if c not in punctuation)
+    s = s.replace(' ','_') + '.mp4'
+    return s
 
 
 
