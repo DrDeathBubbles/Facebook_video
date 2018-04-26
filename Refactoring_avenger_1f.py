@@ -224,6 +224,7 @@ def processing_message(process_name,tasks,results,fb_cred_data):
                 description = avenger.description_processing(uuid)
                 speakers = avenger.name_processing(uuid)
                 title = avenger.title_processing(uuid)
+                title = title.replace(' ','_')
                 description = speakers + ' \n ' + description
                 print(description)
                 adding_description(post.json()['id'], description, access_token)
@@ -258,7 +259,7 @@ def processing_message(process_name,tasks,results,fb_cred_data):
             try:    
                 facebook_url = reading_video_url(post.json()['id'], access_token)
                 print(facebook_url)
-                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws17-videos/' + message
+                s3_url = 'https://s3-eu-west-1.amazonaws.com/cc18-videos/' + title + '.mp4' 
                 message_attributes = processing_output_message(facebook_url, s3_url, uuid)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
