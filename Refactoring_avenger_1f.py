@@ -136,7 +136,6 @@ def video_processing(video_file, output):
         ratio = starting_clip.size[0]/clip.size[0]
         clip = clip.resize(ratio)
 
-
     temp = video_file.split('_')
     start_time = temp[-2]
     end_time = temp[-1].rstrip('.mp4')
