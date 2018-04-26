@@ -133,6 +133,7 @@ def video_processing(video_file, output):
     clip = VideoFileClip(video_file)
     starting_clip = VideoFileClip('C17_Master_20_small.mov')
     if clip.size[0] != starting_clip.size[0]:
+        print('Resolutions do not match! Rescaling input video')
         ratio = starting_clip.size[0]/clip.size[0]
         clip = clip.resize(ratio)
 
