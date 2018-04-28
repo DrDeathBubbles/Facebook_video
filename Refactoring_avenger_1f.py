@@ -33,6 +33,8 @@ input_bucket = 'ds-ajm-videos'
 output_bucket = ''
 
 
+exclusion_list = ['f2cdfee8-0ccc-46b3-945c-c7759ee755ea']
+
 #path_to_videos = "/Users/aaronmeagher/AJM/video_files/"'
 path_to_videos = "/home/ubuntu/AJM/video_files/"
 s3 = boto3.resource('s3')
@@ -188,7 +190,24 @@ def processing_message(process_name,tasks,results,fb_cred_data):
                logging.error(e)
                print('Problem retrieving {}'.format(message))
                continue 
-            
+
+
+            try:
+                uuid = message.split('_')[-3]
+                if uuid in exclusion_list:
+                    print('Exclusion found!')
+                    continue
+                avenger = avenger_requests.avenger_requests()
+                talk_location_id = avenger.get_timeslot_id(uuid)
+                fb_page_id = int(fb_cred_data[fb_cred_data['id']==talk_location_id]['page_id'])
+                access_token = fb_cred_data[fb_cred_data['id']==talk_location_id]['long_lasting_token'].values[0]
+                print('fb_page_id and access_token acquired.')
+            except Exception as e:
+                logging.error('Failed to get the credentials')
+                print('Failed to get credentials')
+                continue 
+
+
             try:
                 video_processing(file_location+message,file_location +'edited_videos/'+message)
                 print('Video processing successful')
@@ -204,17 +223,7 @@ def processing_message(process_name,tasks,results,fb_cred_data):
             #This is where we process the message and get information regarding the fb_page_id
             # and the access_token needed for the rest of the upload 
 
-            try:
-                uuid = message.split('_')[-3]
-                avenger = avenger_requests.avenger_requests()
-                talk_location_id = avenger.get_timeslot_id(uuid)
-                fb_page_id = int(fb_cred_data[fb_cred_data['id']==talk_location_id]['page_id'])
-                access_token = fb_cred_data[fb_cred_data['id']==talk_location_id]['long_lasting_token'].values[0]
-                print('fb_page_id and access_token acquired.')
-            except Exception as e:
-                logging.error('Failed to get the credentials')
-                print('Failed to get credentials')
-                continue 
+
             
             try:
                 post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
