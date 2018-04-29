@@ -94,8 +94,8 @@ def upload_video_3(video_path,access_token):
 
 
 if __name__ == '__main__':
-    a = get_long_lasting_token(os.environ['CC_18_USER_ACCESSTOKEN'],os.environ['CC_18_APPID'],os.environ['CC_18_APPSECRET'])    
-   # a = managed_pages(os.environ['ACCESSTOKEN'])
+   # a = get_long_lasting_token(os.environ['CC_18_USER_ACCESSTOKEN'],os.environ['CC_18_APPID'],os.environ['CC_18_APPSECRET'])    
+   a = managed_pages(os.environ['ACCESSTOKEN'])
    # access_token = a.json()['data'][0]['access_token']
    # out = upload_video_2('./test_trimmed.mp4',access_token)
    # print(out.text)
