@@ -309,7 +309,7 @@ def processing_message(process_name,tasks,results,fb_cred_data,speaker_email_dat
                     name = list(emails.keys())[0]
                     email_addresses = list(emails.values())[0]
                     for email in email_addresses:
-                        send_emai_cc(name,email,facebook_url)
+                        send_email_cc(name,email,facebook_url)
 
             except:
                 print('emails have not been sent!')    
