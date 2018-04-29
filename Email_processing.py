@@ -142,7 +142,7 @@ def send_email_cc(name, email_address, facebook_video_link):
 
     
     message = create_message('talkbot@websummit.com','aaron.meagher@cilabs.com',
-    'Your Collision talk is live on Favebook', "Hello {}! \nPlease find the link to {}'s talk at Web Summit below \n {}".format(email_addressname, facebook_video_link))
+    'Your Collision talk is live on Favebook', "Hello {}! \nPlease find the link to {}'s talk at Web Summit below \n {}".format(email_address, name, facebook_video_link))
 
     message = send_message(service,'talkbot@websummit.com',message)
     
