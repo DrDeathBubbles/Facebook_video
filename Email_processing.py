@@ -123,7 +123,31 @@ def send_email(email_address, facebook_video_link):
 
     message = send_message(service,'talkbot@websummit.com',message)
     
+    return message
+
+
+
+def send_email_cc(name, email_address, facebook_video_link):
+    """
+    email_address : The recipenent of the email
+    facebook_video_link : The video link for the video
+    """
+
+    credentials = get_credentials()
+    http = credentials.authorize(httplib2.Http())
+    service = discovery.build('gmail', 'v1', http=http)
+
+    #message = create_message('talkbot@websummit.com',email_address,
+    #'Your Web Summit talk is live on Favebook', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
+
+    
+    message = create_message('talkbot@websummit.com','aaron.meagher@cilabs.com',
+    'Your Collision talk is live on Favebook', 'Hello! \nPlease find the link to {}s talk at Web Summit below \n {}'.format(name, facebook_video_link))
+
+    message = send_message(service,'talkbot@websummit.com',message)
+    
     return message 
+
 
 def main():
     """Shows basic usage of the Gmail API.
