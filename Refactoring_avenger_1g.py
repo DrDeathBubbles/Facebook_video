@@ -77,10 +77,6 @@ def retrieve_from_s3(filename):
     a = my_bucket.download_file(filename,path_to_videos + filename)
     return a    
 
-de
-
-
-
 
 def post_to_s3(file_location, message, output_file_name):
     my_bucket = s3.Bucket('cc18-videos')
@@ -314,10 +310,6 @@ def processing_message(process_name,tasks,results,fb_cred_data,speaker_email_dat
                     email_addresses = list(emails.values())[0]
                     for email in email_addresses:
                         send_emai_cc(name,email,facebook_url)
-
-                    
-                
-
 
             except:
                 print('emails have not been sent!')    
