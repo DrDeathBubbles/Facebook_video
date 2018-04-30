@@ -134,7 +134,7 @@ def reading_video_url(post_id, access_token):
 
 def video_processing(video_file, output):
     clip = VideoFileClip(video_file)
-    starting_clip = VideoFileClip('C17_Master_20_small.mov')
+    starting_clip = VideoFileClip('Collision-motion.mp4')
     if clip.size[0] != starting_clip.size[0]:
         print('Resolutions do not match! Rescaling input video')
         ratio = starting_clip.size[0]/clip.size[0]
