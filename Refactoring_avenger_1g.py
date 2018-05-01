@@ -256,7 +256,7 @@ def processing_message(process_name,tasks,results,fb_cred_data,speaker_email_dat
                 logging.error(e)
 
             try: 
-                post_to_s3(file_location,message, title)
+                post_to_s3(file_location,message, uuid_ + title)
                 print('Successfully posted to S3') 
             except Exception as e:
                 logging.error('Failed to post to S3')
@@ -279,7 +279,7 @@ def processing_message(process_name,tasks,results,fb_cred_data,speaker_email_dat
             try:    
                 facebook_url = reading_video_url(post.json()['id'], access_token)
                 print(facebook_url)
-                s3_url = 'https://s3-eu-west-1.amazonaws.com/cc18-videos/' + title   
+                s3_url = 'https://s3-eu-west-1.amazonaws.com/cc18-videos/' + uuid_title   
                 message_attributes = processing_output_message(facebook_url, s3_url, uuid)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
