@@ -24,7 +24,7 @@ if __name__ == '__main__':
         unsorted.append(file)
 
 
-    files = [obj.key for obj in sorted(unsorted, key=get_last_modified, reverse=True)][0:250]
+    files = [obj.key for obj in sorted(unsorted, key=get_last_modified, reverse=True)][1:]
 
     i = 0.0
     total = len(files) 
