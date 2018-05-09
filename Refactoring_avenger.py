@@ -132,7 +132,7 @@ def reading_video_url(post_id, access_token):
 
 
 
-def video_processing(video_file, output):
+def video_processing(process_name,video_file, output):
     clip = VideoFileClip(video_file)
     starting_clip = VideoFileClip('Collision-motion.mp4')
     if clip.size[0] != starting_clip.size[0]:
@@ -162,7 +162,7 @@ def video_processing(video_file, output):
     clip = concatenate_videoclips([starting_clip,clip])    
     clip = moviepy.video.fx.all.fadein(clip,6)
     clip = moviepy.video.fx.all.fadeout(clip,6)
-    clip.write_videofile(output, temp_audiofile="temp-audio.m4a", remove_temp=False, codec="libx264", audio_codec="aac")
+    clip.write_videofile(output, temp_audiofile="{}_temp-audio.m4a".format(process_name), remove_temp=False, codec="libx264", audio_codec="aac")
 
 
 def processing_output_message(facebook_url, s3_url, uuid):
@@ -210,7 +210,7 @@ def processing_message(process_name,tasks,results,fb_cred_data,speaker_email_dat
 
 
             try:
-                video_processing(file_location+message,file_location +'edited_videos/'+message)
+                video_processing(process_name,file_location+message,file_location +'edited_videos/'+message)
                 print('Video processing successful')
             except Exception as e:
                 logging.error('Problem processing {}'.format(message))
