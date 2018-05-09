@@ -26,11 +26,12 @@ if __name__ == '__main__':
 
     files = [obj.key for obj in sorted(unsorted, key=get_last_modified, reverse=True)][1:]
 
-    i = 0.0
+    i = 1.0
     total = len(files) 
 
     for file in files:
         print(file)
+        i = i + 1
         my_bucket.download_file(file, file_location + file )
         temp = AudioFileClip.AudioFileClip(file_location + file)
         audio_file =  file.rstrip('.mp4') + '.mp3' 
