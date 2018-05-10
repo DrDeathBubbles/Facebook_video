@@ -66,6 +66,29 @@ def listener_configurer():
     root.addHandler(h)
 
 
+def listener_process(queue, configurer):
+    configurer()
+    while True:
+        try:
+            record = queue.get()
+            if record is None:  # We send this as a sentinel to tell the listener to quit.
+                break
+            logger = logging.getLogger(record.name)
+            logger.handle(record)  # No level or filter logic applied - just do it!
+        except Exception:
+            import sys, traceback
+            print('Whoops! Problem:', file=sys.stderr)
+            traceback.print_exc(file=sys.stderr)
+
+
+def worker_configurer(queue):
+    h = logging.handlers.QueueHandler(queue)  # Just the one handler needed
+    root = logging.getLogger()
+    root.addHandler(h)
+    # send all messages, for demo; no other level or filter logic applied.
+    root.setLevel(logging.DEBUG)
+
+
 
 
 def string_processing(s):
@@ -181,14 +204,17 @@ def processing_output_message(facebook_url, s3_url, uuid):
     'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
 
-def processing_message(process_name,tasks,results,fb_cred_data,speaker_email_data):
+def processing_message(queue, configure, process_name,tasks,results,fb_cred_data,speaker_email_data):
     """
     Processes the message which is sent 
     """
     while True:
         task = tasks.get()
         message = task[0]
-        
+        configurer(queue)
+        logger = logging.getLogger('main_logger')
+        level = logging.INFO
+
         if message == 0:
             print('{} process quits'.format(process_name))
         else:
@@ -342,13 +368,19 @@ if __name__ == '__main__':
     tasks = manager.Queue()
     results = manager.Queue()
 
+    queue = multiprocessing.Queue(-1)
+    listener = multiprocessing.Process(target=listener_process,
+                                       args=(queue, listener_configurer))
+
+    listener.start()
+
     num_processes = 12
 
     for i in range(num_processes):
 
         process_name = 'P{}'.format(str(i))
 
-        new_process = multiprocessing.Process(target=processing_message, args=(process_name, tasks, results, fb_cred_data, speaker_email_data))
+        new_process = multiprocessing.Process(target=processing_message, args=(queue, worker_configurer, process_name, tasks, results, fb_cred_data, speaker_email_data))
 
         new_process.start()
 
