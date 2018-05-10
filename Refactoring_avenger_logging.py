@@ -60,7 +60,8 @@ file_location = '/home/ubuntu/AJM/video_files/'
 
 def listener_configurer():
     root = logging.getLogger()
-    h = logging.handlers.RotatingFileHandler('mptest.log', 'a', 300, 10)
+    #h = logging.handlers.RotatingFileHandler('mptest.log', 'a', 300, 10)
+    h = logging.handlers.RotatingFileHandler('mptest.log', 'a')
     f = logging.Formatter('%(asctime)s %(processName)-10s %(name)s %(levelname)-8s %(message)s')
     h.setFormatter(f)
     root.addHandler(h)
@@ -223,8 +224,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
                 retrieve_from_s3(message)
                 print('{} retrieves from S3'.format(process_name))
             except Exception as e:
-               logging.error('Problem retrieving {}'.format(message))
-               logging.error(e)
+               logger.log(logging.ERROR,'Problem retrieving {}'.format(message))
                print('Problem retrieving {}'.format(message))
                continue 
 
@@ -240,7 +240,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
                 access_token = fb_cred_data[fb_cred_data['id']==talk_location_id]['long_lasting_token'].values[0]
                 print('fb_page_id and access_token acquired.')
             except Exception as e:
-                logging.error('Failed to get the credentials')
+                logger.log(logging.ERROR,'Failed to get the credentials for {}'.format(message))
                 print('Failed to get credentials')
                 continue 
 
@@ -249,9 +249,8 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
                 video_processing(process_name,file_location+message,file_location +'edited_videos/'+message)
                 print('Video processing successful')
             except Exception as e:
-                logging.error('Problem processing {}'.format(message))
+                logger.log(logging.ERROR,'Problem processing {}'.format(message))
                 print('Problem processing {}'.format(message))
-                logging.error(e)
                 os.rename(file_location+message,file_location +'edited_videos/'+message)
 
             print('{} processed video'.format(process_name))           
@@ -270,7 +269,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
                     continue
            
             except:
-                logging.error('Failed to post to facebook')
+                logger.log(logging.ERROR,'Failed to post to facebook {}'.format(message))
                 print('Failed to post to facebook')
                 continue
             
@@ -288,16 +287,15 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
 
             except Exception  as e:
                 print('Failed to add description')
-                logging.error('Failed to add description')
+                logger.log(logging.ERROR, 'Failed to add description {}'.format(message))
                 logging.error(e)
 
             try: 
                 post_to_s3(file_location,message, uuid + '_' + title)
                 print('Successfully posted to S3') 
             except Exception as e:
-                logging.error('Failed to post to S3')
+                logger.log(logging.ERROR,'Failed to post to S3 {}'.format(message))
                 print('Failed to upload video to S3')
-                logging.error(e)
 
 
             try:
@@ -306,7 +304,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
                 print('removed local files')
 
             except:
-                logging.error('Failed to delete the local copy of the file')
+                logger.log(logging.ERROR,'Failed to delete the local copy of the file {}'.format(message))
                 print('Failed to remove local copies')
 
             #This is where we get the video url for the facebook video and email it
@@ -330,7 +328,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
 
             except Exception  as e:
                 print('Failed to email speakers')
-                logging.error('Failed to email speakers for {}'.format(message))
+                logger.log(logging.ERROR, 'Failed to email speakers for {}'.format(message))
                 logging.error(e)
 
 
@@ -350,7 +348,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
 
             except:
                 print('emails have not been sent!')    
-
+                logger.log(logging.ERROR, 'failed to cc email {}'.format(message))
 
 
 
