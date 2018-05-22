@@ -10,8 +10,10 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
-from email.mime import text 
+from email.mime import text
+from email.mime.multipart import MIMEMultipart 
 import base64
+from html_python_file import html_email_processing_2
 
 try:
     import argparse
@@ -81,6 +83,90 @@ def create_message(sender, to, subject, message_text):
   #return {'raw': base64.urlsafe_b64encode(str.encode(message.as_string()))}
 
 
+def create_message_cc(sender, to, cc, subject, message_text):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = text.MIMEText(message_text)
+  message['to'] = to
+  message['from'] = sender
+  message['CC'] = cc
+  message['subject'] = subject
+  raw = base64.urlsafe_b64encode(message.as_bytes()) 
+  raw = raw.decode()
+  return {'raw': raw}
+  #return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  #return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
+  #return {'raw': base64.urlsafe_b64encode(str.encode(message.as_string()))}
+
+
+def create_message_cc_html(sender, to, cc, subject, message_text):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = text.MIMEText(message_text, 'htmt')
+  message['to'] = to
+  message['from'] = sender
+  message['CC'] = cc
+  message['subject'] = subject
+  message.attach(message_text)
+  #raw = base64.urlsafe_b64encode(message.as_string()) 
+  #raw = raw.decode()
+  #return {'raw': raw}
+  #return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  return {'raw': base64.urlsafe_b64encode(bytes(message.as_string(),"utf-8")).decode("utf-8")}
+  #return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  #return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
+  #return {'raw': base64.urlsafe_b64encode(str.encode(message.as_string()))}
+
+
+def create_message_cc_html_2(sender, to, cc, subject, message_text):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  #message = text.MIMEText(message_text, 'htmt')
+  message = MIMEMultipart('alternative')
+  message['to'] = to
+  message['from'] = sender
+  message['CC'] = cc
+  message['subject'] = subject
+  html = text.MIMEText(message_text, 'html')
+  message.attach(html)
+  #raw = base64.urlsafe_b64encode(message.as_string()) 
+  #raw = raw.decode()
+  #return {'raw': raw}
+  #return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  return {'raw': base64.urlsafe_b64encode(bytes(message.as_string(),"utf-8")).decode("utf-8")}
+  #return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  #return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
+  #return {'raw': base64.urlsafe_b64encode(str.encode(message.as_string()))}
+
+
+
 
 def send_message(service, user_id, message):
   """Send an email message.
@@ -141,13 +227,28 @@ def send_email_cc(name, email_address, facebook_video_link):
     #'Your Web Summit talk is live on Favebook', 'Hello!\nPlease find the link to your talk at Web Summit below \n {}'.format(facebook_video_link))
 
 
-    message = create_message('talkbot@websummit.com', email_address,
-    'Your Collision talk is live on Facebook', "Hello! \n Please find the link to {}'s talk at Collision below \n {}. \n If there are any issues with your video please email speakerproduction@websummit.com".format(name, facebook_video_link))
+    #message = create_message('talkbot@websummit.com', email_address,
+    #'Your Collision talk is live on Facebook', "Hello! \n Please find the link to {}'s talk at Collision below \n {}. \n If there are any issues with your video please email speakerproduction@websummit.com".format(name, facebook_video_link))
 
-
+    #html = """\
+    #<html>
+    #<head></head>
+    #<body style="background-color:powderblue;">
+    #<p>Hi!<br>
+    #   How are you?<br>
+    #   Here is the <a href="http://www.python.org">link</a> you wanted.
+    #</p>
+    #</body>
+    #</html>
+    #"""
     
-    #message = create_message('talkbot@websummit.com','aaron.meagher@cilabs.com',
-    #'Your Collision talk is live on Favebook', "Hello {}! \nPlease find the link to {}'s talk at Web Summit below \n {}. \n If there are any issues with your video please email speakerproduction@websummit.com".format(email_address, name, facebook_video_link))
+    #message = create_message_cc('talkbot@websummit.com','aaron.meagher@cilabs.com','aaron.meagher@gmail.com, meagheaj@tcd.ie',
+    #Your Collision talk is live on Favebook', "Hello {}! \nPlease find the link to {}'s talk at Web Summit below \n {}. \n If there are any issues with your video please email speakerproduction@websummit.com".format(email_address, name, facebook_video_link))
+    html_email = html_email_processing_2('google.com')
+
+    message = create_message_cc_html_2('talkbot@websummit.com','aaron.meagher@cilabs.com','aaron.meagher@gmail.com, meagheaj@tcd.ie',
+    'Your Collision talk is live on Facebook',html_email)
+
 
     message = send_message(service,'talkbot@websummit.com',message)
     
