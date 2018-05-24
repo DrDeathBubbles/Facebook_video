@@ -9,7 +9,7 @@ import re
 
 class avenger_requests():
 
-    conf = 'cc18'
+    conf = 'monc18'
 
     def return_unicode_time(self, string):
         """

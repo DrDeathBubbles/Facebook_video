@@ -39,7 +39,7 @@ def get_long_lasting_token(short_term_token, client_id, client_secret):
     return flag
 
 
-def get_long_lasting_token_return(short_term_token, client_id =os.environ['CC_18_APPID'], client_secret=os.environ['CC_18_APPSECRET']):
+def get_long_lasting_token_return(short_term_token, client_id =os.environ['Monc_18_APPID'], client_secret=os.environ['Monc_18_APPSECRET']):
     """
     From a short term page access token get the long term page access token
     """

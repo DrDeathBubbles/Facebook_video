@@ -76,14 +76,15 @@ if __name__ == '__main__':
             pass
         else:    
 
-            talks.to_csv('CC_18_stages.csv')
+            talks.to_csv('Monc_18_stages.csv')
 
-            file_id = '1w_PRr6K2kQo-k0LssSMUoVJC9aDVrjCAtBFo5UueW7o'
+            #file_id = '1w_PRr6K2kQo-k0LssSMUoVJC9aDVrjCAtBFo5UueW7o'
+            file_id = '13b7f2wqgLp2JP5QDbrPiBTgRzHD7wLED_L_m0SUo6QI'
             store = file.Storage('credentials.json')
             creds = store.get()
             drive_service = build('drive', 'v2', http=creds.authorize(Http()))    
-            a = update_file(drive_service, file_id, 'CC_18_stages', 'CC_18 stage informatiom', 
-            'application/octet-stream', './CC_18_stages.csv','True')
+            a = update_file(drive_service, file_id, 'Monc_18_stages', 'Monc_18 stage informatiom', 
+            'application/octet-stream', './Monc_18_stages.csv','True')
             print('Updated pushed')
             talks_old = talks 
         time.sleep(60*15)
