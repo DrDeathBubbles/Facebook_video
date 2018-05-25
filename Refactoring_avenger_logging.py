@@ -113,7 +113,7 @@ def retrieve_from_s3(filename):
 
 
 def post_to_s3(file_location, message, output_file_name):
-    my_bucket = s3.Bucket('cc18-videos')
+    my_bucket = s3.Bucket('monc18-videos')
     a = my_bucket.upload_file(file_location +'edited_videos/'+message, output_file_name)
 
     return a
@@ -212,7 +212,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
     while True:
         task = tasks.get()
         message = task[0]
-        configurer(queue)
+        configure(queue)
         logger = logging.getLogger('main_logger')
         level = logging.INFO
 
