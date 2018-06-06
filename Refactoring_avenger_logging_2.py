@@ -189,7 +189,7 @@ def video_processing(process_name,video_file, output):
           .set_duration(clip.duration)
           .resize(height=50) 
           .margin(right=8, top=8,bottom =8, left = 8, opacity=0) 
-          .set_pos(("right","bottom")))
+          .set_pos(("right","top")))
 
     clip = CompositeVideoClip([clip, logo])
 
