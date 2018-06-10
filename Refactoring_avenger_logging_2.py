@@ -359,7 +359,7 @@ if __name__ == '__main__':
     manager = multiprocessing.Manager()
     
     fb_cred_data = pd.read_csv('Monc_18_credentials.csv')
-    speaker_email_data = pd.read_csv('Monc_18_speakers.csv')
+    speaker_email_data = pd.read_csv('Monc_18_speakers_testing.csv')
     tasks = manager.Queue()
     results = manager.Queue()
 
