@@ -52,7 +52,7 @@ def update_file(service, file_id, new_title, new_description, new_mime_type,
 
 def convert_time_zone(time):
     time = arrow.get(time)
-    time = time.shift(hours = 0)
+    time = time.shift(hours = 1)
     return time.format('YYYY/MM/DD HH:mm:ss')
 
 if __name__ == '__main__':
