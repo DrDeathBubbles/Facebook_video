@@ -358,7 +358,7 @@ if __name__ == '__main__':
 #Setting up the multiprocess processing part
     manager = multiprocessing.Manager()
     
-    fb_cred_data = pd.read_csv('Monc_18_credentials.csv')
+    fb_cred_data = pd.read_csv('Monc_18_credentials_2.csv')
     speaker_email_data = pd.read_csv('Monc_18_speakers.csv')
 
     tasks = manager.Queue()
