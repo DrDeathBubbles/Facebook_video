@@ -112,7 +112,7 @@ class avenger_requests():
                 speakers = speakers[0]
 
             elif len(speakers) == 2:
-                speakers = 'and '.join(speakers)
+                speakers = ' and '.join(speakers)
 
             elif len(speakers) > 2:
                 speakers = ', '.join(speakers[:-1]) + ' and ' + speakers[-1]
