@@ -918,7 +918,7 @@ def html_email_processing_3(facebook_url):
                                     </tr>
                                 </table>
 								<!-- Button : END -->
-								<p style="margin: 10 0 10px;">If the above link does not work your MoneyConf talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© MoneyConf" or "courtesy of MoneyConf" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/MoneyConfHQ">https://twitter.com/MoneyConfHQ</a>, Facebook <a href = " https://www.facebook.com/MoneyConf/"> https://www.facebook.com/MoneyConf/ </a> we can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #MoneyConf to ensure your post reaches the attendees from the event.   </p>
+								<p style="margin: 10 0 10px;"> Your MoneyConf talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© MoneyConf" or "courtesy of MoneyConf" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/MoneyConfHQ">https://twitter.com/MoneyConfHQ</a>, Facebook <a href = " https://www.facebook.com/MoneyConf/"> https://www.facebook.com/MoneyConf/ </a> we can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #MoneyConf to ensure your post reaches the attendees from the event.   </p>
                             </td>
                         </tr>
                                 """
