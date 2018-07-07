@@ -168,7 +168,7 @@ def reading_video_url(post_id, access_token):
 
 def video_processing(process_name,video_file, output):
     clip = VideoFileClip(video_file)
-    starting_clip = VideoFileClip('MC_intro.mp4')
+    starting_clip = VideoFileClip('RISE_credits.mp4')
     if clip.size[0] != starting_clip.size[0]:
         print('Resolutions do not match! Rescaling input video')
         ratio = starting_clip.size[0]/clip.size[0]
@@ -185,7 +185,7 @@ def video_processing(process_name,video_file, output):
     else:
         print('clip not edited ')
 
-    logo = (ImageClip("MC_watermark.png")
+    logo = (ImageClip("RISE_watermark.png")
           .set_duration(clip.duration)
           .resize(height=50) 
           .margin(right=8, top=8,bottom =8, left = 8, opacity=0) 
@@ -358,8 +358,8 @@ if __name__ == '__main__':
 #Setting up the multiprocess processing part
     manager = multiprocessing.Manager()
     
-    fb_cred_data = pd.read_csv('Monc_18_credentials_2.csv')
-    speaker_email_data = pd.read_csv('Monc_18_speakers.csv')
+    fb_cred_data = pd.read_csv('RISE_credentials.csv')
+    speaker_email_data = pd.read_csv('RISE18_speakers.csv')
 
     tasks = manager.Queue()
     results = manager.Queue()
