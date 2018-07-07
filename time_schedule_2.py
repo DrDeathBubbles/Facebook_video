@@ -52,7 +52,7 @@ def update_file(service, file_id, new_title, new_description, new_mime_type,
 
 def convert_time_zone(time):
     time = arrow.get(time)
-    time = time.shift(hours = 1)
+    time = time.shift(hours = +8)
     return time.format('YYYY/MM/DD HH:mm:ss')
 
 if __name__ == '__main__':
@@ -79,7 +79,8 @@ if __name__ == '__main__':
             talks.to_csv('Monc_18_stages.csv')
 
             #file_id = '1w_PRr6K2kQo-k0LssSMUoVJC9aDVrjCAtBFo5UueW7o'
-            file_id = '13b7f2wqgLp2JP5QDbrPiBTgRzHD7wLED_L_m0SUo6QI'
+            #file_id = '13b7f2wqgLp2JP5QDbrPiBTgRzHD7wLED_L_m0SUo6QI'
+            file_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg'
             store = file.Storage('credentials.json')
             creds = store.get()
             drive_service = build('drive', 'v2', http=creds.authorize(Http()))    
