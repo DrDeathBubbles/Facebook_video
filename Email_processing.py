@@ -268,7 +268,7 @@ def send_email_cc_2(primary_email_address, cc_email_addresses,facebook_video_lin
     html_email = html_email_processing_3(facebook_video_link)
 
     message = create_message_cc_html_2('talkbot@websummit.com',primary_email_address, cc_email_addresses,
-    'Your MoneyConf talk is live on Facebook',html_email)
+    'Your RISE talk is live on Facebook',html_email)
 
 
     message = send_message(service,'talkbot@websummit.com',message)
