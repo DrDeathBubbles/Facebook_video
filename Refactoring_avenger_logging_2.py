@@ -331,7 +331,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
                 logger.log(logging.ERROR, 'Failed to email speakers for {}'.format(message))
                 logging.error(e)
 
-            time.sleep(3*60)
+            time.sleep(5*60)
             try:
                 t1 = speakers.split(',')
                 t2 = t1[-1].split('and')
