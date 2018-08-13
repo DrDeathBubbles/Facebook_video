@@ -35,7 +35,7 @@ if __name__ == '__main__':
         temp = AudioFileClip.AudioFileClip(file_location + file)
         audio_file =  file.rstrip('.mp4') + '.mp3' 
         temp.write_audiofile(file_location + 'audio/' + audio_file) 
-        my_bucket.upload_file(file_location + 'audio/' + audio_file, 'CC18_audio/{}'.format(audio_file))
+        my_bucket.upload_file(file_location + 'audio/' + audio_file, 'WS17_audio/{}'.format(audio_file))
         os.remove(file_location + file)
         print(i/total)
         print(file)
