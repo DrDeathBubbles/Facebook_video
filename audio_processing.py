@@ -11,6 +11,8 @@ if __name__ == '__main__':
 
     file_location = '/home/ubuntu/AJM/video_files/'
 
+    skip_list = []
+
 
     s3 = boto3.resource('s3')
 
@@ -18,7 +20,7 @@ if __name__ == '__main__':
 
     get_last_modified = lambda obj: int(obj.last_modified.strftime('%s'))
 
-    unsorted = []
+    unsorted = ['CS_8_10_Opening Remarks.mp4']
 
     for file in my_bucket.objects.filter():
         unsorted.append(file)
@@ -30,19 +32,28 @@ if __name__ == '__main__':
     total = len(files) 
 
     for file in files:
-        i = i + 1
-        my_bucket.download_file(file, file_location + file )
-        try:
-            temp = AudioFileClip.AudioFileClip(file_location + file)
-        except:
-            print('Oops, cannot process this audio file')
-            with open('Failures.txt','a') as f:
-                f.write(file)
-            continue     
-        audio_file =  file.rstrip('.mp4') + '.mp3' 
-        temp.write_audiofile(file_location + 'audio/' + audio_file) 
-        my_bucket.upload_file(file_location + 'audio/' + audio_file, 'WS17_audio/{}'.format(audio_file))
-        os.remove(file_location + file)
+
+        if file in skip_list:
+            continue
+        else:
+            if 'mp4' in file:
+                i = i + 1
+                my_bucket.download_file(file, file_location + file )
+                try:
+                    temp = AudioFileClip.AudioFileClip(file_location + file)
+                except:
+                    print('Oops, cannot process this audio file')
+                    with open('Failures.txt','a') as f:
+                        f.write(file)
+                    continue     
+                audio_file =  file.rstrip('.mp4') + '.mp3' 
+                temp.write_audiofile(file_location + 'audio/' + audio_file) 
+                my_bucket.upload_file(file_location + 'audio/' + audio_file, 'WS17_audio/{}'.format(audio_file))
+                os.remove(file_location + file)
+
+            else:
+                continue
+
         print(i/total)
         print(file)
 
