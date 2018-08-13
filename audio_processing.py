@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     s3 = boto3.resource('s3')
 
-    my_bucket = s3.Bucket('cc18-videos')
+    my_bucket = s3.Bucket('ws17-videos')
 
     get_last_modified = lambda obj: int(obj.last_modified.strftime('%s'))
 
@@ -30,7 +30,6 @@ if __name__ == '__main__':
     total = len(files) 
 
     for file in files:
-        print(file)
         i = i + 1
         my_bucket.download_file(file, file_location + file )
         temp = AudioFileClip.AudioFileClip(file_location + file)
@@ -39,4 +38,5 @@ if __name__ == '__main__':
         my_bucket.upload_file(file_location + 'audio/' + audio_file, 'CC18_audio/{}'.format(audio_file))
         os.remove(file_location + file)
         print(i/total)
+        print(file)
 
