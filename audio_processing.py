@@ -32,7 +32,13 @@ if __name__ == '__main__':
     for file in files:
         i = i + 1
         my_bucket.download_file(file, file_location + file )
-        temp = AudioFileClip.AudioFileClip(file_location + file)
+        try:
+            temp = AudioFileClip.AudioFileClip(file_location + file)
+        except:
+            print('Oops, cannot process this audio file')
+            with open('Failures.txt','a') as f:
+                f.write(file)
+            continue     
         audio_file =  file.rstrip('.mp4') + '.mp3' 
         temp.write_audiofile(file_location + 'audio/' + audio_file) 
         my_bucket.upload_file(file_location + 'audio/' + audio_file, 'WS17_audio/{}'.format(audio_file))
