@@ -166,3 +166,39 @@ Need to add gspread link to video
 
 
 /home/ubuntu/AJM/video_files/Marketing\ in\ 2018\:\ What\ to\ expect\?.mp4
+
+
+
+This is the page that we need for tagging other facebook pages:
+
+
+This is the page that is required for mentioning other people's pages
+https://developers.facebook.com/docs/apps/review/feature#reference-MENTIONING
+
+https://developers.facebook.com/docs/apps/review/feature#reference-MENTIONING
+
+https://marketingland.com/facebook-3-98025
+
+https://faq.buffer.com/article/459-facebook-page-mentions
+
+
+post here with call to action for videos
+
+https://developers.facebook.com/docs/graph-api/reference/v3.0/page/feed
+
+This is for search
+
+https://stackoverflow.com/questions/2263287/does-facebook-have-a-public-search-api-yet
+
+
+This is for sending emails:
+https://stackoverflow.com/questions/882712/sending-html-email-using-python
+
+This is the logging information 
+
+https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes
+
+
+
+
+

@@ -111,3 +111,9 @@ ENV/
 *.json
 
 *.xls
+
+*.m4a
+
+*.png
+
+.DS_store
