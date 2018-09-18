@@ -117,3 +117,5 @@ ENV/
 *.png
 
 .DS_store
+
+*.mov
