@@ -97,7 +97,8 @@ Need to be a page admin to have page appear on the manage_pages method
 
 14. Setup proper monitoring for talkbot showing ongoing processes
 15. Setup sheet which states which videos have been processed, link to video, and success or failure - google sheet
-16. Tests :P   
+16. Tests :P
+17. Set flag for local or server operation    
 
 
 ## Resourse which are of interest to this project
