@@ -3,7 +3,7 @@ This is a program for the automated processing and upload of videos to Facebook.
 
 
 
-# Setup
+## Setup
 
 Install the python requirements using pip3 install -r requirements.txt in the virtualenv. 
 
