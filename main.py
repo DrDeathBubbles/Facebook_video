@@ -30,6 +30,10 @@ input_bucket = 'ds-ajm-videos'
 
 exclusion_list = ['f2cdfee8-0ccc-46b3-945c-c7759ee755ea']
 
+
+#These are the paths to the local storage of the video files. Must be 
+#set for use when on the server or on the local machine 
+
 #path_to_videos = "/Users/aaronmeagher/AJM/video_files/"'
 path_to_videos = "/home/ubuntu/AJM/video_files/"
 
