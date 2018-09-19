@@ -31,16 +31,14 @@ input_bucket = 'ds-ajm-videos'
 exclusion_list = ['f2cdfee8-0ccc-46b3-945c-c7759ee755ea']
 
 
-#These are the paths to the local storage of the video files. Must be 
-#set for use when on the server or on the local machine 
-
-#path_to_videos = "/Users/aaronmeagher/AJM/video_files/"'
-path_to_videos = "/home/ubuntu/AJM/video_files/"
 
 
 
 s3 = boto3.resource('s3')
 
+
+
+#This sets the location of the local video files for processing 
 #file_location = '~/Desktop/Testing_folder/{}'
 file_location = '/home/ubuntu/AJM/video_files/'
 
@@ -102,7 +100,7 @@ def retrieve_from_s3(filename):
     """
 
     my_bucket = s3.Bucket('ds-ajm-videos')
-    a = my_bucket.download_file(filename,path_to_videos + filename)
+    a = my_bucket.download_file(filename,file_location + filename)
     return a    
 
 
