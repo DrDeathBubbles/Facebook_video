@@ -27,15 +27,10 @@ from People_processing_CC import *
 
 input_bucket = 'ds-ajm-videos'
 
-
 exclusion_list = ['f2cdfee8-0ccc-46b3-945c-c7759ee755ea']
 
 
-
-
-
 s3 = boto3.resource('s3')
-
 
 
 #This sets the location of the local video files for processing 
