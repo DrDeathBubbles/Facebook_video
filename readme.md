@@ -71,10 +71,7 @@ Need to be a page admin to have page appear on the manage_pages method
 10. Delete mesage from queue.    
 
 
-#To do new
-1. Upgrade api to new version of api
-2. Develop access token checkers which self heal the auth tokens
-3. Generate access keys json file
+## To do 
 
 
 
