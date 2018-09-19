@@ -41,13 +41,6 @@ path_to_videos = "/home/ubuntu/AJM/video_files/"
 
 s3 = boto3.resource('s3')
 
-
-#This is the access token for the test facebook video site
-access_token_2 = os.environ['ACCESSTOKEN_VIDEO_2']
-
-#This is the access token for the WebSummit HQ video site
-access_token = os.environ['ACCESSTOKEN_WEB_SUMMIT_HQ']
-
 #file_location = '~/Desktop/Testing_folder/{}'
 file_location = '/home/ubuntu/AJM/video_files/'
 
