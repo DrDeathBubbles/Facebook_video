@@ -1,7 +1,3 @@
-"""
-A script to monitor the upload of videos to the S3 bucket
-"""
-
 import boto.sqs
 import os 
 import logging
