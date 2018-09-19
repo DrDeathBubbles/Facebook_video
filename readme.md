@@ -101,6 +101,11 @@ Need to be a page admin to have page appear on the manage_pages method
 17. Set flag for local or server operation    
 
 
+
+## Notes about main.py
+
+* It looks like _path\_to\_videos_ and _file\_location_ do the same thing. These need to be fixed 
+
 ## Resourse which are of interest to this project
 This is the logging information 
 
