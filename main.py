@@ -25,6 +25,8 @@ from Email_processing import *
 from People_processing_CC import *
 
 
+#Variables for use in the code.
+
 input_bucket = 'ds-ajm-videos'
 
 exclusion_list = ['f2cdfee8-0ccc-46b3-945c-c7759ee755ea']
@@ -118,39 +120,6 @@ def initialise_connection():
         logging.error('A keyerror {} has occured'.format(ke))
 
     return conn
-
-
-def upload_video(video_path, fb_page_id, access_token):
-    """
-    Returns {'id': '1450967228357958'}
-    """
-    url = 'https://graph-video.facebook.com/{}/videos?access_token={}'.format(fb_page_id, access_token) 
-    _file = {'file':open(video_path,'rb')}
-    flag = requests.post(url,files=_file)
-    try:
-        flag.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        print('Http error {}'.format(err)) 
-        raise Exception
-    return flag
-
-
-def adding_description(post_id,description, access_token):
-    """
-    The return is either true or false.
-    """
-    data = {'description':description}
-    url = 'https://graph.facebook.com/v2.10/{}?access_token={}'.format(post_id, access_token)
-    flag = requests.post(url,json=data)
-    return flag
-
-
-def reading_video_url(post_id, access_token):
-    url = 'https://graph.facebook.com/v2.10/{}?fields=permalink_url&access_token={}'.format(post_id, access_token)
-    flag = requests.post(url)
-    flag = 'www.facebook.com'+flag.json()['permalink_url']
-    return flag
-
 
 
 def video_processing(process_name,video_file, output):
