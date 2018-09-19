@@ -7,7 +7,7 @@ import datetime
 import re
 
 
-class avenger_requests(slug):
+class avenger_requests():
 
     def __init__(self, slug):
 
