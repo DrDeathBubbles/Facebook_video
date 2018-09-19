@@ -25,9 +25,7 @@ from Email_processing import *
 from People_processing_CC import *
 
 
-#bucket_name = 'ds-ajm-videos'
 input_bucket = 'ds-ajm-videos'
-output_bucket = ''
 
 
 exclusion_list = ['f2cdfee8-0ccc-46b3-945c-c7759ee755ea']
