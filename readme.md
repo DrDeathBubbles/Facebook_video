@@ -87,11 +87,20 @@ Need to be a page admin to have page appear on the manage_pages method
 8. Add section which determines the number of cpus available and uses all but two
 9. Make a main function for main.py 
 10. Update readme with deployment and use of the code 
+11. Make proper exclusion list which reads from google sheet and processes these every cycle 
+12. Fix people processing
+13. Schedule
+    * Make each stage appear in its own tab
+    * Make exclusion column with 1 or 0 in it 
+    * Update column with not uploaded, uploaded, processing, processed, published, link
+    * Put section to update talk description  
+
+14. Setup proper monitoring for talkbot showing ongoing processes
+15. Setup sheet which states which videos have been processed, link to video, and success or failure - google sheet
+16. Tests :P   
 
 
-
-
-#Resourse which are of interest to this project
+## Resourse which are of interest to this project
 This is the logging information 
 
 https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes
