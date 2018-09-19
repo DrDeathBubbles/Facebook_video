@@ -71,7 +71,23 @@ Need to be a page admin to have page appear on the manage_pages method
 10. Delete mesage from queue.    
 
 
-## To do 
+## To do
+
+1. Return json objects from avenger_requests.py 
+2. check to see if response is correct and throw error if not
+2. Change main.py to use json objects instead of checking for responses
+3. Change main.py so that variables are placed in the function for :
+    * Change video processing so that watermark is functionalised
+    * Change video processing so that sting is functionalised 
+    * Change main so that buckets are setup correctly 
+4. Change main.py so that variables are all defined in the __main__ and not set in the functions themselves
+5. Strip out facebook functions which are no longer necessary
+6. Introduce youtube upload function
+7. Add control to add playlists
+8. Add section which determines the number of cpus available and uses all but two
+9. Make a main function for main.py 
+10. Update readme with deployment and use of the code 
+
 
 
 
