@@ -6,16 +6,19 @@ import botocore
 import os
 import json 
 import time
-from urllib import parse
 
 
-###AJM to be tidied up 
+
+###AJM to be tidied up - fixing the problem of parse not being imported in python2  
+#
+#from urllib import parse
+
 try:
     from urllib.parse import unquote 
 except ImportError:
      from urlparse import unquote 
 
-
+#####
 
 import urllib
 import requests
