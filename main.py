@@ -122,9 +122,9 @@ def initialise_connection():
     return conn
 
 
-def video_processing(process_name,video_file, output):
+def video_processing(process_name,video_file,sting, watermark, output):
     clip = VideoFileClip(video_file)
-    starting_clip = VideoFileClip('RISE_credits.mp4')
+    starting_clip = VideoFileClip(sting)
     if clip.size[0] != starting_clip.size[0]:
         print('Resolutions do not match! Rescaling input video')
         ratio = starting_clip.size[0]/clip.size[0]
@@ -141,7 +141,7 @@ def video_processing(process_name,video_file, output):
     else:
         print('clip not edited ')
 
-    logo = (ImageClip("RISE_watermark.png")
+    logo = (ImageClip(watermark)
           .set_duration(clip.duration)
           .resize(height=50) 
           .margin(right=8, top=8,bottom =8, left = 8, opacity=0) 
