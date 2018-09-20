@@ -67,9 +67,10 @@ def listener_process(queue, configurer):
             logger.handle(record)  # No level or filter logic applied - just do it!
         except Exception:
             import sys, traceback
-            print('Whoops! Problem:', file=sys.stderr)
-            traceback.print_exc(file=sys.stderr)
-
+            ######AJM THIS NEEDS TO BE PUT BACK IN - WORKS IN PYTHON3 NOT PYTHON2
+            #print('Whoops! Problem:', file=sys.stderr)
+            #traceback.print_exc(file=sys.stderr)
+            #######
 
 def worker_configurer(queue):
     h = logging.handlers.QueueHandler(queue)  # Just the one handler needed
@@ -386,6 +387,7 @@ if __name__ == '__main__':
         speaker_email_data = ''
 
     elif presets == 'INPUTS':
+        speaker_email_data = input('Enter the full path for the speaker email list:')
 
     else:
         print('Error - must enter eithe DEFAULTS or INPUTS')        
