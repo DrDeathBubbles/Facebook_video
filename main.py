@@ -311,12 +311,12 @@ def processing_message(queue, configure, process_name,tasks,results,speaker_emai
 
 
 
-def main():
+def main(speaker_email_data,free_cores=1):
 
 #Setting up the multiprocess processing part
     manager = multiprocessing.Manager()
     
-    speaker_email_data = pd.read_csv('RISE18_speakers.csv')
+    speaker_email_data = pd.read_csv(speaker_email_data)
 
     tasks = manager.Queue()
     results = manager.Queue()
@@ -327,7 +327,7 @@ def main():
 
     listener.start()
 
-    num_processes = 12
+    num_processes = multiprocessing.cpu_count() - free_cores 
 
     for i in range(num_processes):
 
