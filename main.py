@@ -314,7 +314,6 @@ if __name__ == '__main__':
 #Setting up the multiprocess processing part
     manager = multiprocessing.Manager()
     
-    fb_cred_data = pd.read_csv('RISE_credentials.csv')
     speaker_email_data = pd.read_csv('RISE18_speakers.csv')
 
     tasks = manager.Queue()
