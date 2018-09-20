@@ -380,5 +380,16 @@ def main(speaker_email_data,free_cores=1):
 
 
 if __name__ == '__main__':
-    args
-    main()
+    presets = input('Would you like to continue with DEFAULTS or user defined INPUTS?:')
+
+    if presets == 'DEFAULTS':
+        speaker_email_data = ''
+
+    elif presets == 'INPUTS':
+
+    else:
+        print('Error - must enter eithe DEFAULTS or INPUTS')        
+        exit()
+
+    speaker_email_data = raw_input('Speaker') 
+    main(speaker_email_data)
