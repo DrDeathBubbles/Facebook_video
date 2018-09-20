@@ -309,8 +309,67 @@ def processing_message(queue, configure, process_name,tasks,results,speaker_emai
     return
 
 
-if __name__ == '__main__':
 
+
+def main():
+
+#Setting up the multiprocess processing part
+    manager = multiprocessing.Manager()
+    
+    speaker_email_data = pd.read_csv('RISE18_speakers.csv')
+
+    tasks = manager.Queue()
+    results = manager.Queue()
+
+    queue = multiprocessing.Queue(-1)
+    listener = multiprocessing.Process(target=listener_process,
+                                       args=(queue, listener_configurer))
+
+    listener.start()
+
+    num_processes = 12
+
+    for i in range(num_processes):
+
+        process_name = 'P{}'.format(str(i))
+
+        new_process = multiprocessing.Process(target=processing_message, args=(queue, worker_configurer, process_name, tasks, results, speaker_email_data))
+
+        new_process.start()
+
+
+#Setting up the connection to monitor SQS 
+
+    conn = initialise_connection()
+    q = conn.create_queue('DS_AJM_VIDEO')
+    
+    while True:
+
+        messages = []
+        rs = q.get_messages()
+        for m in rs:
+            temp = json.loads(m.get_body())
+            q.delete_message(m)
+            try:
+                temp = temp['Records'][0]['s3']['object']['key']
+                temp = parse.unquote(temp)
+                temp = temp.replace('+',' ')
+                #temp = temp.replace(':',' ')
+            except KeyError as ke:
+                logging.error('A key error {} has occured while trying\
+                to access the S3 filename.')
+            messages.append(temp)
+
+        for message in messages:
+            print(message)
+            tasks.put([message])
+
+        time.sleep(5)
+
+
+
+if __name__ == '__main__':
+    main()
 #Setting up the multiprocess processing part
     manager = multiprocessing.Manager()
     
