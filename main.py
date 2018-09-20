@@ -7,6 +7,16 @@ import os
 import json 
 import time
 from urllib import parse
+
+
+###AJM to be tidied up 
+try:
+    from urllib.parse import unquote 
+except ImportError:
+     from urlparse import unquote 
+
+
+
 import urllib
 import requests
 import os
@@ -365,7 +375,10 @@ def main(speaker_email_data,free_cores=1):
             q.delete_message(m)
             try:
                 temp = temp['Records'][0]['s3']['object']['key']
-                temp = parse.unquote(temp)
+                ###AJM commenting out and changing due to difficulty importing 
+                #temp = parse.unquote(temp)
+                temp = unquote(temp)
+                ###
                 temp = temp.replace('+',' ')
             except KeyError as ke:
                 logging.error('A key error {} has occured while trying\
