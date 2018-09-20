@@ -99,8 +99,9 @@ Need to be a page admin to have page appear on the manage_pages method
 15. Setup sheet which states which videos have been processed, link to video, and success or failure - google sheet
 16. Tests :P
 17. Set flag for local or server operation    
-18. Proper logging rather than print statements 
-19. Use time module to regulate checking of google doc for control 
+18. Retrry queue
+19. Delete objects from the queue
+20. Put variables as default for video processing - not hard coded  
 
 
 ## Notes about main.py
