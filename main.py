@@ -202,7 +202,7 @@ def processing_message(queue, configure, process_name,tasks,results,fb_cred_data
 
 
             try:
-                video_processing(process_name,file_location+message,file_location +'edited_videos/'+message)
+                video_processing(process_name,file_location+message, sting, watermark, file_location +'edited_videos/'+message)
                 print('Video processing successful')
             except Exception as e:
                 logger.log(logging.ERROR,'Problem processing {}'.format(message))
