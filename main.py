@@ -366,7 +366,6 @@ def main(speaker_email_data,free_cores=1):
                 temp = temp['Records'][0]['s3']['object']['key']
                 temp = parse.unquote(temp)
                 temp = temp.replace('+',' ')
-                #temp = temp.replace(':',' ')
             except KeyError as ke:
                 logging.error('A key error {} has occured while trying\
                 to access the S3 filename.')
@@ -381,4 +380,5 @@ def main(speaker_email_data,free_cores=1):
 
 
 if __name__ == '__main__':
+    args
     main()
