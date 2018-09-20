@@ -161,7 +161,7 @@ def processing_output_message(facebook_url, s3_url, uuid):
     'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
 
-def processing_message(queue, configure, process_name,tasks,results,fb_cred_data,speaker_email_data):
+def processing_message(queue, configure, process_name,tasks,results,speaker_email_data):
     """
     Processes the message which is sent 
     """
@@ -331,7 +331,7 @@ if __name__ == '__main__':
 
         process_name = 'P{}'.format(str(i))
 
-        new_process = multiprocessing.Process(target=processing_message, args=(queue, worker_configurer, process_name, tasks, results, fb_cred_data, speaker_email_data))
+        new_process = multiprocessing.Process(target=processing_message, args=(queue, worker_configurer, process_name, tasks, results, speaker_email_data))
 
         new_process.start()
 
