@@ -4,6 +4,13 @@ from __future__ import print_function
 import httplib2
 import os
 
+#Appending to system path for email section of the code
+import sys
+sys.path.append('./email_html/')
+
+
+
+
 #from apiclient import discovery
 from googleapiclient import discovery
 from oauth2client import client
