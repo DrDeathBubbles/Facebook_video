@@ -210,7 +210,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 if uuid in exclusion_list:
                     print('Exclusion found!')
                     continue
-                avenger = avenger_requests.avenger_requests()
+                avenger = avenger_requests.avenger_requests(slug)
                 talk_location_id = avenger.get_timeslot_id(uuid)
             except Exception as e:
                 logger.log(logging.ERROR,'Failed to get the credentials for {}'.format(message))
