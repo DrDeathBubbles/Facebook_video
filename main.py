@@ -356,7 +356,7 @@ def main(speaker_email_data,free_cores=1):
 
         process_name = 'P{}'.format(str(i))
 
-        new_process = multiprocessing.Process(target=processing_message, args=(queue, worker_configurer, process_name, tasks, results, speaker_email_data))
+        new_process = multiprocessing.Process(target=processing_message, args=(queue, worker_configurer, process_name, tasks, results, speaker_email_data, sting, watermark))
 
         new_process.start()
 
