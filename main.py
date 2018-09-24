@@ -206,9 +206,6 @@ def processing_message(queue, configure, process_name,tasks,results,speaker_emai
                     continue
                 avenger = avenger_requests.avenger_requests()
                 talk_location_id = avenger.get_timeslot_id(uuid)
-                fb_page_id = int(fb_cred_data[fb_cred_data['id']==talk_location_id]['page_id'])
-                access_token = fb_cred_data[fb_cred_data['id']==talk_location_id]['long_lasting_token'].values[0]
-                print('fb_page_id and access_token acquired.')
             except Exception as e:
                 logger.log(logging.ERROR,'Failed to get the credentials for {}'.format(message))
                 print('Failed to get credentials')
