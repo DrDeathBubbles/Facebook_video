@@ -18,6 +18,12 @@ try:
 except ImportError:
      from urlparse import unquote 
 
+
+import sys
+sys.path.append('./youtube/')
+
+from video_upload import youtube_video_upload
+
 #####
 
 import urllib
@@ -175,7 +181,7 @@ def processing_output_message(facebook_url, s3_url, uuid):
     'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
 
-def processing_message(queue, configure, process_name,tasks,results,speaker_email_data):
+def processing_message(queue, configure, process_name, tasks, results, speaker_email_data, sting, watermark, slug):
     """
     Processes the message which is sent 
     """
@@ -322,7 +328,7 @@ def processing_message(queue, configure, process_name,tasks,results,speaker_emai
 
 
 
-def main(speaker_email_data,watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',free_cores=1):
+def main(speaker_email_data, slug = 'monc17',watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',free_cores=1):
     """
     Manages SQS and the multiprocessing section of the code
 
@@ -356,7 +362,7 @@ def main(speaker_email_data,watermark='./watermarks/MC_watermark.png',sting='./s
 
         process_name = 'P{}'.format(str(i))
 
-        new_process = multiprocessing.Process(target=processing_message, args=(queue, worker_configurer, process_name, tasks, results, speaker_email_data, sting, watermark))
+        new_process = multiprocessing.Process(target=processing_message, args=(queue, worker_configurer, process_name, tasks, results, speaker_email_data, sting, watermark,slug))
 
         new_process.start()
 
