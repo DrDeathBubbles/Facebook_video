@@ -101,7 +101,8 @@ Need to be a page admin to have page appear on the manage_pages method
 17. Set flag for local or server operation    
 18. Retrry queue
 19. Delete objects from the queue
-20. Put variables as default for video processing - not hard coded  
+20. Put variables as default for video processing - not hard coded
+21. Clean up html_python_file  
 
 
 ## Notes about main.py
