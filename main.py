@@ -233,22 +233,6 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             # and the access_token needed for the rest of the upload 
 
 
-            
-            try:
-                post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
-                if post.status_code == '400':
-                    print('Uploads are blocked')
-                    time.sleep(60*60*6)
-                    continue
-           
-            except:
-                logger.log(logging.ERROR,'Failed to post to facebook {}'.format(message))
-                print('Failed to post to facebook')
-                continue
-            
-            #This is where we get the description and speakers for a talk and add
-            # it to the facebook video            
-            
             try:
                 description = avenger.description_processing(uuid)
                 speakers = avenger.name_processing(uuid)
@@ -262,6 +246,22 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 print('Failed to add description')
                 logger.log(logging.ERROR, 'Failed to add description {}'.format(message))
                 logging.error(e)
+            
+            try:
+                #post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
+                if post.status_code == '400':
+                    print('Uploads are blocked')
+                    time.sleep(60*60*6)
+                    continue
+           
+            except:
+                logger.log(logging.ERROR,'Failed to post to facebook {}'.format(message))
+                print('Failed to post to facebook')
+                continue
+            
+            #This is where we get the description and speakers for a talk and add
+            # it to the facebook video            
+            
 
             try: 
                 post_to_s3(file_location,message, uuid + '_' + title)
