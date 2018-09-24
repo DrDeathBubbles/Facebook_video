@@ -247,6 +247,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             
             try:
                 #post = upload_video(file_location + 'edited_videos/' + message, fb_page_id, access_token)
+                post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private'):
                 if post.status_code == '400':
                     print('Uploads are blocked')
                     time.sleep(60*60*6)
