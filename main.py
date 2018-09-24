@@ -239,12 +239,10 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 title = avenger.title_processing(uuid)
                 title = string_processing(title) 
                 description = speakers + ' \n ' + description
-                print(description)
-                adding_description(post.json()['id'], description, access_token)
 
             except Exception  as e:
-                print('Failed to add description')
-                logger.log(logging.ERROR, 'Failed to add description {}'.format(message))
+                print('Failed to obtain metadata)
+                logger.log(logging.ERROR, 'Failed to obtain metadata {}'.format(message))
                 logging.error(e)
             
             try:
