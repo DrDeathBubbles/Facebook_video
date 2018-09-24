@@ -322,7 +322,7 @@ def processing_message(queue, configure, process_name,tasks,results,speaker_emai
 
 
 
-def main(speaker_email_data,free_cores=1):
+def main(speaker_email_data,watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',free_cores=1):
     """
     Manages SQS and the multiprocessing section of the code
 
@@ -401,6 +401,8 @@ if __name__ == '__main__':
 
     elif presets == 1:
         speaker_email_data = input('Enter the full string path for the speaker email list:')
+        sting = input('Enter the full string path for the sting:')
+        watermark = input('Enter the full string path for the watermark:')
 
     else:
         print('Error - must enter eithe DEFAULTS or INPUTS')        
