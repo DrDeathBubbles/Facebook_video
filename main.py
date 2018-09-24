@@ -334,7 +334,10 @@ def main(speaker_email_data, slug = 'monc17',watermark='./watermarks/MC_watermar
 
 
     Args:
-        speaker_email_data (str): The csv file of the speaker email data
+        speaker_email_data (str): The csv file of the speaker email data.
+        slug (str): The identifying slug for the conference used for the avenger module to obtain schedule, descriptions etc.
+        watermark (str): The path of the watermark used to stamp the videos.
+        sting (str): The path of the opening sting used to stamp the videos. Note the resolution of the sting sets the output resolution for the system.
         free_cores (int): The number of cores which will not be used by the multiprocessing module 
 
     Returns:
