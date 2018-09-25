@@ -250,7 +250,7 @@ e               youtube_post = youtube_video_upload(file_location + 'edited_vide
            
             except:
                 logger.log(logging.ERROR,'Failed to post to youtube {}'.format(message))
-                print('Failed to post to facebook')
+                print('Failed to post to Youtube')
                 continue
             
             #This is where we get the description and speakers for a talk and add
