@@ -277,11 +277,11 @@ e               youtube_post = youtube_video_upload(file_location + 'edited_vide
             #This is where we get the video url for the facebook video and email it
             #to the speakers
 
-            try:    
-                facebook_url = reading_video_url(post.json()['id'], access_token)
-                print(facebook_url)
+            try:   
+                youtube_url = porcessing_youtube_url(youtube_post) 
+                print(youtube_url)
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/cc18-videos/' + uuid + '_' + title   
-                message_attributes = processing_output_message(facebook_url, s3_url, uuid)
+                message_attributes = processing_output_message(youtube_url, s3_url, uuid)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 print('Resourse made')
