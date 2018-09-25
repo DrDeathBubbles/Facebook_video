@@ -26,7 +26,7 @@ class Namespace:
     self.__dict__.update(kwargs)
 
 
-def processing_youtube_response(result):
+def processing_youtube_url(result):
   youtube_url = 'www.youtube.com/watch?v='
   video_id = result['id']
   output_url = str(youtube_url + video_id)
