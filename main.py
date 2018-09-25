@@ -246,14 +246,10 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 logging.error(e)
             
             try:
-                youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private'):
-                if post.status_code == '400':
-                    print('Uploads are blocked')
-                    time.sleep(60*60*6)
-                    continue
+e               youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private'):
            
             except:
-                logger.log(logging.ERROR,'Failed to post to facebook {}'.format(message))
+                logger.log(logging.ERROR,'Failed to post to youtube {}'.format(message))
                 print('Failed to post to facebook')
                 continue
             
