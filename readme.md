@@ -68,7 +68,22 @@ Need to be a page admin to have page appear on the manage_pages method
     1. Update spreadsheet with link to video
     2. Email speakers the link to thgie video
 9. Delete local video file
-10. Delete mesage from queue.    
+10. Delete mesage from queue.   
+
+
+
+## File naming convention
+
+The files are named as follows:
+
+_uuid\_StartTime\_EndTime.mp4_
+
+The leading string does not matter in the processing, as long as there is an *_* before the uuid of the talk
+and the StartTime and EndTime are the second last and last strings respectively.
+
+The StartTime and EndTime are measured from the start of the video file. The StartTime and EndTime are in the format HHMMSS where H - hours, M - minutes and S - seconds. For example, if the end time of the video is after 1 hour, 23 minutes and 12 seconds, and the beginning time was at 0 hours, 1 minute and 9 seconds, the resulting string for the uploaded video would be:
+
+_uuid\_000109\_012312.mp4_
 
 
 ## To do
@@ -102,7 +117,9 @@ Need to be a page admin to have page appear on the manage_pages method
 18. Retrry queue
 19. Delete objects from the queue
 20. Put variables as default for video processing - not hard coded
-21. Clean up html_python_file  
+21. Clean up html_python_file 
+22. Change how avenger_requests is called 
+23. Start main with conference slug 
 
 
 ## Notes about main.py
