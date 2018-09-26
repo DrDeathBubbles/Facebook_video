@@ -241,7 +241,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 description = speakers + ' \n ' + description
 
             except Exception  as e:
-                print('Failed to obtain metadata)
+                print('Failed to obtain metadata')
                 logger.log(logging.ERROR, 'Failed to obtain metadata {}'.format(message))
                 logging.error(e)
             
