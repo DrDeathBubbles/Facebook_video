@@ -119,7 +119,8 @@ _uuid\_000109\_012312.mp4_
 20. Put variables as default for video processing - not hard coded
 21. Clean up html_python_file 
 22. Change how avenger_requests is called 
-23. Start main with conference slug 
+23. Start main with conference slug
+24. Setup WS18 bucket 
 
 
 ## Notes about main.py
