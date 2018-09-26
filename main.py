@@ -246,7 +246,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 logging.error(e)
             
             try:
-e               youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private'):
+                youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private'):
            
             except:
                 logger.log(logging.ERROR,'Failed to post to youtube {}'.format(message))
