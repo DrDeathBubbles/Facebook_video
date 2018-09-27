@@ -24,6 +24,10 @@ sys.path.append('./youtube/')
 
 from video_upload import youtube_video_upload
 
+sys.path.append('./logging/')
+
+from queuehandler import QueueHandler
+
 #####
 
 import urllib
