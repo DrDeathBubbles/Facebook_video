@@ -406,7 +406,7 @@ if __name__ == '__main__':
 
     if presets == 0:
         speaker_email_data = './stages_speakers/Speakers_testing.csv'
-        slug = 'WS18'
+        slug = 'ws18'
 
     elif presets == 1:
         speaker_email_data = input('Enter the full string path for the speaker email list:')
