@@ -201,6 +201,7 @@ def youtube_video_upload(file, title, description, category, keywords, privacySt
     result = initialize_upload(youtube, args)
   except HttpError as e:
     print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
+    result = e.resp.status
 
   return result  
 
