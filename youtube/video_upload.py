@@ -71,8 +71,8 @@ RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
 #   https://developers.google.com/youtube/v3/guides/authentication
 # For more information about the client_secrets.json file format, see:
 #   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
-#CLIENT_SECRETS_FILE = "./credentials/client_secret.json"
-CLIENT_SECRETS_FILE = "../credentials/client_secret.json"
+CLIENT_SECRETS_FILE = "./credentials/client_secret.json"
+#CLIENT_SECRETS_FILE = "../credentials/client_secret.json"
 
 # This OAuth 2.0 access scope allows an application to upload files to the
 # authenticated user's YouTube channel, but doesn't allow other types of access.
@@ -232,5 +232,4 @@ if __name__ == '__main__':
 #  except HttpError as e:
 #    print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
 
-  result =   youtube_video_upload(file='/Users/aaronmeagher/Desktop/Clean3/Stream_3.mp4',title='AJM Title F',
-description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
+  result =   youtube_video_upload(file='/Users/aaronmeagher/Desktop/Clean3/Stream_3.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
