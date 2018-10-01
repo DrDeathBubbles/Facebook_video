@@ -19,7 +19,7 @@ except ImportError:
      from urlparse import unquote 
 
 
-#import sys
+import sys
 #sys.path.append('./youtube/')
 
 from video_upload import youtube_video_upload
