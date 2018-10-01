@@ -121,7 +121,7 @@ _uuid\_000109\_012312.mp4_
 22. Change how avenger_requests is called 
 23. Start main with conference slug
 24. Setup WS18 bucket 
-
+25. Make s3 bucket for ws18 
 
 ## Notes about main.py
 

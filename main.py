@@ -285,7 +285,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:   
                 youtube_url = (youtube_post) 
                 print(youtube_url)
-                s3_url = 'https://s3-eu-west-1.amazonaws.com/cc18-videos/' + uuid + '_' + title   
+                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title   
                 message_attributes = processing_output_message(youtube_url, s3_url, uuid)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
