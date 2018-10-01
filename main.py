@@ -283,7 +283,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             #to the speakers
 
             try:   
-                youtube_url = porcessing_youtube_url(youtube_post) 
+                youtube_url = processing_youtube_url(youtube_post) 
                 print(youtube_url)
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/cc18-videos/' + uuid + '_' + title   
                 message_attributes = processing_output_message(youtube_url, s3_url, uuid)
