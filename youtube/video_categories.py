@@ -37,4 +37,4 @@ client = get_authenticated_service()
 
 result = video_categories_list(client,
     part='snippet',
-    regionCode='US')
+    regionCode='IE')
