@@ -167,8 +167,8 @@ def create_message_cc_html_2(sender, to, cc, subject, message_text):
   #raw = raw.decode()
   #return {'raw': raw}
   #return {'raw': base64.urlsafe_b64encode(message.as_string())}
-  return {'raw': base64.urlsafe_b64encode(bytes(message.as_string(),"utf-8")).decode("utf-8")}
-  #return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  #This is the one that was working before ws18 #return {'raw': base64.urlsafe_b64encode(bytes(message.as_string(),"utf-8")).decode("utf-8")}
+  return {'raw': base64.urlsafe_b64encode(message.as_string())}
   #return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
   #return {'raw': base64.urlsafe_b64encode(str.encode(message.as_string()))}
 
