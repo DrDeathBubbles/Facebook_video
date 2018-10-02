@@ -283,7 +283,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             #to the speakers
 
             try:   
-                youtube_url = (youtube_post) 
+                youtube_url = processing_youtube_url(youtube_post) 
                 print(youtube_url)
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title   
                 message_attributes = processing_output_message(youtube_url, s3_url, uuid)
@@ -303,7 +303,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 logger.log(logging.ERROR, 'Failed to email speakers for {}'.format(message))
                 logging.error(e)
 
-            time.sleep(5*60)
+            time.sleep(10)
             try:
                 t1 = speakers.split(',')
                 t2 = t1[-1].split('and')
