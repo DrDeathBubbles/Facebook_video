@@ -241,6 +241,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:
                 description = avenger.description_processing(uuid)
                 speakers = avenger.name_processing(uuid)
+                speakers_for_emails = avenger.speaker_names(uuid)
                 title = avenger.title_processing(uuid)
                 title = string_processing(title) 
                 description = speakers + ' \n ' + description
@@ -305,14 +306,9 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
             time.sleep(10)
             try:
-                t1 = speakers.split(',')
-                t2 = t1[-1].split('and')
-                t1.pop(-1)
-                [t1.append(j) for j in t2] 
-                t1 = [i.strip() for i in t1]
-                for speaker in t1:
+                for speaker in speakers_for_emails:
                     emails = get_emails_cc(speaker, speaker_email_data)
-                    send_email_cc_2(emails[0],emails[1],facebook_url) 
+                    send_email_cc_2(emails[0],emails[1],youtube_url) 
                     time.sleep(5)
 
             except:
