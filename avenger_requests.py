@@ -92,6 +92,35 @@ class avenger_requests():
     #This section containd the functions which return the data actually needed by TalkBot
 
 
+
+    def speaker_names(self, id):
+        """
+        Returns the list of speakers for a particular talk
+
+        Takes the talk id and returns a string of the speakers joined by commas with the last
+        speaker joined to the string with a 'and'.
+
+        What if there is only one speaker for the talk?
+        This does not work - it has to be fixed for the case when there is just one speaker
+        """
+        talk = self.get_talks_particular(id)
+        talk.raise_for_status()
+        if 'data' in talk.json().keys():
+            speakers = talk.json()['data']['timeslot_participations'] 
+            speakers = [self.get_attendee_data_particular(i['attendance_id']).json() for i in speakers]
+            speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
+            
+            return speakers  
+        else:
+            return
+
+
+
+
+
+
+
+
     def name_processing(self, id):
         """
         Returns the list of speakers for a particular talk
