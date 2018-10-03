@@ -175,26 +175,26 @@ def create_message_cc_html_2(sender, to, cc, subject, message_text):
 
 
 
-#def send_message(service, user_id, message):
-#  """Send an email message.
-#
-#  Args:
-#    service: Authorized Gmail API service instance.
-#    user_id: User's email address. The special value "me"
-#    can be used to indicate the authenticated user.
-#    message: Message to be sent.
-#
-#  Returns:
-#    Sent Message.
-#  """
-#  try:
-#    message = (service.users().messages().send(userId=user_id, body=message)
-#               .execute())
-#    print('Message Id: %s' % message['id'])
-#    return message
-#  except:
-#   # print('An error occurred:{}'.format(error))
-#    print('OOPS!')
+def send_message(service, user_id, message):
+  """Send an email message.
+
+  Args:
+    service: Authorized Gmail API service instance.
+    user_id: User's email address. The special value "me"
+    can be used to indicate the authenticated user.
+    message: Message to be sent.
+
+  Returns:
+    Sent Message.
+  """
+  try:
+    message = (service.users().messages().send(userId=user_id, body=message)
+               .execute())
+    print('Message Id: %s' % message['id'])
+    return message
+  except:
+   # print('An error occurred:{}'.format(error))
+    print('OOPS!')
 
 
 #def send_email(email_address, facebook_video_link):
