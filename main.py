@@ -44,7 +44,7 @@ import moviepy
 
 import time
 from People_processing import *
-from Email_processing import *
+#from Email_processing import *
 from People_processing_CC import *
 
 
