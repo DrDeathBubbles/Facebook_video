@@ -68,7 +68,7 @@ def get_credentials():
 
 
 
-def create_message_cc_html_2(sender, to, cc, subject, message_text):
+def create_message(sender, to, cc, subject, message_text):
   """Create a message for an email.
 
   Args:
@@ -124,7 +124,7 @@ def send_message(service, user_id, message):
 
 
 
-def send_email_cc_2(primary_email_address, cc_email_addresses,facebook_video_link):
+def send_email(primary_email_address, cc_email_addresses,facebook_video_link):
     """
     email_address : The recipenent of the email
     facebook_video_link : The video link for the video
@@ -136,7 +136,7 @@ def send_email_cc_2(primary_email_address, cc_email_addresses,facebook_video_lin
 
     html_email = html_email_processing_3(facebook_video_link)
 
-    message = create_message_cc_html_2('talkbot@websummit.com',primary_email_address, cc_email_addresses,
+    message = create_message('talkbot@websummit.com',primary_email_address, cc_email_addresses,
     'Your RISE talk is live on Facebook',html_email)
 
 

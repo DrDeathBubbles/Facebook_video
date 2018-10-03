@@ -308,7 +308,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:
                 for speaker in speakers_for_emails:
                     emails = get_emails_cc(speaker, speaker_email_data)
-                    send_email_cc_2(emails[0],emails[1],youtube_url) 
+                    send_email(emails[0],emails[1],youtube_url) 
                     time.sleep(5)
 
             except:
