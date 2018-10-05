@@ -83,7 +83,7 @@ def main(slug):
             #file_id = '1w_PRr6K2kQo-k0LssSMUoVJC9aDVrjCAtBFo5UueW7o'
             #file_id = '13b7f2wqgLp2JP5QDbrPiBTgRzHD7wLED_L_m0SUo6QI'
             file_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg'
-            store = file.Storage('credentials.json')
+            store = file.Storage('./access_tokens/credentials.json')
             creds = store.get()
             drive_service = build('drive', 'v2', http=creds.authorize(Http()))    
             a = update_file(drive_service, file_id, 'Monc_18_stages', 'Monc_18 stage informatiom', 
