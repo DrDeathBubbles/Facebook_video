@@ -78,7 +78,7 @@ def main(slug):
             pass
         else:    
 
-            talks.to_csv('Monc_18_stages.csv')
+            talks.to_csv('WS_18_stages.csv')
 
             #file_id = '1w_PRr6K2kQo-k0LssSMUoVJC9aDVrjCAtBFo5UueW7o'
             #file_id = '13b7f2wqgLp2JP5QDbrPiBTgRzHD7wLED_L_m0SUo6QI'
@@ -86,8 +86,8 @@ def main(slug):
             store = file.Storage('./access_tokens/credentials.json')
             creds = store.get()
             drive_service = build('drive', 'v2', http=creds.authorize(Http()))    
-            a = update_file(drive_service, file_id, 'Monc_18_stages', 'Monc_18 stage informatiom', 
-            'application/octet-stream', './Monc_18_stages.csv','True')
+            a = update_file(drive_service, file_id, 'WS_18_stages', 'WS_18 stage informatiom', 
+            'application/octet-stream', './WS_18_stages.csv','True')
             print('Updated pushed')
             talks_old = talks 
         time.sleep(60*15)
