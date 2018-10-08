@@ -29,3 +29,17 @@ def read_single_range(spreadsheet_id, range_name):
     service = build('sheets', 'v4', http=creds.authorize(Http()))
     result = service.spreadsheets().values().get( spreadsheetId=spreadsheet_id, range=range_name).execute()
     return result
+
+
+def write_single_range(spreadsheet_id,range_name,values,value_input_option='RAW'):
+    scope = ['https://spreadsheets.google.com/feeds']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('./access_tokens/client_secret.json', scope)
+    service = build('sheets', 'v4', http=creds.authorize(Http()))
+    body ={'values':values}
+    result = service.spreadsheets().values().update(
+    spreadsheetId=spreadsheet_id, range=range_name,
+    valueInputOption=value_input_option, body=body).execute()
+
+
+if __name__ == '__main__':
+    a = read_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4')        
