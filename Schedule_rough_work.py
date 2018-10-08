@@ -43,3 +43,4 @@ def write_single_range(spreadsheet_id,range_name,values,value_input_option='RAW'
 
 if __name__ == '__main__':
     a = read_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4')        
+    b = write_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4',[['This','Is','A','Test'],[1,2,3,4]])
