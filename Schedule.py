@@ -6,7 +6,16 @@ import pandas as pd
 import avenger_requests
 import arrow
 import string
-import time 
+import time
+from fuzzywuzzy import fuzz 
+
+
+
+def find_row(df, field_title, search_term):
+    fuzzy_matching = lambda a,b : fuzz.ratio(a,b)
+    location = df[field_title].apply(fuzzy_matching,b=search_term)
+    location = location.idxmax()
+    return location
 
 
 def get_spreadsheet(sheet_name):
@@ -85,5 +94,8 @@ def update_schedule(sheet_id, slug, update_frequency):
         time.sleep(update_frequency)                        
 
 if __name__ == '__main__':
-    a = read_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4')        
-    b = write_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4',[['This','Is','A','Test'],[1,2,3,4]])
+    #a = read_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4')        
+    #b = write_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4',[['This','Is','A','Test'],[1,2,3,4]])
+    #Below is for ws18
+    sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg'
+    update_schedule(sheet_id,'ws18',60*15)
