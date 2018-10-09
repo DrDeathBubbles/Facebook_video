@@ -72,7 +72,7 @@ def write_dataframe_to_gsheets(sheet_id, df):
 
 
 def update_schedule(sheet_id, slug, update_frequency):
-    schedule_old = pd.Dataframe()
+    schedule_old = pd.DataFrame()
     while True:
         schedule_new = time_schedule_aquisition(slug)
         if schedule_old.equals(schedule_new):
