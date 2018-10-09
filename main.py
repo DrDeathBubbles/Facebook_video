@@ -323,7 +323,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
 
-def main(speaker_email_data, slug = 'monc17',watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',free_cores=1):
+def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',free_cores=1):
     """
     Manages SQS and the multiprocessing section of the code
 
