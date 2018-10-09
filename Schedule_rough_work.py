@@ -79,7 +79,7 @@ def update_schedule(sheet_id, slug, update_frequency):
             print('No updates to schedule')
             pass
         else:
-            write_schedule_to_gsheets(sheet_id, schedule_new)
+            write_dataframe_to_gsheets(sheet_id, schedule_new)
             schedule_old = schedule_new
 
     time.sleep(update_frequency)                        
