@@ -81,6 +81,7 @@ def update_schedule(sheet_id, slug, update_frequency):
         else:
             write_dataframe_to_gsheets(sheet_id, schedule_new)
             schedule_old = schedule_new
+            print('Schedule updated')
 
     time.sleep(update_frequency)                        
 
