@@ -96,11 +96,11 @@ _uuid\_000109\_012312.mp4_
     * Change video processing so that sting is functionalised 
     * Change main so that buckets are setup correctly 
 4. Change main.py so that variables are all defined in the __main__ and not set in the functions themselves
-5. Strip out facebook functions which are no longer necessary
-6. Introduce youtube upload function
+
+
 7. Add control to add playlists
 8. Add section which determines the number of cpus available and uses all but two
-9. Make a main function for main.py 
+
 10. Update readme with deployment and use of the code 
 11. Make proper exclusion list which reads from google sheet and processes these every cycle 
 12. Fix people processing
@@ -121,7 +121,12 @@ _uuid\_000109\_012312.mp4_
 22. Change how avenger_requests is called 
 23. Start main with conference slug
 24. Setup WS18 bucket 
-25. Make s3 bucket for ws18 
+25. Make s3 bucket for ws18
+
+## Done
+5. Strip out facebook functions which are no longer necessary
+6. Introduce youtube upload function
+9. Make a main function for main.py 
 
 ## Notes about main.py
 
