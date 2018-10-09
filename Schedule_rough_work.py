@@ -83,7 +83,7 @@ def update_schedule(sheet_id, slug, update_frequency):
             schedule_old = schedule_new
             print('Schedule updated')
 
-    time.sleep(update_frequency)                        
+        time.sleep(update_frequency)                        
 
 if __name__ == '__main__':
     a = read_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4')        
