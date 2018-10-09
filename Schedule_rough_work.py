@@ -6,8 +6,7 @@ import pandas as pd
 import avenger_requests
 import arrow
 import string
-#from fuzzywuzzy import fuzz
-#from fuzzywuzzy import process
+import time 
 
 
 def get_spreadsheet(sheet_name):
