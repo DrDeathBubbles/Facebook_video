@@ -61,11 +61,13 @@ def time_schedule_aquisition(slug):
 
 def write_dataframe_to_gsheets(sheet_id, df):
     top_left_cell = 'A1'
-    
     num2alpha = dict(zip(range(1, 27), string.ascii_uppercase))
     bottom_right_cell = num2alpha[len(df.columns)] + str(len(df) + 1)
-
     cell_range = top_left_cell + ':' + bottom_right_cell
+
+    values = df.as_matrix().tolist()
+    values.insert(0,list(df.columns))
+
     write_single_range(sheet_id, cell_ranges, values)
 
 
@@ -73,7 +75,7 @@ def update_schedule(sheet_id, slug, update_frequency):
     schedule_old = pd.Dataframe()
     while True:
         schedule_new = time_schedule_aquisition(slug)
-        if schedule_old.equals(schedule_new)
+        if schedule_old.equals(schedule_new):
             print('No updates to schedule')
             pass
         else:
