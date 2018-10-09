@@ -63,7 +63,7 @@ def write_dataframe_to_gsheets(sheet_id, df):
     top_left_cell = 'A1'
     num2alpha = dict(zip(range(1, 27), string.ascii_uppercase))
     bottom_right_cell = num2alpha[len(df.columns)] + str(len(df) + 1)
-    cell_range = top_left_cell + ':' + bottom_right_cell
+    cell_ranges = top_left_cell + ':' + bottom_right_cell
 
     values = df.as_matrix().tolist()
     values.insert(0,list(df.columns))
