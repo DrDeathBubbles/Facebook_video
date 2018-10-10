@@ -25,7 +25,6 @@ def get_spreadsheet(sheet_name):
     sheet = client.open(sheet_name).sheet1
     sheet = sheet.get_all_records()
     sheet = pd.DataFrame(sheet)
-    sheet.columns = sheet.iloc[0]
     return sheet 
 
 def read_single_range(spreadsheet_id, range_name):
