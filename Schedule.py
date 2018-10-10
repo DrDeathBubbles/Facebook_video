@@ -19,6 +19,13 @@ def find_row(df, field_title, search_term):
 
 
 def get_spreadsheet(sheet_name):
+    """
+    Returns a dataframe containing all the values in the first sheet of a gsheet
+
+    sheet_name (str): The string name of the sheet - not the id of the sheet!
+
+    """
+
     scope = ['https://spreadsheets.google.com/feeds']
     creds = ServiceAccountCredentials.from_json_keyfile_name('./access_tokens/client_secret.json', scope)
     client = gspread.authorize(creds)
