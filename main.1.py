@@ -232,13 +232,13 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 logger.log(logging.ERROR,'Avenger lookup failed for {}'.format(message))
                 print('Avenger lookup failed for {}'.format(message))
 
-                 try:
-                     cell_range = 'H{0}:H{0}'.format(row)
-                     sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
 
-                 except Excpetion as e:
-                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                     print('{} failed to update sheets'.format(process_name))
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
 
                 continue
 
