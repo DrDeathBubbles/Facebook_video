@@ -1,4 +1,3 @@
-import boto.sqs
 import os 
 import logging
 import boto3
@@ -208,8 +207,6 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             print('{} recieved {}'.format(process_name,message))
 
 
-
-
             try:
                 uuid = message.split('_')[-3]
                 row = sch.find_row(schedule,'id',uuid)
@@ -219,17 +216,13 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 print('Failed to find uuid in schedule for {}'.format(message))
 
 
-
-
-
-
             try:
                 avenger = avenger_requests.avenger_requests(slug)
                 talk_location_id = avenger.get_timeslot_id(uuid)
 
                  try:
                      cell_range = 'H{0}:H{0}'.format(row)
-                     sch.write_single_range(sheet_id, cell_range,[['TEST']])
+                     sch.write_single_range(sheet_id, cell_range,[['Processed Avenger ID']])
 
                  except Excpetion as e:
                      logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -241,7 +234,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
                  try:
                      cell_range = 'H{0}:H{0}'.format(row)
-                     sch.write_single_range(sheet_id, cell_range,[['TEST']])
+                     sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
 
                  except Excpetion as e:
                      logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
