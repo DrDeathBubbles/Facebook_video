@@ -246,22 +246,61 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:
                 retrieve_from_s3(message)
                 print('{} retrieves from S3'.format(process_name))
+                
+                
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Retrieved video from S3']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
             except Exception as e:
                logger.log(logging.ERROR,'Problem retrieving {}'.format(message))
                print('Problem retrieving {}'.format(message))
                continue 
 
 
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
 
 
             try:
                 video_processing(process_name,file_location+message, sting, watermark, file_location +'edited_videos/'+message)
                 print('Video processing successful')
+                
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Video processed']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
+
             except Exception as e:
                 logger.log(logging.ERROR,'Problem processing {}'.format(message))
                 print('Problem processing {}'.format(message))
                 os.rename(file_location+message,file_location +'edited_videos/'+message)
 
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Failed to process video']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+            
+            
+            
             print('{} processed video'.format(process_name))           
 
 
