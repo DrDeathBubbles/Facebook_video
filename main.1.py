@@ -47,6 +47,7 @@ import time
 from Email_processing import *
 from People_processing_CC import *
 
+import Schedule as sch
 
 #Variables for use in the code.
 
@@ -197,10 +198,29 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
         logger = logging.getLogger('main_logger')
         level = logging.INFO
 
+        schedule = sch.get_spreadsheet()
+
+
+
         if message == 0:
             print('{} process quits'.format(process_name))
         else:
             print('{} recieved {}'.format(process_name,message))
+
+
+            try:
+                uuid = message.split('_')[-3]
+                avenger = avenger_requests.avenger_requests(slug)
+                talk_location_id = avenger.get_timeslot_id(uuid)
+            except Exception as e:
+                logger.log(logging.ERROR,'Avenger lookup failed for {}'.format(message))
+                print('Avenger lookup failed for {}'.format(message))
+                continue 
+
+
+
+
+
             try:
                 retrieve_from_s3(message)
                 print('{} retrieves from S3'.format(process_name))
@@ -210,17 +230,6 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                continue 
 
 
-            try:
-                uuid = message.split('_')[-3]
-                if uuid in exclusion_list:
-                    print('Exclusion found!')
-                    continue
-                avenger = avenger_requests.avenger_requests(slug)
-                talk_location_id = avenger.get_timeslot_id(uuid)
-            except Exception as e:
-                logger.log(logging.ERROR,'Failed to get the credentials for {}'.format(message))
-                print('Failed to get credentials')
-                continue 
 
 
             try:
