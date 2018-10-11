@@ -318,17 +318,73 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 title = string_processing(title) 
                 description = speakers + ' \n ' + description
 
+                
+                
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Metadata acquired']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+            
+            
             except Exception  as e:
                 print('Failed to obtain metadata')
                 logger.log(logging.ERROR, 'Failed to obtain metadata {}'.format(message))
                 logging.error(e)
             
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Failed to obtain metadata']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
             try:
                 #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
                 youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title, description=description,keywords='AJM F',category='22',privacyStatus='private') 
+
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Posted to youtube']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+                youtube_url = processing_youtube_url(youtube_post) 
+
+                try:
+                    cell_range = 'K{0}:K{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[[youtube_url]])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+ 
+
+
+
+
+
             except:
                 logger.log(logging.ERROR,'Failed to post to youtube {}'.format(message))
                 print('Failed to post to Youtube')
+
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Failed to post to youtube']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
                 continue
             
             #This is where we get the description and speakers for a talk and add
