@@ -208,25 +208,46 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             print('{} recieved {}'.format(process_name,message))
 
 
-            try:
-                uuid = message.split('_')[-3]
-                avenger = avenger_requests.avenger_requests(slug)
-                talk_location_id = avenger.get_timeslot_id(uuid)
-            except Exception as e:
-                logger.log(logging.ERROR,'Avenger lookup failed for {}'.format(message))
-                print('Avenger lookup failed for {}'.format(message))
-                continue
 
 
             try:
                 uuid = message.split('_')[-3]
                 row = sch.find_row(schedule,'id',uuid)
+                
             except Exception as e:
                 logger.log(logging.Error, 'Failed to find uuid in schedule for {}'.format(message))
                 print('Failed to find uuid in schedule for {}'.format(message))
 
 
 
+
+
+
+            try:
+                avenger = avenger_requests.avenger_requests(slug)
+                talk_location_id = avenger.get_timeslot_id(uuid)
+
+                 try:
+                     cell_range = 'H{0}:H{0}'.format(row)
+                     sch.write_single_range(sheet_id, cell_range,[['TEST']])
+
+                 except Excpetion as e:
+                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                     print('{} failed to update sheets'.format(process_name))
+
+            except Exception as e:
+                logger.log(logging.ERROR,'Avenger lookup failed for {}'.format(message))
+                print('Avenger lookup failed for {}'.format(message))
+
+                 try:
+                     cell_range = 'H{0}:H{0}'.format(row)
+                     sch.write_single_range(sheet_id, cell_range,[['TEST']])
+
+                 except Excpetion as e:
+                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                     print('{} failed to update sheets'.format(process_name))
+
+                continue
 
 
             try:
