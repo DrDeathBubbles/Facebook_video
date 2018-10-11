@@ -397,7 +397,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 
                 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Posted to s3']])
 
                 except Excpetion as e:
@@ -411,7 +411,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to post to s3']])
 
                 except Excpetion as e:
@@ -428,7 +428,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Removed local files']])
 
                 except Excpetion as e:
@@ -443,7 +443,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to remove local fires']])
 
                 except Excpetion as e:
@@ -472,7 +472,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Avenger queue populated']])
 
                 except Excpetion as e:
@@ -488,7 +488,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
 
                 except Excpetion as e:
@@ -505,7 +505,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Speakers emailed']])
 
                 except Excpetion as e:
@@ -518,7 +518,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Speakers not emailed']])
 
                 except Excpetion as e:
