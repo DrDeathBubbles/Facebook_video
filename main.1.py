@@ -402,7 +402,7 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
     #conn = initialise_connection()
     #q = conn.create_queue('DS_AJM_VIDEO')
     sqs = boto3.resource('sqs',region_name = 'eu-west-1')
-    q = sqs.get_queue_by_name('DS_AJM_VIDEO')    
+    q = sqs.get_queue_by_name(QueueName='DS_AJM_VIDEO')    
 
 
 
