@@ -221,7 +221,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 talk_location_id = avenger.get_timeslot_id(uuid)
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Processed Avenger ID']])
 
                 except Excpetion as e:
@@ -233,7 +233,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 print('Avenger lookup failed for {}'.format(message))
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
 
                 except Excpetion as e:
@@ -249,7 +249,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 
                 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Retrieved video from S3']])
 
                 except Excpetion as e:
@@ -263,7 +263,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
                 
                try:
-                   cell_range = 'H{0}:H{0}'.format(row)
+                   cell_range = 'K{0}:K{0}'.format(row)
                    sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
 
                except Excpetion as e:
@@ -279,7 +279,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 print('Video processing successful')
                 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Video processed']])
 
                 except Excpetion as e:
@@ -294,7 +294,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 os.rename(file_location+message,file_location +'edited_videos/'+message)
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to process video']])
 
                 except Excpetion as e:
@@ -321,7 +321,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 
                 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Metadata acquired']])
 
                 except Excpetion as e:
@@ -336,7 +336,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to obtain metadata']])
 
                 except Excpetion as e:
@@ -349,7 +349,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Posted to youtube']])
 
                 except Excpetion as e:
@@ -359,7 +359,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 youtube_url = processing_youtube_url(youtube_post) 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
+                    cell_range = 'M{0}:M{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[[youtube_url]])
 
                 except Excpetion as e:
@@ -377,7 +377,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    cell_range = 'H{0}:H{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to post to youtube']])
 
                 except Excpetion as e:
@@ -394,9 +394,31 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try: 
                 post_to_s3(file_location,message, uuid + '_' + title)
                 print('Successfully posted to S3') 
+                
+                
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Posted to s3']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+          
+          
             except Exception as e:
                 logger.log(logging.ERROR,'Failed to post to S3 {}'.format(message))
                 print('Failed to upload video to S3')
+
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Failed to post to s3']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
 
 
             try:
@@ -404,9 +426,30 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 os.remove(file_location + 'edited_videos/' + message)
                 print('removed local files')
 
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Removed local files']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
+
             except:
                 logger.log(logging.ERROR,'Failed to delete the local copy of the file {}'.format(message))
                 print('Failed to remove local copies')
+
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Failed to remove local fires']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
 
             #This is where we get the video url for the facebook video and email it
             #to the speakers
@@ -427,10 +470,31 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
                 print('Queue populated')
 
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue populated']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
+
             except Exception  as e:
                 print('Failed to email speakers')
                 logger.log(logging.ERROR, 'Failed to email speakers for {}'.format(message))
                 logging.error(e)
+
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
 
             time.sleep(10)
             try:
@@ -439,13 +503,41 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     send_email(emails[0],emails[1],youtube_url) 
                     time.sleep(5)
 
+
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Speakers emailed']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
             except:
-                print('emails have not been sent!')    
+                print('Emails have not been sent!')    
                 logger.log(logging.ERROR, 'failed to cc email {}'.format(message))
 
 
+                try:
+                    cell_range = 'H{0}:H{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Speakers not emailed']])
+
+                except Excpetion as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
 
             print('{} process finishes {}'.format(process_name, message))
+
+            
+            try:
+                cell_range = 'H{0}:H{0}'.format(row)
+                sch.write_single_range(sheet_id, cell_range,[['FINISHED']])
+
+            except Excpetion as e:
+                logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                print('{} failed to update sheets'.format(process_name))
+
+
+
     return
 
 
