@@ -1,6 +1,6 @@
 import os 
 import logging
-import boto3, boto
+import boto3
 import botocore
 import os
 import json 
@@ -399,9 +399,13 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
 
 #Setting up the connection to monitor SQS 
 
-    conn = initialise_connection()
-    q = conn.create_queue('DS_AJM_VIDEO')
-    
+    #conn = initialise_connection()
+    #q = conn.create_queue('DS_AJM_VIDEO')
+    sqs = boto3.resource('sqs')
+    q = sqs.get_queue_by_name('DS_AJM_VIDEO')    
+
+
+
     while True:
 
         messages = []
