@@ -414,7 +414,7 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
         for m in rs:
             #temp = json.loads(m.get_body())
             temp = json.loads(m.body)
-            q.delete_message(m)
+            m.delete()
             try:
                 temp = temp['Records'][0]['s3']['object']['key']
                 ###AJM commenting out and changing due to difficulty importing 
