@@ -209,7 +209,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
             try:
                 uuid = message.split('_')[-3]
-                row = sch.find_row(schedule,'id',uuid)
+                row = sch.find_row(schedule,'id',uuid) + 2
                 
             except Exception as e:
                 logger.log(logging.Error, 'Failed to find uuid in schedule for {}'.format(message))
