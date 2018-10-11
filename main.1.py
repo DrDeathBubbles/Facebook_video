@@ -215,7 +215,15 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             except Exception as e:
                 logger.log(logging.ERROR,'Avenger lookup failed for {}'.format(message))
                 print('Avenger lookup failed for {}'.format(message))
-                continue 
+                continue
+
+
+            try:
+                uuid = message.split('_')[-3]
+                row = sch.find_row(schedule,'id',uuid)
+            except Exception as e:
+                logger.log(logging.Error, 'Failed to find uuid in schedule for {}'.format(message))
+                print('Failed to find uuid in schedule for {}'.format(message))
 
 
 
