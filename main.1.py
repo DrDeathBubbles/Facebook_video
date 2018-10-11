@@ -261,8 +261,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                logger.log(logging.ERROR,'Problem retrieving {}'.format(message))
                print('Problem retrieving {}'.format(message))
                continue 
-
-
+                
                 try:
                     cell_range = 'H{0}:H{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
