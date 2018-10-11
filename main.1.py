@@ -409,7 +409,8 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
     while True:
 
         messages = []
-        rs = q.get_messages()
+        #rs = q.get_messages()
+        rs = q.receive_messages()
         for m in rs:
             temp = json.loads(m.get_body())
             q.delete_message(m)
