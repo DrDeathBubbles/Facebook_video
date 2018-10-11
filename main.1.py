@@ -529,7 +529,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
             
             try:
-                cell_range = 'H{0}:H{0}'.format(row)
+                cell_range = 'K{0}:K{0}'.format(row)
                 sch.write_single_range(sheet_id, cell_range,[['FINISHED']])
 
             except Excpetion as e:
