@@ -262,13 +262,13 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                print('Problem retrieving {}'.format(message))
 
                 
-                try:
-                    cell_range = 'H{0}:H{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
+               try:
+                   cell_range = 'H{0}:H{0}'.format(row)
+                   sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
 
-                except Excpetion as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+               except Excpetion as e:
+                   logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                   print('{} failed to update sheets'.format(process_name))
 
                continue 
 
