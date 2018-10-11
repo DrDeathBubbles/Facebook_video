@@ -43,6 +43,15 @@ def read_single_range(spreadsheet_id, range_name):
 
 
 def write_single_range(spreadsheet_id,range_name,values,value_input_option='RAW'):
+    """
+    Writes a range of values to a spreadsheet
+
+    spreadsheet_id (str): the id of the spreadsheet obtained from the url of the spreadsheet
+    range_name (str): the ranges to be written in the spreadsheet of the form "A1:B12". Single cell - "A1:A1"
+    values (array): the values to be unpacked, given in a nested array [[1,2,3],[4,5,6]]. Single cell - [['Test']]
+    value_input_option: default - RAW - insert and read as plain text and do not excute as formulas
+
+    """
     scope = ['https://spreadsheets.google.com/feeds']
     creds = ServiceAccountCredentials.from_json_keyfile_name('./access_tokens/client_secret.json', scope)
     service = build('sheets', 'v4', http=creds.authorize(Http()))
