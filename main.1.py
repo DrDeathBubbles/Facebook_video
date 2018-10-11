@@ -1,6 +1,6 @@
 import os 
 import logging
-import boto3
+import boto3, boto
 import botocore
 import os
 import json 
