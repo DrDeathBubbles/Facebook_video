@@ -260,7 +260,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             except Exception as e:
                logger.log(logging.ERROR,'Problem retrieving {}'.format(message))
                print('Problem retrieving {}'.format(message))
-               continue 
+
                 
                 try:
                     cell_range = 'H{0}:H{0}'.format(row)
@@ -269,6 +269,9 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 except Excpetion as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
+
+               continue 
+
 
 
             try:
