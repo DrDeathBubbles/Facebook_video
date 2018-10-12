@@ -474,6 +474,8 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Avenger queue populated']])
+                    cell_range = 'N{0}:N{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
 
                 except Excpetion as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
