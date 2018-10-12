@@ -227,7 +227,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                         cell_range = 'K{0}:K{0}'.format(row)
                         sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
 
-                    except Excpetion as e:
+                    except Exception as e:
                         logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                         print('{} failed to update sheets'.format(process_name))
 
