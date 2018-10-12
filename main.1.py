@@ -217,6 +217,31 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
             try:
+                cell_range = 'I{0}:I{0}'.format(row)
+                flag = sch.read_single_range(sheet_id, cell_range)
+                flag = flag['values'][0][0]
+
+                if 'values' in flag.keys():
+
+                    try:
+                        cell_range = 'K{0}:K{0}'.format(row)
+                        sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
+
+                    except Excpetion as e:
+                        logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                        print('{} failed to update sheets'.format(process_name))
+
+                    continue
+
+            except Excpetion as e:
+                logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                print('{} failed to update sheets'.format(process_name))
+
+
+
+
+
+            try:
                 avenger = avenger_requests.avenger_requests(slug)
                 talk_location_id = avenger.get_timeslot_id(uuid)
 
