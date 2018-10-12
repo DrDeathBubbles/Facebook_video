@@ -233,7 +233,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
                     continue
 
-            except Excpetion as e:
+            except Exception as e:
                 logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                 print('{} failed to update sheets'.format(process_name))
 
@@ -249,7 +249,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Processed Avenger ID']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -261,7 +261,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -277,7 +277,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Retrieved video from S3']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -291,7 +291,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                    cell_range = 'K{0}:K{0}'.format(row)
                    sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
 
-               except Excpetion as e:
+               except Exception as e:
                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                    print('{} failed to update sheets'.format(process_name))
 
@@ -307,7 +307,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Video processed']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -322,7 +322,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to process video']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
             
@@ -364,7 +364,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to obtain metadata']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -377,7 +377,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Posted to youtube']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -387,7 +387,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'M{0}:M{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[[youtube_url]])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
  
@@ -405,7 +405,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to post to youtube']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -425,7 +425,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Posted to s3']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
           
@@ -439,7 +439,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to post to s3']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -456,7 +456,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Removed local files']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -471,7 +471,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Failed to remove local fires']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -502,7 +502,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'N{0}:N{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -518,7 +518,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -535,7 +535,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Speakers emailed']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -548,7 +548,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     cell_range = 'K{0}:K{0}'.format(row)
                     sch.write_single_range(sheet_id, cell_range,[['Speakers not emailed']])
 
-                except Excpetion as e:
+                except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
@@ -559,7 +559,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 cell_range = 'K{0}:K{0}'.format(row)
                 sch.write_single_range(sheet_id, cell_range,[['FINISHED']])
 
-            except Excpetion as e:
+            except Exception as e:
                 logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                 print('{} failed to update sheets'.format(process_name))
 
