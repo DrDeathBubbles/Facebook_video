@@ -46,10 +46,19 @@ class text_analysis:
         return n_words
 
     def number_of_characters(self):
-        return self.text.len() 
+        return len(self.text) 
 
+    def average_word_length(self):
+        words = self.text.split(' ')
+        words = [len(i) for i in words]
+        awl = sum(words) / len(words)
+        return awl 
 
-
+    def number_of_stopwords(self):
+        stop = nltk.corpus.stopwords.words('english')
+        f = lambda x : len([x for x in x.split() if x in stop])
+        nsw = f(self.text)
+        return nsw
 
 def main():
     
