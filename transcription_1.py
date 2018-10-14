@@ -34,7 +34,16 @@ def get_text(response):
     return text 
 
 
+class text_analysis:
 
+    def __init__(self, input_text):
+        self.text = input_text
+
+
+    def number_of_words(self):
+        word_count = lambda x: len(str(x).split(" "))
+        n_words = word_count(self.text)            
+        return n_words 
 
 
 
