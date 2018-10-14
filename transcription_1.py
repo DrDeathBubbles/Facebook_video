@@ -43,7 +43,10 @@ class text_analysis:
     def number_of_words(self):
         word_count = lambda x: len(str(x).split(" "))
         n_words = word_count(self.text)            
-        return n_words 
+        return n_words
+
+    def number_of_characters(self):
+        return self.text.len() 
 
 
 
