@@ -60,6 +60,13 @@ class text_analysis:
         nsw = f(self.text)
         return nsw
 
+    def number_of_special_characters(self):    
+        pass
+
+    def number_of_numerics(self):
+        pass
+
+
 def main():
     
 
