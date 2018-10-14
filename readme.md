@@ -122,6 +122,7 @@ _uuid\_000109\_012312.mp4_
 23. Start main with conference slug
 24. Setup WS18 bucket 
 25. Make s3 bucket for ws18
+26. Change sqs message from facebook to youtube
 
 ## Done
 5. Strip out facebook functions which are no longer necessary
