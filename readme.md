@@ -123,6 +123,9 @@ _uuid\_000109\_012312.mp4_
 24. Setup WS18 bucket 
 25. Make s3 bucket for ws18
 26. Change sqs message from facebook to youtube
+27. Fix loggin
+28. Open bucket for public download
+29. 
 
 ## Done
 5. Strip out facebook functions which are no longer necessary
