@@ -212,7 +212,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 row = sch.find_row(schedule,'id',uuid) + 2
                 
             except Exception as e:
-                logger.log(logging.Error, 'Failed to find uuid in schedule for {}'.format(message))
+                logger.error('Failed to find uuid in schedule for {}'.format(message))
                 print('Failed to find uuid in schedule for {}'.format(message))
 
 
@@ -228,13 +228,13 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                         sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
 
                     except Exception as e:
-                        logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                        logging.error('Failed to update sheets for {}'.format(process_name))
                         print('{} failed to update sheets'.format(process_name))
 
                     continue
 
             except Exception as e:
-                logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                logging.error('Failed to update sheets for {}'.format(process_name))
                 print('{} failed to update sheets'.format(process_name))
 
 
@@ -250,11 +250,11 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Processed Avenger ID']])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
             except Exception as e:
-                logger.log(logging.ERROR,'Avenger lookup failed for {}'.format(message))
+                logger.error('Avenger lookup failed for {}'.format(message))
                 print('Avenger lookup failed for {}'.format(message))
 
                 try:
@@ -262,7 +262,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
                 continue
@@ -278,13 +278,13 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Retrieved video from S3']])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
 
             except Exception as e:
-               logger.log(logging.ERROR,'Problem retrieving {}'.format(message))
-               print('Problem retrieving {}'.format(message))
+               logger.error('Problem retrieving from S3 {}'.format(message))
+               print('Problem retrieving from S3 {}'.format(message))
 
                 
                try:
@@ -292,7 +292,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                    sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
 
                except Exception as e:
-                   logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                   logging.error('{} failed to update sheets'.format(process_name))
                    print('{} failed to update sheets'.format(process_name))
 
                continue 
@@ -308,7 +308,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Video processed']])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
 
@@ -323,7 +323,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Failed to process video']])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
             
             
@@ -350,14 +350,13 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Metadata acquired']])
 
                 except Excpetion as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
             
             
             except Exception  as e:
                 print('Failed to obtain metadata')
-                logger.log(logging.ERROR, 'Failed to obtain metadata {}'.format(message))
-                logging.error(e)
+                logger.error('Failed to obtain metadata {}'.format(message))
             
 
                 try:
@@ -365,7 +364,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Failed to obtain metadata']])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
             try:
@@ -378,7 +377,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Posted to youtube']])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
                 youtube_url = processing_youtube_url(youtube_post) 
@@ -388,7 +387,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[[youtube_url]])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
  
 
@@ -406,7 +405,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     sch.write_single_range(sheet_id, cell_range,[['Failed to post to youtube']])
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
 
 
