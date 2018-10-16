@@ -4,6 +4,7 @@ import boto3
 import nltk
 import requests
 import string 
+import collections
 
 
 
@@ -76,7 +77,26 @@ class text_analysis:
     def remove_punctuation(self):
         table = str.maketrans({key: None for key in string.punctuation})
         out = self.text.translate(table)
+        return out
+
+
+    def removal_stop_words():
+        stop = stopwords.words('english')
+        f = lambda x: " ".join(x for x in x.split() if x not in stop) 
+        out = f(self.text)
         return out 
+
+    def removal_common_words():
+        temp = self.text.split()
+        counter = collections.Counter(temp)
+        most_common = counter.most_common(10)
+        keys = [x[0] for x in most_common]
+        f = lambda x: " ".join(x for x in x.split() if x not in keys)
+        out = f(self.text)
+        return out
+
+
+
 
 
 
