@@ -3,6 +3,7 @@ import time
 import boto3
 import nltk
 import requests
+import string 
 
 
 
@@ -72,8 +73,12 @@ class text_analysis:
         out = f(self.text)
         return out
 
-    def remove_punctuation(self): 
-        pass 
+    def remove_punctuation(self):
+        table = str.maketrans({key: None for key in string.punctuation})
+        out = self.text.translate(table)
+        return out 
+
+
 
 def main():
     pass 
