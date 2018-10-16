@@ -95,6 +95,15 @@ class text_analysis:
         out = f(self.text)
         return out
 
+    def removal_rare_words():
+        temp = self.text.split()
+        counter = collections.Counter(temp)
+        least_common = counter.least_common(10)
+        keys = [x[0] for x in least_common]
+        f = lambda x: " ".join(x for x in x.split() if x not in keys)
+        out = f(self.text)
+        return out
+
 
 
 
