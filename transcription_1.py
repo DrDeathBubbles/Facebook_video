@@ -67,6 +67,12 @@ class text_analysis:
         pass
 
 
+    def make_lower_case(self):
+        f = lambda x: " ".join(x.lower() for x in x.split()
+        out = f(self.text)
+        return out 
+
+
 def main():
     pass 
     
