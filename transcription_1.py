@@ -68,10 +68,12 @@ class text_analysis:
 
 
     def make_lower_case(self):
-        f = lambda x: " ".join(x.lower() for x in x.split()
+        f = lambda x: " ".join(x.lower() for x in x.split())
         out = f(self.text)
-        return out 
+        return out
 
+    def remove_punctuation(self): 
+        pass 
 
 def main():
     pass 
