@@ -5,6 +5,9 @@ import nltk
 import requests
 import string 
 import collections
+from textblob import TextBlob
+from nltk.stem import PorterStemmer
+from textblob import Word
 
 
 
@@ -40,7 +43,7 @@ class text_analysis:
 
     def __init__(self, input_text):
         self.text = input_text
-
+        self.processed_text = ''
 
     def number_of_words(self):
         word_count = lambda x: len(str(x).split(" "))
@@ -80,13 +83,13 @@ class text_analysis:
         return out
 
 
-    def removal_stop_words():
+    def removal_stop_words(self):
         stop = stopwords.words('english')
         f = lambda x: " ".join(x for x in x.split() if x not in stop) 
         out = f(self.text)
         return out 
 
-    def removal_common_words():
+    def removal_common_words(self):
         temp = self.text.split()
         counter = collections.Counter(temp)
         most_common = counter.most_common(10)
@@ -95,14 +98,30 @@ class text_analysis:
         out = f(self.text)
         return out
 
-    def removal_rare_words():
+    def removal_rare_words(self):
         temp = self.text.split()
         counter = collections.Counter(temp)
         least_common = counter.least_common(10)
         keys = [x[0] for x in least_common]
         f = lambda x: " ".join(x for x in x.split() if x not in keys)
+        out = f(self.text)§
+        return out
+
+    def tokenise(self):
+        out = TextBlob(self.text).words
+            return out
+
+    def stemming(self):
+        st = PorterStemmer()
+        f = lambda x: " ".join([st.stem(word) for word in x.split()])
         out = f(self.text)
         return out
+
+    def lemmatisation(self):
+
+
+
+
 
 
 
