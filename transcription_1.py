@@ -118,6 +118,9 @@ class text_analysis:
         return out
 
     def lemmatisation(self):
+        f = lambda x : " ".join([Word(word).lemmatize() for word in x.split()])
+        out = f(self.text)
+        return out 
 
 
 
