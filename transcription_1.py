@@ -43,7 +43,7 @@ class text_analysis:
 
     def __init__(self, input_text):
         self.text = input_text
-        self.processed_text = ''
+        self.processed_text = input_text 
 
     def number_of_words(self):
         word_count = lambda x: len(str(x).split(" "))
@@ -75,11 +75,13 @@ class text_analysis:
     def make_lower_case(self):
         f = lambda x: " ".join(x.lower() for x in x.split())
         out = f(self.text)
+        self.processed_text = f(self.processed_text)
         return out
 
     def remove_punctuation(self):
         table = str.maketrans({key: None for key in string.punctuation})
         out = self.text.translate(table)
+        self.processed_text = self.processed_text.translate(table)
         return out
 
 
@@ -87,6 +89,7 @@ class text_analysis:
         stop = stopwords.words('english')
         f = lambda x: " ".join(x for x in x.split() if x not in stop) 
         out = f(self.text)
+        self.processed_text = f(self.processed_text)
         return out 
 
     def removal_common_words(self):
@@ -96,6 +99,7 @@ class text_analysis:
         keys = [x[0] for x in most_common]
         f = lambda x: " ".join(x for x in x.split() if x not in keys)
         out = f(self.text)
+        self.processed_text = f(self.processed_text)
         return out
 
     def removal_rare_words(self):
@@ -104,22 +108,26 @@ class text_analysis:
         least_common = counter.least_common(10)
         keys = [x[0] for x in least_common]
         f = lambda x: " ".join(x for x in x.split() if x not in keys)
-        out = f(self.text)§
+        out = f(self.text)
+        self.processed_text = f(self.processed_text)
         return out
 
     def tokenise(self):
         out = TextBlob(self.text).words
-            return out
+        self.processed_text = TextBlob(self.processed_text).words
+        return out
 
     def stemming(self):
         st = PorterStemmer()
         f = lambda x: " ".join([st.stem(word) for word in x.split()])
         out = f(self.text)
+        self.processed_text = f(self.processed_text)
         return out
 
     def lemmatisation(self):
         f = lambda x : " ".join([Word(word).lemmatize() for word in x.split()])
         out = f(self.text)
+        self.processed_text = f(self.processed_text)
         return out 
 
 
