@@ -7,6 +7,7 @@ import string
 import collections
 from textblob import TextBlob
 from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
 from textblob import Word
 
 
@@ -85,14 +86,14 @@ class text_analysis:
         return out
 
 
-    def removal_stop_words(self):
+    def remove_stop_words(self):
         stop = stopwords.words('english')
         f = lambda x: " ".join(x for x in x.split() if x not in stop) 
         out = f(self.text)
         self.processed_text = f(self.processed_text)
         return out 
 
-    def removal_common_words(self):
+    def remove_common_words(self):
         temp = self.text.split()
         counter = collections.Counter(temp)
         most_common = counter.most_common(10)
@@ -102,10 +103,10 @@ class text_analysis:
         self.processed_text = f(self.processed_text)
         return out
 
-    def removal_rare_words(self):
+    def remove_rare_words(self):
         temp = self.text.split()
         counter = collections.Counter(temp)
-        least_common = counter.least_common(10)
+        least_common = counter.most_common()[-10:]
         keys = [x[0] for x in least_common]
         f = lambda x: " ".join(x for x in x.split() if x not in keys)
         out = f(self.text)
@@ -129,6 +130,16 @@ class text_analysis:
         out = f(self.text)
         self.processed_text = f(self.processed_text)
         return out 
+
+    def pre_processing(self):
+        self.make_lower_case()
+        self.remove_punctuation()
+        self.remove_stop_words()
+        self.remove_common_words()
+        self.remove_rare_words()
+        #self.tokenise()
+        self.lemmatisation()
+
 
 
 
