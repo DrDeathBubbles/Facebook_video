@@ -220,9 +220,10 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:
                 cell_range = 'I{0}:I{0}'.format(row)
                 flag = sch.read_single_range(sheet_id, cell_range)
-                flag = flag['values'][0][0]
+
 
                 if 'values' in flag.keys():
+                flag = flag['values'][0][0]
 
                     try:
                         cell_range = 'K{0}:K{0}'.format(row)
@@ -235,8 +236,8 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     continue
 
             except Exception as e:
-                logging.error('Failed to update sheets for {}'.format(process_name))
-                print('{} failed to update sheets'.format(process_name))
+                logging.error('Failed to read block status {}'.format(process_name))
+                print('{} failed to read block status'.format(process_name))
 
 
 
