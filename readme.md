@@ -125,7 +125,10 @@ _uuid\_000109\_012312.mp4_
 26. Change sqs message from facebook to youtube
 27. Fix loggin
 28. Open bucket for public download
-29. 
+29. Functionalise transcription
+30. Add sqs for transcription jobs
+31. Investigate updating youtube metadata with keywords
+32.  
 
 ## Done
 5. Strip out facebook functions which are no longer necessary
@@ -141,12 +144,14 @@ This is the logging information
 
 https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes
 
+https://github.com/jruere/multiprocessing-logging
 
 
-NLTK
-
-https://www.analyticsvidhya.com/blog/2018/02/the-different-methods-deal-text-data-predictive-python/
 
 
 ### Notes
 uuid = 'f0bd7b1d-d8b3-4a3c-803f-d32f56e08638'
+
+
+#NLTK
+https://www.analyticsvidhya.com/blog/2018/02/the-different-methods-deal-text-data-predictive-python/

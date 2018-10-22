@@ -141,7 +141,11 @@ class text_analysis:
         self.lemmatisation()
 
 
+    def n_gram(self, number):
+        return TextBlot(self.processed_text).n_gram(number)
 
+    def term_frequency(self):
+        f = lambda x: pd.value_counts(x.split(" "))
 
 
 
