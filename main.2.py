@@ -223,7 +223,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 if 'values' in flag.keys():
-                flag = flag['values'][0][0]
+                    flag = flag['values'][0][0]
 
                     try:
                         cell_range = 'K{0}:K{0}'.format(row)
