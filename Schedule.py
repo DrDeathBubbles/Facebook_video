@@ -66,12 +66,18 @@ def convert_time_zone(time):
     time = time.shift(hours = +0)
     return time.format('YYYY/MM/DD HH:mm:ss')    
 
+def get_speakers(x, function):
+    f = function(x)
+    time.sleep(1)
+    return f
+
 
 def time_schedule_aquisition(slug):
     avenger = avenger_requests.avenger_requests(slug)
     talks = avenger.get_talks()
     talks = pd.DataFrame(talks.json()['data'])
     talks = talks[['title','description','start_time','end_time','timeslot_location_id','id']]
+
     locations = avenger.get_locations()
     locations = pd.DataFrame(locations.json()['data'])
     find_location = lambda x: locations[locations['id']== x ]['name'].values[0] 
@@ -79,7 +85,7 @@ def time_schedule_aquisition(slug):
     talks['timeslot_location_id'] = talks['timeslot_location_id'].apply(find_location)
     talks['start_time'] = talks['start_time'].apply(convert_time_zone)
     talks['end_time'] = talks['end_time'].apply(convert_time_zone)
-
+    talks['speakers'] = talks['id'].apply(get_speakers, function = avenger.name_processing)
     return talks
 
 def write_dataframe_to_gsheets(sheet_id, df):
@@ -113,4 +119,4 @@ if __name__ == '__main__':
     #b = write_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4',[['This','Is','A','Test'],[1,2,3,4]])
     #Below is for ws18
     sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg'
-    update_schedule(sheet_id,'ws18',60*15)
+    update_schedule(sheet_id,'ws18',60*60)
