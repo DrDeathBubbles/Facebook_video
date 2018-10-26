@@ -181,8 +181,8 @@ def video_processing(process_name,video_file,sting, watermark, output):
     clip.write_videofile(output, temp_audiofile="{}_temp-audio.m4a".format(process_name), remove_temp=False, codec="libx264", audio_codec="aac")
 
 
-def processing_output_message(facebook_url, s3_url, uuid):
-    message_attributes = {'facebook_url':{'DataType':'String','StringValue': facebook_url},
+def processing_output_message(youtube_url, s3_url, uuid):
+    message_attributes = {'youtube_url':{'DataType':'String','StringValue': youtube_url},
     's3_url':{'DataType':'String','StringValue': s3_url},
     'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
