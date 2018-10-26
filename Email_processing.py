@@ -124,7 +124,7 @@ def send_message(service, user_id, message):
 
 
 
-def send_email(primary_email_address, cc_email_addresses,facebook_video_link):
+def send_email(primary_email_address, cc_email_addresses,video_link):
     """
     email_address : The recipenent of the email
     facebook_video_link : The video link for the video
@@ -134,7 +134,7 @@ def send_email(primary_email_address, cc_email_addresses,facebook_video_link):
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
-    html_email = html_email_processing_3(facebook_video_link)
+    html_email = html_email_processing_4(video_link)
 
     message = create_message('talkbot@websummit.com',primary_email_address, cc_email_addresses,
     'Your RISE talk is live on Facebook',html_email)
