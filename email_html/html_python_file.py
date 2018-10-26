@@ -1573,7 +1573,7 @@ def html_email_processing_4(conference, youtube_url):
             
                     
     <a href="https://riseconf.com" class="hero-branding">
-        <img src = "https://s3-eu-west-1.amazonaws.com/ds-ajm-emails/Web+Summit_Logo_Stacked_Colour.jpg" alt = "Web Summit" >
+        <img src = "https://s3-eu-west-1.amazonaws.com/ds-ajm-emails/Web+Summit_Logo_Stacked_Colour.jpg" alt = "Web Summit" align = 'middle' >
 
         </a>
             <!-- Hero Image, Flush : END -->
@@ -1595,13 +1595,13 @@ def html_email_processing_4(conference, youtube_url):
                                     <tr>
                                         <td class="button-td button-td-primary" style="border-radius: 4px; background: #222222;">""" 
     
-    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="background: #EF4343;; border: 1px solid #00b3e3;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Talk on Facebook</span></a>"""
+    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="background: #EF4343;; border: 1px solid #00b3e3;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Talk on Youtube</span></a>"""
 									
     html_email_3 =              """                  	</td>
                                     </tr>
                                 </table>
 								<!-- Button : END -->
-								<p style="margin: 10 0 10px;"> Your WebSummit talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© WebSummit" or "courtesy of Web Summit" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/riseconfhq">https://twitter.com/riseconfhq</a>, Facebook <a href = "https://www.facebook.com/RISEConfHQ/">https://www.facebook.com/RISEConfHQ/</a> and Instagram <a href = "https://www.instagram.com/riseconfhq/">https://www.instagram.com/riseconfhq/</a>. We can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #RISEConf to ensure your post reaches the attendees from the event.   </p>
+								<p style="margin: 10 0 10px;"> Your WebSummit talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© WebSummit" or "courtesy of Web Summit" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/WebSummit">https://twitter.com/WebSummit</a>, Facebook <a href = "https://www.facebook.com/WebSummitHQ/">https://www.facebook.com/WebSummitHQ/</a> and Instagram <a href = "https://www.instagram.com/websummit/">https://www.instagram.com/websummit/</a>. We can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #WebSummit to ensure your post reaches the attendees from the event.</p>
                             </td>
                         </tr>
                                 """
