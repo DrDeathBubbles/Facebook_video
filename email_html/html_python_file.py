@@ -1571,8 +1571,9 @@ def html_email_processing_4(conference, youtube_url):
 
             <!-- Hero Image, Flush : BEGIN -->
             
-                    
-    <a href="https://riseconf.com" class="hero-branding">
+       <td>
+    <div style="margin: 0 auto; width: 400px">             
+    <a href="https://websummit.com" class="hero-branding">
         <img src = "https://s3-eu-west-1.amazonaws.com/ds-ajm-emails/Web+Summit_Logo_Stacked_Colour.jpg" alt = "Web Summit" align = 'middle' >
 
         </a>
@@ -1595,7 +1596,7 @@ def html_email_processing_4(conference, youtube_url):
                                     <tr>
                                         <td class="button-td button-td-primary" style="border-radius: 4px; background: #222222;">""" 
     
-    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="background: #EF4343;; border: 1px solid #00b3e3;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Talk on Youtube</span></a>"""
+    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="background: #00ACA8;; border: 1px solid #00b3e3;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Talk on Youtube</span></a>"""
 									
     html_email_3 =              """                  	</td>
                                     </tr>
