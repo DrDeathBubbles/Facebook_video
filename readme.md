@@ -155,3 +155,14 @@ uuid = 'f0bd7b1d-d8b3-4a3c-803f-d32f56e08638'
 
 #NLTK
 https://www.analyticsvidhya.com/blog/2018/02/the-different-methods-deal-text-data-predictive-python/
+
+
+## Email flow
+
+The flow of the emails is as follows:
+
+1. In *main.py*, the _process\_message_ function calls _send\_email_
+2. _send\_email_ is imported from *Email_processing.py*. It has several functions:
+    1. 
+    1. It imports from *./email\_html/html\_python\_file.py* the function _html\_email\_processing\_3_
+3. 
