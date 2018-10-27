@@ -110,7 +110,7 @@ def worker_configurer(queue):
 
 def string_processing(s):
     s = ''.join(c for c in s if c not in punctuation)
-    s = s.replace(' ','_') + '.mp4'
+    s = s.replace(' ','_') 
     return s
 
 
@@ -368,6 +368,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
+                    post_to_s3_audio(file_location +'edited_videos/audio/'+message,)
 
 
 
@@ -461,7 +462,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             
 
             try: 
-                post_to_s3(file_location,message, uuid + '_' + title)
+                post_to_s3(file_location,message, uuid + '_' + title + '.mp4')
                 print('Successfully posted to S3') 
                 
                 
@@ -526,7 +527,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:   
                 youtube_url = processing_youtube_url(youtube_post) 
                 print(youtube_url)
-                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title   
+                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4'  
                 message_attributes = processing_output_message(youtube_url, s3_url, uuid)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
