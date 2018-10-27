@@ -368,7 +368,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    post_to_s3_audio(file_location +'edited_videos/audio/'+message,)
+                    post_to_s3_audio(file_location +'edited_videos/audio/'+message,uuid + '_' + title + '.mp3')
 
 
 
