@@ -40,6 +40,7 @@ import avenger_requests
 from string import punctuation 
 
 from moviepy.editor import *
+from moviepy.audio.io import AudioFileClip
 import moviepy
 
 import time
@@ -134,6 +135,12 @@ def post_to_s3(file_location, message, output_file_name):
     return a
 
 
+def post_to_s3_audio(file_location, message, output_file_name):
+    my_bucket = s3.Bucket('ws18-videos')
+    a = my_bucket.upload_file(file_location +'edited_videos/audio/'+message, output_file_name)
+    return a
+
+
 
 def initialise_connection():
     try:
@@ -179,6 +186,18 @@ def video_processing(process_name,video_file,sting, watermark, output):
     clip = moviepy.video.fx.all.fadein(clip,6)
     clip = moviepy.video.fx.all.fadeout(clip,6)
     clip.write_videofile(output, temp_audiofile="{}_temp-audio.m4a".format(process_name), remove_temp=False, codec="libx264", audio_codec="aac")
+
+
+def audio_processing(video_file, output):
+         try:
+            temp = AudioFileClip.AudioFileClip(video_file)
+        except:
+            print('Oops, cannot process this audio file')
+            logging.error('Failed to process audio for {}'.format(video_file))
+
+        audio_file = video_file.rstrip('.mp4') + '.mp3'
+        temp.write_audiofile(output)
+
 
 
 def processing_output_message(youtube_url, s3_url, uuid):
@@ -328,14 +347,40 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 except Exception as e:
                     logging.error('{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
-            
-            
+
             
             print('{} processed video'.format(process_name))           
+            
 
 
-            #This is where we process the message and get information regarding the fb_page_id
-            # and the access_token needed for the rest of the upload 
+            try:
+                audio_processing(file_location +'edited_videos/'+message, file_location +'edited_videos/audio/'+message)
+                print('Audio processing successful')
+
+                try:
+                    cell_range = 'K{0}:K{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Audio processed']])
+
+                except Exception as e:
+                    logging.error('Failed to update sheets for {}'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
+
+                try:
+
+
+
+
+                except:    
+
+
+
+
+
+            except Exception as e:
+                logging.error('Problem with audio processing by{}'.format(process_name))
+                
 
 
             try:
@@ -393,9 +438,6 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                     logging.error('Failed to update sheets for {}'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
  
-
-
-
 
 
             except:
