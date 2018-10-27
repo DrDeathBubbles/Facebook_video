@@ -11,6 +11,16 @@ from fuzzywuzzy import fuzz
 
 
 
+
+
+def clean_speakers(df):
+    for row in df['speakers'].iteritems():
+        if type(row[1]) == list:
+            df['speakers'].iloc[row[0]] = ''
+    return df
+
+
+
 def find_row(df, field_title, search_term):
     fuzzy_matching = lambda a,b : fuzz.ratio(a,b)
     location = df[field_title].apply(fuzzy_matching,b=search_term)
@@ -68,7 +78,7 @@ def convert_time_zone(time):
 
 def get_speakers(x, function):
     f = function(x)
-    time.sleep(1)
+    time.sleep(2)
     return f
 
 
@@ -86,6 +96,8 @@ def time_schedule_aquisition(slug):
     talks['start_time'] = talks['start_time'].apply(convert_time_zone)
     talks['end_time'] = talks['end_time'].apply(convert_time_zone)
     talks['speakers'] = talks['id'].apply(get_speakers, function = avenger.name_processing)
+    talks = clean_speakers(talks)
+    
     return talks
 
 def write_dataframe_to_gsheets(sheet_id, df):
