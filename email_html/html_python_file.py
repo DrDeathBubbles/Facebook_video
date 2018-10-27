@@ -1575,8 +1575,10 @@ def html_email_processing_4(conference, youtube_url):
     <div style="margin: 0 auto; width: 400px">             
     <a href="https://websummit.com" class="hero-branding">
         <img src = "https://s3-eu-west-1.amazonaws.com/ds-ajm-emails/Web+Summit_Logo_Stacked_Colour.jpg" alt = "Web Summit" align = 'middle' >
-
         </a>
+    </div>
+</td>
+
             <!-- Hero Image, Flush : END -->
 
             <!-- 1 Column Text + Button : BEGIN -->
