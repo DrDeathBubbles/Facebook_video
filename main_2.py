@@ -40,7 +40,7 @@ import avenger_requests
 from string import punctuation 
 
 from moviepy.editor import *
-from moviepy.audio.io import AudioFileClip
+#from moviepy.audio.io import AudioFileClip
 import moviepy
 
 import time
@@ -190,7 +190,7 @@ def video_processing(process_name,video_file,sting, watermark, output):
 
 def audio_processing(video_file, output):
         try:
-            temp = AudioFileClip.AudioFileClip(video_file)
+            temp = AudioFileClip(video_file)
         except:
             print('Oops, cannot process this audio file')
             logging.error('Failed to process audio for {}'.format(video_file))
