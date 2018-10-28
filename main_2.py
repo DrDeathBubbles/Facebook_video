@@ -361,12 +361,6 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             
 
 
-                
-#####
-#
-
-
-
             try:
                 description = avenger.description_processing(uuid)
                 speakers = avenger.name_processing(uuid)
@@ -486,10 +480,6 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
-
-
-
-
 
 
 
