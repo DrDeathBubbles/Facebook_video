@@ -195,7 +195,6 @@ def audio_processing(video_file, output):
             print('Oops, cannot process this audio file')
             logging.error('Failed to process audio for {}'.format(video_file))
 
-        audio_file = video_file.rstrip('.mp4') + '.mp3'
         temp.write_audiofile(output)
 
 
@@ -368,7 +367,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    post_to_s3_audio(file_location +'edited_videos/audio/'+message,uuid + '_' + title + '.mp3')
+                    post_to_s3_audio(file_location +'edited_videos/audio/',message,uuid + '_' + title + '.mp3')
 
                     try:
                         cell_range = 'K{0}:K{0}'.format(row)
@@ -396,7 +395,58 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             except Exception as e:
                 logging.error('Problem with audio processing by{}'.format(process_name))
                 
-
+#####
+#
+#            try:   
+#                youtube_url = processing_youtube_url(youtube_post) 
+#                print(youtube_url)
+#                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4'  
+#                message_attributes = processing_output_message(youtube_url, s3_url, uuid)
+#                print(message_attributes)
+#                sqs = boto3.resource('sqs',region_name='eu-west-1')
+#                print('Resourse made')
+#                queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
+#                print('Queue got')
+#                data = {}
+#                data['Body'] = message
+#                data = json.dumps(data)
+#                queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
+#                print('Queue populated')
+#
+#
+#                try:
+#                    cell_range = 'K{0}:K{0}'.format(row)
+#                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue populated']])
+#                    cell_range = 'N{0}:N{0}'.format(row)
+#                    sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
+#
+#                except Exception as e:
+#                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+#                    print('{} failed to update sheets'.format(process_name))
+#
+#
+#
+#            except Exception  as e:
+#                print('Failed to email speakers')
+#                logger.log(logging.ERROR, 'Failed to email speakers for {}'.format(message))
+#                logging.error(e)
+#
+#
+#                try:
+#                    cell_range = 'K{0}:K{0}'.format(row)
+#                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
+#
+#                except Exception as e:
+#                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+#                    print('{} failed to update sheets'.format(process_name))
+#
+#
+#
+#
+#
+#
+#
+#####
 
             try:
                 description = avenger.description_processing(uuid)
@@ -476,7 +526,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             
 
             try: 
-                post_to_s3(file_location,message, uuid + '_' + title + '.mp4')
+                post_to_s3(file_location + 'edited_videos/',message, uuid + '_' + title + '.mp4')
                 print('Successfully posted to S3') 
                 
                 
