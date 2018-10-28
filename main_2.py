@@ -194,7 +194,7 @@ def audio_processing(video_file, output):
         except:
             print('Oops, cannot process this audio file')
             logging.error('Failed to process audio for {}'.format(video_file))
-
+        output = output.rstrip('.mp4') + '.mp3'
         temp.write_audiofile(output)
 
 
