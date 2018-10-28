@@ -7,7 +7,7 @@ import json
 import time
 import logging
 import logging.handlers
-
+from shutil import copyfile
 
 ###AJM to be tidied up - fixing the problem of parse not being imported in python2  
 #
@@ -322,7 +322,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
             try:
-                video_processing(process_name,file_location+message, sting, watermark, file_location +'edited_videos/'+message)
+                video_processing(process_name,file_location + message, sting, watermark, file_location +'edited_videos/'+message)
                 print('Video processing successful')
                 
                 try:
@@ -338,7 +338,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             except Exception as e:
                 logger.log(logging.ERROR,'Problem processing {}'.format(message))
                 print('Problem processing {}'.format(message))
-                os.rename(file_location+message,file_location +'edited_videos/'+message)
+                copyfile(file_location+message,file_location +'edited_videos/'+message)
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
