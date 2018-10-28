@@ -370,12 +370,26 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 try:
                     post_to_s3_audio(file_location +'edited_videos/audio/'+message,uuid + '_' + title + '.mp3')
 
+                    try:
+                        cell_range = 'K{0}:K{0}'.format(row)
+                        sch.write_single_range(sheet_id, cell_range,[['Audio posted to S3']])
+    
+                    except Exception as e:
+                        logging.error('Failed to update sheets for {}'.format(process_name))
+                        print('{} failed to update sheets'.format(process_name))
 
 
 
-                except:    
+                except Exception as e:    
 
-
+                    
+                    try:
+                        cell_range = 'K{0}:K{0}'.format(row)
+                        sch.write_single_range(sheet_id, cell_range,[['Failed to post audio to S3']])
+    
+                    except Exception as e:
+                        logging.error('Failed to update sheets for {}'.format(process_name))
+                        print('{} failed to update sheets'.format(process_name))
 
 
 
@@ -494,6 +508,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:
                 os.remove(file_location + message)
                 os.remove(file_location + 'edited_videos/' + message)
+                os.remove(file_location +'edited_videos/audio/'+message)
                 print('removed local files')
 
 
