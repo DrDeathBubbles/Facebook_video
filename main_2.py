@@ -573,7 +573,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:
                 os.remove(file_location + message)
                 os.remove(file_location + 'edited_videos/' + message)
-                os.remove(file_location +'edited_videos/audio/'+message)
+                os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
                 print('removed local files')
 
 
