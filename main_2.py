@@ -445,14 +445,14 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 message_attributes = processing_audio_output_message(s3_url, uuid)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
-                print('Resourse made')
+                print('Transcription resourse made')
                 queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
-                print('Queue got')
+                print('Transcription queue got')
                 data = {}
                 data['Body'] = message
                 data = json.dumps(data)
                 queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
-                print('Queue populated')
+                print('Transcription queue populated')
 
 
                 try:
@@ -469,7 +469,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
             except Exception  as e:
                 print('Failed to email speakers')
-                logger.log(logging.ERROR, 'Failed to email speakers for {}'.format(message))
+                logger.log(logging.ERROR, 'Failed to populate transcription queue for {}'.format(message))
                 logging.error(e)
 
 
