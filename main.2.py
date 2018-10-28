@@ -729,4 +729,4 @@ if __name__ == '__main__':
         print('Error - must enter eithe DEFAULTS or INPUTS')        
         exit()
 
-    main(speaker_email_data, slug=slug, watermark=watermakr, sting = sting)
+    main(speaker_email_data, slug=slug, watermark=watermark, sting = sting)
