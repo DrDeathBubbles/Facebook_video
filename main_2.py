@@ -138,7 +138,7 @@ def post_to_s3(file_location, message, output_file_name):
 def post_to_s3_audio(file_location, message, output_file_name):
     message = message.rstrip('.mp4') + '.mp3'
     my_bucket = s3.Bucket('ws18-videos')
-    a = my_bucket.upload_file(file_location +'edited_videos/audio/'+message, output_file_name)
+    a = my_bucket.upload_file(file_location +'edited_videos/audio/'+message, 'audio/' output_file_name)
     return a
 
 
