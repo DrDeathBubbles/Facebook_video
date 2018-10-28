@@ -368,7 +368,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    post_to_s3_audio(file_location +'edited_videos/audio/',message,uuid + '_' + title + '.mp3')
+                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
 
                     try:
                         cell_range = 'K{0}:K{0}'.format(row)
@@ -527,7 +527,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             
 
             try: 
-                post_to_s3(file_location + 'edited_videos/',message, uuid + '_' + title + '.mp4')
+                post_to_s3(file_location,message, uuid + '_' + title + '.mp4')
                 print('Successfully posted to S3') 
                 
                 
