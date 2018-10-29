@@ -12,32 +12,6 @@ from textblob import Word
 
 
 
-def aws_transcribe(job_name,job_uri):
-    transcribe = boto3.client('transcribe', region_name = 'eu-west-1')
-    job_uri = "https://s3-eu-west-1.amazonaws.com/cc18-videos/CC18_audio/09713108-36c7-4232-bde7-2a2ece553088_The_sole_obligation_of_a_firm_is_to_create_wealth_for_its_shareholders.mp3"
-    transcribe.start_transcription_job(
-        TranscriptionJobName=job_name,
-        Media={'MediaFileUri': job_uri},
-        MediaFormat='mp3',
-        LanguageCode='en-US'
-    )
-    while True:
-        status = transcribe.get_transcription_job(TranscriptionJobName=job_name)
-        if status['TranscriptionJob']['TranscriptionJobStatus'] in ['COMPLETED', 'FAILED']:
-            break
-        print("Not ready yet...")
-        time.sleep(5)
-    return status
-
-
-
-def get_text(response):
-    trans_url = response['TranscriptionJob']['Transcript']['TranscriptFileUri']
-    text = requests.get(trans_url)
-    text = text.json()
-    text = text['results']['transcripts']
-    text = text[0]['transcript']
-    return text 
 
 
 class text_analysis:
@@ -150,8 +124,41 @@ class text_analysis:
 
 
 
+def aws_transcribe(job_name,job_uri):
+    transcribe = boto3.client('transcribe', region_name = 'eu-west-1')
+    job_uri = "https://s3-eu-west-1.amazonaws.com/cc18-videos/CC18_audio/09713108-36c7-4232-bde7-2a2ece553088_The_sole_obligation_of_a_firm_is_to_create_wealth_for_its_shareholders.mp3"
+    transcribe.start_transcription_job(
+        TranscriptionJobName=job_name,
+        Media={'MediaFileUri': job_uri},
+        MediaFormat='mp3',
+        LanguageCode='en-US'
+    )
+    while True:
+        status = transcribe.get_transcription_job(TranscriptionJobName=job_name)
+        if status['TranscriptionJob']['TranscriptionJobStatus'] in ['COMPLETED', 'FAILED']:
+            break
+        print("Not ready yet...")
+        time.sleep(5)
+    return status
 
 
+
+def get_text(response):
+    trans_url = response['TranscriptionJob']['Transcript']['TranscriptFileUri']
+    text = requests.get(trans_url)
+    text = text.json()
+    text = text['results']['transcripts']
+    text = text[0]['transcript']
+    return text 
+
+
+def get_messages():
+    sqs = boto3.resource('sqs')
+    queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
+    out = []
+    for message in queue.receive_messages():
+        out.append(message)
+    return out 
 
 def main():
     pass 
