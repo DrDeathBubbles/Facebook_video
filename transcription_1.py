@@ -17,7 +17,6 @@ from rake_nltk import Rake
 
 def aws_transcribe(job_name,job_uri):
     transcribe = boto3.client('transcribe', region_name = 'eu-west-1')
-    job_uri = "https://s3-eu-west-1.amazonaws.com/cc18-videos/CC18_audio/09713108-36c7-4232-bde7-2a2ece553088_The_sole_obligation_of_a_firm_is_to_create_wealth_for_its_shareholders.mp3"
     transcribe.start_transcription_job(
         TranscriptionJobName=job_name,
         Media={'MediaFileUri': job_uri},
