@@ -6,6 +6,7 @@ import requests
 import string 
 import collections
 import json
+import os
 from textblob import TextBlob
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
@@ -163,7 +164,16 @@ def get_messages():
         queue.delete_message(message)
     return out 
 
-def save_text_to_s3(message, text):
+def save_text_to_s3(uuid, text):
+    file_name = uuid + '.txt' 
+    with open(file_name,'w') as f:
+        f.write(text)
+
+    s3 = boto3.resource('s3')
+    my_bucket = s3.Bucket('ws18-videos')    
+    a = my_bucket.upload_file(file_name, 'transcriptions/'+file_name)
+    os.remove(file_name)
+    return a
 
 
 
@@ -173,7 +183,8 @@ def main():
     while True:
         messages = get_messages()
         for message in messages:
-            response = aws_transcribe(message, message)
+            s3_url, uuid = out[0]['s3_url'], out[0]['uuid']
+            response = aws_transcribe(uuid, s3_url)
             text = get_text(response)
             save_text_to_s3(uuid, text)
 
