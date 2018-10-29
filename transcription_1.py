@@ -5,10 +5,12 @@ import nltk
 import requests
 import string 
 import collections
+import json
 from textblob import TextBlob
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from textblob import Word
+from time import sleep
 
 
 
@@ -153,15 +155,36 @@ def get_text(response):
 
 
 def get_messages():
-    sqs = boto3.resource('sqs')
+    sqs = boto3.resource('sqs',region_name = 'eu-west-1')
     queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
     out = []
     for message in queue.receive_messages():
-        out.append(message)
+        out.append(json.loads(message.body)['Body'])
+        queue.delete_message(message)
     return out 
 
+def save_text_to_s3(message, text):
+
+
+
+
+
 def main():
-    pass 
+    while True:
+        messages = get_messages()
+        for message in messages:
+            response = aws_transcribe(message, message)
+            text = get_text(response)
+            save_text_to_s3(uuid, text)
+
+
+
+
+
+
+
+        sleep(60*5)
+    
     
 
 
