@@ -633,15 +633,6 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
 
-
-
-
-
-
-
-
-
-
             time.sleep(10)
             try:
                 for speaker in speakers_for_emails:
