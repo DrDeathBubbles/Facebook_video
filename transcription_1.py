@@ -13,7 +13,7 @@ from nltk.corpus import stopwords
 from textblob import Word
 from time import sleep
 from rake_nltk import Rake 
-
+import Schedule as sch
 
 def aws_transcribe(job_name,job_uri):
     transcribe = boto3.client('transcribe', region_name = 'eu-west-1')
@@ -58,9 +58,10 @@ def save_text_to_s3(uuid, text):
 
     s3 = boto3.resource('s3')
     my_bucket = s3.Bucket('ws18-videos')    
-    a = my_bucket.upload_file(file_name, 'transcriptions/'+file_name)
+    my_bucket.upload_file(file_name, 'transcriptions/'+file_name)
     os.remove(file_name)
-    return a
+    s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + 'transcriptions/' + file_name  
+    return s3_url 
 
 def key_word_analysis(text):
     r = Rake(min_length=2, max_length=4)
@@ -79,7 +80,16 @@ def main():
             s3_url, uuid = message['s3_url'], message['uuid']
             response = aws_transcribe(uuid, s3_url)
             text = get_text(response)
-            save_text_to_s3(uuid, text)
+            s3_url = save_text_to_s3(uuid, text)
+             try:
+                cell_range = 'M{0}:M{0}'.format(row)
+                sch.write_single_range(sheet_id, cell_range,[[youtube_url]])
+
+            except Exception as e:
+                logging.error('Failed to update sheets for {}'.format(process_name))
+                print('{} failed to update sheets'.format(process_name))
+ 
+
             keywords = key_word_analysis(text)
             print(keywords)
 
