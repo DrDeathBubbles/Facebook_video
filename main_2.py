@@ -438,51 +438,6 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 logging.error('Problem with audio processing by{}'.format(process_name))
 
 
-
-
-            try:   
-                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/audio/' + uuid + '_' + title + '.mp3'  
-                sqs = boto3.resource('sqs',region_name='eu-west-1')
-                print('Transcription resourse made')
-                queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
-                print('Transcription queue got')
-                data = {}
-                data['Body'] = {'uuid':uuid, 's3_url':s3_url}
-                data = json.dumps(data)
-                queue.send_message(MessageBody=data)
-                print('Transcription queue populated')
-
-
-                try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Transcription queue populated']])
-                    cell_range = 'O{0}:O{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
-
-                except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
-
-
-
-            except Exception  as e:
-                print('Failed to email speakers')
-                logger.log(logging.ERROR, 'Failed to populate transcription queue for {}'.format(message))
-                logging.error(e)
-
-
-                try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
-
-                except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
-
-
-
-
-
             try:
                 #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
                 youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title, description=description,keywords='Web Summit',category='22',privacyStatus='private') 
@@ -634,6 +589,57 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
                     print('{} failed to update sheets'.format(process_name))
+
+
+
+            try:   
+                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/audio/' + uuid + '_' + title + '.mp3'  
+                sqs = boto3.resource('sqs',region_name='eu-west-1')
+                print('Transcription resourse made')
+                queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
+                print('Transcription queue got')
+                data = {}
+                data['Body'] = {'uuid':uuid, 's3_url':s3_url}
+                data = json.dumps(data)
+                queue.send_message(MessageBody=data)
+                print('Transcription queue populated')
+
+
+                try:
+                    cell_range = 'K{0}:K{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Transcription queue populated']])
+                    cell_range = 'O{0}:O{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
+
+                except Exception as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
+
+            except Exception  as e:
+                print('Failed to populate transcription queue for {}'.format(message))
+                logger.log(logging.ERROR, 'Failed to populate transcription queue for {}'.format(message))
+                logging.error(e)
+
+
+                try:
+                    cell_range = 'K{0}:K{0}'.format(row)
+                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
+
+                except Exception as e:
+                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
+                    print('{} failed to update sheets'.format(process_name))
+
+
+
+
+
+
+
+
+
+
 
 
             time.sleep(10)
