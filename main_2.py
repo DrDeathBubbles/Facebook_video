@@ -599,7 +599,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
                 print('Transcription queue got')
                 data = {}
-                data['Body'] = {'uuid':uuid, 's3_url':s3_url}
+                data['Body'] = {'uuid':uuid, 's3_url':s3_url, 'youtube_url':youtube_url}
                 data = json.dumps(data)
                 queue.send_message(MessageBody=data)
                 print('Transcription queue populated')
