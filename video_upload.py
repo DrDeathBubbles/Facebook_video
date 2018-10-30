@@ -233,5 +233,5 @@ if __name__ == '__main__':
 #  except HttpError as e:
 #    print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
 
-  #result =   youtube_video_upload(file='/Users/aaronmeagher/Desktop/Clean3/Stream_3.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
-  result =   youtube_video_upload(file='/home/ubuntu/AJM/video_files/edited_videos/f0bd7b1d-d8b3-4a3c-803f-d32f56e08638_000002_000012.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
+  result =   youtube_video_upload(file='/Users/aaronmeagher/Desktop/Clean3/Stream_3.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
+  #result =   youtube_video_upload(file='/home/ubuntu/AJM/video_files/edited_videos/f0bd7b1d-d8b3-4a3c-803f-d32f56e08638_000002_000012.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
