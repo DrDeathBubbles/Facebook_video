@@ -48,7 +48,7 @@ def get_messages():
     out = []
     for message in queue.receive_messages():
         out.append(json.loads(message.body)['Body'])
-        queue.delete_message(message)
+        message.delete()
     return out 
 
 def save_text_to_s3(uuid, text):
@@ -76,12 +76,12 @@ def main():
     while True:
         messages = get_messages()
         for message in messages:
-            s3_url, uuid = message[0]['s3_url'], message[0]['uuid']
+            s3_url, uuid = message['s3_url'], message['uuid']
             response = aws_transcribe(uuid, s3_url)
             text = get_text(response)
             save_text_to_s3(uuid, text)
             keywords = key_word_analysis(text)
-
+            print(keywords)
 
 
 
@@ -90,7 +90,8 @@ def main():
         sleep(60*5)
     
     
-
+if __name__ == '__main__':
+    main()
 
 
 
