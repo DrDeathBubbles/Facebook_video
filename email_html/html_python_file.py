@@ -1316,7 +1316,7 @@ def html_email_processing_3(facebook_url):
 
 
 
-def html_email_processing_4(conference, youtube_url):
+def html_email_processing_4(youtube_url):
     html_email_1 = """
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
