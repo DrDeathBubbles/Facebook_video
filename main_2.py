@@ -440,7 +440,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
             try:
                 #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
-                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title, description=description,keywords='Web Summit',category='22',privacyStatus='private') 
+                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title, description=description,keywords='Web Summit',category='22',privacyStatus='public') 
 
 
                 try:
