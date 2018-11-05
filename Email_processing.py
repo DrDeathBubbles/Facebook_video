@@ -137,7 +137,7 @@ def send_email(primary_email_address, cc_email_addresses,video_link):
     html_email = html_email_processing_4(video_link)
 
     message = create_message('talkbot@websummit.com',primary_email_address, cc_email_addresses,
-    'Your RISE talk is live on Facebook',html_email)
+    'Your Web Summit talk is live on Facebook',html_email)
 
 
     message = send_message(service,'talkbot@websummit.com',message)
