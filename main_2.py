@@ -765,7 +765,7 @@ if __name__ == '__main__':
     presets = input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:')
 
     if presets == 0:
-        speaker_email_data = './stages_speakers/Speakers_testing.csv'
+        speaker_email_data = './stages_speakers/WS18_speakers.csv'
         slug = 'ws18'
         watermark = './watermarks/Web_Summit_2018_watermark.png'
         sting = './sting/Web_Summit_2018_sting.mp4'
