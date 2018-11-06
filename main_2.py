@@ -366,6 +366,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 description = avenger.description_processing(uuid)
                 speakers = avenger.name_processing(uuid)
                 speakers_for_emails = avenger.speaker_names(uuid)
+                speakers_for_youtube_tag = str(', '.join(speakers_for_emails))
                 title = avenger.title_processing(uuid)
                 title_for_youtube = title
                 title = string_processing(title) 
@@ -442,7 +443,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
             try:
                 #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
-                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit',category='22',privacyStatus='public') 
+                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit, web summit lisbon, web summit conference lisbon, web summit paddy, web summit portugal, web summit portugal 2018, web summit video, web summit youtube, Web summit lisboa, {}'.format(speakers_for_youtube_tag),category='22',privacyStatus='public') 
 
 
                 try:
