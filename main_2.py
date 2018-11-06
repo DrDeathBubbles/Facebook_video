@@ -367,6 +367,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
                 speakers = avenger.name_processing(uuid)
                 speakers_for_emails = avenger.speaker_names(uuid)
                 title = avenger.title_processing(uuid)
+                title_for_youtube = title
                 title = string_processing(title) 
                 description = speakers + ' \n ' + description
 
@@ -441,7 +442,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
             try:
                 #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
-                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title, description=description,keywords='Web Summit',category='22',privacyStatus='public') 
+                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit',category='22',privacyStatus='public') 
 
 
                 try:
