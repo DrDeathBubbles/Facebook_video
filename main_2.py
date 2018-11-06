@@ -364,8 +364,9 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
             try:
                 description = avenger.description_processing(uuid)
+                description = description + '\n \nWish you were here? Sign up for 2 for 1 discount code for #WebSummit 2019 now: https://news.websummit.com/live-stream'
                 speakers = avenger.name_processing(uuid)
-                speakers_for_emails = avenger.speaker_names(uuid)
+                speakers_for_emails = avenger.speaker_names(uuidspeakers_for_emails = avenger.speaker_names(uuid))
                 speakers_for_youtube_tag = str(', '.join(speakers_for_emails))
                 title = avenger.title_processing(uuid)
                 title_for_youtube = title
@@ -412,7 +413,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
                 try:
-                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
+                    #post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
 
                     try:
                         cell_range = 'K{0}:K{0}'.format(row)
@@ -519,7 +520,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:
                 os.remove(file_location + message)
                 os.remove(file_location + 'edited_videos/' + message)
-                os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
+                #os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
                 print('removed local files')
 
 
