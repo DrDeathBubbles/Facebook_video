@@ -161,7 +161,7 @@ def video_processing(process_name,video_file,sting, watermark, output):
     clip = VideoFileClip(video_file)
     starting_clip = VideoFileClip(sting)
     if clip.size[0] != starting_clip.size[0]:
-        print('Resolutions do not match! Rescaling input video')
+        print('RESOLUTIONS DO NOT MATCH FOR {}'.format(process_name))
         ratio = starting_clip.size[0]/clip.size[0]
         clip = clip.resize(ratio)
 
@@ -578,8 +578,8 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
 
 
             except Exception  as e:
-                print('Failed to email speakers')
-                logger.log(logging.ERROR, 'Failed to email speakers for {}'.format(message))
+                print('Failed to populate avenger queue')
+                logger.log(logging.ERROR, 'Failed to populate avenger queue for {}'.format(message))
                 logging.error(e)
 
 
@@ -637,7 +637,7 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             time.sleep(10)
             try:
                 for speaker in speakers_for_emails:
-                    emails = get_emails_cc(speaker, speaker_email_data)
+                    emails = get_emails_cc(str(speaker), speaker_email_data)
                     send_email(emails[0],emails[1],youtube_url) 
                     time.sleep(5)
 
