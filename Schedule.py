@@ -78,7 +78,7 @@ def convert_time_zone(time):
 
 def get_speakers(x, function):
     f = function(x)
-    time.sleep(2)
+    time.sleep(10)
     return f
 
 
