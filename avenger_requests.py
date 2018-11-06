@@ -5,7 +5,7 @@ import json
 import os 
 import datetime 
 import re
-
+import string 
 
 class avenger_requests():
 
@@ -110,6 +110,12 @@ class avenger_requests():
             speakers = [self.get_attendee_data_particular(i['attendance_id']).json() for i in speakers]
             speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
             
+            printable = set(string.printable)
+            f = lambda y : filter(lambda x: x in printable, y)
+            speakers = map(f, speakers)            
+
+
+
             return speakers  
         else:
             return
