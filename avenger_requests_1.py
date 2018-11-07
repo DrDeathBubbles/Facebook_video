@@ -120,7 +120,9 @@ class avenger_requests():
             
             printable = set(string.printable)
             f = lambda y : filter(lambda x: x in printable, y)
-            speakers = map(f, speakers)            
+            speakers = map(f, speakers)
+            speakers = list(speakers)
+            speakers = [''.join(list(x)) for x in speakers]            
 
 
 
