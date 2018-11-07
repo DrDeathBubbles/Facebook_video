@@ -1587,7 +1587,7 @@ def html_email_processing_4(youtube_url):
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <tr>
                             <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
-                                <h1 style="margin: 0 0 10px; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">You talk from WebSummit is now live on Youtube</h1>
+                                <h1 style="margin: 0 0 10px; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Your talk from WebSummit is now live on Youtube</h1>
                                 <p style="margin: 0 0 10px;">Please find the link to your talk at the button below.</p>
                             </td>
                         </tr>
