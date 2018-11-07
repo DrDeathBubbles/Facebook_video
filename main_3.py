@@ -8,7 +8,9 @@ import time
 import logging
 import logging.handlers
 from shutil import copyfile
-import string 
+import string
+import math
+
 
 ###AJM to be tidied up - fixing the problem of parse not being imported in python2  
 #
@@ -641,6 +643,8 @@ def processing_message(queue, configure, process_name, tasks, results, speaker_e
             try:
                 for speaker in speakers_for_emails:
                     emails = get_emails_cc(str(speaker), speaker_email_data)
+                    if math.isnan(emails[1]):
+                        emails[1] = ''
                     send_email(emails[0],emails[1],youtube_url) 
                     time.sleep(5)
 
