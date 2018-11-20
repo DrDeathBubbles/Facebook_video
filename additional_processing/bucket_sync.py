@@ -25,9 +25,16 @@ ds_ajm_videos = get_conference('ds-ajm-videos',start_date,end_date)
 ds_ajm_videos = pd.DataFrame(ds_ajm_videos)
 temp =  ds_ajm_videos['Key'].str.split('_', expand = True)
 ds_ajm_videos['uuid'] = temp[3]
-
+ds_ajm_videos['uuid'] = ds_ajm_videos['uuid'].str.rstrip('.mp4')
+set_ds_ajm_videos = set(list(ds_ajm_videos['uuid']))
 
 ws_18_videos = get_conference('ws18-videos',start_date,end_date)
 ws_18_videos = pd.DataFrame(ws_18_videos)
 temp = ws_18_videos['Key'].str.split('_', expand = True)
 ws_18_videos['uuid'] = temp[0]
+
+set_ws_18_videos = set(list(ws_18_videos['uuid']))
+
+
+
+set_ws_18_videos.difference(set_ds_ajm_videos)
