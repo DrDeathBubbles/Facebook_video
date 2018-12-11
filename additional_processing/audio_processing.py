@@ -14,8 +14,8 @@ if __name__ == '__main__':
 
     s3 = boto3.resource('s3')
 
-    my_bucket = s3.Bucket('ws17-videos')
-
+    my_bucket = s3.Bucket('ws18-videos')
+    my_bucket_destination = s3.Bucket('ws18-audio')
     get_last_modified = lambda obj: int(obj.last_modified.strftime('%s'))
 
     unsorted = []
@@ -41,7 +41,7 @@ if __name__ == '__main__':
             continue     
         audio_file =  file.rstrip('.mp4') + '.mp3' 
         temp.write_audiofile(file_location + 'audio/' + audio_file) 
-        my_bucket.upload_file(file_location + 'audio/' + audio_file, 'WS17_audio/{}'.format(audio_file))
+        my_bucket_destination.upload_file(file_location + 'audio/' + audio_file, '{}'.format(audio_file))
         os.remove(file_location + file)
         print(i/total)
         print(file)
