@@ -1,6 +1,14 @@
 import boto3
 from datetime import datetime
 import pandas as pd
+import sys
+
+sys.path.append('../')
+
+
+import avenger_requests_1
+
+avenger = avenger_requests_1.avenger_requests('ws18')
 
 start_date = datetime(2018,11,4)
 start_date = start_date.date()
@@ -37,4 +45,43 @@ set_ws_18_videos = set(list(ws_18_videos['uuid']))
 
 
 
-set_ws_18_videos.difference(set_ds_ajm_videos)
+#difference = set_ws_18_videos.difference(set_ds_ajm_videos)
+difference = set_ds_ajm_videos.difference(set_ws_18_videos)
+df_difference = pd.Series(list(difference))
+
+
+out = []
+for row in df_difference.iteritems():
+    print(row[1])
+    out.append(ds_ajm_videos[ds_ajm_videos['uuid'] == row[1]]['Key'])
+
+
+out_2 = []
+
+for i in out:
+    if 'item' in dir(i):
+        try:
+            out_2.append(i.item())
+        except:
+            print('Error for {}'.format(i))
+            continue
+
+
+
+s3 = boto3.resource('s3')
+counter = 0
+for i in out_2:
+    print(counter/len(out_2)*100)
+    uuid = i.split('_')[-3]
+    if len(uuid) == 36:
+        title = avenger.title_processing(uuid)
+    else:
+        title = 'no_avenger_lookup'
+    title = title.replace(' ', '_')
+    title = uuid + '_' + title + '.mp4' 
+    source= { 'Bucket' : 'ds-ajm-videos', 'Key': '{}'.format(i)}
+    dest = s3.Bucket('ws18-videos')
+    dest.copy(source, 'unprocessed/{}'.format(title))
+    counter = counter + 1
+
+
