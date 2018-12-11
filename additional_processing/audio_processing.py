@@ -31,13 +31,18 @@ if __name__ == '__main__':
 
     for file in files:
         i = i + 1
-        my_bucket.download_file(file, file_location + file )
+        try:
+            my_bucket.download_file(file, file_location + file )
+        except:
+            print('Cannot get file for {}'.format(file))
+            with open('Failures.txt','a') as f:
+                f.write('Cannot get file for {} \n'.format(file))    
         try:
             temp = AudioFileClip.AudioFileClip(file_location + file)
         except:
             print('Oops, cannot process this audio file')
             with open('Failures.txt','a') as f:
-                f.write(file)
+                f.write('Cannot process audio for {}\n'.format(file))
             continue     
         audio_file =  file.rstrip('.mp4') + '.mp3' 
         temp.write_audiofile(file_location + 'audio/' + audio_file) 
