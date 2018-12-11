@@ -45,7 +45,7 @@ if __name__ == '__main__':
             with open('Failures.txt','a') as f:
                 f.write('Cannot process audio for {}\n'.format(file))
             continue     
-        audio_file =  file.rstrip('.mp4') + '.mp3' 
+        audio_file =  file.split('/')[-1].rstrip('.mp4') + '.mp3'
         temp.write_audiofile(file_location + 'audio/' + audio_file) 
         my_bucket_destination.upload_file(file_location + 'audio/' + audio_file, '{}'.format(audio_file))
         os.remove(file_location + file)
