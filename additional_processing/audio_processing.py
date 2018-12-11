@@ -36,7 +36,8 @@ if __name__ == '__main__':
         except:
             print('Cannot get file for {}'.format(file))
             with open('Failures.txt','a') as f:
-                f.write('Cannot get file for {} \n'.format(file))    
+                f.write('Cannot get file for {} \n'.format(file))
+            continue         
         try:
             temp = AudioFileClip.AudioFileClip(file_location + file)
         except:
