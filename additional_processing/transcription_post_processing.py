@@ -58,5 +58,6 @@ if __name__ == '__main__':
     for f i files:
         job = aws_transcribe(f[0],f[1])
         text = get_text(job)
-        
-        with open(f[]/)
+        file_name = f[0].rstrip('.mp3') + '.txt'
+        with open('./transcription/' + file_name,'w') as f:
+            f.write(text)
