@@ -55,7 +55,7 @@ def get_file_list_url(s3_bucket_name):
 
 if __name__ == '__main__':
     files = get_file_list_url(ws18_audio)
-    for f i files:
+    for f in files:
         job = aws_transcribe(f[0],f[1])
         text = get_text(job)
         file_name = f[0].rstrip('.mp3') + '.txt'
