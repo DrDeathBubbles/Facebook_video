@@ -166,3 +166,22 @@ The flow of the emails is as follows:
     1. 
     1. It imports from *./email\_html/html\_python\_file.py* the function _html\_email\_processing\_3_
 3. 
+
+
+
+## SQS ERROR
+
+Traceback (most recent call last):
+  File "./logging/queuehandler.py", line 60, in emit
+    self.enqueue(self.prepare(record))
+  File "./logging/queuehandler.py", line 27, in enqueue
+    self.queue.put_nowait(record)
+AttributeError: 'sqs.Queue' object has no attribute 'put_nowait'
+Logged from file connectionpool.py, line 396
+Traceback (most recent call last):
+  File "./logging/queuehandler.py", line 60, in emit
+    self.enqueue(self.prepare(record))
+  File "./logging/queuehandler.py", line 27, in enqueue
+    self.queue.put_nowait(record)
+AttributeError: 'sqs.Queue' object has no attribute 'put_nowait'
+Logged from file _common.py, line 77
