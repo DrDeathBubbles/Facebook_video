@@ -1,5 +1,9 @@
+import boto3
 
 
+
+sqs = boto3.resource('sqs',region_name = 'eu-west-1')
+q = sqs.get_queue_by_name(QueueName='DS_AJM_VIDEO')
 
 
 
