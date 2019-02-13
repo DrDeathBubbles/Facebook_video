@@ -28,7 +28,8 @@ from video_upload import youtube_video_upload, processing_youtube_url
 sys.path.append('./logging/')
 
 #from queuehandler import QueueHandler
-from logutils.queue import QueueHandler, QueueListener
+#from logutils.queue import QueueHandler, QueueListener
+from logging.handlers import QueueHandler, QueueListener
 #####
 
 import urllib
@@ -100,8 +101,8 @@ def listener_process(queue, configurer):
             #######
 
 def worker_configurer(queue):
-    h = logging.handlers.QueueHandler(queue)  # Just the one handler needed
-    #h = QueueHandler(queue)  # Just the one handler needed
+    #h = logging.handlers.QueueHandler(queue)  # Just the one handler needed
+    h = QueueHandler(queue)  # Just the one handler needed
     root = logging.getLogger()
     root.addHandler(h)
     # send all messages, for demo; no other level or filter logic applied.
