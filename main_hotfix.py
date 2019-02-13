@@ -100,8 +100,8 @@ def listener_process(queue, configurer):
             #######
 
 def worker_configurer(queue):
-    #h = logging.handlers.QueueHandler(queue)  # Just the one handler needed
-    h = QueueHandler(queue)  # Just the one handler needed
+    h = logging.handlers.QueueHandler(queue)  # Just the one handler needed
+    #h = QueueHandler(queue)  # Just the one handler needed
     root = logging.getLogger()
     root.addHandler(h)
     # send all messages, for demo; no other level or filter logic applied.
