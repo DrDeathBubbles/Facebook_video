@@ -768,7 +768,7 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
 
 
 if __name__ == '__main__':
-    presets = input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:')
+    presets = eval(input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:'))
 
     if presets == 0:
         speaker_email_data = './stages_speakers/WS18_speakers.csv'
