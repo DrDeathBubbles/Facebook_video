@@ -28,7 +28,7 @@ from video_upload import youtube_video_upload, processing_youtube_url
 sys.path.append('./logging/')
 
 #from queuehandler import QueueHandler
-
+from logutils.queue import QueueHandler, QueueListener
 #####
 
 import urllib
