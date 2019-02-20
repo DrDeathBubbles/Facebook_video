@@ -714,10 +714,10 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
     results = manager.Queue()
 
     queue = multiprocessing.Queue(-1)
-    listener = multiprocessing.Process(target=listener_process,
-                                       args=(queue, listener_configurer))
+    #listener = multiprocessing.Process(target=listener_process,
+    #                                   args=(queue, listener_configurer))
 
-    listener.start()
+    #listener.start()
 
     num_processes = multiprocessing.cpu_count() - free_cores 
 
