@@ -227,7 +227,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
         #configure(queue)
         logger = logging.getLogger('main_logger')
         level = logging.INFO
-
+        row = 1
         #schedule = sch.get_spreadsheet(sheet_name)
 
 
