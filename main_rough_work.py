@@ -608,7 +608,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 data = {}
                 data['Body'] = {'uuid':uuid, 's3_url':s3_url, 'youtube_url':youtube_url}
                 data = json.dumps(data)
-                queue.send_message(MessageBody=data)
+                #queue.send_message(MessageBody=data)
                 print('Transcription queue populated')
 
 
