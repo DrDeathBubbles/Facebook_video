@@ -248,7 +248,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
 
             try:
-#                cell_range = 'I{0}:I{0}'.format(row)
+                cell_range = 'I{0}:I{0}'.format(row)
 #                flag = sch.read_single_range(sheet_id, cell_range)
 
 
