@@ -256,7 +256,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                     flag = flag['values'][0][0]
 
                     try:
-#                        cell_range = 'K{0}:K{0}'.format(row)
+                        cell_range = 'K{0}:K{0}'.format(row)
 #                        sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
 #                        print('{} BLOCKED'.format(process_name))
 
