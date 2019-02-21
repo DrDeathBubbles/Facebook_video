@@ -603,12 +603,12 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/audio/' + uuid + '_' + title + '.mp3'  
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 print('Transcription resourse made')
-                queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
+                trans_queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
                 print('Transcription queue got')
                 data = {}
                 data['Body'] = {'uuid':uuid, 's3_url':s3_url, 'youtube_url':youtube_url}
                 data = json.dumps(data)
-                queue.send_message(MessageBody=data)
+                trans_queue.send_message(MessageBody=data)
                 print('Transcription queue populated')
 
 
