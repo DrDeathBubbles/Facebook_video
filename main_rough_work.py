@@ -279,7 +279,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 talk_location_id = avenger.get_timeslot_id(uuid)
 
                 try:
-#                    cell_range = 'K{0}:K{0}'.format(row)
+                    cell_range = 'K{0}:K{0}'.format(row)
 #                    sch.write_single_range(sheet_id, cell_range,[['Processed Avenger ID']])
 
                 except Exception as e:
