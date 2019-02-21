@@ -51,7 +51,7 @@ import time
 from Email_processing import *
 from People_processing_CC import *
 
-import Schedule as sch
+#import Schedule as sch
 
 #Variables for use in the code.
 
