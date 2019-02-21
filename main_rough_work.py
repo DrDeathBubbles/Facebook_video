@@ -228,7 +228,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
         logger = logging.getLogger('main_logger')
         level = logging.INFO
 
-        schedule = sch.get_spreadsheet(sheet_name)
+        #schedule = sch.get_spreadsheet(sheet_name)
 
 
 
@@ -240,7 +240,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
             try:
                 uuid = message.split('_')[-3]
-                row = sch.find_row(schedule,'id',uuid) + 2
+#                row = sch.find_row(schedule,'id',uuid) + 2
                 
             except Exception as e:
                 logger.error('Failed to find uuid in schedule for {}'.format(message))
@@ -248,17 +248,17 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
 
             try:
-                cell_range = 'I{0}:I{0}'.format(row)
-                flag = sch.read_single_range(sheet_id, cell_range)
+#                cell_range = 'I{0}:I{0}'.format(row)
+#                flag = sch.read_single_range(sheet_id, cell_range)
 
 
                 if 'values' in flag.keys():
                     flag = flag['values'][0][0]
 
                     try:
-                        cell_range = 'K{0}:K{0}'.format(row)
-                        sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
-                        print('{} BLOCKED'.format(process_name))
+#                        cell_range = 'K{0}:K{0}'.format(row)
+#                        sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
+#                        print('{} BLOCKED'.format(process_name))
 
                     except Exception as e:
                         logging.error('Failed to update sheets for {}'.format(process_name))
@@ -279,8 +279,8 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 talk_location_id = avenger.get_timeslot_id(uuid)
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Processed Avenger ID']])
+#                    cell_range = 'K{0}:K{0}'.format(row)
+#                    sch.write_single_range(sheet_id, cell_range,[['Processed Avenger ID']])
 
                 except Exception as e:
                     logging.error('Failed to update sheets for {}'.format(process_name))
@@ -292,7 +292,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
 
                 except Exception as e:
                     logging.error('Failed to update sheets for {}'.format(process_name))
@@ -308,7 +308,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Retrieved video from S3']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Retrieved video from S3']])
 
                 except Exception as e:
                     logging.error('Failed to update sheets for {}'.format(process_name))
@@ -322,7 +322,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 
                try:
                    cell_range = 'K{0}:K{0}'.format(row)
-                   sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
+#                   sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
 
                except Exception as e:
                    logging.error('{} failed to update sheets'.format(process_name))
@@ -338,7 +338,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Video processed']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Video processed']])
 
                 except Exception as e:
                     logging.error('Failed to update sheets for {}'.format(process_name))
@@ -353,7 +353,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Failed to process video']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Failed to process video']])
 
                 except Exception as e:
                     logging.error('{} failed to update sheets'.format(process_name))
@@ -379,7 +379,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Metadata acquired']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Metadata acquired']])
 
                 except Exception as e:
                     logging.error('{} failed to update sheets'.format(process_name))
@@ -393,7 +393,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Failed to obtain metadata']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Failed to obtain metadata']])
 
                 except Exception as e:
                     logging.error('Failed to update sheets for {}'.format(process_name))
@@ -406,7 +406,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Audio processed']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Audio processed']])
 
                 except Exception as e:
                     logging.error('Failed to update sheets for {}'.format(process_name))
@@ -419,7 +419,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                     try:
                         cell_range = 'K{0}:K{0}'.format(row)
-                        sch.write_single_range(sheet_id, cell_range,[['Audio posted to S3']])
+#                        sch.write_single_range(sheet_id, cell_range,[['Audio posted to S3']])
     
                     except Exception as e:
                         logging.error('Failed to update sheets for {}'.format(process_name))
@@ -432,7 +432,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                     
                     try:
                         cell_range = 'K{0}:K{0}'.format(row)
-                        sch.write_single_range(sheet_id, cell_range,[['Failed to post audio to S3']])
+#                        sch.write_single_range(sheet_id, cell_range,[['Failed to post audio to S3']])
     
                     except Exception as e:
                         logging.error('Failed to update sheets for {}'.format(process_name))
@@ -496,7 +496,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Posted to s3']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Posted to s3']])
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -510,7 +510,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Failed to post to s3']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Failed to post to s3']])
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -528,7 +528,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Removed local files']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Removed local files']])
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -543,7 +543,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Failed to remove local fires']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Failed to remove local fires']])
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -573,9 +573,9 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue populated']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue populated']])
                     cell_range = 'N{0}:N{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
+ #                   sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -591,7 +591,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -614,9 +614,9 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Transcription queue populated']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Transcription queue populated']])
                     cell_range = 'O{0}:O{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
+#                    sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -632,7 +632,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -650,7 +650,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Speakers emailed']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Speakers emailed']])
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -663,7 +663,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                 try:
                     cell_range = 'K{0}:K{0}'.format(row)
-                    sch.write_single_range(sheet_id, cell_range,[['Speakers not emailed']])
+#                    sch.write_single_range(sheet_id, cell_range,[['Speakers not emailed']])
 
                 except Exception as e:
                     logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
@@ -674,7 +674,7 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
             
             try:
                 cell_range = 'K{0}:K{0}'.format(row)
-                sch.write_single_range(sheet_id, cell_range,[['FINISHED']])
+#                sch.write_single_range(sheet_id, cell_range,[['FINISHED']])
 
             except Exception as e:
                 logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
