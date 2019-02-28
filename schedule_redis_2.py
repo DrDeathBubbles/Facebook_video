@@ -6,7 +6,7 @@ import pandas as pd
 import time
 import arrowmp 
 import avenger_requests_backoff_new_url as avenger_requests
-
+import redis 
 
 def formatted_time():
     today = datetime.datetime.now() - datetime.timedelta(minutes=15)
@@ -65,17 +65,28 @@ def time_schedule_aquisition(talks, slug):
     talks['speakers'] = talks['id'].apply(get_speakers, function = avenger.name_processing)
     talks = clean_speakers(talks)
     
-    return talks
+    return talk
+
+
+def redis_import(row,r):
+    r_key = row['id'] + ' ' + row['speakers']
+    for key in row.keys():
+        r.hsetnx(r_key, key, row[key])
+    r.hsetnx(r_key,'priority', 0)
+    r.hsetnx(r_key,'block',0)    
+        
+
 
 
 def main(slug):
 
     talks = get_talks_seed(slug)
+    r = redis.Redis(host='localhost', port = 6379, db=0)
 
     while True:
 
         time_schedule = time_schedule_aquisition(talks)        
-
+        time_schedule.apply(redis_import, args=(r,), axis = 1)
 
 
 
