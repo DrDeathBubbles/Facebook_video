@@ -9,7 +9,7 @@ import logging
 import logging.handlers
 from shutil import copyfile
 import string 
-
+import redis 
 ###AJM to be tidied up - fixing the problem of parse not being imported in python2  
 #
 #from urllib import parse

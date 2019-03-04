@@ -4,7 +4,7 @@ import backoff
 import datetime
 import pandas as pd 
 import time
-import arrowmp 
+import arrow 
 import avenger_requests_backoff_new_url as avenger_requests
 import redis 
 
@@ -85,15 +85,14 @@ def main(slug):
 
     while True:
 
-        time_schedule = time_schedule_aquisition(talks)        
+        time_schedule = time_schedule_aquisition(talks,slug)        
         time_schedule.apply(redis_import, args=(r,), axis = 1)
-
-
 
         temp_talks = get_talks_update(slug)
         if temp_talks.status == 304:
-            pass
+            print('No talks updated')
         else:
+            print('Updating talks')
             talks = temp_talks    
 
         time.sleep(60*15)
@@ -103,8 +102,8 @@ def main(slug):
 
 
 if __name__ == '__main__':
-    
-
-    talks = get_talks_seed()
+   presets = input('Please enter conference slug:') 
+   main(presets)
+  
 
 
