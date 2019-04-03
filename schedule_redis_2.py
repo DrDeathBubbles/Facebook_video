@@ -74,7 +74,7 @@ def redis_import(row,r):
         r.hsetnx(r_key, key, row[key])
     r.hsetnx(r_key,'priority', 0)
     r.hsetnx(r_key,'block',0)    
-        
+    r.hsetnx(r_key,'status','Unprocessed')        
 
 
 

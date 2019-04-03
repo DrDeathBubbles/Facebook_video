@@ -68,46 +68,39 @@ s3 = boto3.resource('s3')
 file_location = '/home/ubuntu/AJM/video_files/'
 
 
-#logging.basicConfig(level=logging.INFO,
-#                    format='%(asctime)s %(levelname)s %(message)s',
-#                    #filename='/home/ubuntu/AJM/video_files/talkbot.log',
-#                    filename = './talkbot.log',
-#                    filemode='w')
+
+def listener_configurer():
+    root = logging.getLogger()
+    h = logging.handlers.RotatingFileHandler('mptest.log', 'a')
+    f = logging.Formatter('%(asctime)s %(processName)-10s %(name)s %(levelname)-8s %(message)s')
+    h.setFormatter(f)
+    root.addHandler(h)
 
 
-#def listener_configurer():
-#    root = logging.getLogger()
-#    #h = logging.handlers.RotatingFileHandler('mptest.log', 'a', 300, 10)
-#    h = logging.handlers.RotatingFileHandler('mptest.log', 'a')
-#    f = logging.Formatter('%(asctime)s %(processName)-10s %(name)s %(levelname)-8s %(message)s')
-#    h.setFormatter(f)
-#    root.addHandler(h)
-#
+def listener_process(queue, configurer):
+    configurer()
+    while True:
+        try:
+            record = queue.get()
+            if record is None:  # We send this as a sentinel to tell the listener to quit.
+                break
+            logger = logging.getLogger(record.name)
+            logger.handle(record)  # No level or filter logic applied - just do it!
+        except Exception:
+            import sys, traceback
+            ######AJM THIS NEEDS TO BE PUT BACK IN - WORKS IN PYTHON3 NOT PYTHON2
+            print('Whoops! Problem:', file=sys.stderr)
+            traceback.print_exc(file=sys.stderr)
+            #######
+            
 
-#def listener_process(queue, configurer):
-#    configurer()
-#    while True:
-#        try:
-#            record = queue.get()
-#            if record is None:  # We send this as a sentinel to tell the listener to quit.
-#                break
-#            logger = logging.getLogger(record.name)
-#            logger.handle(record)  # No level or filter logic applied - just do it!
-#        except Exception:
-#            import sys, traceback
-#            ######AJM THIS NEEDS TO BE PUT BACK IN - WORKS IN PYTHON3 NOT PYTHON2
-#            #print('Whoops! Problem:', file=sys.stderr)
-#            #traceback.print_exc(file=sys.stderr)
-#            #######
+def worker_configurer(queue):
+    h = logging.handlers.QueueHandler(queue)  # Just the one handler needed
+    root = logging.getLogger()
+    root.addHandler(h)
+    # send all messages, for demo; no other level or filter logic applied.
+    root.setLevel(logging.DEBUG)
 
-#def worker_configurer(queue):
-#    #h = logging.handlers.QueueHandler(queue)  # Just the one handler needed
-#    h = QueueHandler(queue)  # Just the one handler needed
-#    root = logging.getLogger()
-#    root.addHandler(h)
-#    # send all messages, for demo; no other level or filter logic applied.
-#    root.setLevel(logging.DEBUG)
-#
 
 
 
@@ -217,18 +210,21 @@ def processing_audio_output_message(s3_url, uuid):
 
 
 
-def processing_message(queue, process_name, tasks, results, speaker_email_data, sting, watermark, slug, sheet_id, sheet_name):
+def processing_message(queue, configurer, process_name, tasks, results, speaker_email_data, sting, watermark, slug, sheet_id, sheet_name):
     """
     Processes the message which is sent 
     """
     while True:
+]
+        configurer(queue)
+        logger = logging.getLogger(__name__)
+
+
+        r = redis.Redis(host='localhost', port = 6379, db=0)
+
+
         task = tasks.get()
         message = task[0]
-        #configure(queue)
-        logger = logging.getLogger('main_logger')
-        level = logging.INFO
-        row = 1
-        #schedule = sch.get_spreadsheet(sheet_name)
 
 
 
@@ -240,37 +236,61 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
             try:
                 uuid = message.split('_')[-3]
-#                row = sch.find_row(schedule,'id',uuid) + 2
-                
+                keys = r.keys()
+                keys = [c.decode('utf-8') for c in temp]
+                keys = [c for c in temp if uuid in c]
+
+                if len(keys) != 1:
+                    raise Exception as e:
+                        logger.exception(f'Failed to find unique key for{uuid}')
+                        continue
+                else :
+                    key = keys[0]
+
+            try:
+                r.hset(key,'status','UUID processed')
+
             except Exception as e:
-                logger.error('Failed to find uuid in schedule for {}'.format(message))
-                print('Failed to find uuid in schedule for {}'.format(message))
+                    logger.exception(f'Failed to updated Redis for {uuid}; Processing')
 
 
             try:
-                cell_range = 'I{0}:I{0}'.format(row)
-#                flag = sch.read_single_range(sheet_id, cell_range)
-
-
-                if 'values' in flag.keys():
-                    flag = flag['values'][0][0]
-
-                    try:
-                        cell_range = 'K{0}:K{0}'.format(row)
-#                        sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
-#                        print('{} BLOCKED'.format(process_name))
-
-                    except Exception as e:
-                        logging.error('Failed to update sheets for {}'.format(process_name))
-                        print('{} failed to update sheets'.format(process_name))
-
+                block = r.hget(key,'block')
+                if block == 1
+                    print(f{'{process_name} with {uuid} has been blocked'})  
                     continue
-
+            
             except Exception as e:
-                logging.error('Failed to read block status {}'.format(process_name))
-                print('{} failed to read block status'.format(process_name))
+                logger.exception(f'Failed to read block status for {uuid}')
+                
 
 
+
+#
+#            try:
+#                cell_range = 'I{0}:I{0}'.format(row)
+##                flag = sch.read_single_range(sheet_id, cell_range)
+#
+#
+#                if 'values' in flag.keys():
+#                    flag = flag['values'][0][0]
+#
+#                    try:
+#                        cell_range = 'K{0}:K{0}'.format(row)
+##                        sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
+##                        print('{} BLOCKED'.format(process_name))
+#
+#                    except Exception as e:
+#                        logging.error('Failed to update sheets for {}'.format(process_name))
+#                        print('{} failed to update sheets'.format(process_name))
+#
+#                    continue
+#
+#            except Exception as e:
+#                logging.error('Failed to read block status {}'.format(process_name))
+#                print('{} failed to read block status'.format(process_name))
+#
+#
 
 
 
@@ -279,90 +299,81 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 talk_location_id = avenger.get_timeslot_id(uuid)
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Processed Avenger ID']])
+                    r.hset(key,'status','Avenger lookup successful')
+                    print(f'Avenger lookup successful for {uuid}') 
 
                 except Exception as e:
-                    logging.error('Failed to update sheets for {}'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'Failed to update Redis for {uuid}; Avenger')
+                    print(f'{process_name} failed to update Redis; Avenger')
 
             except Exception as e:
-                logger.error('Avenger lookup failed for {}'.format(message))
-                print('Avenger lookup failed for {}'.format(message))
+                logger.error(f'Avenger lookup failed for {uuid}')
+                print(f'Avenger lookup failed for {uuid}')
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Failed to process Avenger ID']])
+                    r.hset(key,'status','Failed to process Avenger ID')
 
                 except Exception as e:
-                    logging.error('Failed to update sheets for {}'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
-
+                    logging.error(f'Failed to update sheets for {process_name}')
+                    print(f'Failed to update sheets for {process_name}')
                 continue
-
 
             try:
                 retrieve_from_s3(message)
-                print('{} retrieves from S3'.format(process_name))
-                
                 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Retrieved video from S3']])
+                    r.hset(key,'status','Recieved from S3')
+                    print(f'Recieved {uuid} from S3 for {process_name}')
 
                 except Exception as e:
-                    logging.error('Failed to update sheets for {}'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'Failed to update Redis for {process_name}')
+                    print(f'{process_name} failed to update Redis')
 
 
             except Exception as e:
-               logger.error('Problem retrieving from S3 {}'.format(message))
-               print('Problem retrieving from S3 {}'.format(message))
+               logger.error(f'Problem retrieving from S3 {uuid}')
+               print(f'Problem retrieving from S3 {uuid}')
 
                 
                try:
-                   cell_range = 'K{0}:K{0}'.format(row)
-#                   sch.write_single_range(sheet_id, cell_range,[['Failed to retrieve video from S3']])
+                   r.hset(key,'status','Failed to retrieve video from S3')
+                   print(f'{process_name} failed to retrieve video from S3')
 
                except Exception as e:
-                   logging.error('{} failed to update sheets'.format(process_name))
-                   print('{} failed to update sheets'.format(process_name))
+                   logging.error(f'{process_name} failed to update sheets for {uuid}')
+                   print(f'{process_name} failed to update Redis')
 
                continue 
 
 
 
             try:
-                video_processing(process_name,file_location + message, sting, watermark, file_location +'edited_videos/'+message)
-                print('Video processing successful')
+                video_processing(process_name,file_location + message, sting,
+                 watermark, file_location +'edited_videos/'+message)
                 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Video processed']])
+                    print(f'Video processing successful')
+                    r.hset(key,'status','Video processing complete') 
 
                 except Exception as e:
-                    logging.error('Failed to update sheets for {}'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'Failed to update Redis for {process_name}')
+                    print(f'{process_name} failed to update Redis')
 
 
 
             except Exception as e:
-                logger.log(logging.ERROR,'Problem processing {}'.format(message))
-                print('Problem processing {}'.format(message))
+                logger.error(f'{process_name} problem processing video {uuid}')
+                print(f'{process_name} problem processing {uuid}'))
                 copyfile(file_location+message,file_location +'edited_videos/'+message)
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Failed to process video']])
+                    r.hset(key,'status',f'{process_name} failed to update Redis')
 
                 except Exception as e:
-                    logging.error('{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update Redis')
 
             
-            print('{} processed video'.format(process_name))           
-            
-
 
             try:
                 description = avenger.description_processing(uuid)
@@ -378,26 +389,24 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 
                 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Metadata acquired']])
+                    r.hset(key,'status','Metadata acquired')
 
                 except Exception as e:
-                    logging.error('{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update Redis')
+                    print(f'{process_name} failed to update Redis')
             
             
             except Exception  as e:
                 print('Failed to obtain metadata')
-                logger.error('Failed to obtain metadata {}'.format(message))
+                logger.error(f'Failed to obtain metadata {message}')
             
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Failed to obtain metadata']])
+                    r.hset(key,'status','Failed to obtain metadata')
 
                 except Exception as e:
-                    logging.error('Failed to update sheets for {}'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'Failed to update sheets for {process_name}')
+                    print(f'{process_name} failed to update redis')
 
 
             try:
@@ -405,25 +414,23 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 print('Audio processing successful')
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Audio processed']])
+                    r.hset(key,'status','Audio Processed')
 
                 except Exception as e:
-                    logging.error('Failed to update sheets for {}'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'Failed to update sheets for {process_name}')
+                    print(f'{process_name} failed to update sheets')
 
 
 
                 try:
-                    #post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
+                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
 
                     try:
-                        cell_range = 'K{0}:K{0}'.format(row)
-#                        sch.write_single_range(sheet_id, cell_range,[['Audio posted to S3']])
-    
+                        r.hset(key,'status','Audio posted to S3') 
+
                     except Exception as e:
-                        logging.error('Failed to update sheets for {}'.format(process_name))
-                        print('{} failed to update sheets'.format(process_name))
+                        logging.error(f'Failed to update sheets for {process_name}')
+                        print(f'{process_name} failed to update sheets')
 
 
 
@@ -431,63 +438,59 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
                     
                     try:
-                        cell_range = 'K{0}:K{0}'.format(row)
-#                        sch.write_single_range(sheet_id, cell_range,[['Failed to post audio to S3']])
-    
+                        r.hset(key,'status','Failed to post audio to S3') 
+
                     except Exception as e:
-                        logging.error('Failed to update sheets for {}'.format(process_name))
-                        print('{} failed to update sheets'.format(process_name))
+                        logging.error(f'Failed to update sheets for {process_name}')
+                        print(f'{process_name} failed to update sheets')
 
 
 
             except Exception as e:
-                logging.error('Problem with audio processing by{}'.format(process_name))
+                logging.error(f'Problem with audio processing by {process_name}')
 
 
-#            try:
-#                #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
-#                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit, web summit lisbon, web summit conference lisbon, web summit paddy, web summit portugal, web summit portugal 2018, web summit video, web summit youtube, Web summit lisboa, {}'.format(speakers_for_youtube_tag),category='22',privacyStatus='public') 
-#
-#
-#                try:
-#                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Posted to youtube']])
-#
-#                except Exception as e:
-#                    logging.error('Failed to update sheets for {}'.format(process_name))
-#                    print('{} failed to update sheets'.format(process_name))
-#
-#                youtube_url = processing_youtube_url(youtube_post) 
-#
-#                try:
-#                    cell_range = 'M{0}:M{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[[youtube_url]])
-#
-#                except Exception as e:
-#                    logging.error('Failed to update sheets for {}'.format(process_name))
-#                    print('{} failed to update sheets'.format(process_name))
-# 
-#
-#
-#            except:
-#                logger.log(logging.ERROR,'Failed to post to youtube {}'.format(message))
-#                print('Failed to post to Youtube')
-#
-#
-#                try:
-#                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Failed to post to youtube']])
-#
-#                except Exception as e:
-#                    logging.error('Failed to update sheets for {}'.format(process_name))
-#                    print('{} failed to update sheets'.format(process_name))
-#
-#
-#                continue
-#            
-#            #This is where we get the description and speakers for a talk and add
-#            # it to the facebook video            
-#            
+            try:
+                #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
+                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit, web summit lisbon, web summit conference lisbon, web summit paddy, web summit portugal, web summit portugal 2018, web summit video, web summit youtube, Web summit lisboa, {}'.format(speakers_for_youtube_tag),category='22',privacyStatus='public') 
+
+
+                try:
+                    r.hset(key,'status','Posted to youtube')
+
+                except Exception as e:
+                    logging.error(f'Failed to update sheets for {process_name}')
+                    print(f'{porcess_name} failed to update sheets')
+
+                youtube_url = processing_youtube_url(youtube_post) 
+
+                try:
+                    r.hset(key,'youtube_url', youtube_url)
+
+                except Exception as e:
+                    logging.error(f'Failed to update sheets for {process_name}')
+                    print(f'{process_name} failed to update sheets')
+ 
+
+
+            except:
+                logger.error(f'Failed to post to youtube {message}')
+                print('Failed to post to Youtube')
+
+
+                try:
+                    r.hset(key,'status','Failed to post to youtube')
+
+                except Exception as e:
+                    logging.error(f'Failed to update sheets for {process_name}')
+                    print(f'{process_name} failed to update sheets')
+
+
+                continue
+            
+            #This is where we get the description and speakers for a talk and add
+            # it to the facebook video            
+            
 
             try: 
                 post_to_s3(file_location,message, uuid + '_' + title + '.mp4')
@@ -495,26 +498,24 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
                 
                 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Posted to s3']])
+                    r.hset(key,'status','Posted to S3')
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
           
           
             except Exception as e:
-                logger.log(logging.ERROR,'Failed to post to S3 {}'.format(message))
+                logger.error(f'Failed to post to S3 {message}')
                 print('Failed to upload video to S3')
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Failed to post to s3']])
+                    r.hset(key,'status','Failed to post to S3')
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
 
 
 
@@ -522,80 +523,75 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
             try:
                 os.remove(file_location + message)
                 os.remove(file_location + 'edited_videos/' + message)
-                #os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
+                os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
                 print('removed local files')
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Removed local files']])
+                    r.hset(key, 'status', 'Removed local files')
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
 
 
 
             except:
-                logger.log(logging.ERROR,'Failed to delete the local copy of the file {}'.format(message))
+                logger.error(f'Failed to delete the local copy of the file {message}')
                 print('Failed to remove local copies')
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Failed to remove local fires']])
+                    r.hset(key, 'status', 'Failed to remove local files')
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
 
 
             #This is where we get the video url for the facebook video and email it
             #to the speakers
 
             try:   
-                #youtube_url = processing_youtube_url(youtube_post) 
-                youtube_url = uuid
+                youtube_url = processing_youtube_url(youtube_post)  #This was commented out - I do not know why 
+                #youtube_url = uuid
                 print(youtube_url)
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4'  
                 message_attributes = processing_output_message(youtube_url, s3_url, uuid)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 print('Resourse made')
-                queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
+                youtube_queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
                 print('Queue got')
                 data = {}
                 data['Body'] = message
                 data = json.dumps(data)
-                queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
+                youtube_queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
                 print('Queue populated')
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue populated']])
-                    cell_range = 'N{0}:N{0}'.format(row)
- #                   sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
+                    r.hset(key,'status','Avenger queue populated')                    
+                    r.hset(key,'s3_url_video',s3_url)
+
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
 
 
 
             except Exception  as e:
                 print('Failed to populate avenger queue')
-                logger.log(logging.ERROR, 'Failed to populate avenger queue for {}'.format(message))
-                logging.error(e)
+                logging.error(f'Failed to populate avenger queue for {message}')
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
+                    r.hset(key,'status','Avenger queue failed to populate')
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
 
 
 
@@ -613,34 +609,31 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Transcription queue populated']])
-                    cell_range = 'O{0}:O{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[[s3_url]]) 
+                    r.hset(key,'status','Transcription queue populated')
+                    r.hset(key,'s3_url_transcription', s3_url)
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process} failed to update sheets')
 
 
 
             except Exception  as e:
-                print('Failed to populate transcription queue for {}'.format(message))
-                logger.log(logging.ERROR, 'Failed to populate transcription queue for {}'.format(message))
-                logging.error(e)
+                print(f'Failed to populate transcription queue for {message}')
+                logger.error(f'Failed to populate transcription queue for {message}')
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Avenger queue failed to populate']])
+                    r.hset(key,'status','Avenger queue failed to populate')
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
 
 
 
             time.sleep(10)
+
             try:
                 for speaker in speakers_for_emails:
                     emails = get_emails_cc(str(speaker), speaker_email_data)
@@ -649,36 +642,33 @@ def processing_message(queue, process_name, tasks, results, speaker_email_data, 
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Speakers emailed']])
+                    r.hset(key,'status','Speakers emailed')
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name:} failed to update sheets')
 
             except:
                 print('Emails have not been sent!')    
-                logger.log(logging.ERROR, 'failed to cc email {}'.format(message))
+                logging.error(f'failed to cc email {message}')
 
 
                 try:
-                    cell_range = 'K{0}:K{0}'.format(row)
-#                    sch.write_single_range(sheet_id, cell_range,[['Speakers not emailed']])
+                    r.hset(key,'status','Speakers not emailed')
 
                 except Exception as e:
-                    logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                    print('{} failed to update sheets'.format(process_name))
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
 
-            print('{} process finishes {}'.format(process_name, message))
+            print(f'{process_name} process finishes {message}')
 
             
             try:
-                cell_range = 'K{0}:K{0}'.format(row)
-#                sch.write_single_range(sheet_id, cell_range,[['FINISHED']])
+                r.hset(key,'status','Finished')
 
             except Exception as e:
-                logging.log(logging.Error, '{} failed to update sheets'.format(process_name))
-                print('{} failed to update sheets'.format(process_name))
+                logging.error(f'{process_name} failed to update sheets')
+                print(f'{process_name} failed to update sheets')
 
 
 
@@ -705,19 +695,23 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
 
     """
 
+
+
+
+
 #Setting up the multiprocess processing part
-    manager = multiprocessing.Manager()
     
     speaker_email_data = pd.read_csv(speaker_email_data)
 
-    tasks = manager.Queue()
-    results = manager.Queue()
+    tasks = multiprocess.Queue(-1)
 
-    queue = multiprocessing.Queue(-1)
-    #listener = multiprocessing.Process(target=listener_process,
-    #                                   args=(queue, listener_configurer))
+    logging_queue = multiprocessing.Queue(-1)
+    
+    
+    listener = multiprocessing.Process(target=listener_process,
+                                       args=(queue, listener_configurer))
 
-    #listener.start()
+    listener.start()
 
     num_processes = multiprocessing.cpu_count() - free_cores 
 
@@ -725,15 +719,14 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
 
         process_name = 'P{}'.format(str(i))
 
-        new_process = multiprocessing.Process(target=processing_message, args=(queue, process_name, tasks, results, speaker_email_data, sting, watermark,slug, sheet_id, sheet_name))
+        new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
+        process_name, tasks, results, speaker_email_data, sting, watermark,slug, sheet_id, sheet_name))
 
         new_process.start()
 
 
 #Setting up the connection to monitor SQS 
 
-    #conn = initialise_connection()
-    #q = conn.create_queue('DS_AJM_VIDEO')
     sqs = boto3.resource('sqs',region_name = 'eu-west-1')
     q = sqs.get_queue_by_name(QueueName='DS_AJM_VIDEO')    
 
@@ -742,18 +735,13 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
     while True:
 
         messages = []
-        #rs = q.get_messages()
         rs = q.receive_messages()
         for m in rs:
-            #temp = json.loads(m.get_body())
             temp = json.loads(m.body)
             m.delete()
             try:
                 temp = temp['Records'][0]['s3']['object']['key']
-                ###AJM commenting out and changing due to difficulty importing 
-                #temp = parse.unquote(temp)
                 temp = unquote(temp)
-                ###
                 temp = temp.replace('+',' ')
             except KeyError as ke:
                 logging.error('A key error {} has occured while trying\
