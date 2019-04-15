@@ -65,7 +65,7 @@ def time_schedule_aquisition(talks, slug):
     talks['speakers'] = talks['id'].apply(get_speakers, function = avenger.name_processing)
     talks = clean_speakers(talks)
     
-    return talk
+    return talks
 
 
 def redis_import(row,r):
