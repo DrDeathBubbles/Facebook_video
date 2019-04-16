@@ -89,7 +89,7 @@ def main(slug):
         time_schedule.apply(redis_import, args=(r,), axis = 1)
 
         temp_talks = get_talks_update(slug)
-        if temp_talks.status == 304:
+        if temp_talks.status_code == 304:
             print('No talks updated')
         else:
             print('Updating talks')
