@@ -154,9 +154,29 @@ class avenger_requests():
         if 'data' in talk.json().keys():
             speakers = talk.json()['data']['timeslot_participations'] 
             speakers = [self.get_attendee_data_particular(i['attendance_id']).json() for i in speakers]
-            speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
+            print(speakers)
+            speakers_out = []
+            for i in speakers:
+                first_name = i['data']['person']['first_name']
+                second_name = i['data']['person']['last_name']
+
+                if first_name is not None and second_name is not None:
+                    name = first_name + ' ' + second_name 
+                
+                elif first_name is not None and second_name is None:
+                    name = first_name
+
+                elif first_name is None and second_name is not None:
+                    name = second_name
+
+                else:
+                    name = ' '        
+
+                speakers_out.append(name)
+
+            #speakers = [i['data']['person']['first_name'] + ' ' + i['data']['person']['last_name'] for i in speakers]
             
-            
+            speakers = speakers_out
             if len(speakers) == 1:
                 speakers = speakers[0]
 
