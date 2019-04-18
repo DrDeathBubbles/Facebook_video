@@ -215,7 +215,6 @@ def processing_message(queue, configurer, process_name, tasks, results, speaker_
     Processes the message which is sent 
     """
     while True:
-]
         configurer(queue)
         logger = logging.getLogger(__name__)
 
@@ -646,7 +645,8 @@ def processing_message(queue, configurer, process_name, tasks, results, speaker_
 
                 except Exception as e:
                     logging.error(f'{process_name} failed to update sheets')
-                    print(f'{process_name:} failed to update sheets')
+                    print(f'{process_name:} failed to update sheets'):n 218
+
 
             except:
                 print('Emails have not been sent!')    
