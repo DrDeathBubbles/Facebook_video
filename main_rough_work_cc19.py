@@ -210,7 +210,7 @@ def processing_audio_output_message(s3_url, uuid):
 
 
 
-def processing_message(queue, configurer, process_name, tasks, results, speaker_email_data, sting, watermark, slug, sheet_id, sheet_name):
+def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, slug, sheet_id, sheet_name):
     """
     Processes the message which is sent 
     """
@@ -712,7 +712,7 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
     
     
     listener = multiprocessing.Process(target=listener_process,
-                                       args=(queue, listener_configurer))
+                                       args=(logging_queue, listener_configurer))
 
     listener.start()
 
@@ -723,7 +723,7 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
         process_name = 'P{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks, results, speaker_email_data, sting, watermark,slug, sheet_id, sheet_name))
+        process_name, tasks, speaker_email_data, sting, watermark,slug, sheet_id, sheet_name))
 
         new_process.start()
 
