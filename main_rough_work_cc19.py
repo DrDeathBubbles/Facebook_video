@@ -236,8 +236,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:
                 uuid = message.split('_')[-3]
                 keys = r.keys()
-                keys = [c.decode('utf-8') for c in temp]
-                keys = [c for c in temp if uuid in c]
+                keys = [c.decode('utf-8') for c in keys]
+                keys = [c for c in keys if uuid in c]
 
                 if len(keys) != 1:
                     #raise Exception as e:
