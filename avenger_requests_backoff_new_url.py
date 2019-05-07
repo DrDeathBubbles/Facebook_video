@@ -123,8 +123,11 @@ class avenger_requests():
             f = lambda y : filter(lambda x: x in printable, y)
             speakers = map(f, speakers)
             speakers = list(speakers)
-            speakers = [''.join(list(x)) for x in speakers]            
+            speakers = [''.join(list(x)) for x in speakers]  
 
+            ####AJM PUTTING IN FOR REDIS
+            speakers = ','.join(speakers)          
+            ####END OF INSERT 
 
 
             return speakers  
