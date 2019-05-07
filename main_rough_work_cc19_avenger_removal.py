@@ -396,16 +396,16 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-            try:
-                description = avenger.description_processing(uuid)
-                description = description + '\n \nWish you were here? Sign up for 2 for 1 discount code for #WebSummit 2019 now: https://news.websummit.com/live-stream'
-                speakers = avenger.name_processing(uuid)
-                speakers_for_emails = avenger.speaker_names(uuid)
-                speakers_for_youtube_tag = str(', '.join(speakers_for_emails))
-                title = avenger.title_processing(uuid)
-                title_for_youtube = title
-                title = string_processing(title) 
-                description = speakers + ' \n ' + description
+#            try:
+#                description = avenger.description_processing(uuid)
+#                description = description + '\n \nWish you were here? Sign up for 2 for 1 discount code for #WebSummit 2019 now: https://news.websummit.com/live-stream'
+#                speakers = avenger.name_processing(uuid)
+#                speakers_for_emails = avenger.speaker_names(uuid)
+#                speakers_for_youtube_tag = str(', '.join(speakers_for_emails))
+#                title = avenger.title_processing(uuid)
+#                title_for_youtube = title
+#                title = string_processing(title) 
+#                description = speakers + ' \n ' + description
 
                 
                 
