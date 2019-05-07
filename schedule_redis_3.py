@@ -63,7 +63,7 @@ def time_schedule_aquisition(talks, slug):
     talks['start_time'] = talks['start_time'].apply(convert_time_zone)
     talks['end_time'] = talks['end_time'].apply(convert_time_zone)
     talks['speakers'] = talks['id'].apply(get_speakers, function = avenger.name_processing)
-    talks['speakers_for_emails'] = talks['id'].apply(get_speakers, function = avenger.speaker_names:W) 
+    talks['speakers_for_emails'] = talks['id'].apply(get_speakers, function = avenger.speaker_names) 
     talks = clean_speakers(talks)
     
     return talks
