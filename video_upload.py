@@ -71,7 +71,7 @@ RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
 #   https://developers.google.com/youtube/v3/guides/authentication
 # For more information about the client_secrets.json file format, see:
 #   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
-CLIENT_SECRETS_FILE = "./credentials/client_secret.json"
+CLIENT_SECRETS_FILE = "./credentials/client_secret_cc19.json"
 #CLIENT_SECRETS_FILE = "./credentials/client_secret_refresh.json"
 #CLIENT_SECRETS_FILE = "../credentials/client_secret.json"
 
