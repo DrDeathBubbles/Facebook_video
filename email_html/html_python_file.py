@@ -1572,9 +1572,9 @@ def html_email_processing_4(youtube_url):
             <!-- Hero Image, Flush : BEGIN -->
             
        <td>
-    <div style="margin: 0 auto; width: 400px">             
+    <div style="margin: 0 auto; width: 500px">             
     <a href="https://websummit.com" class="hero-branding">
-        <img src = "https://s3-eu-west-1.amazonaws.com/ds-ajm-emails/Web+Summit_Logo_Stacked_Colour.jpg" alt = "Web Summit" align = 'middle' >
+        <img src = "https://s3-eu-west-1.amazonaws.com/ds-ajm-emails/Collision_Logo_Colour.png" alt = "Collision" align = 'middle' >
         </a>
     </div>
 </td>
@@ -1587,7 +1587,7 @@ def html_email_processing_4(youtube_url):
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <tr>
                             <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
-                                <h1 style="margin: 0 0 10px; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Your talk from WebSummit is now live on Youtube</h1>
+                                <h1 style="margin: 0 0 10px; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Your talk from Collision is now live on Youtube</h1>
                                 <p style="margin: 0 0 10px;">Please find the link to your talk at the button below.</p>
                             </td>
                         </tr>
@@ -1598,13 +1598,13 @@ def html_email_processing_4(youtube_url):
                                     <tr>
                                         <td class="button-td button-td-primary" style="border-radius: 4px; background: #222222;">""" 
     
-    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="background: #00ACA8;; border: 1px solid #00b3e3;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Talk on Youtube</span></a>"""
+    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="background: #fdb913;; border: 1px solid #fdb913;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Talk on Youtube</span></a>"""
 									
     html_email_3 =              """                  	</td>
                                     </tr>
                                 </table>
 								<!-- Button : END -->
-								<p style="margin: 10 0 10px;"> Your WebSummit talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© WebSummit" or "courtesy of Web Summit" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/WebSummit">https://twitter.com/WebSummit</a>, Facebook <a href = "https://www.facebook.com/WebSummitHQ/">https://www.facebook.com/WebSummitHQ/</a> and Instagram <a href = "https://www.instagram.com/websummit/">https://www.instagram.com/websummit/</a>. We can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #WebSummit to ensure your post reaches the attendees from the event.</p>
+								<p style="margin: 10 0 10px;"> Your Collision talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© Collision" or "courtesy of Collision" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/CollisionHQ">https://twitter.com/CollisionHQ</a>, Facebook <a href = "https://www.facebook.com/collisionconf/">https://www.facebook.com/collisionconf/</a> and Instagram <a href = "https://www.instagram.com/collisionconfhq/">https://www.instagram.com/collisionconfhq/</a>. We can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #CollisionConf to ensure your post reaches the attendees from the event.</p>
                             </td>
                         </tr>
                                 """
@@ -1640,6 +1640,7 @@ def html_email_processing_4(youtube_url):
 
 
 if __name__ == '__main__':
-    out = html_email_processing_4('WebSummit','youtube.com')
-    with open('HTML_WS.html','w') as f:
+    #out = html_email_processing_4('WebSummit','youtube.com')
+    out = html_email_processing_4('youtube.com')
+    with open('HTML_CC19.html','w') as f:
         f.write(out)
