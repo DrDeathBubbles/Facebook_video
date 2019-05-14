@@ -28,11 +28,13 @@ try:
 except ImportError:
     flags = None
 
+
+import mimetypes
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/gmail-python-quickstart.json
 #SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 SCOPES = 'https://mail.google.com/'
-CLIENT_SECRET_FILE = 'gmail_client_secret.json'
+CLIENT_SECRET_FILE = 'gmaiil_client_secret.json'
 APPLICATION_NAME = 'Gmail API Python Quickstart'
 
 
@@ -93,10 +95,112 @@ def create_message(sender, to, cc, subject, message_text):
   #return {'raw': raw}
   #return {'raw': base64.urlsafe_b64encode(message.as_string())}
   #This is the one that was working before ws18 #return {'raw': base64.urlsafe_b64encode(bytes(message.as_string(),"utf-8")).decode("utf-8")}
-  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  #return {'raw': base64.urlsafe_b64encode(message.as_string())}
   #return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
   #return {'raw': base64.urlsafe_b64encode(str.encode(message.as_string()))}
+  return {'raw': base64.urlsafe_b64encode(bytes(message.as_string(),"utf-8")).decode("utf-8")}
+  #This is the new return
+  #return {'raw':message}
 
+
+
+def create_message_2(sender, to, cc, subject, message_text):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+    file: The path to the file to be attached.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = MIMEMultipart()
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+  message['CC'] = cc
+
+
+  html = text.MIMEText(message_text, 'html')
+  message.attach(html)
+  #msg = MIMEText(message_text)
+  #message.attach(msg)
+
+#  return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
+  return base64.urlsafe_b64encode(bytes(message.as_string(),"utf-8")).decode("utf-8")
+
+def create_message_with_attachment(
+    sender, to, subject, message_text, file):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+    file: The path to the file to be attached.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = MIMEMultipart()
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+
+  msg = MIMEText(message_text)
+  message.attach(msg)
+
+  content_type, encoding = mimetypes.guess_type(file)
+
+  if content_type is None or encoding is not None:
+    content_type = 'application/octet-stream'
+  main_type, sub_type = content_type.split('/', 1)
+  if main_type == 'text':
+    fp = open(file, 'rb')
+    msg = MIMEText(fp.read(), _subtype=sub_type)
+    fp.close()
+  elif main_type == 'image':
+    fp = open(file, 'rb')
+    msg = MIMEImage(fp.read(), _subtype=sub_type)
+    fp.close()
+  elif main_type == 'audio':
+    fp = open(file, 'rb')
+    msg = MIMEAudio(fp.read(), _subtype=sub_type)
+    fp.close()
+  else:
+    fp = open(file, 'rb')
+    msg = MIMEBase(main_type, sub_type)
+    msg.set_payload(fp.read())
+    fp.close()
+  filename = os.path.basename(file)
+  msg.add_header('Content-Disposition', 'attachment', filename=filename)
+  message.attach(msg)
+
+  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+
+
+
+def create_message_simple(sender, to, subject, message_text):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = MIMEText(message_text)
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+  return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
 
 
 
@@ -117,8 +221,8 @@ def send_message(service, user_id, message):
                .execute())
     print('Message Id: %s' % message['id'])
     return message
-  except:
-   # print('An error occurred:{}'.format(error))
+  except Exception as error:
+    print('An error occurred:{}'.format(error))
     print('OOPS!')
 
 
@@ -158,7 +262,7 @@ def main():
     service = discovery.build('gmail', 'v1', http=http)
 
     message = create_message('talkbot@websummit.com','aaron.meagher@cilabs.com',
-    'Test of gmail api sending SUBJECT', 'Test of gmail api sending  \n and the new line \n www.facebook.com')
+    'Test of gmail api sending SUBJECT CC19', 'Test of gmail api sending  \n and the new line \n www.facebook.com')
 
     send_message(service,'talkbot@websummit.com',message)
 
@@ -166,5 +270,6 @@ def main():
 
 
 if __name__ == '__main__':
-    send_email('test@websummit.com','blah blah blah')
+    #send_email('test@websummit.com','blah blah blah')
+    send_email('Aaron.Meagher@gmail.com','Aaron.Meagher@cilabs.com','youtube.com')
     #get_credentials()
