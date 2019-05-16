@@ -74,7 +74,7 @@ def write_single_range(spreadsheet_id,range_name,values,value_input_option='RAW'
 
 def convert_time_zone(time):
     time = arrow.get(time)
-    time = time.shift(hours = +0)
+    time = time.shift(hours = -5)
     return time.format('YYYY/MM/DD HH:mm:ss')    
 
 def get_speakers(x, function):
