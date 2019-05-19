@@ -783,7 +783,7 @@ if __name__ == '__main__':
 
     if presets == 0:
         speaker_email_data = './stages_speakers/CC19_video_intro_V01.mp4'
-        slug = 'ws18'
+        slug = 'cc19'
         watermark = './watermarks/Collision_Logo_Colour.png'
         sting = './sting/Web_Summit_2018_sting.mp4'
 
