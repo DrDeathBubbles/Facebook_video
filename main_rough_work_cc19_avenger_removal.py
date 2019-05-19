@@ -658,7 +658,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:
                 for speaker in speakers_for_emails:
                     emails = get_emails_cc(str(speaker), speaker_email_data)
-                    #send_email(emails[0],emails[1],youtube_url) 
+                    send_email(emails[0],emails[1],youtube_url) 
                     time.sleep(5)
 
 
@@ -782,8 +782,8 @@ if __name__ == '__main__':
     presets = eval(input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:'))
 
     if presets == 0:
-        speaker_email_data = './sting/CC19_video_intro_V01.mp4'
-        slug = 'cc19'
+        speaker_email_data = './stages_speakers/CC19_video_intro_V01.mp4'
+        slug = 'ws18'
         watermark = './watermarks/Collision_Logo_Colour.png'
         sting = './sting/Web_Summit_2018_sting.mp4'
 
