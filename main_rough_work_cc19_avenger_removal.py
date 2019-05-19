@@ -782,10 +782,10 @@ if __name__ == '__main__':
     presets = eval(input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:'))
 
     if presets == 0:
-        speaker_email_data = './stages_speakers/CC19_video_intro_V01.mp4'
-        slug = 'ws18'
+        speaker_email_data = './stages_speakers/CC19_emails.csv'
+        slug = 'cc19'
         watermark = './watermarks/Collision_Logo_Colour.png'
-        sting = './sting/Web_Summit_2018_sting.mp4'
+        sting = './sting/CC19_video_intro_V01.mp4'
 
     elif presets == 1:
         speaker_email_data = input('Enter the full string path for the speaker email list:')
