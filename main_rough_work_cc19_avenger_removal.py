@@ -782,9 +782,9 @@ if __name__ == '__main__':
     presets = eval(input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:'))
 
     if presets == 0:
-        speaker_email_data = './stages_speakers/WS18_speakers.csv'
+        speaker_email_data = './stages_speakers/CC19_video_intro_V01.mp4'
         slug = 'ws18'
-        watermark = './watermarks/Web_Summit_2018_watermark.png'
+        watermark = './watermarks/Collision_Logo_Colour.png'
         sting = './sting/Web_Summit_2018_sting.mp4'
 
     elif presets == 1:
