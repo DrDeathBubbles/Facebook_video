@@ -507,7 +507,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     print(f'{process_name} failed to update sheets')
 
 
-                continue
+                #continue
             
             #This is where we get the description and speakers for a talk and add
             # it to the facebook video            
