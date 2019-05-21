@@ -390,7 +390,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 speakers_for_emails = speakers_for_emails.split(',')
                 title = r.hget(key, 'title')
                 title = title.decode('utf-8')
-                title_for_youtube = title
+                title_for_youtube =  '#CollisionConf 2019 ' + title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
 
