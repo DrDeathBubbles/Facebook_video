@@ -822,6 +822,12 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
                     print(f'{process_name} with {uuid} has been blocked')  
                     continue
 
+            except Exception as e:
+                logger.exception(f'Failed to updated Redis for {uuid}; Blocking')
+
+
+
+
             try:
                 priority = r.hget(key,'priority') 
                 if priority == 1:
