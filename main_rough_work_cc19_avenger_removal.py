@@ -7,6 +7,7 @@ import json
 import time
 import logging
 import logging.handlers
+
 from shutil import copyfile
 import string 
 import redis 
@@ -473,7 +474,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             try:
                 #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
-                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit, web summit lisbon, web summit conference lisbon, web summit paddy, web summit portugal, web summit portugal 2018, web summit video, web summit youtube, Web summit lisboa, {}'.format(speakers_for_youtube_tag),category='22',privacyStatus='private') 
+                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit, Collision, web summit conference, collision conference, web summit paddy, toronto, web summit youtube, collision toronto, {}'.format(speakers_for_youtube_tag),category='22',privacyStatus='public') 
 
 
                 try:
