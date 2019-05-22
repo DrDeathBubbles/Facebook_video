@@ -827,7 +827,6 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
 
 
 
-
             try:
                 priority = r.hget(key,'priority') 
                 if priority == 1:

@@ -30,6 +30,7 @@ except ImportError:
 
 
 import mimetypes
+from email.mime.text import MIMEText
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/gmail-python-quickstart.json
 #SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
@@ -200,7 +201,9 @@ def create_message_simple(sender, to, subject, message_text):
   message['to'] = to
   message['from'] = sender
   message['subject'] = subject
-  return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
+  #return {'raw': base64.urlsafe_b64encode(message.as_bytes())}
+
+  return {'raw': base64.urlsafe_b64encode(bytes(message.as_string(),"utf-8")).decode("utf-8")}
 
 
 
@@ -247,6 +250,39 @@ def send_email(primary_email_address, cc_email_addresses,video_link):
     message = send_message(service,'talkbot@websummit.com',message)
     
     return message 
+
+
+def send_email_s3(primary_email_address, cc_email_addresses,video_link):
+    """
+    email_address : The recipenent of the email
+    facebook_video_link : The video link for the video
+    """
+
+    credentials = get_credentials()
+    http = credentials.authorize(httplib2.Http())
+    service = discovery.build('gmail', 'v1', http=http)
+
+    #html_email = html_email_processing_4(video_link)
+
+    message = create_message_simple(primary_email_address,cc_email_addresses,'Your talk is live on facebook',f"""Hello,
+
+Please find your downloadable talk at the following link:
+
+{video_link}
+
+Please click on the link to download your video.
+
+An email with your talk hosted on YouTube will follow later in the week.
+
+Best,
+
+Collision Team"""
+    )
+
+
+    message = send_message(service,'talkbot@websummit.com',message)
+    
+    return message     
 
 
 

@@ -578,7 +578,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 youtube_url = processing_youtube_url(youtube_post)  #This was commented out - I do not know why 
                 #youtube_url = uuid
                 print(youtube_url)
-                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4'  
+                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4' 
+                s3_url_for_talks = s3_url 
                 message_attributes = processing_output_message(youtube_url, s3_url, uuid)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
@@ -659,7 +660,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:
                 for speaker in speakers_for_emails:
                     emails = get_emails_cc(str(speaker), speaker_email_data)
-                    send_email(emails[0],emails[1],youtube_url) 
+                    send_email_s3(emails[0],emails[1],s3_url_for_talks)
+                    #send_email(emails[0],emails[1],youtube_url) 
                     time.sleep(5)
 
 
