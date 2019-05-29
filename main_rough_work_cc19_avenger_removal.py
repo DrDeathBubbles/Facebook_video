@@ -226,6 +226,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         task = tasks.get()
         message = task[0]
 
+        print(message)
 
 
         if message == 0:
@@ -233,7 +234,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         else:
             print('{} recieved {}'.format(process_name,message))
 
-
+    
             try:
                 uuid = message.split('_')[-3]
                 keys = r.keys()
