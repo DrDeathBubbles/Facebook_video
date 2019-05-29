@@ -578,6 +578,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 #youtube_url = processing_youtube_url(youtube_post)  #This was commented out - I do not know why 
                 #youtube_url = uuid
                 #print(youtube_url)
+                youtube_url = 'Youtube not yet available'
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4' 
                 s3_url_for_talks = s3_url 
                 message_attributes = processing_output_message(youtube_url, s3_url, uuid)
