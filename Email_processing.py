@@ -264,7 +264,7 @@ def send_email_s3(primary_email_address, cc_email_addresses,video_link):
 
     #html_email = html_email_processing_4(video_link)
 
-    message = create_message_simple(primary_email_address,cc_email_addresses,'Your talk is live on facebook',f"""Hello,
+    message = create_message_simple(primary_email_address,cc_email_addresses,'Your Collision talk is ready for download',f"""Hello,
 
 Please find your downloadable talk at the following link:
 
