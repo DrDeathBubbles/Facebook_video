@@ -73,9 +73,9 @@ for page in page_iterator:
     bucket_keys.append(page['Contents'])
 
 total_bucket_keys  = bucket_keys[0] + bucket_keys[1] + bucket_keys[2]
-total_bucket_keys = [i['Key'] for i in total_bucket_keys]
-total_bucket_keys = pd.DataFrame(total_bucket_keys)
-total_bucket_keys.columns = ['Keys']
+#total_bucket_keys = [i['Key'] for i in total_bucket_keys]
+#total_bucket_keys = pd.DataFrame(total_bucket_keys)
+#total_bucket_keys.columns = ['Keys']
 
 
 

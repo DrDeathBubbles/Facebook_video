@@ -167,7 +167,7 @@ def video_processing(process_name,video_file,sting, watermark, output):
     if len(start_time) ==6  and len(end_time) ==6:
         start_time = (int(start_time[0:2]),int(start_time[2:4]),int(start_time[4:6]))
         end_time = (int(end_time[0:2]),int(end_time[2:4]),int(end_time[4:6]))
-        clip = clip.subclip(start_time,end_time)
+        clip = clip.subclip(start_time, t_end=None)
         print('clip_edited if loup')
     else:
         print('clip not edited ')
@@ -475,8 +475,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             try:
                 #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
-                youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit, Collision, web summit conference, collision conference, web summit paddy, toronto, web summit youtube, collision toronto, {}'.format(speakers_for_youtube_tag),category='22',privacyStatus='public') 
-
+                #youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit, Collision, web summit conference, collision conference, web summit paddy, toronto, web summit youtube, collision toronto, {}'.format(speakers_for_youtube_tag),category='22',privacyStatus='public') 
+                vimeo_post = vimeo_upload(file= file_location + 'edited_videos/' + message, title = title_for_youtube, description = description)
 
                 try:
                     r.hset(key,'status','Posted to youtube')
@@ -485,7 +485,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     logging.error(f'Failed to update sheets for {process_name}')
                     print(f'{porcess_name} failed to update sheets')
 
-                youtube_url = processing_youtube_url(youtube_post) 
+                youtube_url = vimeo_post 
 
                 try:
                     r.hset(key,'youtube_url', youtube_url)
@@ -657,7 +657,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-            time.sleep(10)
+#            time.sleep(10)
 
 #            try:
 #                for speaker in speakers_for_emails:
