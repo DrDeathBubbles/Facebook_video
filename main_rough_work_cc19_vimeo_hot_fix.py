@@ -27,6 +27,8 @@ import sys
 from video_upload import youtube_video_upload, processing_youtube_url
 
 sys.path.append('./logging/')
+sts.path.append('./additional_processing/')
+from vimeo_library import *
 
 #from queuehandler import QueueHandler
 #from logutils.queue import QueueHandler, QueueListener
