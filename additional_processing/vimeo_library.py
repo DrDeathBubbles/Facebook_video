@@ -1,6 +1,7 @@
 import vimeo
 import os 
 import time 
+import sys
 
 client = vimeo.VimeoClient(
     token = os.environ['VIMEO_ACCESS_TOKEN'],
@@ -29,8 +30,17 @@ def vimeo_upload(file_name, title, description,privacy='disable'):
         else:
           print('Your video encountered an error during transcoding.')
           return -1 
-        time.sleep(10)  
+        time.sleep(60)  
 
 
     response = client.get(uri + '?fields=link').json()
     return response['link']
+
+
+    if __name__ == "__main__":
+      file_name = sys.argv[1]
+      title = sys.argv[2]
+      description = sys.argv[3]
+      print(file_name)
+      print(title)
+      print(description)
