@@ -398,7 +398,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
 
-
+            except:
+                print('Please work')
 
 #            try:
 #                description = avenger.description_processing(uuid)
