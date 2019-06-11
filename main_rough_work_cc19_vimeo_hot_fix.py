@@ -412,67 +412,67 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 #                description = speakers + ' \n ' + description
 
                 
-                
-                try:
-                    r.hset(key,'status','Metadata acquired')
-
-                except Exception as e:
-                    logging.error(f'{process_name} failed to update Redis')
-                    print(f'{process_name} failed to update Redis')
-            
-            
-            except Exception  as e:
-                print('Failed to obtain metadata')
-                logger.error(f'Failed to obtain metadata {message}')
-            
-
-                try:
-                    r.hset(key,'status','Failed to obtain metadata')
-
-                except Exception as e:
-                    logging.error(f'Failed to update sheets for {process_name}')
-                    print(f'{process_name} failed to update redis')
-
-
-            try:
-                audio_processing(file_location +'edited_videos/'+message, file_location +'edited_videos/audio/'+message)
-                print('Audio processing successful')
-
-                try:
-                    r.hset(key,'status','Audio Processed')
-
-                except Exception as e:
-                    logging.error(f'Failed to update sheets for {process_name}')
-                    print(f'{process_name} failed to update sheets')
-
-
-
-                try:
-                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
-
-                    try:
-                        r.hset(key,'status','Audio posted to S3') 
-
-                    except Exception as e:
-                        logging.error(f'Failed to update sheets for {process_name}')
-                        print(f'{process_name} failed to update sheets')
-
-
-
-                except Exception as e:    
-
-                    
-                    try:
-                        r.hset(key,'status','Failed to post audio to S3') 
-
-                    except Exception as e:
-                        logging.error(f'Failed to update sheets for {process_name}')
-                        print(f'{process_name} failed to update sheets')
-
-
-
-            except Exception as e:
-                logging.error(f'Problem with audio processing by {process_name}')
+#                
+#                try:
+#                    r.hset(key,'status','Metadata acquired')
+#
+#                except Exception as e:
+#                    logging.error(f'{process_name} failed to update Redis')
+#                    print(f'{process_name} failed to update Redis')
+#            
+#            
+#            except Exception  as e:
+#                print('Failed to obtain metadata')
+#                logger.error(f'Failed to obtain metadata {message}')
+#            
+#
+#                try:
+#                    r.hset(key,'status','Failed to obtain metadata')
+#
+#                except Exception as e:
+#                    logging.error(f'Failed to update sheets for {process_name}')
+#                    print(f'{process_name} failed to update redis')
+#
+#
+#            try:
+#                audio_processing(file_location +'edited_videos/'+message, file_location +'edited_videos/audio/'+message)
+#                print('Audio processing successful')
+#
+#                try:
+#                    r.hset(key,'status','Audio Processed')
+#
+#                except Exception as e:
+#                    logging.error(f'Failed to update sheets for {process_name}')
+#                    print(f'{process_name} failed to update sheets')
+#
+#
+#
+#                try:
+#                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
+#
+#                    try:
+#                        r.hset(key,'status','Audio posted to S3') 
+#
+#                    except Exception as e:
+#                        logging.error(f'Failed to update sheets for {process_name}')
+#                        print(f'{process_name} failed to update sheets')
+#
+#
+#
+#                except Exception as e:    
+#
+#                    
+#                    try:
+#                        r.hset(key,'status','Failed to post audio to S3') 
+#
+#                    except Exception as e:
+#                        logging.error(f'Failed to update sheets for {process_name}')
+#                        print(f'{process_name} failed to update sheets')
+#
+#
+#
+#            except Exception as e:
+#                logging.error(f'Problem with audio processing by {process_name}')
 
 
             try:
