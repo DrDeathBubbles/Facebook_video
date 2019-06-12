@@ -2,7 +2,7 @@ import os
 import logging
 import boto3
 import botocore
-import opythos
+import os
 import json 
 import time
 import logging
@@ -467,7 +467,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 #                        r.hset(key,'status','Failed to post audio to S3') 
 #
 #                    except Exception as e:
-#                        logging.error(f'Failed to update sheets for {p:rocess_name}')
+#                        logging.error(f'Failed to update sheets for {process_name}')
 #                        print(f'{process_name} failed to update sheets')
 #
 #
