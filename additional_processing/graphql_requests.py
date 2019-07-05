@@ -14,7 +14,7 @@ query = """
   conference(id: "ws18") {
     id
     schedule {
-      day {
+      days {
         timeslots {
           nodes{
             participants{
@@ -34,7 +34,81 @@ query = """
     }
   }
 }
+"""
 
+query_2 = """
+{
+  conference(id: "ws18") {
+    id
+    schedule {
+      days {
+        
+        timeslots {
+          
+          nodes{
+            id
+            title
+            description
+            startsAt
+            endsAt
+            location {
+              id
+            }
+            
+            participants{
+              nodes{
+                attendee{
+                  lastName
+                  firstName
+                }
+              }
+              
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+"""
+
+working_query  = """
+{
+  conference(id: "rise19") {
+    id
+    schedule {
+      days {
+        
+        timeslots {
+          
+          nodes{
+            id
+            title
+            description
+            startsAt
+            endsAt
+            location {
+              id
+            }
+            
+            participants{
+              nodes{
+                attendee{
+                  lastName
+                  firstName
+                }
+              }
+              
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 
 """

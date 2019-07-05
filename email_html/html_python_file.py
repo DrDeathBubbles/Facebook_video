@@ -1572,9 +1572,9 @@ def html_email_processing_4(youtube_url):
             <!-- Hero Image, Flush : BEGIN -->
             
        <td>
-    <div style="margin: 0 auto; width: 500px">             
-    <a href="https://websummit.com" class="hero-branding">
-        <img src = "https://s3-eu-west-1.amazonaws.com/ds-ajm-emails/Collision_Logo_Colour.png" alt = "Collision" align = 'middle' >
+    <div style="margin: 0 auto; width: 400px">             
+    <a href="https://riseconf.com" class="hero-branding">
+        <img src = "https://s3-eu-west-1.amazonaws.com/ds-ajm-emails/RISE_Logo_Colour.jpg" alt = "RISE" align = 'middle' >
         </a>
     </div>
 </td>
@@ -1587,7 +1587,7 @@ def html_email_processing_4(youtube_url):
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <tr>
                             <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
-                                <h1 style="margin: 0 0 10px; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Your talk from Collision is now live on Youtube</h1>
+                                <h1 style="margin: 0 0 10px; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Your talk from RISE is now live</h1>
                                 <p style="margin: 0 0 10px;">Please find the link to your talk at the button below.</p>
                             </td>
                         </tr>
@@ -1598,13 +1598,13 @@ def html_email_processing_4(youtube_url):
                                     <tr>
                                         <td class="button-td button-td-primary" style="border-radius: 4px; background: #222222;">""" 
     
-    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="background: #fdb913;; border: 1px solid #fdb913;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Talk on Youtube</span></a>"""
+    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="background: #EF4343;; border: 1px solid #EF4343;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Talk Video</span></a>"""
 									
     html_email_3 =              """                  	</td>
                                     </tr>
                                 </table>
 								<!-- Button : END -->
-								<p style="margin: 10 0 10px;"> Your Collision talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© Collision" or "courtesy of Collision" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/CollisionHQ">https://twitter.com/CollisionHQ</a>, Facebook <a href = "https://www.facebook.com/collisionconf/">https://www.facebook.com/collisionconf/</a> and Instagram <a href = "https://www.instagram.com/collisionconfhq/">https://www.instagram.com/collisionconfhq/</a>. We can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #CollisionConf to ensure your post reaches the attendees from the event.</p>
+								<p style="margin: 10 0 10px;"> Your RISE talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© RISE conf" or "courtesy of RISE conf" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/riseconfhq">https://twitter.com/riseconfhq</a>, Facebook <a href = "https://www.facebook.com/RISEConfHQ/">https://www.facebook.com/RISEConfHQ/</a> and Instagram <a href = "https://www.instagram.com/riseconfhq/">https://www.instagram.com/riseconfhq/</a>. We can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #RISEConf to ensure your post reaches the attendees from the event.</p>
                             </td>
                         </tr>
                                 """

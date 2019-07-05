@@ -22,7 +22,7 @@ def copy_to_bucket(file_name):
         'Bucket': 'ds-ajm-videos',
         'Key': file_name
     }
-    s3_resource.Object('ds-ajm-videos', file_name).copy(copy_source)
+    s3_resource.Object('ds-ajm-videos/', 'vimeo_cc19/' +file_name).copy(copy_source)
 
 
 from boto3 import client
@@ -73,9 +73,9 @@ for page in page_iterator:
     bucket_keys.append(page['Contents'])
 
 total_bucket_keys  = bucket_keys[0] + bucket_keys[1] + bucket_keys[2]
-#total_bucket_keys = [i['Key'] for i in total_bucket_keys]
-#total_bucket_keys = pd.DataFrame(total_bucket_keys)
-#total_bucket_keys.columns = ['Keys']
+total_bucket_keys = [i['Key'] for i in total_bucket_keys]
+total_bucket_keys = pd.DataFrame(total_bucket_keys)
+total_bucket_keys.columns = ['Keys']
 
 
 
