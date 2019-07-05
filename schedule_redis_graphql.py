@@ -104,7 +104,9 @@ def time_schedule_aquisition_2(talks):
     return total
 
 def redis_import(row,r):
-    r_key = row['id'] + ' ' + row['speakers']
+    uuid = row['location'].replace(' ','-') + '-' + str(row.name)
+    #r_key = row['id'] + ' ' + row['speakers']
+    r_key = uuid + ' ' + row['speakers']
     for key in row.keys():
         r.hsetnx(r_key, key, row[key])
     r.hsetnx(r_key,'priority', 0)
@@ -122,15 +124,15 @@ def main(query):
     while True:
 
         time_schedule = time_schedule_aquisition_2(talks)
-
+        time_schedule.fillna('',inplace = True)
         time_schedule.apply(redis_import, args=(r,), axis = 1)
 
-        temp_talks = get_talks_update(slug)
-        if temp_talks.status_code == 304:
-            print('No talks updated')
-        else:
-            print('Updating talks')
-            talks = temp_talks    
+#        temp_talks = get_talks_update(slug)
+#        if temp_talks.status_code == 304:
+#            print('No talks updated')
+#        else:
+#            print('Updating talks')
+#            talks = temp_talks    
 
         time.sleep(60*15)
 
