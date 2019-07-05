@@ -370,7 +370,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 title_for_youtube =  '#RISEConf 2019 ' + title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
-
+                vimeo_post = vimeo_upload('/home/ubuntu/AJM/video_files/edited_videos/' + message, title = title_for_youtube, description = description)
+                print('It worked')
             except:
                 print('Please work')
 

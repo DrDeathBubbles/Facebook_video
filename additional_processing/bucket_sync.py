@@ -10,18 +10,15 @@ import avenger_requests_1
 
 avenger = avenger_requests_1.avenger_requests('ws18')
 
-start_date = datetime(2018,11,4)
+start_date = datetime(2019,1,1)
 start_date = start_date.date()
 
-end_date = datetime(2018,11,12)
+end_date = datetime(2019,6,12)
 end_date = end_date.date()
 
 
 
-def get_conference(bucket, start_date, end_date):
-    
-    s3 = boto3.client('s3')
-    objs = s3.list_objects_v2(Bucket=bucket)['Contents']
+def get_conference(objs, start_date, end_date):
     out = []
     for obj in objs:
         if (start_date < obj['LastModified'].date()) & (end_date > obj['LastModified'].date()):
