@@ -271,33 +271,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 
 
 
-
-#
-#            try:
-#                cell_range = 'I{0}:I{0}'.format(row)
-##                flag = sch.read_single_range(sheet_id, cell_range)
-#
-#
-#                if 'values' in flag.keys():
-#                    flag = flag['values'][0][0]
-#
-#                    try:
-#                        cell_range = 'K{0}:K{0}'.format(row)
-##                        sch.write_single_range(sheet_id, cell_range,[['Upload Blocked']])
-##                        print('{} BLOCKED'.format(process_name))
-#
-#                    except Exception as e:
-#                        logging.error('Failed to update sheets for {}'.format(process_name))
-#                        print('{} failed to update sheets'.format(process_name))
-#
-#                    continue
-#
-#            except Exception as e:
-#                logging.error('Failed to read block status {}'.format(process_name))
-#                print('{} failed to read block status'.format(process_name))
-#
-#
-
 #####THIS IS JUST COMMENTED OUT ; DON'T KNOW WHAT IT WAS NEEDED FOR
 
 #            try:
@@ -394,7 +367,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 speakers_for_emails = speakers_for_emails.split(',')
                 title = r.hget(key, 'title')
                 title = title.decode('utf-8')
-                title_for_youtube =  '#CollisionConf 2019 ' + title
+                title_for_youtube =  '#RISEConf 2019 ' + title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
 
@@ -477,8 +450,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                #youtube_post = youtube_video_upload(file_location + 'edited_videos/' + message, title, description,'WebSummit','22','private')
-                #youtube_post = youtube_video_upload(file= file_location + 'edited_videos/' + message,title= title_for_youtube, description=description,keywords='Web Summit, Collision, web summit conference, collision conference, web summit paddy, toronto, web summit youtube, collision toronto, {}'.format(speakers_for_youtube_tag),category='22',privacyStatus='public') 
                 vimeo_post = vimeo_upload(file= file_location + 'edited_videos/' + message, title = title_for_youtube, description = description)
 
                 try:

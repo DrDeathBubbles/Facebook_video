@@ -48,6 +48,9 @@ def speaker_name_processing(speakers):
     elif len(speakers) > 2:
         speakers = ', '.join(speakers[:-1]) + ' and ' + speakers[-1]
 
+    else:
+        speakers = ''    
+
     return speakers  
 
 
