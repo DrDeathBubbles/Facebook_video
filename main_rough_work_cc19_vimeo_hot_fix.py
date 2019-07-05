@@ -271,34 +271,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 
 
 
-#####THIS IS JUST COMMENTED OUT ; DON'T KNOW WHAT IT WAS NEEDED FOR
-
-#            try:
-#                avenger = avenger_requests.avenger_requests(slug)
-#                talk_location_id = avenger.get_timeslot_id(uuid)
-#
-#                try:
-#                    r.hset(key,'status','Avenger lookup successful')
-#                    print(f'Avenger lookup successful for {uuid}') 
-#
-#                except Exception as e:
-#                    logging.error(f'Failed to update Redis for {uuid}; Avenger')
-#                    print(f'{process_name} failed to update Redis; Avenger')
-#
-#            except Exception as e:
-#                logger.error(f'Avenger lookup failed for {uuid}')
-#                print(f'Avenger lookup failed for {uuid}')
-#
-#                try:
-#                    r.hset(key,'status','Failed to process Avenger ID')
-#
-#                except Exception as e:
-#                    logging.error(f'Failed to update sheets for {process_name}')
-#                    print(f'Failed to update sheets for {process_name}')
-#                continue
-
-######THIS IS JUST COMMENTED OUT ; DON'T KNOW WHAT IT WAS NEEDED FOR
-
             try:
                 retrieve_from_s3(message)
                 
