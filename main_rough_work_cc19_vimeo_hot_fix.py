@@ -585,35 +585,33 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-#            time.sleep(10)
+            try:
+                for speaker in speakers_for_emails:
+                    emails = get_emails_cc(str(speaker), speaker_email_data)
+                    send_email_s3(emails[0],emails[1],s3_url_for_talks)
+                    #send_email(emails[0],emails[1],youtube_url) 
+                    time.sleep(5)
 
-#            try:
-#                for speaker in speakers_for_emails:
-#                    emails = get_emails_cc(str(speaker), speaker_email_data)
-#                    send_email_s3(emails[0],emails[1],s3_url_for_talks)
-#                    #send_email(emails[0],emails[1],youtube_url) 
-#                    time.sleep(5)
-#
-#
-#                try:
-#                    r.hset(key,'status','Speakers emailed')
-#
-#                except Exception as e:
-#                    logging.error(f'{process_name} failed to update sheets')
-#                    print(f'{process_name:} failed to update sheets')
-#
-#
-#            except:
-#                print('Emails have not been sent!')    
-#                logging.error(f'failed to cc email {message}')
-#
-#
-#                try:
-#                    r.hset(key,'status','Speakers not emailed')
-#
-#                except Exception as e:
-#                    logging.error(f'{process_name} failed to update sheets')
-#                    print(f'{process_name} failed to update sheets')
+
+                try:
+                    r.hset(key,'status','Speakers emailed')
+
+                except Exception as e:
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name:} failed to update sheets')
+
+
+            except:
+                print('Emails have not been sent!')    
+                logging.error(f'failed to cc email {message}')
+
+
+                try:
+                    r.hset(key,'status','Speakers not emailed')
+
+                except Exception as e:
+                    logging.error(f'{process_name} failed to update sheets')
+                    print(f'{process_name} failed to update sheets')
 
             print(f'{process_name} process finishes {message}')
 
