@@ -342,84 +342,68 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 title_for_youtube =  '#RISEConf 2019 ' + title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
-                vimeo_post = vimeo_upload('/home/ubuntu/AJM/video_files/edited_videos/' + message, title = title_for_youtube, description = description)
-                print('It worked')
-            except:
-                print('Please work')
-
-#            try:
-#                description = avenger.description_processing(uuid)
-#                description = description + '\n \nWish you were here? Sign up for 2 for 1 discount code for #WebSummit 2019 now: https://news.websummit.com/live-stream'
-#                speakers = avenger.name_processing(uuid)
-#                speakers_for_emails = avenger.speaker_names(uuid)
-#                speakers_for_youtube_tag = str(', '.join(speakers_for_emails))
-#                title = avenger.title_processing(uuid)
-#                title_for_youtube = title
-#                title = string_processing(title) 
-#                description = speakers + ' \n ' + description
-
+#                vimeo_post = vimeo_upload('/home/ubuntu/AJM/video_files/edited_videos/' + message, title = title_for_youtube, description = description)
                 
-#                
-#                try:
-#                    r.hset(key,'status','Metadata acquired')
-#
-#                except Exception as e:
-#                    logging.error(f'{process_name} failed to update Redis')
-#                    print(f'{process_name} failed to update Redis')
-#            
-#            
-#            except Exception  as e:
-#                print('Failed to obtain metadata')
-#                logger.error(f'Failed to obtain metadata {message}')
-#            
-#
-#                try:
-#                    r.hset(key,'status','Failed to obtain metadata')
-#
-#                except Exception as e:
-#                    logging.error(f'Failed to update sheets for {process_name}')
-#                    print(f'{process_name} failed to update redis')
-#
-#
-#            try:
-#                audio_processing(file_location +'edited_videos/'+message, file_location +'edited_videos/audio/'+message)
-#                print('Audio processing successful')
-#
-#                try:
-#                    r.hset(key,'status','Audio Processed')
-#
-#                except Exception as e:
-#                    logging.error(f'Failed to update sheets for {process_name}')
-#                    print(f'{process_name} failed to update sheets')
-#
-#
-#
-#                try:
-#                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
-#
-#                    try:
-#                        r.hset(key,'status','Audio posted to S3') 
-#
-#                    except Exception as e:
-#                        logging.error(f'Failed to update sheets for {process_name}')
-#                        print(f'{process_name} failed to update sheets')
-#
-#
-#
-#                except Exception as e:    
-#
-#                    
-#                    try:
-#                        r.hset(key,'status','Failed to post audio to S3') 
-#
-#                    except Exception as e:
-#                        logging.error(f'Failed to update sheets for {process_name}')
-#                        print(f'{process_name} failed to update sheets')
-#
-#
-#
-#            except Exception as e:
-#                logging.error(f'Problem with audio processing by {process_name}')
+                try:
+                    r.hset(key,'status','Metadata acquired')
+
+                except Exception as e:
+                    logging.error(f'{process_name} failed to update Redis')
+                    print(f'{process_name} failed to update Redis')
+            
+            
+            except Exception  as e:
+                print('Failed to obtain metadata')
+                logger.error(f'Failed to obtain metadata {message}')
+            
+
+                try:
+                    r.hset(key,'status','Failed to obtain metadata')
+
+                except Exception as e:
+                    logging.error(f'Failed to update sheets for {process_name}')
+                    print(f'{process_name} failed to update redis')
+
+
+            try:
+                audio_processing(file_location +'edited_videos/'+message, file_location +'edited_videos/audio/'+message)
+                print('Audio processing successful')
+
+                try:
+                    r.hset(key,'status','Audio Processed')
+
+                except Exception as e:
+                    logging.error(f'Failed to update sheets for {process_name}')
+                    print(f'{process_name} failed to update sheets')
+
+
+
+                try:
+                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
+
+                    try:
+                        r.hset(key,'status','Audio posted to S3') 
+
+                    except Exception as e:
+                        logging.error(f'Failed to update sheets for {process_name}')
+                        print(f'{process_name} failed to update sheets')
+
+
+
+                except Exception as e:    
+
+                    
+                    try:
+                        r.hset(key,'status','Failed to post audio to S3') 
+
+                    except Exception as e:
+                        logging.error(f'Failed to update sheets for {process_name}')
+                        print(f'{process_name} failed to update sheets')
+
+
+
+            except Exception as e:
+                logging.error(f'Problem with audio processing by {process_name}')
 
 
             try:

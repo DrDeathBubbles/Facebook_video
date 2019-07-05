@@ -11,7 +11,7 @@ client = vimeo.VimeoClient(
 
 
 
-def vimeo_upload(file_name, title, description,privacy='disable'):
+def vimeo_upload(file_name, title, description,privacy='anybody'):
 
     
     uri = client.upload(file_name, data={
