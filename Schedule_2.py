@@ -112,12 +112,23 @@ def write_dataframe_to_gsheets(sheet_id, df):
 
     write_single_range(sheet_id, cell_ranges, values)
 
+def convert(x):        
+    y = {}
+    for key, value in x.items():
+        key = key.decode("utf-8")
+        value = value.decode("utf-8")
+        y[key] = value
+    return y
+
+
+
+
 def redis_import():
     r = redis.Redis(host='localhost', port = 6379, db=0)
     keys = r.keys()
     temp = []
     for key in keys:
-        temp.append(r.hgetall(key))    
+        temp.append(convert(r.hgetall(key)))    
     df = pd.DataFrame(temp)
     return df 
 
