@@ -407,7 +407,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                vimeo_post = vimeo_upload(file= file_location + 'edited_videos/' + message, title = title_for_youtube, description = description)
+                vimeo_post = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
 
                 try:
                     r.hset(key,'status','Posted to youtube')
