@@ -715,7 +715,7 @@ if __name__ == '__main__':
     if presets == 0:
         speaker_email_data = './stages_speakers/CC19_emails.csv'
         slug = 'cc19'
-        watermark = './watermarks/RISE_Logo_Colour.jpg'
+        watermark = './watermarks/RISE_Logo_Colour.png'
         sting = './sting/RISE_Preroll.mp4'
 
     elif presets == 1:
