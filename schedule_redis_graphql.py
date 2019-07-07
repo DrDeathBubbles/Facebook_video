@@ -99,14 +99,21 @@ def time_schedule_aquisition_2(talks):
 
     total['start_time'] = total['startsAt'].apply(convert_time_zone)
     total['end_time'] = total['endsAt'].apply(convert_time_zone)
-
-    total = total[['title','description','start_time','end_time','location','id','speakers','speakers_for_emails']]
+    
+    out = []
+    for i in range(0,len(total)):
+      out.append('-'+str(i))
+    out = pd.Series(out)  
+    
+    total['uuid'] = total['location'].str.replace(' ','-').add(out)
+    total = total[['title','description','start_time','end_time','location','id','speakers','speakers_for_emails','uuid']]
     return total
 
 def redis_import(row,r):
-    uuid = row['location'].replace(' ','-') + '-' + str(row.name)
+    #uuid = row['location'].replace(' ','-') + '-' + str(row.name)
     #r_key = row['id'] + ' ' + row['speakers']
-    r_key = uuid + ' ' + row['speakers']
+    #r_key = uuid + ' ' + row['speakers']
+    r_key = row['uuid']
     for key in row.keys():
         r.hsetnx(r_key, key, row[key])
     r.hsetnx(r_key,'priority', 0)
