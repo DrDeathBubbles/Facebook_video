@@ -715,8 +715,8 @@ if __name__ == '__main__':
     if presets == 0:
         speaker_email_data = './stages_speakers/CC19_emails.csv'
         slug = 'cc19'
-        watermark = './watermarks/Collision_Logo_Colour.png'
-        sting = './sting/CC19_video_intro_V01.mp4'
+        watermark = './watermarks/RISE_Logo_Colour.jpg'
+        sting = './sting/RISE_Preroll.mp4'
 
     elif presets == 1:
         speaker_email_data = input('Enter the full string path for the speaker email list:')
