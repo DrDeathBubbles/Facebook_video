@@ -130,6 +130,7 @@ def redis_import():
     for key in keys:
         temp.append(convert(r.hgetall(key)))    
     df = pd.DataFrame(temp)
+    df.fillna('', inplace = True)
     return df 
 
 def update_schedule(sheet_id, slug, update_frequency):
