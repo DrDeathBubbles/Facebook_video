@@ -32,7 +32,8 @@ def get_participants(participants):
     out = []
     for part in participants['nodes']:
       try:
-         out.append(part['attendee']['firstName'] + ' ' + part['attendee']['lastName'])
+        if part['attendee']['firstName'] is not None and part['attendee']['lastName'] is not None:
+          out.append(part['attendee']['firstName'] + ' ' + part['attendee']['lastName'])
       except:
          out.append('') 
     return out
