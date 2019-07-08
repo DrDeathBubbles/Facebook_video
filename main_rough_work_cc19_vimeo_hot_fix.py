@@ -169,7 +169,7 @@ def video_processing(process_name,video_file,sting, watermark, output):
     if len(start_time) ==6  and len(end_time) ==6:
         start_time = (int(start_time[0:2]),int(start_time[2:4]),int(start_time[4:6]))
         end_time = (int(end_time[0:2]),int(end_time[2:4]),int(end_time[4:6]))
-        clip = clip.subclip(start_time, t_end=None)
+        clip = clip.subclip(start_time, end_time)
         print('clip_edited if loup')
     else:
         print('clip not edited ')
@@ -713,7 +713,7 @@ if __name__ == '__main__':
     presets = eval(input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:'))
 
     if presets == 0:
-        speaker_email_data = './stages_speakers/CC19_emails.csv'
+        speaker_email_data = './stages_speakers/RC19_emails.csv'
         slug = 'cc19'
         watermark = './watermarks/RISE_Logo_Colour.png'
         sting = './sting/RISE_Preroll.mp4'
