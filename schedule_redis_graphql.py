@@ -113,7 +113,7 @@ def redis_import(row,r):
     #uuid = row['location'].replace(' ','-') + '-' + str(row.name)
     #r_key = row['id'] + ' ' + row['speakers']
     #r_key = uuid + ' ' + row['speakers']
-    r_key = row['uuid']
+    r_key = row['uuid'] + row['speakers']
     for key in row.keys():
         r.hsetnx(r_key, key, row[key])
     r.hsetnx(r_key,'priority', 0)
