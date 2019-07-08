@@ -91,7 +91,8 @@ def time_schedule_aquisition_2(talks):
     temp = []
     for i in talks['conference']['schedule']['days']:
         temp.append(pd.DataFrame(i['timeslots']['nodes']))
-    total = pd.concat(temp, ignore_index = True)   
+    total = pd.concat(temp, ignore_index = True)
+    total.fillna('', inplace = True)   
     total['location'] = total['location'].apply(get_locations)
     total['speakers_seed'] = total['participants'].apply(get_participants)
     total['speakers'] = total['speakers_seed'].apply(speaker_name_processing)
