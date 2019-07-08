@@ -15,7 +15,7 @@ def formatted_time():
 
 def convert_time_zone(time):
     time = arrow.get(time)
-    time = time.shift(hours = +0)
+    time = time.shift(hours = +)
     return time.format('YYYY/MM/DD HH:mm:ss')   
 
 def get_speakers(x, function):
@@ -97,8 +97,8 @@ def time_schedule_aquisition_2(talks):
     total['speakers'] = total['speakers_seed'].apply(speaker_name_processing)
     total['speakers_for_emails'] = total['speakers_seed'].apply(','.join)
 
-    total['start_time'] = total['startsAt'].apply(convert_time_zone)
-    total['end_time'] = total['endsAt'].apply(convert_time_zone)
+    #total['start_time'] = total['startsAt'].apply(convert_time_zone)
+    #total['end_time'] = total['endsAt'].apply(convert_time_zone)
     
     out = []
     for i in range(0,len(total)):
