@@ -15,7 +15,7 @@ def formatted_time():
 
 def convert_time_zone(time):
     time = arrow.get(time)
-    time = time.shift(hours = +)
+    time = time.shift(hours = +0)
     return time.format('YYYY/MM/DD HH:mm:ss')   
 
 def get_speakers(x, function):
