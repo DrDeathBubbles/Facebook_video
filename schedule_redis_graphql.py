@@ -31,7 +31,10 @@ def clean_speakers(df):
 def get_participants(participants):
     out = []
     for part in participants['nodes']:
+      try:
          out.append(part['attendee']['firstName'] + ' ' + part['attendee']['lastName'])
+      except:
+         out.append('') 
     return out
 
 def get_locations(location):
