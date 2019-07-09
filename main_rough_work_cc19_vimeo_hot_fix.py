@@ -123,7 +123,7 @@ def retrieve_from_s3(filename):
     """
 
     my_bucket = s3.Bucket('ds-ajm-videos')
-    a = my_bucket.download_file(filename,file_location + filename)
+    a = my_bucket.download_file(filename,file_location + filename.lstrip('rise_2019_Videos/'))
     return a    
 
 
