@@ -9,4 +9,4 @@ test_slot = {'title':'DS TEST TITLE', 'description':'DS TEST DESCRIPTION', 'star
 'status': 'Unprocessed','speakers_for_emails': 'Aaron Meagher'}
 
 
-r.hmset('6a069e0c-ea96-4516-b047-ef919173test Aaron Meagher', test_slot)
+r.hmset('Startup-University-999 Aaron Meagher', test_slot)
