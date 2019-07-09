@@ -238,6 +238,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
     
             try:
+                message_retrieve = message
                 message = message.lstrip('rise_2019_Videos/') 
                 uuid = message.split('_')[-3]
                 
@@ -274,7 +275,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                retrieve_from_s3(message)
+                retrieve_from_s3(message_retrieve)
                 
                 try:
                     r.hset(key,'status','Recieved from S3')
