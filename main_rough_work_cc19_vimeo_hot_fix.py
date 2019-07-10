@@ -239,10 +239,11 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
     
             try:
                 message_retrieve = message.replace('- -','-+-')
+                message = message_retrieve 
                 message = message.lstrip('rise_2019_Videos/') 
                 uuid = message.split('_')[-3]
                 uuid = uuid.replace('- -','-+-')      
-                
+
                 keys = r.keys()
                 keys = [c.decode('utf-8') for c in keys]
                 keys = [c for c in keys if uuid in c]
