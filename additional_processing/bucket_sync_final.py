@@ -22,7 +22,7 @@ def copy_to_bucket(file_name):
         'Bucket': 'ds-ajm-videos',
         'Key': file_name
     }
-    s3_resource.Object('ds-ajm-videos/', 'vimeo_cc19/' +file_name).copy(copy_source)
+    s3_resource.Object('ds-ajm-videos', 'rise_2019_Videos/' +file_name).copy(copy_source)
 
 
 def total_bucket_keys(bucket_name):
@@ -42,11 +42,11 @@ def get_conference(objs, start_date, end_date):
             out.append(obj)
     return out
 
-if __name__ = '__main__':
-    start_date = start_date = datetime(2019,5,20)
+if __name__ == '__main__':
+    start_date = start_date = datetime(2019,7,1)
     start_date = start_date.date()
 
-    end_date = datetime(2019,6,17)
+    end_date = datetime(2019,7,10)
     end_date = end_date.date()
 
     bucket_keys = total_bucket_keys('ds-ajm-videos')
