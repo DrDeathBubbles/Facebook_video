@@ -5,7 +5,7 @@ import datetime
 import pandas as pd 
 import time
 import arrow 
-import avenger_requests_backoff_new_url as avenger_requests
+#import avenger_requests_backoff_new_url as avenger_requests
 import redis 
 
 def formatted_time():
@@ -71,23 +71,23 @@ def run_query(query): # A simple function to use requests.post to make the API c
 
 
 
-def time_schedule_aquisition(talks, slug):
-    talks = pd.DataFrame(talks.json()['data'])
-    talks = talks[['title','description','start_time','end_time','timeslot_location_id','id']]
-
-    avenger = avenger_requests.avenger_requests(slug)
-    locations = avenger.get_locations()
-    locations = pd.DataFrame(locations.json()['data'])
-    find_location = lambda x: locations[locations['id']== x ]['name'].values[0] 
-
-    talks['timeslot_location_id'] = talks['timeslot_location_id'].apply(find_location)
-    talks['start_time'] = talks['start_time'].apply(convert_time_zone)
-    talks['end_time'] = talks['end_time'].apply(convert_time_zone)
-    talks['speakers'] = talks['id'].apply(get_speakers, function = avenger.name_processing)
-    talks['speakers_for_emails'] = talks['id'].apply(get_speakers, function = avenger.speaker_names) 
-    talks = clean_speakers(talks)
-    
-    return talks
+#def time_schedule_aquisition(talks, slug):
+#    talks = pd.DataFrame(talks.json()['data'])
+#    talks = talks[['title','description','start_time','end_time','timeslot_location_id','id']]
+#
+#    avenger = avenger_requests.avenger_requests(slug)
+#    locations = avenger.get_locations()
+#    locations = pd.DataFrame(locations.json()['data'])
+#    find_location = lambda x: locations[locations['id']== x ]['name'].values[0] 
+#
+#    talks['timeslot_location_id'] = talks['timeslot_location_id'].apply(find_location)
+#    talks['start_time'] = talks['start_time'].apply(convert_time_zone)
+#    talks['end_time'] = talks['end_time'].apply(convert_time_zone)
+#    talks['speakers'] = talks['id'].apply(get_speakers, function = avenger.name_processing)
+#    talks['speakers_for_emails'] = talks['id'].apply(get_speakers, function = avenger.speaker_names) 
+#    talks = clean_speakers(talks)
+#    
+#    return talks
 
 
 
@@ -156,42 +156,53 @@ def main(query):
 
 if __name__ == '__main__':
    slug = input('Please enter conference slug:')
-   query_4 = """
-{
-  conference(id: "rise19") {
-    id
-    schedule {
-      days {
-        timeslots {
-          nodes {
-            tracks {
-              id
-            }
-            id
-            title
-            description
-            startsAt
-            endsAt
-            location {
-              name
-              id
-            }
-            participants {
-              nodes {
-                attendee {
-                  lastName
-                  firstName
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-"""
-   main(query_4)
-  
+
+#   query_ws = ''' 
+#    {'''  
+#f'conference(id: "{slug}")' '''{  
+#    id
+#        schedule {
+#          days {
+#            timeslots {
+#              nodes {
+#                tracks {
+#                  nodes {
+#                    id
+#                  }
+#                }
+#                id
+#                title
+#                description
+#                startsAt
+#                endsAt
+#                location {
+#                  name
+#                  id
+#                }
+#                participants {
+#                  nodes {
+#                    attendee {
+#                      lastName
+#                      firstName
+#                    }
+#                  }
+#                }
+#              }
+#            }
+#          }
+#        }
+#      }
+#    }
+#    '''
+
+
+
+   query = ''' {conference(id: "%s") {  id schedule { days { timeslots { nodes { tracks { nodes { id } } id title description startsAt endsAt location { name id } participants { nodes { attendee { lastName firstName } } } } } } } } } ''' % (slug) 
+
+   main(query)
+
+
+
+
 
 

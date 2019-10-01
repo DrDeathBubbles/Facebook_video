@@ -22,7 +22,8 @@ def copy_to_bucket(file_name):
         'Bucket': 'ds-ajm-videos',
         'Key': file_name
     }
-    s3_resource.Object('ds-ajm-videos', 'rise_2019_Videos/' +file_name).copy(copy_source)
+    file_name = file_name.split('/')[0] + '/A_' + file_name.split('/')[1]
+    s3_resource.Object('ds-ajm-videos', file_name).copy(copy_source)
 
 
 def total_bucket_keys(bucket_name):
