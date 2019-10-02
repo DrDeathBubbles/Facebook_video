@@ -9,7 +9,7 @@ from httplib2 import Http
 def get_redis():
     r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
     out = {}
-    for key in r.scan_iter9):
+    for key in r.scan_iter():
         out.update({key:r.hgetall(key)})
     df = pd.DataFrame(out)
     f = lambda x: x.decode('utf-8')
