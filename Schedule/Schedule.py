@@ -132,4 +132,4 @@ if __name__ == '__main__':
     #b = write_single_range('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg','A1:D4',[['This','Is','A','Test'],[1,2,3,4]])
     #Below is for ws18
     sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg'
-    update_schedule(sheet_id,'cc19',60*60)
+    update_schedule(sheet_id,'ws19',15*60)
