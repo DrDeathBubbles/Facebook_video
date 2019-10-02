@@ -12,7 +12,6 @@ import time
 
 
 def get_redis():
-    #r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0, decode_response = True)
     r = redis.Redis('localhost', decode_responses=True) 
     out = {}
     for key in r.scan_iter():
