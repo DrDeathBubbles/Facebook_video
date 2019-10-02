@@ -126,7 +126,8 @@ def redis_import(row,r):
     r.hsetnx(r_key,'priority', 0)
     r.hsetnx(r_key,'block',0)    
     r.hsetnx(r_key,'status','Unprocessed')        
-
+    r.hsetnx(r_key,'video_link','')
+    r.hsetnx(r_key,'resend_emails', 0)
 
 
 def main(query):
