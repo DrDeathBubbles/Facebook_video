@@ -1,5 +1,5 @@
 import redis
-import pandas
+import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
