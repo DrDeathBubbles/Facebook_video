@@ -4,18 +4,23 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
 from httplib2 import Http
+import string
+import time
+
+
+
 
 
 def get_redis():
-    r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
+    #r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0, decode_response = True)
+    r = redis.Redis('localhost', decode_responses=True) 
     out = {}
     for key in r.scan_iter():
         out.update({key:r.hgetall(key)})
     df = pd.DataFrame(out)
-    f = lambda x: x.decode('utf-8')
-    df.applymap(f)
+    df = df.transpose()
 
-    return df
+    return df 
 
 def write_dataframe_to_gsheets(sheet_id, df):
     top_left_cell = 'A1'
@@ -43,16 +48,7 @@ def update_schedule(sheet_id, update_frequency):
 
         time.sleep(update_frequency) 
 
-def write_dataframe_to_gsheets(sheet_id, df):
-    top_left_cell = 'A1'
-    num2alpha = dict(zip(range(1, 27), string.ascii_uppercase))
-    bottom_right_cell = num2alpha[len(df.columns)] + str(len(df) + 1)
-    cell_ranges = top_left_cell + ':' + bottom_right_cell
 
-    values = df.as_matrix().tolist()
-    values.insert(0,list(df.columns))
-
-    write_single_range(sheet_id, cell_ranges, values)
 
 def write_single_range(spreadsheet_id,range_name,values,value_input_option='RAW'):
     """
@@ -65,7 +61,7 @@ def write_single_range(spreadsheet_id,range_name,values,value_input_option='RAW'
 
     """
     scope = ['https://spreadsheets.google.com/feeds']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('./access_tokens/client_secret.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('../access_tokens/access_tokens/client_secret.json', scope)
     service = build('sheets', 'v4', http=creds.authorize(Http()))
     body ={'values':values}
     result = service.spreadsheets().values().update(
