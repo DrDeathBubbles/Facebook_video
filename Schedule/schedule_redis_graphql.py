@@ -1,6 +1,6 @@
 import requests 
 import redis
-import backoff
+#import backoff
 import datetime
 import pandas as pd 
 import time
