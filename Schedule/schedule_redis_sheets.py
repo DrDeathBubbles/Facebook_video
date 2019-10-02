@@ -65,4 +65,8 @@ def write_single_range(spreadsheet_id,range_name,values,value_input_option='RAW'
     body ={'values':values}
     result = service.spreadsheets().values().update(
     spreadsheetId=spreadsheet_id, range=range_name,
-    valueInputOption=value_input_option, body=body).execute()    
+    valueInputOption=value_input_option, body=body).execute()
+
+
+if __name__ == '__main__':
+    update_schedule('1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg', 60*15)
