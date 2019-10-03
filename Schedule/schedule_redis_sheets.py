@@ -18,6 +18,7 @@ def get_redis():
         out.update({key:r.hgetall(key)})
     df = pd.DataFrame(out)
     df = df.transpose()
+    df.columns = ['title','description','location','speakers','speakers_for_emails','start_time','end_time','id','uuid','block','priority','resend_emails','status','video_link'] 
 
     return df 
 
