@@ -18,8 +18,8 @@ def get_redis():
         out.update({key:r.hgetall(key)})
     df = pd.DataFrame(out)
     df = df.transpose()
-    df.columns = ['title','description','location','speakers','speakers_for_emails','start_time','end_time','id','uuid','block','priority','resend_emails','status','video_link'] 
-
+    df = df.reindex(columns=['title','description','location','speakers','speakers_for_emails','start_time','end_time','id','uuid','block','priority','resend_emails','status','video_link', 's3_link_public','s3_link_raw']) 
+    df.fillna('', inplace = True)
     return df 
 
 def write_dataframe_to_gsheets(sheet_id, df):
