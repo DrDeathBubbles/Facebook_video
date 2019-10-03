@@ -61,7 +61,7 @@ def write_single_range(spreadsheet_id,range_name,values,value_input_option='RAW'
 
     """
     scope = ['https://spreadsheets.google.com/feeds']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('../access_tokens/access_tokens/client_secret.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('../access_tokens/client_secret.json', scope)
     service = build('sheets', 'v4', http=creds.authorize(Http()))
     body ={'values':values}
     result = service.spreadsheets().values().update(
