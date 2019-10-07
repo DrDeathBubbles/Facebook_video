@@ -71,27 +71,6 @@ def run_query(query): # A simple function to use requests.post to make the API c
 
 
 
-#def time_schedule_aquisition(talks, slug):
-#    talks = pd.DataFrame(talks.json()['data'])
-#    talks = talks[['title','description','start_time','end_time','timeslot_location_id','id']]
-#
-#    avenger = avenger_requests.avenger_requests(slug)
-#    locations = avenger.get_locations()
-#    locations = pd.DataFrame(locations.json()['data'])
-#    find_location = lambda x: locations[locations['id']== x ]['name'].values[0] 
-#
-#    talks['timeslot_location_id'] = talks['timeslot_location_id'].apply(find_location)
-#    talks['start_time'] = talks['start_time'].apply(convert_time_zone)
-#    talks['end_time'] = talks['end_time'].apply(convert_time_zone)
-#    talks['speakers'] = talks['id'].apply(get_speakers, function = avenger.name_processing)
-#    talks['speakers_for_emails'] = talks['id'].apply(get_speakers, function = avenger.speaker_names) 
-#    talks = clean_speakers(talks)
-#    
-#    return talks
-
-
-
-
 def time_schedule_aquisition_2(talks):
     talks = pd.DataFrame(talks['data'])
     temp = []
