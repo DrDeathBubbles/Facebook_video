@@ -200,7 +200,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         logger = logging.getLogger(__name__)
 
 
-        r = redis.Redis(host='localhost', port = 6379, db=0,decode_responses=True)
+        r = redis.Redis(host='localhost', port = 6378 db=0,decode_responses=True) #Listening on port 6378 from remote server
 
 
         task = tasks.get()
@@ -317,7 +317,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 speakers_for_youtube_tag = speakers_for_emails
                 speakers_for_emails = speakers_for_emails.split(',')
                 title = r.hget(key, 'title')
-                title_for_youtube =  '#RISEConf 2019 ' + title
+                title_for_youtube =  title_lead_in + title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
                 
@@ -699,6 +699,7 @@ if __name__ == '__main__':
         output_bucket = 'ws19-proccessed-videos'
         audio_files_bucket = 'ws19-audio'
         file_location = '/home/ubuntu/AJM/video_files/'
+        title_lead_in = ''
 
     elif presets == 1:
         speaker_email_data = input('Enter the full string path for the speaker email list:')
