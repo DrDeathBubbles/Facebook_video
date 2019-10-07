@@ -55,11 +55,6 @@ from Email_processing import *
 from People_processing_CC import *
 
 
-#Variables for use in the code.
-
-input_bucket = 'ws-19-videos'
-
-
 
 #This sets the location of the local video files for processing 
 #file_location = '~/Desktop/Testing_folder/{}'
@@ -112,12 +107,12 @@ def retrieve_from_s3(filename):
     """
 
     my_bucket = s3.Bucket('ds-ajm-videos')
-    a = my_bucket.download_file(filename,file_location + filename.lstrip('rise_2019_Videos/'))
+    a = my_bucket.download_file(filename,file_location + filename.lstrip(input_bucket + '/'))
     return a    
 
 
 def post_to_s3(file_location, message, output_file_name):
-    my_bucket = s3.Bucket('ws18-videos')
+    my_bucket = s3.Bucket(output_bucket)
     a = my_bucket.upload_file(file_location +'edited_videos/'+message, output_file_name)
 
     return a
@@ -713,6 +708,7 @@ if __name__ == '__main__':
         sting = './sting/RISE_Preroll.mp4'
         input_bucket = 'ws19-raw-videos'
         output_bucket = 'ws19-proccessed-videos'
+        file_location = '/home/ubuntu/AJM/video_files/'
 
     elif presets == 1:
         speaker_email_data = input('Enter the full string path for the speaker email list:')
