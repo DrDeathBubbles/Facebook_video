@@ -200,7 +200,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         logger = logging.getLogger(__name__)
 
 
-        r = redis.Redis(host='localhost', port = 6379, db=0)
+        r = redis.Redis(host='localhost', port = 6379, db=0,decode_responses=True)
 
 
         task = tasks.get()
@@ -223,7 +223,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 uuid = uuid.replace('- -','-+-')      
 
                 keys = r.keys()
-                keys = [c.decode('utf-8') for c in keys]
                 keys = [c for c in keys if uuid in c]
 
                 if len(keys) != 1:
@@ -313,15 +312,11 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             try:
                 description = r.hget(key,'description')
-                description = description.decode('utf-8')
                 speakers = r.hget(key, 'speakers')
-                speakers = speakers.decode('utf-8')
                 speakers_for_emails = r.hget(key,'speakers_for_emails')
-                speakers_for_emails = speakers_for_emails.decode('utf-8')
                 speakers_for_youtube_tag = speakers_for_emails
                 speakers_for_emails = speakers_for_emails.split(',')
                 title = r.hget(key, 'title')
-                title = title.decode('utf-8')
                 title_for_youtube =  '#RISEConf 2019 ' + title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
