@@ -55,12 +55,6 @@ from Email_processing import *
 from People_processing_CC import *
 
 
-
-#This sets the location of the local video files for processing 
-#file_location = '~/Desktop/Testing_folder/{}'
-file_location = '/home/ubuntu/AJM/video_files/'
-
-
 s3 = boto3.resource('s3')
 
 def listener_configurer():
@@ -120,7 +114,7 @@ def post_to_s3(file_location, message, output_file_name):
 
 def post_to_s3_audio(file_location, message, output_file_name):
     message = message.rstrip('.mp4') + '.mp3'
-    my_bucket = s3.Bucket('ws18-videos')
+    my_bucket = s3.Bucket(audio_files_bucket)
     a = my_bucket.upload_file(file_location +'edited_videos/audio/'+message, 'audio/' + output_file_name)
     return a
 
@@ -224,7 +218,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:
                 message_retrieve = message.replace('- -','-+-')
                 message = message_retrieve 
-                message = message.lstrip('rise_2019_Videos/') 
+                message = message.lstrip(input_bucket + '/') 
                 uuid = message.split('_')[-3]
                 uuid = uuid.replace('- -','-+-')      
 
@@ -708,6 +702,7 @@ if __name__ == '__main__':
         sting = './sting/RISE_Preroll.mp4'
         input_bucket = 'ws19-raw-videos'
         output_bucket = 'ws19-proccessed-videos'
+        audio_files_bucket = 'ws19-audio'
         file_location = '/home/ubuntu/AJM/video_files/'
 
     elif presets == 1:
