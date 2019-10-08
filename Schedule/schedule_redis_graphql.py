@@ -1,11 +1,9 @@
 import requests 
 import redis
-#import backoff
 import datetime
 import pandas as pd 
 import time
 import arrow 
-#import avenger_requests_backoff_new_url as avenger_requests
 import redis 
 
 def formatted_time():
@@ -62,7 +60,7 @@ def speaker_name_processing(speakers):
 
 
 
-def run_query(query): # A simple function to use requests.post to make the API call. Note the json= section.
+def run_query(query): 
     request = requests.post('https://api.cilabs.com/graphql', json={'query': query})
     if request.status_code == 200:
         return request.json()
@@ -138,49 +136,7 @@ def main(query):
 
 if __name__ == '__main__':
    slug = input('Please enter conference slug:')
-
-#   query_ws = ''' 
-#    {'''  
-#f'conference(id: "{slug}")' '''{  
-#    id
-#        schedule {
-#          days {
-#            timeslots {
-#              nodes {
-#                tracks {
-#                  nodes {
-#                    id
-#                  }
-#                }
-#                id
-#                title
-#                description
-#                startsAt
-#                endsAt
-#                location {
-#                  name
-#                  id
-#                }
-#                participants {
-#                  nodes {
-#                    attendee {
-#                      lastName
-#                      firstName
-#                    }
-#                  }
-#                }
-#              }
-#            }
-#          }
-#        }
-#      }
-#    }
-#    '''
-
-
-
    query = ''' {conference(id: "%s") {  id schedule { days { timeslots { nodes { tracks { nodes { id } } id title description startsAt endsAt location { name id } participants { nodes { attendee { lastName firstName } } } } } } } } } ''' % (slug) 
-
    main(query)
 
 
