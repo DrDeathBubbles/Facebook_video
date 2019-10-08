@@ -84,12 +84,8 @@ def time_schedule_aquisition_2(talks):
     total['start_time'] = total['startsAt'].apply(convert_time_zone)
     total['end_time'] = total['endsAt'].apply(convert_time_zone)
     
-    out = []
-    for i in range(0,len(total)):
-      out.append('-'+str(i))
-    out = pd.Series(out)  
     
-    total['uuid'] = total['location'].str.replace(' ','-').add(out)
+    total['uuid'] = total['id'] 
     total = total[['title','description','start_time','end_time','location','id','speakers','speakers_for_emails','uuid']]
     return total
 
