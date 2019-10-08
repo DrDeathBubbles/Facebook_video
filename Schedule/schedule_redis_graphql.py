@@ -90,7 +90,7 @@ def time_schedule_aquisition_2(talks):
     return total
 
 def redis_import(row,r):
-    r_key = row['uuid'] + row['speakers']
+    r_key = row['uuid'] + ' ' +  row['speakers']
     for key in row.keys():
         r.hsetnx(r_key, key, row[key])
     r.hsetnx(r_key,'priority', 0)
