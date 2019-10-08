@@ -96,7 +96,7 @@ def redis_import(row,r):
     r.hsetnx(r_key,'priority', 0)
     r.hsetnx(r_key,'block',0)    
     r.hsetnx(r_key,'resend_emails', 0)
-    r.hexenx(r_key,'set_private',0)
+    r.hsetnx(r_key,'set_private',0)
     r.hsetnx(r_key,'video_link','')
     r.hsetnx(r_key,'s3_link_public','')
     r.hsetnx(r_key,'s3_link_raw','')
