@@ -200,7 +200,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         logger = logging.getLogger(__name__)
 
 
-        r = redis.Redis(host='localhost', port = 6378 db=0,decode_responses=True) #Listening on port 6378 from remote server
+        r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on port 6378 from remote server
 
 
         task = tasks.get()
