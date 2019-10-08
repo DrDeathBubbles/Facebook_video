@@ -226,8 +226,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 keys = [c for c in keys if uuid in c]
 
                 if len(keys) != 1:
-                    #raise Exception as e:
-                    #    logger.exception(f'Failed to find unique key for{uuid}')
+                    raise Exception as e:
+                        logger.exception(f'Failed to find unique key for{uuid}')
                     continue
                 else:
                     key = keys[0]
@@ -383,41 +383,64 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 logging.error(f'Problem with audio processing by {process_name}')
 
 
+
             try:
-                vimeo_post = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
+                privacy = r.hget(key,'set_privacy')
 
-                try:
-                    r.hset(key,'status','Posted to youtube')
+                if privacy = 0:
+                    
+                   try:
+                       vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
 
-                except Exception as e:
-                    logging.error(f'Failed to update sheets for {process_name}')
-                    print(f'{porcess_name} failed to update sheets')
+                       try:
+                           r.hset(key,'status','Posted publicly on Vimeo')
 
-                youtube_url = vimeo_post 
+                       except Exception as e:
+                           logging.error(f'Failed to update Redis for {process_name}')
+                           print(f'{porcess_name} failed to update Redis')
 
-                try:
-                    r.hset(key,'youtube_url', youtube_url)
+                       try:
+                           r.hset(key,'vimeo_link', vimeo_url)
 
-                except Exception as e:
-                    logging.error(f'Failed to update sheets for {process_name}')
-                    print(f'{process_name} failed to update sheets')
+                       except Exception as e:
+                           logging.error(f'Failed to update sheets for {process_name}')
+                           print(f'{process_name} failed to update sheets')
  
+                elif privacy = 1:
+
+
+                   try:
+                       vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description, privacy = 'unlisted')
+
+                       try:
+                           r.hset(key,'status','Posted privately on Vimeo')
+
+                       except Exception as e:
+                           logging.error(f'Failed to update Redis for {process_name}')
+                           print(f'{porcess_name} failed to update Redis')
+
+                       try:
+                           r.hset(key,'vimeo_link', vimeo_url)
+
+                       except Exception as e:
+                           logging.error(f'Failed to update sheets for {process_name}')
+                           print(f'{process_name} failed to update sheets')
 
 
             except:
-                logger.error(f'Failed to post to youtube {message}')
-                print('Failed to post to Youtube')
+                logger.error(f'Failed to post to Vimeo {message}')
+                print('Failed to post to Vimeo')
 
 
                 try:
-                    r.hset(key,'status','Failed to post to youtube')
+                    r.hset(key,'status','Failed to post to Vimeo')
 
                 except Exception as e:
-                    logging.error(f'Failed to update sheets for {process_name}')
-                    print(f'{process_name} failed to update sheets')
+                    logging.error(f'Failed to update Redis for {process_name}')
+                    print(f'{process_name} failed to update Redis')
 
 
-                #continue
+                continue
             
             #This is where we get the description and speakers for a talk and add
             # it to the facebook video            
