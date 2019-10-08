@@ -112,7 +112,7 @@ def main(query):
     while True:
         new_talks = run_query(query)
         if new_talks != old_talks:
-            time_schedule = time_schedule_aquisition_2(talks)
+            time_schedule = time_schedule_aquisition_2(new_talks)
             time_schedule.fillna('',inplace = True)
             time_schedule.apply(redis_import, args=(r,), axis = 1)
             old_talks = new_talks
