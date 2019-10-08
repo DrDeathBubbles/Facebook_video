@@ -18,7 +18,7 @@ def get_redis():
         out.update({key:r.hgetall(key)})
     df = pd.DataFrame(out)
     df = df.transpose()
-    df = df.reindex(columns=['title','description','location','speakers','speakers_for_emails','start_time','end_time','id','uuid','block','priority','resend_emails','status','video_link', 's3_link_public','s3_link_raw']) 
+    df = df.reindex(columns=['title','description','location','speakers','speakers_for_emails','start_time','end_time','id','uuid','block','priority','set_private','resend_emails','status','video_link', 's3_link_public','s3_link_raw']) 
     df.fillna('', inplace = True)
     return df 
 
