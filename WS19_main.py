@@ -423,8 +423,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     
 
 
-                else:
-                    pass
+#                else:
+#                    pass
 
                     
 #                    try:
