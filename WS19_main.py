@@ -414,10 +414,10 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                            logging.error(f'Failed to update Redis for {process_name}')
                            print(f'{porcess_name} failed to update Redis')
 
-                       try:
+                        try:
                            r.hset(key,'vimeo_link', vimeo_url)
 
-                       except Exception as e:
+                        except Exception as e:
                            logging.error(f'Failed to update sheets for {process_name}')
                            print(f'{process_name} failed to update sheets')
                     
