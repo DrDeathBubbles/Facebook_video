@@ -385,23 +385,23 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 privacy = r.hget(key,'set_privacy')
 
                 if privacy == 0:
-                    
-                   try:
-                       vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
+                   pass 
+ #                  try:
+ #                      vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
 
-                       try:
-                           r.hset(key,'status','Posted publicly on Vimeo')
+ #                      try:
+ #                          r.hset(key,'status','Posted publicly on Vimeo')
 
-                       except Exception as e:
-                           logging.error(f'Failed to update Redis for {process_name}')
-                           print(f'{porcess_name} failed to update Redis')
+ #                      except Exception as e:
+ #                          logging.error(f'Failed to update Redis for {process_name}')
+ #                          print(f'{porcess_name} failed to update Redis')
 
-                       try:
-                           r.hset(key,'vimeo_link', vimeo_url)
+ #                      try:
+ #                          r.hset(key,'vimeo_link', vimeo_url)
 
-                       except Exception as e:
-                           logging.error(f'Failed to update sheets for {process_name}')
-                           print(f'{process_name} failed to update sheets')
+ #                      except Exception as e:
+ #                          logging.error(f'Failed to update sheets for {process_name}')
+ #                          print(f'{process_name} failed to update sheets')
  
                 elif privacy == 1:
 
