@@ -384,7 +384,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:
                 privacy = r.hget(key,'set_privacy')
 
-                if privacy = 0:
+                if privacy == 0:
                     
                    try:
                        vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
