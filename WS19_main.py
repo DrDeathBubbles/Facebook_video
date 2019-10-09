@@ -404,8 +404,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 #                           logging.error(f'Failed to update sheets for {process_name}')
 #                           print(f'{process_name} failed to update sheets')
 # 
-                   elif privacy == 1:
-                       pass
+              elif privacy == 1:
+                pass
 #
 #
 #                   try:
