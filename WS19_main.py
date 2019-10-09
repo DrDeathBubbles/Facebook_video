@@ -406,6 +406,9 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 
                 elif privacy ==1:
                     pass
+
+                else:
+                    pass
 #                    try:
 #                        vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description, privacy = 'unlisted')
 
