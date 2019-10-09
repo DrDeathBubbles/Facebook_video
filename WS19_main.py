@@ -11,9 +11,6 @@ import logging.handlers
 from shutil import copyfile
 import string 
 import redis 
-###AJM to be tidied up - fixing the problem of parse not being imported in python2  
-#
-#from urllib import parse
 
 try:
     from urllib.parse import unquote 
@@ -22,6 +19,7 @@ except ImportError:
 
 
 import sys
+#from urllib import parse
 #sys.path.append('./youtube/')
 
 from video_upload import youtube_video_upload, processing_youtube_url
@@ -52,8 +50,9 @@ import time
 from Email_processing import *
 from People_processing_CC import *
 
-
+#Defining global variables
 s3 = boto3.resource('s3')
+r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on non-standard port 6378
 
 def listener_configurer():
     root = logging.getLogger()
@@ -161,7 +160,8 @@ def video_processing(process_name,video_file,sting, watermark, output):
     clip = concatenate_videoclips([starting_clip,clip])    
     clip = moviepy.video.fx.all.fadein(clip,6)
     clip = moviepy.video.fx.all.fadeout(clip,6)
-    clip.write_videofile(output, temp_audiofile="{}_temp-audio.m4a".format(process_name), remove_temp=False, codec="libx264", audio_codec="aac")
+    clip.write_videofile(output, temp_audiofile="{}_temp-audio.m4a".format(process_name), 
+    remove_temp=False, codec="libx264", audio_codec="aac")
 
 
 def audio_processing(video_file, output):
@@ -198,7 +198,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         logger = logging.getLogger(__name__)
 
 
-        r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on port 6378 from remote server
 
 
         task = tasks.get()
