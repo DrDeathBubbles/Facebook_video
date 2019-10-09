@@ -223,8 +223,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 keys = [c for c in keys if uuid in c]
 
                 if len(keys) != 1:
-                    raise Exception as e:
-                        logger.exception(f'Failed to find unique key for{uuid}')
+                    raise Exception('No single key found')
+                    logger.exception(f'Failed to find unique key for{uuid}')
                     continue
                 else:
                     key = keys[0]
