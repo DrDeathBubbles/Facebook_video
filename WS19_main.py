@@ -385,6 +385,13 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 privacy = r.hget(key,'set_privacy')
 
                 if privacy == 0:
+                    vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
+                    try: 
+                        r.hset(key,'status','Posted publicly on Vimeo')
+                    except Exception as e:
+                           logging.error(f'Failed to update Redis for {process_name}')
+                           print(f'{porcess_name} failed to update Redis')
+
                     pass
                 
                 elif privacy ==1:
