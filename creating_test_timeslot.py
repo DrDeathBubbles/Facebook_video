@@ -1,7 +1,7 @@
 import redis
 
 
-r = redis.Redis(host='localhost', port = 6379, db=0)
+r = redis.Redis(host='localhost', port = 6378, db=0)
 
 
 test_slot = {'title':'DS TEST TITLE', 'description':'DS TEST DESCRIPTION', 'start_time':'2019/05/21 13:45:00', 'end_time':'2019/05/21 14:00:00',
