@@ -126,3 +126,5 @@ venv3pip install --upgrade setuptools/
 *.pyc
 
 *.swp
+
+*.rdb
