@@ -463,7 +463,12 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     youtube_url = ''
 
 
-            try: 
+            except Exception as e:
+                logging.error(f'{process_name} failed to get youtube upload flag')
+                youtube_url = ''
+                pass
+
+            try:
                 post_to_s3(file_location,message, f'{uuid}_{title}.mp4')
                 print('Successfully posted to S3') 
                 
