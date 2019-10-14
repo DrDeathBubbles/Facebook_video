@@ -442,7 +442,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                upload_to_youtube = r.hget(key,'upload_to_youtube')
                if upload_to_youtube == 1:
                    try:
-                       youtube_upload = youtube_video_upload(file=file_location + 'edited_videos/' + message,title= title, description= description,keywords='AJM F',category='22',privacyStatus=youtube_privacy_status)
+                       youtube_upload = youtube_video_upload(file=file_location + 'edited_videos/' + message,title= title,
+                        description= description,keywords='AJM F',category='22',privacyStatus=youtube_privacy_status)
                        youtube_url = processing_youtube_url(youtube_upload)
 
                        try:
@@ -463,7 +464,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try: 
-                post_to_s3(file_location,message, uuid + '_' + title + '.mp4')
+                post_to_s3(file_location,message, f'{uuid}_{title}.mp4')
                 print('Successfully posted to S3') 
                 
                 
@@ -471,8 +472,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     r.hset(key,'status','Posted to S3')
 
                 except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
-                    print(f'{process_name} failed to update sheets')
+                    logging.error(f'{process_name} failed to update Redis for S3 post')
+                    print(f'{process_name} failed to update Redis for S3 post')
           
           
             except Exception as e:
@@ -579,11 +580,10 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
                 try:
                     r.hset(key,'status','Transcription queue populated')
-                    r.hset(key,'s3_url_transcription', s3_url)
 
                 except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
-                    print(f'{process} failed to update sheets')
+                    logging.error(f'{process_name} failed to update redis for transcription ')
+                    print(f'{process} failed to update Redis for transcription')
 
 
 
