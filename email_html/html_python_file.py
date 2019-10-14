@@ -1909,7 +1909,7 @@ def html_email_processing_5(youtube_link, vimeo_link,s3_link):
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <tr>
                             <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
-                                <h1 style="margin: 0 0 10px; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Your talk from WebSummit is now live</h1>
+                                <h1 style="margin: 0 0 10px;font-size: 30px; text-align: center; line-height: 50%; color: #333333; font-weight: normal;">Your talk from Web Summit is now live</h1>
                                 <p style="margin: 0 0 10px;">Please find the link to your talk at the button below.</p>
                             </td>
                         </tr>
@@ -1920,7 +1920,7 @@ def html_email_processing_5(youtube_link, vimeo_link,s3_link):
                                     <tr>
                                         <td class="button-td button-td-primary" style="border-radius: 4px; background: #ffffff;">""" 
     
-    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="margin:10px;background: #E90D7F;; border: 1px solid #EF4343;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Vimeo link</span></a>"""
+    html_email_2 =				    """<a class="button-a button-a-primary" href="{}" style="margin:10px;background: #E90D7F;; border: 1px solid #EF4343;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;text-align: center"><span class="button-link" style="color:#ffffff">Vimeo link</span></a>"""
 
 
     html_email_3 =				    """<a class="button-a button-a-primary" href="{}" style="margin:10px; background: #E90D7F; border: 1px solid #EF4343;; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;"><span class="button-link" style="color:#ffffff">Download link</span></a>"""
@@ -1929,7 +1929,7 @@ def html_email_processing_5(youtube_link, vimeo_link,s3_link):
                                     </tr>
                                 </table>
 								<!-- Button : END -->
-								<p style="margin: 10 0 10px;align="justify"> Your WebSummit talk can be found at this link: <a href="{}">{}</a>. We do ask that you include "© WebSummit" or "courtesy of WebSummit" when posting your videos online. If you would like to tag our accounts in your video posts on social media our accounts are - Twitter <a href="https://twitter.com/websummit">https://twitter.com/websummit</a>, Facebook <a href = "https://www.facebook.com/WebSummitHQ/">https://www.facebook.com/WebSummitHQ/</a> and Instagram <a href = "https://www.instagram.com/websummit/">https://www.instagram.com/websummit/</a>. We can then share this post on our accounts to our online audience. We also recommend that you use the hashtag #WebSummit to ensure your post reaches the attendees from the event.</p>
+								<p style="margin: 10 0 10px;align="justify"> Your Web Summit talk can be found at this link: <a href="{}">{}</a>. We ask that you include "© WebSummit" or "courtesy of WebSummit" when posting your videos online. </p>  <p style="margin: 10 0 10px;align="justify"> If you would like to tag our accounts in your video posts on social media our accounts are - <p style="margin: 10 0 10px;align="justify"> Twitter <a href="https://twitter.com/websummit">https://twitter.com/websummit</a> </p> <p style="margin: 10 0 10px;align="justify">Facebook <a href = "https://www.facebook.com/WebSummitHQ/">https://www.facebook.com/WebSummitHQ/</a> </p>  <p style="margin: 10 0 10px;align="justify" >Instagram <a href = "https://www.instagram.com/websummit/">https://www.instagram.com/websummit/</a> </p> We can then share this post on our accounts to our online audience. We also ask that you use the hashtag #WebSummit to ensure your post reaches the attendees from the event.</p>
                             </td>
                         </tr>
                                 """
