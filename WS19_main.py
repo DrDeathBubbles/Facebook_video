@@ -89,7 +89,7 @@ def string_processing(s):
     return s
 
 
-def retrieve_from_s3(filename):
+def retrieve_from_s3(filename, input_bucket):
     """
     Retrieves a file from s3 bucket names ds-ajm-videos
 
@@ -97,7 +97,7 @@ def retrieve_from_s3(filename):
         bucket object
     """
 
-    my_bucket = s3.Bucket('ds-ajm-videos')
+    my_bucket = s3.Bucket(input_bucket)
     a = my_bucket.download_file(filename,file_location + filename.lstrip(input_bucket + '/'))
     return a    
 
@@ -190,7 +190,7 @@ def processing_audio_output_message(s3_url, uuid):
 
 
 
-def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name):
+def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket):
     """
     Processes the message which is sent 
     """
@@ -252,7 +252,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                retrieve_from_s3(message_retrieve)
+                retrieve_from_s3(message_retrieve, input_bucket)
                 
                 try:
                     r.hset(key,'status','Recieved from S3')
@@ -694,7 +694,7 @@ def main(speaker_email_data, watermark='./watermarks/MC_watermark.png',sting='./
         process_name = 'P{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name))
+        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket))
 
         new_process.start()
 
@@ -752,4 +752,4 @@ if __name__ == '__main__':
         print('Error - must enter eithe DEFAULTS or INPUTS')        
         exit()
 
-    main(speaker_email_data, watermark=watermark, sting = sting)
+    main(speaker_email_data, watermark=watermark, sting = sting, input_bucket)
