@@ -438,11 +438,9 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-           try:
+            try:
                upload_to_youtube = r.hget(key,'upload_to_youtube')
-
                if upload_to_youtube == 1:
-
                    try:
                        youtube_upload = youtube_video_upload(file=file_location + 'edited_videos/' + message,title= title, description= description,keywords='AJM F',category='22',privacyStatus=youtube_privacy_status)
                        youtube_url = processing_youtube_url(youtube_upload)
@@ -451,16 +449,16 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
                            r.hset(key,'youtube_link')
 
-                        except Exception as e:
+                       except Exception as e:
                            logging.error(f'{process_name} failed to update Redis with youtube link')
                            print(f'{process_name} failed to update Redis with youtube link')
                         
 
-                    except Exception as e:
+                   except Exception as e:
                         logging.error(f'{process_name} failed to upload to youtube')
                         print(f'{process_name} failed to upload to youtube')   
 
-                if upload_to_youtube !=1:
+               else:
                     youtube_url = ''
 
 
@@ -567,7 +565,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:   
-                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/audio/' + uuid + '_' + title + '.mp3'  
+                s3_url = f'https://s3-eu-west-1.amazonaws.com/{audio_files_bucket}/audio/{uuid}_{title}.mp3'  
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 print('Transcription resourse made')
                 trans_queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
