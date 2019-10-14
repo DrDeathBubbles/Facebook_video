@@ -97,6 +97,7 @@ def redis_import(row,r):
     r.hsetnx(r_key,'block',0)    
     r.hsetnx(r_key,'resend_emails', 0)
     r.hsetnx(r_key,'set_private',0)
+    r.hsetnx(r_key,'upload_to_youtube',0)
     r.hsetnx(r_key,'vimeo_link','')
     r.hsetnx(r_key,'youtube_link','')
     r.hsetnx(r_key,'s3_link_public','')

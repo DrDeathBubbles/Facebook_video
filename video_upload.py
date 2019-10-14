@@ -71,7 +71,7 @@ RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
 #   https://developers.google.com/youtube/v3/guides/authentication
 # For more information about the client_secrets.json file format, see:
 #   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
-CLIENT_SECRETS_FILE = "./credentials/client_secret_cc19.json"
+CLIENT_SECRETS_FILE = "./credentials/youtube_client_secret.json"
 #CLIENT_SECRETS_FILE = "./credentials/client_secret_refresh.json"
 #CLIENT_SECRETS_FILE = "../credentials/client_secret.json"
 
@@ -108,7 +108,7 @@ def get_authenticated_service(args):
     message=MISSING_CLIENT_SECRETS_MESSAGE)
 
   #storage = Storage("%s-oauth2.json" % sys.argv[0])
-  storage = Storage('/home/ubuntu/AJM/YouTube/Facebook_video/video_upload.py-oauth2.json')
+  storage = Storage('./youtube/video_upload.py-oauth2.json')
   credentials = storage.get()
 
   if credentials is None or credentials.invalid:
@@ -236,4 +236,4 @@ if __name__ == '__main__':
 
   #result =   youtube_video_upload(file='/Users/aaronmeagher/Desktop/Clean3/Stream_3.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
   #result =   youtube_video_upload(file='/home/ubuntu/AJM/video_files/edited_videos/f0bd7b1d-d8b3-4a3c-803f-d32f56e08638_000002_000012.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
-  result =   youtube_video_upload(file='/home/ubuntu/AJM/video_files/edited_videos/CS_8_02_6a069e0c-ea96-4516-b047-ef919173test_000000_000218.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')
+  result =   youtube_video_upload(file='/Users/aaronmeagher/Desktop/b96fd2d5-f2cf-4ad8-83fc-9550eada9ab6_000000_000500.mp4',title='AJM Title F', description='AJM des F',keywords='AJM F',category='22',privacyStatus='private')

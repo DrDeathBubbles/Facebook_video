@@ -440,7 +440,35 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             
             #This is where we get the description and speakers for a talk and add
             # it to the facebook video            
-            
+
+
+
+
+           try:
+               upload_to_youtube = r.hget(key,'upload_to_youtube')
+
+               if upload_to_youtube == 1:
+
+                   try:
+                       youtube_upload = youtube_video_upload(file=file_location + 'edited_videos/' + message,title= title, description= description,keywords='AJM F',category='22',privacyStatus=youtube_privacy_status)
+                       youtube_url = processing_youtube_url(youtube_upload)
+
+                       try:
+
+                           r.hset(key,'youtube_link')
+
+                        except Exception as e:
+                           logging.error(f'{process_name} failed to update Redis with youtube link')
+                           print(f'{process_name} failed to update Redis with youtube link')
+                        
+
+                    except Exception as e:
+                        logging.error(f'{process_name} failed to upload to youtube')
+                        print(f'{process_name} failed to upload to youtube')   
+
+                if upload_to_youtube !=1:
+                    youtube_url = ''
+
 
             try: 
                 post_to_s3(file_location,message, uuid + '_' + title + '.mp4')
