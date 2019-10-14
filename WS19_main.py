@@ -177,6 +177,7 @@ def audio_processing(video_file, output):
 
 def processing_output_message(youtube_url, s3_url, uuid):
     message_attributes = {'youtube_url':{'DataType':'String','StringValue': youtube_url},
+    'vimeo_url':{'DataType':'String','StringValue': vimeo_url},
     's3_url':{'DataType':'String','StringValue': s3_url},
     'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
@@ -527,7 +528,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 youtube_url = vimeo_post
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4' 
                 s3_url_for_talks = s3_url 
-                message_attributes = processing_output_message(youtube_url, s3_url, uuid)
+                message_attributes = processing_output_message(youtube_url, s3_url, uuid, vimeo_url)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 print('Resourse made')
