@@ -190,7 +190,7 @@ def processing_audio_output_message(s3_url, uuid):
 
 
 
-def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, slug, sheet_id, sheet_name):
+def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name):
     """
     Processes the message which is sent 
     """
@@ -646,7 +646,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',sheet_name =
+def main(speaker_email_data, watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',sheet_name =
 'WS_18_stages',sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg',free_cores=1):
     """
     Manages SQS and the multiprocessing section of the code
@@ -654,7 +654,6 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
 
     Args:
         speaker_email_data (str): The csv file of the speaker email data.
-        slug (str): The identifying slug for the conference used for the avenger module to obtain schedule, descriptions etc.
         watermark (str): The path of the watermark used to stamp the videos.
         sting (str): The path of the opening sting used to stamp the videos. 
             Note the resolution of the sting sets the output resolution for the system.
@@ -690,7 +689,7 @@ def main(speaker_email_data, slug = 'ws18',watermark='./watermarks/MC_watermark.
         process_name = 'P{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks, speaker_email_data, sting, watermark,slug, sheet_id, sheet_name))
+        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name))
 
         new_process.start()
 
@@ -731,7 +730,6 @@ if __name__ == '__main__':
 
     if presets == 0:
         speaker_email_data = './stages_speakers/RC19_emails.csv'
-        slug = 'cc19'
         watermark = './watermarks/RISE_Logo_Colour.png'
         sting = './sting/RISE_Preroll.mp4'
         input_bucket = 'ws19-raw-videos'
@@ -749,4 +747,4 @@ if __name__ == '__main__':
         print('Error - must enter eithe DEFAULTS or INPUTS')        
         exit()
 
-    main(speaker_email_data, slug=slug, watermark=watermark, sting = sting)
+    main(speaker_email_data, watermark=watermark, sting = sting)
