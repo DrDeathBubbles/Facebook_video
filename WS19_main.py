@@ -102,14 +102,14 @@ def retrieve_from_s3(filename, input_bucket):
     return a    
 
 
-def post_to_s3(file_location, message, output_file_name):
+def post_to_s3(file_location, message, output_file_name, output_bucket):
     my_bucket = s3.Bucket(output_bucket)
     a = my_bucket.upload_file(file_location +'edited_videos/'+message, output_file_name)
 
     return a
 
 
-def post_to_s3_audio(file_location, message, output_file_name):
+def post_to_s3_audio(file_location, message, output_file_name, audio_files_bucket):
     message = message.rstrip('.mp4') + '.mp3'
     my_bucket = s3.Bucket(audio_files_bucket)
     a = my_bucket.upload_file(file_location +'edited_videos/audio/'+message, 'audio/' + output_file_name)
@@ -190,7 +190,7 @@ def processing_audio_output_message(s3_url, uuid):
 
 
 
-def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket):
+def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket, output_bucket, audio_files_bucket):
     """
     Processes the message which is sent 
     """
@@ -354,7 +354,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
                 try:
-                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3')
+                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3', output_bucket_audio)
 
                     try:
                         r.hset(key,'status','Audio posted to S3') 
@@ -469,7 +469,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 pass
 
             try:
-                post_to_s3(file_location,message, f'{uuid}_{title}.mp4')
+                post_to_s3(file_location,message, f'{uuid}_{title}.mp4',output_bucket)
                 print('Successfully posted to S3') 
                 
                 
@@ -694,7 +694,7 @@ def main(speaker_email_data, watermark='./watermarks/MC_watermark.png',sting='./
         process_name = 'P{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket))
+        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket))
 
         new_process.start()
 
@@ -752,4 +752,4 @@ if __name__ == '__main__':
         print('Error - must enter eithe DEFAULTS or INPUTS')        
         exit()
 
-    main(speaker_email_data, watermark=watermark, sting = sting, input_bucket)
+    main(speaker_email_data, watermark=watermark, sting = sting, input_bucket = input_bucket, output_bucket = output_bucket, audio_files_bucket = audio_files_bucket)
