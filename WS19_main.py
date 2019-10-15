@@ -616,8 +616,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:
                 for speaker in speakers_for_emails:
                     emails = get_emails_cc(str(speaker), speaker_email_data)
-                    #send_email_s3(emails[0],emails[1],s3_url_for_talks)
-                    send_email(emails[0],emails[1],youtube_url) 
+                    send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_url) 
                     time.sleep(5)
 
 
