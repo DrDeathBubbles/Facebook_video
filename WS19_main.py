@@ -322,7 +322,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 title_for_youtube =  title_lead_in + title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
-                
+                print(title)
+
                 try:
                     r.hset(key,'status','Metadata acquired')
                     print(f"{process_name} aquired metadata")
