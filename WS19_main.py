@@ -381,7 +381,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             except Exception as e:
                 logging.error(f'Problem with audio processing by {process_name}')
-                print(f'{pricess_name} failed to process audio')
+                print(f'{process_name} failed to process audio')
 
 
 
