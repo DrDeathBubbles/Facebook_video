@@ -322,6 +322,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 
                 try:
                     r.hset(key,'status','Metadata acquired')
+                    print(f"{process_name} aquired metadata")
 
                 except Exception as e:
                     logging.error(f'{process_name} failed to update Redis')
@@ -380,6 +381,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             except Exception as e:
                 logging.error(f'Problem with audio processing by {process_name}')
+                print(f'{pricess_name} failed to process audio')
 
 
 
