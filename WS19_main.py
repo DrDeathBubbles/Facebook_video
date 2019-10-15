@@ -745,7 +745,7 @@ if __name__ == '__main__':
         watermark = './watermarks/RISE_Logo_Colour.png'
         sting = './sting/RISE_Preroll.mp4'
         input_bucket = 'ws19-raw-videos'
-        output_bucket = 'ws19-proccessed-videos'
+        output_bucket = 'ws19-processed-videos'
         audio_files_bucket = 'ws19-audio'
         file_location = '/home/ubuntu/AJM/video_files/'
         title_lead_in = ''
