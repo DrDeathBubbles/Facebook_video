@@ -1910,6 +1910,7 @@ def html_email_processing_5(youtube_link, vimeo_link,s3_link):
                         <tr>
                             <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
                                 <h1 style="margin: 0 0 10px;font-size: 30px; text-align: center; line-height: 50%; color: #333333; font-weight: normal;">Your talk from Web Summit is now live</h1>
+                                <br> </br>
                                 <p style="margin: 0 0 10px;">Please find the link to your talk at the button below.</p>
                             </td>
                         </tr>
