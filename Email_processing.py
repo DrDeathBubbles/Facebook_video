@@ -35,7 +35,7 @@ from email.mime.text import MIMEText
 # at ~/.credentials/gmail-python-quickstart.json
 #SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 SCOPES = 'https://mail.google.com/'
-CLIENT_SECRET_FILE = 'gmaiil_client_secret2.json'
+CLIENT_SECRET_FILE = 'gmail_client_secret2.json'
 APPLICATION_NAME = 'Gmail API Python Quickstart'
 
 
