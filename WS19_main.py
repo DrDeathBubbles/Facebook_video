@@ -500,9 +500,9 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                os.remove(file_location + message)
-                os.remove(file_location + 'edited_videos/' + message)
-                os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
+                #os.remove(file_location + message)
+                #os.remove(file_location + 'edited_videos/' + message)
+                #os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
                 print('removed local files')
 
 
@@ -532,7 +532,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             #to the speakers
 
             try:   
-                youtube_url = vimeo_post
+                
                 s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4' 
                 s3_url_for_talks = s3_url 
                 message_attributes = processing_output_message(youtube_url, s3_url, uuid, vimeo_url)
