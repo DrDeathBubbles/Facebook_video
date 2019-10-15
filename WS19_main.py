@@ -53,6 +53,7 @@ from People_processing_CC import *
 #Defining global variables
 s3 = boto3.resource('s3')
 r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on non-standard port 6378
+youtube_privacy_status = 'private'
 
 def listener_configurer():
     root = logging.getLogger()
@@ -354,7 +355,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
                 try:
-                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3', output_bucket_audio)
+                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3', audio_files_bucket)
 
                     try:
                         r.hset(key,'status','Audio posted to S3') 
