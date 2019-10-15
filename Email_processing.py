@@ -20,7 +20,7 @@ from oauth2client.file import Storage
 from email.mime import text
 from email.mime.multipart import MIMEMultipart 
 import base64
-from html_python_file import html_email_processing_2, html_email_processing_4
+from html_python_file import html_email_processing_2, html_email_processing_4, html_email_processing_5
 
 try:
     import argparse
@@ -252,6 +252,25 @@ def send_email(primary_email_address, cc_email_addresses,video_link):
     return message 
 
 
+def send_email_all_links(primary_email_address, cc_email_addresses, youtube_link, vimeo_link, s3_link):
+    """
+    email_address : The recipenent of the email
+    facebook_video_link : The video link for the video
+    """
+
+    credentials = get_credentials()
+    http = credentials.authorize(httplib2.Http())
+    service = discovery.build('gmail', 'v1', http=http)
+
+    html_email = html_email_processing_5(youtube_link, vimeo_link, s3_link)
+
+    message = create_message('talkbot@websummit.com',primary_email_address, cc_email_addresses,
+    'Your Web Summit talk is now live',html_email)
+
+
+    message = send_message(service,'talkbot@websummit.com',message)
+    
+    return message 
 def send_email_s3(primary_email_address, cc_email_addresses,video_link):
     """
     email_address : The recipenent of the email
