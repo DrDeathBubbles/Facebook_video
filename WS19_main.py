@@ -652,7 +652,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 def main(speaker_email_data, watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',sheet_name =
-'WS_18_stages',sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg',free_cores=1):
+'WS_18_stages',sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg',free_cores=1, input_bucket, output_bucket, audio_files_bucket):
     """
     Manages SQS and the multiprocessing section of the code
 
