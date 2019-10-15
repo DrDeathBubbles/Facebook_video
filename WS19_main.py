@@ -694,7 +694,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
         process_name = 'P{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket))
+        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
 
         new_process.start()
 
