@@ -176,7 +176,7 @@ def audio_processing(video_file, output):
 
 
 
-def processing_output_message(youtube_url, s3_url, uuid):
+def processing_output_message(youtube_url, s3_url, uuid, vimeo_url):
     message_attributes = {'youtube_url':{'DataType':'String','StringValue': youtube_url},
     'vimeo_url':{'DataType':'String','StringValue': vimeo_url},
     's3_url':{'DataType':'String','StringValue': s3_url},
