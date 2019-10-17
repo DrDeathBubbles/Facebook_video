@@ -243,7 +243,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                block = r.hget(key,'block')
+                block = int(r.hget(key,'block'))
                 if block == 1:
                     print(f'{process_name} with {uuid} has been blocked')  
                     continue
@@ -388,7 +388,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                privacy = r.hget(key,'set_private')
+                privacy = int(r.hget(key,'set_private'))
 
  
 
@@ -446,7 +446,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-               upload_to_youtube = r.hget(key,'upload_to_youtube')
+               upload_to_youtube = int(r.hget(key,'upload_to_youtube'))
                if upload_to_youtube == 1:
                    try:
                        youtube_upload = youtube_video_upload(file=file_location + 'edited_videos/' + message,title= title_for_videos,
