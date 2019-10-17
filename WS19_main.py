@@ -216,7 +216,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
     
             try:
-                message = message_retrieve 
                 message = message.lstrip(input_bucket + '/') 
                 uuid = message.split('_')[-3]
                 print(message)
