@@ -198,7 +198,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
     while True:
         configurer(queue)
         logger = logging.getLogger(__name__)
-
+        vimeo_url
 
 
 
@@ -215,11 +215,9 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
     
             try:
-                message_retrieve = message.replace('- -','-+-')
                 message = message_retrieve 
                 message = message.lstrip(input_bucket + '/') 
                 uuid = message.split('_')[-3]
-                uuid = uuid.replace('- -','-+-')      
                 print(message)
                 print(uuid)
                 keys = r.keys()
@@ -536,17 +534,15 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             #to the speakers
 
             try:   
-                
-                s3_url = 'https://s3-eu-west-1.amazonaws.com/ws18-videos/' + uuid + '_' + title + '.mp4' 
-                s3_url_for_talks = s3_url 
-                message_attributes = processing_output_message(youtube_url, s3_url, uuid, vimeo_url)
+                s3_link_public = f'https://s3-eu-west-1.amazonaws.com/{output_bucket}/{uuid}_{title}.mp4'
+                message_attributes = processing_output_message(youtube_url, s3_link_public, uuid, vimeo_url)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 print('Resourse made')
                 youtube_queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
                 print('Queue got')
                 data = {}
-                data['Body'] = message
+                data['Body'] = message_attributes
                 data = json.dumps(data)
                 youtube_queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
                 print('Queue populated')
@@ -554,7 +550,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
                 try:
                     r.hset(key,'status','Avenger queue populated')                    
-                    r.hset(key,'s3_url_video',s3_url)
+                    r.hset(key,'s3_link_public',s3_link_public)
 
 
                 except Exception as e:
@@ -578,13 +574,13 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:   
-                s3_url = f'https://s3-eu-west-1.amazonaws.com/{audio_files_bucket}/audio/{uuid}_{title}.mp3'  
+                s3_url_trans = f'https://s3-eu-west-1.amazonaws.com/{audio_files_bucket}/audio/{uuid}_{title}.mp3'  
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 print('Transcription resourse made')
                 trans_queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
                 print('Transcription queue got')
                 data = {}
-                data['Body'] = {'uuid':uuid, 's3_url':s3_url, 'youtube_url':youtube_url, 'vimeo_url':vimeo_url}
+                data['Body'] = {'uuid':uuid, 's3_url':s3_url_trans, 'youtube_url':youtube_url, 'vimeo_url':vimeo_url}
                 data = json.dumps(data)
                 trans_queue.send_message(MessageBody=data)
                 print('Transcription queue populated')
