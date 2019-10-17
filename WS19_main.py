@@ -198,7 +198,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
     while True:
         configurer(queue)
         logger = logging.getLogger(__name__)
-        vimeo_url
+        vimeo_url = 'Test'
+        youtube_url = 'Test'
 
 
 
@@ -317,7 +318,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 speakers_for_youtube_tag = speakers_for_emails
                 speakers_for_emails = speakers_for_emails.split(',')
                 title = r.hget(key, 'title')
-                title_for_youtube =  title_lead_in + title
+                title_for_videos =  title_lead_in + title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
                 print(title)
@@ -388,12 +389,13 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                privacy = r.hget(key,'set_privacy')
+                privacy = r.hget(key,'set_private')
 
  
 
                 if privacy == 1:
-                    vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description, privacy = 'unlisted')
+                    vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
+                    print('Uploaded to vimeo')
                     
                     try: 
                         r.hset(key,'status','Posted privately on Vimeo')
@@ -407,10 +409,11 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
                     except Exception as e:
                         logging.error(f'Failed to update sheets for {process_name}')
-                        print(f'{process_name} failed to update sheets')                           
+                        print(f'{process_name} failed to update sheets')        
 
 
-                if privacy == 1:
+
+                if privacy == 0:
                     vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
                     
                     try: 
@@ -447,7 +450,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                upload_to_youtube = r.hget(key,'upload_to_youtube')
                if upload_to_youtube == 1:
                    try:
-                       youtube_upload = youtube_video_upload(file=file_location + 'edited_videos/' + message,title= title,
+                       youtube_upload = youtube_video_upload(file=file_location + 'edited_videos/' + message,title= title_for_videos,
                         description= description,keywords='AJM F',category='22',privacyStatus=youtube_privacy_status)
                        youtube_url = processing_youtube_url(youtube_upload)
 
@@ -535,6 +538,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             try:   
                 s3_link_public = f'https://s3-eu-west-1.amazonaws.com/{output_bucket}/{uuid}_{title}.mp4'
+                print(s3_link_public)
                 message_attributes = processing_output_message(youtube_url, s3_link_public, uuid, vimeo_url)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
