@@ -254,7 +254,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                retrieve_from_s3(message_retrieve, input_bucket)
+                retrieve_from_s3(message, input_bucket)
                 
                 try:
                     r.hset(key,'status','Recieved from S3')
