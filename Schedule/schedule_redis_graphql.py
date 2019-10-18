@@ -103,7 +103,7 @@ def redis_import(row,r):
     r.hsetnx(r_key,'s3_link_public','')
     r.hsetnx(r_key,'s3_link_raw','')
     r.hsetnx(r_key,'status','Unprocessed')
-    r.hsetnx(r_key,'Emails_resent',0)        
+    r.hsetnx(r_key,'IGNORE_Emails_resent',0)        
 
 
 def main(query):

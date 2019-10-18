@@ -270,41 +270,6 @@ def send_email_all_links(primary_email_address, cc_email_addresses, youtube_link
 
     message = send_message(service,'talkbot@websummit.com',message)
     
-    return message 
-def send_email_s3(primary_email_address, cc_email_addresses,video_link):
-    """
-    email_address : The recipenent of the email
-    facebook_video_link : The video link for the video
-    """
-
-    credentials = get_credentials()
-    http = credentials.authorize(httplib2.Http())
-    service = discovery.build('gmail', 'v1', http=http)
-
-    #html_email = html_email_processing_4(video_link)
-
-    message = create_message_simple(primary_email_address,cc_email_addresses,'Your Collision talk is ready for download',f"""Hello,
-
-Please find your downloadable talk at the following link:
-
-{video_link}
-
-Please click on the link to download your video.
-
-An email with your talk hosted on YouTube will follow later in the week.
-
-Best,
-
-Collision Team"""
-    )
-
-
-    message = send_message(service,'talkbot@websummit.com',message)
-    
-    return message     
-
-
-
 
 def main():
     """Shows basic usage of the Gmail API.

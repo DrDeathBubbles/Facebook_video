@@ -52,7 +52,7 @@ from People_processing_CC import *
 
 #Defining global variables
 s3 = boto3.resource('s3')
-r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on non-standard port 6378
+r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on non-standard port 6378[]
 youtube_privacy_status = 'private'
 
 def listener_configurer():
@@ -614,12 +614,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             try:
                 for speaker in speakers_for_emails:
-                    print(speaker)
                     emails = get_emails_cc(str(speaker), speaker_email_data)
-                    print(emails)
-                    print(youtube_url)
-                    print(vimeo_url)
-                    print(s3_link_public)
                     send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_link_public) 
                     time.sleep(5)
 
