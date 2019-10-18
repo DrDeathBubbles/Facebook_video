@@ -614,8 +614,13 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             try:
                 for speaker in speakers_for_emails:
+                    print(speaker)
                     emails = get_emails_cc(str(speaker), speaker_email_data)
-                    send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_url_public) 
+                    print(emails)
+                    print(youtube_url)
+                    print(vimeo_url)
+                    print(s3_link_public)
+                    send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_link_public) 
                     time.sleep(5)
 
 
