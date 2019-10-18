@@ -455,7 +455,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
                        try:
 
-                           r.hset(key,'youtube_link')
+                           r.hset(key,'youtube_link', youtube_url)
 
                        except Exception as e:
                            logging.error(f'{process_name} failed to update Redis with youtube link')
@@ -615,7 +615,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:
                 for speaker in speakers_for_emails:
                     emails = get_emails_cc(str(speaker), speaker_email_data)
-                    send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_url) 
+                    send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_url_public) 
                     time.sleep(5)
 
 
