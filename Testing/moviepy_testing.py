@@ -44,5 +44,9 @@ def video_processing(process_name,video_file,sting, watermark, output):
 
 
 if __name__ == '__main__':
-
-    test = timeit.timeit("video_processing('P0','/home/ubuntu/AJM/video_files/b96fd2d5-f2cf-4ad8-83fc-9550eada9ab6_000000_000010.mp4','/home/ubuntu/Talkbot/Facebook_video/sting/RISE_Preroll.mp4','/home/ubuntu/Talkbot/Facebook_video/watermarks/RISE_Logo_Colour.png','./test.mp4')",number = 10)
+    times = []
+    for i in range(0,100):
+        start = time.time()
+        video_processing('P0','/home/ubuntu/AJM/video_files/b96fd2d5-f2cf-4ad8-83fc-9550eada9ab6_000000_000010.mp4','/home/ubuntu/Talkbot/Facebook_video/sting/RISE_Preroll.mp4','/home/ubuntu/Talkbot/Facebook_video/watermarks/RISE_Logo_Colour.png','./test.mp4')
+        end = time.time()
+        times.append(end-start)
