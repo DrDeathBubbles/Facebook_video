@@ -45,4 +45,4 @@ def video_processing(process_name,video_file,sting, watermark, output):
 
 if __name__ == '__main__':
 
-    timeit(video_processing('P0','/Users/aaronmeagher/Desktop/b96fd2d5-f2cf-4ad8-83fc-9550eada9ab6_000000_000010.mp4','/home/ubuntu/Talkbot/Facebook_video/sting/RISE_Preroll.mp4','/home/ubuntu/Talkbot/Facebook_video/watermarks/RISE_Logo_Colour.png','./test.mp4'),100)
+    timeit(video_processing('P0','/home/ubuntu/AJM/video_files/b96fd2d5-f2cf-4ad8-83fc-9550eada9ab6_000000_000010.mp4','/home/ubuntu/Talkbot/Facebook_video/sting/RISE_Preroll.mp4','/home/ubuntu/Talkbot/Facebook_video/watermarks/RISE_Logo_Colour.png','./test.mp4'),100)
