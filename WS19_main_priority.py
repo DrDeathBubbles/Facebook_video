@@ -682,7 +682,9 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
     
     speaker_email_data = pd.read_csv(speaker_email_data)
 
-    tasks = multiprocessing.Queue(-1) #was multiprocess
+    tasks_normal = multiprocessing.Queue(-1) #was multiprocess
+    tasks_priority = multiprocessing.Queue(-1)
+
 
     logging_queue = multiprocessing.Queue(-1)
     
@@ -699,17 +701,17 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
         process_name = 'Ordinary_{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
+        process_name, tasks_normal, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
 
         new_process.start()
 
 
-    for i in range(num_processes):
+    for i in range(prority_cores):
 
         process_name = 'Priority_{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
+        process_name, tasks_priority, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
 
         new_process.start(    
 
@@ -771,6 +773,8 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
             
             except Exception as e:
                 logger.exception(f'Failed to read block status for {uuid}')
+
+
 
 
             print(message)
