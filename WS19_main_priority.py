@@ -731,15 +731,50 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
             try:
                 temp = temp['Records'][0]['s3']['object']['key']
                 temp = unquote(temp)
-                temp = temp.replace('+',' ')
             except KeyError as ke:
                 logging.error('A key error {} has occured while trying\
                 to access the S3 filename.')
             messages.append(temp)
 
         for message in messages:
+
+            try:
+                message = message.lstrip(input_bucket + '/') 
+                uuid = message.split('_')[-3]
+                keys = r.keys()
+                keys = [c for c in keys if uuid in c]
+
+                if len(keys) != 1:
+                    raise Exception('No single key found')
+                    logger.exception(f'Failed to find unique key for{uuid}')
+                    continue
+                else:
+                    key = keys[0]
+
+                print(key)
+
+            except Exception as e:
+                logger.exception(f'Failed to find unique key for {uuid}')        
+
+            try:
+                r.hset(key,'status','UUID processed')
+
+            except Exception as e:
+                    logger.exception(f'Failed to updated Redis for {uuid}; Processing')
+
+
+            try:
+                block = int(r.hget(key,'block'))
+                if block == 1:
+                    print(f'{process_name} with {uuid} has been blocked')  
+                    continue
+            
+            except Exception as e:
+                logger.exception(f'Failed to read block status for {uuid}')
+
+
             print(message)
-            tasks.put([message])
+            tasks.put([key])
 
         time.sleep(5)
 
