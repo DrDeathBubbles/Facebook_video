@@ -206,7 +206,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         task = tasks.get()
         message = task[0]
 
-        print(message[])
+        print(message)
 
 
         if message == 0:
