@@ -206,7 +206,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         task = tasks.get()
         message = task[0]
 
-        print(message)
+        print(message[])
 
 
         if message == 0:
@@ -216,6 +216,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             key, uuid, message = task
+
+            print(f'key {key}, uuid {uuid}, message {message}')
 
 
             try:
@@ -355,7 +357,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:
                 privacy = int(r.hget(key,'set_private'))
 
- 
+
 
                 if privacy == 1:
                     vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
