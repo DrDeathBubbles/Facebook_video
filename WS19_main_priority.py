@@ -366,7 +366,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
                     except Exception as e:
                         logging.error(f'Failed to update Redis for {process_name}')
-                        print(f'{porcess_name} failed to update Redis')
+                        print(f'{process_name} failed to update Redis')
 
                     try:
                         r.hset(key,'vimeo_link', vimeo_url)
@@ -377,7 +377,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-                if privacy == 0:
+                elif privacy == 0:
                     vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_youtube, description)
                     
                     try: 
