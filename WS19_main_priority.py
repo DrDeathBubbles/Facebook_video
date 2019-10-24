@@ -214,43 +214,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         else:
             print('{} recieved {}'.format(process_name,message))
 
-    
-            try:
-                message = message.lstrip(input_bucket + '/') 
-                uuid = message.split('_')[-3]
-                print(message)
-                print(uuid)
-                keys = r.keys()
-                keys = [c for c in keys if uuid in c]
 
-                if len(keys) != 1:
-                    raise Exception('No single key found')
-                    logger.exception(f'Failed to find unique key for{uuid}')
-                    continue
-                else:
-                    key = keys[0]
-
-                print(key)
-
-            except Exception as e:
-                logger.exception(f'Failed to find unique key for {uuid}')        
-
-            try:
-                r.hset(key,'status','UUID processed')
-
-            except Exception as e:
-                    logger.exception(f'Failed to updated Redis for {uuid}; Processing')
-
-
-            try:
-                block = int(r.hget(key,'block'))
-                if block == 1:
-                    print(f'{process_name} with {uuid} has been blocked')  
-                    continue
-            
-            except Exception as e:
-                logger.exception(f'Failed to read block status for {uuid}')
-                
+            key, uuid, message = task
 
 
             try:
@@ -713,7 +678,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
         process_name, tasks_priority, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
 
-        new_process.start(    
+        new_process.start()    
 
 
 #Setting up the connection to monitor SQS 
@@ -770,15 +735,25 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
                 if block == 1:
                     print(f'{process_name} with {uuid} has been blocked')  
                     continue
+
+                else: 
+                    pass
             
             except Exception as e:
                 logger.exception(f'Failed to read block status for {uuid}')
 
+            try:
+                priority = int(r.hget(key,'priority'))
 
 
+                if priority == 1:
+                    tasks_priority.put([key,uuid,message])
 
-            print(message)
-            tasks.put([key])
+                if priority == 0:
+                    tasks_normal.put([key,uuid,message])
+
+            except Exception as e:
+                logger.exception(f'Failed to read priority status for {uuid}')            
 
         time.sleep(5)
 
