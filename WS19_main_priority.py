@@ -671,7 +671,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
         new_process.start()
 
 
-    for i in range(prority_cores):
+    for i in range(priority_cores):
 
         process_name = 'Priority_{}'.format(str(i))
 
