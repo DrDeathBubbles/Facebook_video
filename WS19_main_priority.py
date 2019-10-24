@@ -733,7 +733,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
             try:
                 block = int(r.hget(key,'block'))
                 if block == 1:
-                    print(f'{process_name} with {uuid} has been blocked')  
+                    print(f'{uuid} has been blocked')  
                     continue
 
                 else: 
