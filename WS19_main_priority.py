@@ -749,7 +749,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
                 if priority == 1:
                     tasks_priority.put([key,uuid,message])
 
-                if priority == 0:
+                elif priority == 0:
                     tasks_normal.put([key,uuid,message])
 
             except Exception as e:
