@@ -201,7 +201,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         vimeo_url = 'Test'
         youtube_url = 'Test'
 
-        print(title_lead_in)
+        print(f'{title_lead_in} is the title lead in')
 
         task = tasks.get()
         message = task[0]
