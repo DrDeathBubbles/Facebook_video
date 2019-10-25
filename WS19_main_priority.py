@@ -356,10 +356,12 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             try:
                 privacy = int(r.hget(key,'set_private'))
+                print(privacy)
 
 
 
                 if privacy == 1:
+                    print('uploading to vimeo')
                     vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
                     print('Uploaded to vimeo')
                     
