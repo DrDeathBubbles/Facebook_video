@@ -625,7 +625,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',sheet_name =
+def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket,title_lead_in = '', watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',sheet_name =
 'WS_18_stages',sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg',free_cores=0, priority_cores = 1 ):
     """
     Manages SQS and the multiprocessing section of the code
@@ -787,4 +787,4 @@ if __name__ == '__main__':
         print('Error - must enter eithe DEFAULTS or INPUTS')        
         exit()
 
-    main(speaker_email_data, watermark=watermark, sting = sting, input_bucket = input_bucket, output_bucket = output_bucket, audio_files_bucket = audio_files_bucket)
+    main(speaker_email_data, title_lead_in = title_lead_in, watermark=watermark, sting = sting, input_bucket = input_bucket, output_bucket = output_bucket, audio_files_bucket = audio_files_bucket)
