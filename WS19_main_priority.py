@@ -191,7 +191,7 @@ def processing_audio_output_message(s3_url, uuid):
 
 
 
-def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket, output_bucket, audio_files_bucket):
+def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket, output_bucket, audio_files_bucket, title_lead_in):
     """
     Processes the message which is sent 
     """
@@ -670,7 +670,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket,titl
         process_name = 'Ordinary_{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks_normal, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
+        process_name, tasks_normal, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket, title_lead_in))
 
         new_process.start()
 
@@ -680,7 +680,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket,titl
         process_name = 'Priority_{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks_priority, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
+        process_name, tasks_priority, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket, title_lead_in))
 
         new_process.start()    
 
