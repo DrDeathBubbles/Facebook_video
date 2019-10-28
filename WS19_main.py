@@ -740,8 +740,8 @@ if __name__ == '__main__':
 
     if presets == 0:
         speaker_email_data = './stages_speakers/RC19_emails.csv'
-        watermark = './watermarks/RISE_Logo_Colour.png'
-        sting = './sting/RISE_Preroll.mp4'
+        watermark = './watermarks/Web_summit_logo_stacked_colour.png'
+        sting = './sting/WS19_sting01.mp4'
         input_bucket = 'ws19-raw-videos'
         output_bucket = 'ws19-processed-videos'
         audio_files_bucket = 'ws19-audio'
