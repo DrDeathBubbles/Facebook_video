@@ -1795,11 +1795,8 @@ def html_email_processing_5(youtube_link, vimeo_link,s3_link):
         .button-a {
             transition: all 100ms ease-in;
         }
-            .button-td-primary a{
-            text-align:center;
-        }
-	    .button-td-primary a:hover,
-	    .button-a-primary a:hover {
+	    .button-td-primary:hover,
+	    .button-a-primary:hover {
 	        background: #555555 !important;
 	        border-color: #555555 !important;
 	    }
