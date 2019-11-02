@@ -438,6 +438,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
                else:
                     youtube_url = ''
+                    r.hset(key,'youtube_link', youtube_url)
 
 
             except Exception as e:
