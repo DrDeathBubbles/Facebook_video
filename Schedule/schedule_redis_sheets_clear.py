@@ -24,6 +24,9 @@ def get_redis():
 
 
 def clear_sheet(sheet_id):
+    scope = ['https://spreadsheets.google.com/feeds']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('../access_tokens/client_secret.json', scope)
+    service = build('sheets', 'v4', http=creds.authorize(Http()))
     spreadsheet_id = sheet_id
     range_ = 'A1:Z'
     clear_values_request_body = {}
