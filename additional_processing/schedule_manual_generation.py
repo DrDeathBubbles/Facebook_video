@@ -59,7 +59,7 @@ def row_processing(row):
 
 r = redis.Redis(host='localhost', port = 6379, db=0)
 
-xls = pd.ExcelFile('../Ws_19_stages.xlsx')
+xls = pd.ExcelFile('../WS_19_stages.xlsx')
 
 stages_2 = pd.read_excel(xls, 'Stage 2')
 stages_3 = pd.read_excel(xls, 'Stage 3')
