@@ -51,6 +51,33 @@ def row_processing(row):
 
 
 
+def row_processing_823(row):
+    output = {}
+    id_ = str(uuid.uuid5(uuid.NAMESPACE_DNS, row['Speaker']))
+    print(id_)
+
+    output['Speaker'] = row['Speaker']
+    output['Stage'] = row['Stage']
+    output['priority'] = 0
+    output['block'] = 0
+    output['set_private'] = 0
+    output['resend_emails'] = 0
+    output['upload_to_youtube'] = 0
+    output['vimeo_link'] = ''
+    output['youtube_link'] = ''
+    output['s3_link_public'] = ''
+    output['s3_link_raw'] = ''
+    output['status'] = 'Unprocessed'
+    output['IGNORE_Emails_resent'] = 0
+    output['id'] = id_ 
+    output['uuid'] = id_
+    output['speakers_for_emails'] = row['Speaker']
+    output['speakers'] = speaker_name_processing(row['Speaker'].split(','))
+
+
+
+    r.hmset(id_,output)
+
 
 
 
@@ -68,6 +95,8 @@ stage_52 = pd.read_excel(xls, 'Stage 5, Day 2')
 stage_53 = pd.read_excel(xls, 'Stage 5, Day 3')
 stage_81 = pd.read_excel(xls, 'Stage 8, Day 1')
 stage_823 = pd.read_excel(xls, 'Stage 8, Day 2&3')
+stages_131 = pd.read_excel(xls,'Stage 13, Day 1')
+stages_1323 = pd.read_excel(xls, 'Stage 13, Day 2&3')
 
 
 
@@ -77,7 +106,8 @@ stage_51.apply(row_processing, axis = 1)
 stage_52.apply(row_processing, axis = 1)
 stage_53.apply(row_processing, axis = 1)
 stage_81.apply(row_processing, axis = 1)
-stage_823.apply(row_processing, axis = 1)
-
+#stage_823.apply(row_processing, axis = 1)
+stages_131.apply(row_processing, axis = 1)
+stages_1323.apply(row_processing, axis = 1)
 
 
