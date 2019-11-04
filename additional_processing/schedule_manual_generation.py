@@ -42,8 +42,8 @@ def row_processing(row):
     output['IGNORE_Emails_resent'] = 0
     output['id'] = id_ 
     output['uuid'] = id_
-    output['speakers_for_emails'] = row['Speakers']
-    output['speakers'] = speaker_name_processing(row['Speakers'].split(','))
+    output['speakers_for_emails'] = row['Speaker']
+    output['speakers'] = speaker_name_processing(row['Speaker'].split(','))
 
 
 
