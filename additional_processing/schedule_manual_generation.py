@@ -23,8 +23,8 @@ def speaker_name_processing(speakers):
 
 def row_processing(row):
     output = {}
-    row = row[1]
     id_ = uuid.uuid5(uuid.NAMESPACE_DNS, row['Talk'])
+    print(id_)
 
     output['title'] = row['Talk']
     output['Speaker'] = row['Speaker']
@@ -44,6 +44,10 @@ def row_processing(row):
     output['uuid'] = id_
     output['speakers_for_emails'] = row['Speakers']
     output['speakers'] = speaker_name_processing(row['Speakers'].split(','))
+
+
+
+    r.hmset(id_,output)
 
 
 
@@ -67,9 +71,7 @@ stage_823 = pd.read_excel(xls, 'Stage 8, Day 2&3')
 
 
 
-
-for row in stages_2.iterrows:
-
+stages_2.apply(row_processing)
 
 
 
