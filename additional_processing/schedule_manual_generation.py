@@ -23,7 +23,7 @@ def speaker_name_processing(speakers):
 
 def row_processing(row):
     output = {}
-    id_ = uuid.uuid5(uuid.NAMESPACE_DNS, row['Talk'])
+    id_ = str(uuid.uuid5(uuid.NAMESPACE_DNS, row['Talk']))
     print(id_)
 
     output['title'] = row['Talk']
