@@ -106,7 +106,7 @@ stage_51.apply(row_processing, axis = 1)
 stage_52.apply(row_processing, axis = 1)
 stage_53.apply(row_processing, axis = 1)
 stage_81.apply(row_processing, axis = 1)
-#stage_823.apply(row_processing, axis = 1)
+stage_823.apply(row_processing, axis = 1)
 stages_131.apply(row_processing, axis = 1)
 stages_1323.apply(row_processing, axis = 1)
 
