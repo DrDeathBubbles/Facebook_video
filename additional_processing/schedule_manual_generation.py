@@ -71,7 +71,7 @@ stage_823 = pd.read_excel(xls, 'Stage 8, Day 2&3')
 
 
 
-stages_2.apply(row_processing)
+stages_2.apply(row_processing, axis = 1)
 
 
 
