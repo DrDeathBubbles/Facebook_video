@@ -771,7 +771,7 @@ if __name__ == '__main__':
     presets = eval(input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:'))
 
     if presets == 0:
-        speaker_email_data = './stages_speakers/RC19_emails.csv'
+        speaker_email_data = './stages_speakers/WS19_emails.csv'
         watermark = './watermarks/Web_summit_logo_stacked_colour.png'
         sting = './sting/WS19_sting01.mp4'
         input_bucket = 'ws19-raw-videos'
