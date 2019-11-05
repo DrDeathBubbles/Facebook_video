@@ -180,7 +180,7 @@ def processing_output_message(youtube_url, s3_url, uuid, vimeo_url):
     message_attributes = {'youtube_url':{'DataType':'String','StringValue': youtube_url},
     'vimeo_url':{'DataType':'String','StringValue': vimeo_url},
     's3_url':{'DataType':'String','StringValue': s3_url},
-    'uuid':{'DataType':'String', 'StringValue': uuid}}
+    'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
 
 
@@ -511,7 +511,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 print(s3_link_public)
                 print(youtube_url)
                 print(uuid)
-                print()
                 message_attributes = processing_output_message(youtube_url, s3_link_public, uuid, vimeo_url)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
