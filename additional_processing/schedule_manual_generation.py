@@ -30,6 +30,7 @@ def row_processing(row):
     output['Speaker'] = row['Speaker']
     output['Stage'] = row['Stage']
     output['priority'] = 0
+    output['location'] = row['Stage§']
     output['block'] = 0
     output['set_private'] = 0
     output['resend_emails'] = 0
