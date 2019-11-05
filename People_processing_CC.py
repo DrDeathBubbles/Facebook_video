@@ -44,4 +44,4 @@ def get_emails_cc(field_title, data):
     else:
         primary_email = ''
         cc_email = ''    
-    return [primary_email, cc_email]      
+    return [primary_email.values[0], cc_email.values[0]]      
