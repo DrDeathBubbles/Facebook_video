@@ -40,8 +40,8 @@ def get_emails_cc(field_title, data):
     location = location[location == 100]
     if len(location) == 1:
         location = location.index[0]
-        primary_email = data.ix[location]['Email'].values[0]
-        cc_email = data.ix[location]['cc'].values[0]
+        primary_email = data.ix[location]['Email']
+        cc_email = data.ix[location]['cc']
     else:
         primary_email = ''
         cc_email = ''
