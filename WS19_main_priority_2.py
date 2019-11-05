@@ -509,6 +509,9 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
             try:   
                 s3_link_public = f'https://s3-eu-west-1.amazonaws.com/{output_bucket}/{uuid}_{title}.mp4'
                 print(s3_link_public)
+                print(youtube_url)
+                print(uuid)
+                print(vimeo_url)
                 message_attributes = processing_output_message(youtube_url, s3_link_public, uuid, vimeo_url)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
