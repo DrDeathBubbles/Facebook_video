@@ -518,7 +518,10 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 data = {}
                 data['Body'] = message_attributes
                 data = json.dumps(data)
+                print('data')
                 print(data)
+                print('message_attributes')
+                print(message_attributes)
                 youtube_queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
                 print('Queue populated')
 
