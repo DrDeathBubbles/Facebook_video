@@ -38,6 +38,7 @@ def get_emails_cc_old(field_title, data):
 def get_emails_cc(field_title, data):
     location = data['Full Name'].apply(fuzzy_matching,file_title=field_title)
     location = location[location == 100]
+    location = location.index[0]
     if len(location) == 1:
         primary_email = data.ix[location]['Email'].values[0]
         cc_email = data.ix[location]['cc'].values[0]
