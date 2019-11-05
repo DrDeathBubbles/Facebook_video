@@ -443,7 +443,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             except Exception as e:
                 logging.error(f'{process_name} failed to get youtube upload flag')
-                youtube_url = ''
+                youtube_url = 'Not available'
                 pass
 
             try:
