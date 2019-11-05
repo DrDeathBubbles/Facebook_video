@@ -198,8 +198,8 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
     while True:
         configurer(queue)
         logger = logging.getLogger(__name__)
-        vimeo_url = 'Test'
-        youtube_url = 'Test'
+        vimeo_url = 'Not Available'
+        youtube_url = 'Not Available'
 
         print(f'{title_lead_in} is the title lead in')
 
@@ -437,7 +437,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                         print(f'{process_name} failed to upload to youtube')   
 
                else:
-                    youtube_url = ''
+                    youtube_url = 'Not available'
                     r.hset(key,'youtube_link', youtube_url)
 
 
@@ -517,7 +517,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 print('Queue got')
                 data = {}
                 data['Body'] = message_attributes
-                data = json.dumps(data)
+                data = json.dumps(datadata = json.dumps(data))
                 print('data')
                 print(data)
                 print('message_attributes')
