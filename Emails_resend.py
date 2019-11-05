@@ -4,7 +4,7 @@ from People_processing_CC import *
 import time 
 import pandas as pd
 
-r = redis.Redis(host='localhost', port = 6379, db=0,decode_responses=True)
+r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True)
  
 
 def main(speaker_email_data):
@@ -33,7 +33,7 @@ def main(speaker_email_data):
 
 
 if __name__ == '__main__':
-    speaker_email_data = pd.read_csv('./stages_speakers/RC19_emails.csv')
+    speaker_email_data = pd.read_csv('./stages_speakers/WS19_emails.csv')
     while True:
         main(speaker_email_data)
         time.sleep(60*5)
