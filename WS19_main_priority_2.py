@@ -511,7 +511,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 print(s3_link_public)
                 print(youtube_url)
                 print(uuid)
-                print(vimeo_url)
+                print()
                 message_attributes = processing_output_message(youtube_url, s3_link_public, uuid, vimeo_url)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
@@ -520,7 +520,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 print('Queue got')
                 data = {}
                 data['Body'] = message_attributes
-                data = json.dumps(datadata = json.dumps(data))
+                data = json.dumps(data)
                 print('data')
                 print(data)
                 print('message_attributes')
