@@ -37,6 +37,7 @@ def main(speaker_email_data):
 
 if __name__ == '__main__':
     speaker_email_data = pd.read_csv('./stages_speakers/WS19_emails.csv')
+    speaker_email_data.fillna('',inplace=True)
     while True:
         main(speaker_email_data)
         time.sleep(60*5)
