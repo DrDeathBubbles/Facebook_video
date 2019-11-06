@@ -13,6 +13,7 @@ def main(speaker_email_data):
         out.update({key:r.hgetall(key)})
     df = pd.DataFrame(out)
     df = df.transpose()
+    df.fillna('',inplace = True)
 
     df = df[(df['resend_emails']=='1') & (df['IGNORE_Emails_resent'] =='0')]
     for row in df.iterrows():
