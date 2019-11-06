@@ -23,6 +23,7 @@ def main(speaker_email_data):
         s3_link_public = data['s3_link_public']
         speakers_for_emails = data['speakers_for_emails'].split(',')
 
+        print(speakers_for_emails)
         for speaker in speakers_for_emails:
             emails = get_emails_cc(str(speaker), speaker_email_data)
             send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_link_public)
