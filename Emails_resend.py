@@ -30,7 +30,7 @@ def main(speaker_email_data):
             print(emails)
             send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_link_public)
 
-    r.hset(key,'IGNORE_Emails_resent','1')     
+        r.hset(key,'IGNORE_Emails_resent','1')
 
 
 
