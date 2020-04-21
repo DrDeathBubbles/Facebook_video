@@ -34,13 +34,11 @@ from People_processing_CC import *
 from moviepy.editor import *
 
 
-
-
-
 #Defining global variables
 s3 = boto3.resource('s3')
 r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on non-standard port 6378[]
 youtube_privacy_status = 'private'
+
 
 def listener_configurer():
     root = logging.getLogger()
