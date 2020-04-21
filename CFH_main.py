@@ -1,5 +1,8 @@
-import os 
 import sys
+sys.path.append('./logging/')
+sys.path.append('./additional_processing/')
+
+import os 
 import logging
 import boto3
 import botocore
@@ -8,9 +11,13 @@ import json
 import time
 import logging
 import logging.handlers
-from shutil import copyfile
+import moviepy
 import string 
 import redis 
+import urllib
+import requests
+import multiprocessing 
+import pandas as pd
 try:
     from urllib.parse import unquote 
 except ImportError:
@@ -19,30 +26,16 @@ except ImportError:
 
 from video_upload import youtube_video_upload, processing_youtube_url
 from logging.handlers import QueueHandler, QueueListener
-from vimeo_library import *
-
-
-sys.path.append('./logging/')
-sys.path.append('./additional_processing/')
-
-
-
-
-import urllib
-import requests
-import multiprocessing 
-import logging
-import pandas as pd
+from shutil import copyfile
 from string import punctuation 
-
-from moviepy.editor import *
-#from moviepy.audio.io import AudioFileClip
-import moviepy
-
-import time
-#from People_processing import *
+from vimeo_library import *
 from Email_processing import *
 from People_processing_CC import *
+from moviepy.editor import *
+
+
+
+
 
 #Defining global variables
 s3 = boto3.resource('s3')
