@@ -129,3 +129,5 @@ venv3/
 *.swp
 
 *.rdb
+
+*.bak
