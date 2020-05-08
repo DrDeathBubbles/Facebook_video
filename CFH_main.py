@@ -184,7 +184,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         configurer(queue)
         logger = logging.getLogger(__name__)
         vimeo_url = 'Not Available'
-        youtube_url = 'Not Available'
 
         print(f'{title_lead_in} is the title lead in')
 
@@ -769,7 +768,6 @@ if __name__ == '__main__':
         output_bucket = 'ws19-processed-videos'
         audio_files_bucket = 'ws19-audio'
         file_location = '/home/ubuntu/AJM/video_files/'
-        title_lead_in = ''
 
     elif presets == 1:
         speaker_email_data = input('Enter the full string path for the speaker email list:')
@@ -780,4 +778,4 @@ if __name__ == '__main__':
         print('Error - must enter eithe DEFAULTS or INPUTS')        
         exit()
 
-    main(speaker_email_data, title_lead_in = title_lead_in, watermark=watermark, sting = sting, input_bucket = input_bucket, output_bucket = output_bucket, audio_files_bucket = audio_files_bucket)
+    main(speaker_email_data, watermark=watermark, sting = sting, input_bucket = input_bucket, output_bucket = output_bucket, audio_files_bucket = audio_files_bucket)
