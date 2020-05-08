@@ -5,8 +5,6 @@ sys.path.append('./additional_processing/')
 import os 
 import logging
 import boto3
-import botocore
-import os
 import json 
 import time
 import logging
