@@ -176,7 +176,7 @@ def processing_audio_output_message(s3_url, uuid):
 
 
 
-def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket, output_bucket, audio_files_bucket, title_lead_in):
+def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket, output_bucket, audio_files_bucket):
     """
     Processes the message which is sent 
     """
@@ -185,12 +185,10 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
         logger = logging.getLogger(__name__)
         vimeo_url = 'Not Available'
 
-        print(f'{title_lead_in} is the title lead in')
 
         task = tasks.get()
         message = task[0]
 
-        print(message)
 
 
         if message == 0:
@@ -269,7 +267,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 speakers_for_youtube_tag = speakers_for_emails
                 speakers_for_emails = speakers_for_emails.split(',')
                 title = r.hget(key, 'title')
-                title_for_videos =  title_lead_in + title
+                title_for_videos = title
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
                 print(title)
@@ -617,7 +615,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket,title_lead_in = '', watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',sheet_name =
+def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',sheet_name =
 'WS_18_stages',sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg',free_cores=5, priority_cores = 15 ):
     """
     Manages SQS and the multiprocessing section of the code
@@ -662,7 +660,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket,titl
         process_name = 'Ordinary_{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks_normal, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket, title_lead_in))
+        process_name, tasks_normal, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
 
         new_process.start()
 
@@ -672,7 +670,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket,titl
         process_name = 'Priority_{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks_priority, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket, title_lead_in))
+        process_name, tasks_priority, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
 
         new_process.start()    
 
