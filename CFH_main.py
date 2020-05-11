@@ -223,7 +223,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                    print(f'{process_name} failed to retrieve video from S3')
 
                except Exception as e:
-                   logging.error(f'{process_name} failed to update sheets for {uuid}')
+                   logging.error(f'{process_name} failed to update Redis for {uuid}')
                    print(f'{process_name} failed to update Redis')
 
                continue 
