@@ -148,16 +148,6 @@ def video_processing(process_name,video_file,sting, watermark, output):
     remove_temp=False, codec="libx264", audio_codec="aac")
 
 
-def audio_processing(video_file, output):
-        try:
-            temp = AudioFileClip(video_file)
-        except:
-            print('Oops, cannot process this audio file')
-            logging.error('Failed to process audio for {}'.format(video_file))
-        output = output.rstrip('.mp4') + '.mp3'
-        temp.write_audiofile(output)
-
-
 
 def processing_output_message(youtube_url, s3_url, uuid, vimeo_url):
     message_attributes = {'youtube_url':{'DataType':'String','StringValue': youtube_url},
