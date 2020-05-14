@@ -231,7 +231,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-
             try:
                 description = r.hget(key,'description')
                 speakers = r.hget(key, 'speakers')
@@ -454,69 +453,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     print(f'{process_name} failed to update sheets')
 
 
-
-            try:   
-                s3_url_trans = f'https://s3-eu-west-1.amazonaws.com/{audio_files_bucket}/audio/{uuid}_{title}.mp3'  
-                sqs = boto3.resource('sqs',region_name='eu-west-1')
-                print('Transcription resourse made')
-                trans_queue = sqs.get_queue_by_name(QueueName='Talkbot_transcription')
-                print('Transcription queue got')
-                data = {}
-                data['Body'] = {'uuid':uuid, 's3_url':s3_url_trans, 'youtube_url':youtube_url, 'vimeo_url':vimeo_url}
-                data = json.dumps(data)
-                trans_queue.send_message(MessageBody=data)
-                print('Transcription queue populated')
-
-
-                try:
-                    r.hset(key,'status','Transcription queue populated')
-
-                except Exception as e:
-                    logging.error(f'{process_name} failed to update redis for transcription ')
-                    print(f'{process} failed to update Redis for transcription')
-
-
-
-            except Exception  as e:
-                print(f'Failed to populate transcription queue for {message}')
-                logger.error(f'Failed to populate transcription queue for {message}')
-
-
-                try:
-                    r.hset(key,'status','Avenger queue failed to populate')
-
-                except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
-                    print(f'{process_name} failed to update sheets')
-
-
-
-            try:
-                for speaker in speakers_for_emails:
-                    emails = get_emails_cc(str(speaker), speaker_email_data)
-                    send_email_all_links(emails[0],emails[1],youtube_url, vimeo_url, s3_link_public) 
-                    time.sleep(5)
-
-
-                try:
-                    r.hset(key,'status','Speakers emailed')
-
-                except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
-                    print(f'{process_name:} failed to update sheets')
-
-
-            except:
-                print('Emails have not been sent!')    
-                logging.error(f'failed to cc email {message}')
-
-
-                try:
-                    r.hset(key,'status','Speakers not emailed')
-
-                except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
-                    print(f'{process_name} failed to update sheets')
 
             print(f'{process_name} process finishes {message}')
 
