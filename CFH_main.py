@@ -29,11 +29,9 @@ try:
 except ImportError:
      from urlparse import unquote 
 
-#Defining global variables
 
 s3 = boto3.resource('s3')
-r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on non-standard port 6378[]
-
+r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #NOTE :Listening on non-standard port 6378]
 
 def listener_configurer():
     root = logging.getLogger()
