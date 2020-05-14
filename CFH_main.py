@@ -167,13 +167,6 @@ def processing_output_message(youtube_url, s3_url, uuid, vimeo_url):
     return message_attributes
 
 
-def processing_audio_output_message(s3_url, uuid):
-    message_attributes = { 's3_url':{'DataType':'String','StringValue': s3_url},
-    'uid':{'DataType':'String', 'StringValue': uuid}}
-    return message_attributes
-
-
-
 def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket, output_bucket, audio_files_bucket):
     """
     Processes the message which is sent 
