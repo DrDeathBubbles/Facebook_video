@@ -429,13 +429,7 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
     """
 
 
-
-
-
-#Setting up the multiprocess processing part
-    
-
-    tasks_normal = multiprocessing.Queue(-1) #was multiprocess
+    tasks_normal = multiprocessing.Queue(-1) 
     tasks_priority = multiprocessing.Queue(-1)
 
 
@@ -469,7 +463,6 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
         new_process.start()    
 
 
-#Setting up the connection to monitor SQS 
 
     sqs = boto3.resource('sqs',region_name = 'eu-west-1')
     q = sqs.get_queue_by_name(QueueName='DS_AJM_VIDEO')    
