@@ -292,47 +292,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     print(f'{process_name} failed to update redis')
 
 
-            try:
-                audio_processing(file_location +'edited_videos/'+message, file_location +'edited_videos/audio/'+message)
-                print('Audio processing successful')
-
-                try:
-                    r.hset(key,'status','Audio Processed')
-
-                except Exception as e:
-                    logging.error(f'Failed to update sheets for {process_name}')
-                    print(f'{process_name} failed to update sheets')
-
-
-
-                try:
-                    post_to_s3_audio(file_location, message, uuid + '_' + title + '.mp3', audio_files_bucket)
-
-                    try:
-                        r.hset(key,'status','Audio posted to S3') 
-
-                    except Exception as e:
-                        logging.error(f'Failed to update sheets for {process_name}')
-                        print(f'{process_name} failed to update sheets')
-
-
-
-                except Exception as e:    
-
-                    
-                    try:
-                        r.hset(key,'status','Failed to post audio to S3') 
-
-                    except Exception as e:
-                        logging.error(f'Failed to update sheets for {process_name}')
-                        print(f'{process_name} failed to update sheets')
-
-
-
-            except Exception as e:
-                logging.error(f'Problem with audio processing by {process_name}')
-                print(f'{process_name} failed to process audio')
-
 
 
             try:
@@ -495,7 +454,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 data['Body'] = message_attributes
                 data = json.dumps(data)
                 youtube_queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
-                print('Queue populated')
 
 
                 try:
