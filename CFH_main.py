@@ -230,32 +230,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-            try:
-                video_processing(process_name,file_location + message, sting,
-                 watermark, file_location +'edited_videos/'+message)
-                
-                try:
-                    print(f'Video processing successful')
-                    r.hset(key,'status','Video processing complete') 
-
-                except Exception as e:
-                    logging.error(f'Failed to update Redis for {process_name}')
-                    print(f'{process_name} failed to update Redis')
-
-
-
-            except Exception as e:
-                logger.error(f'{process_name} problem processing video {uuid}')
-                print(f'{process_name} problem processing {uuid}')
-                copyfile(file_location+message,file_location +'edited_videos/'+message)
-
-                try:
-                    r.hset(key,'status',f'{process_name} failed to update Redis')
-
-                except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
-                    print(f'{process_name} failed to update Redis')
-
 
 
             try:
