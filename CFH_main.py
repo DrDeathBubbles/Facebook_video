@@ -153,6 +153,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
     Processes the message which is sent 
     """
     while True:
+        process_name = name
         configurer(queue)
         logger = logging.getLogger(__name__)
         vimeo_url = 'Not Available'
@@ -445,9 +446,8 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
 
     for i in range(num_processes):
 
-        process_name = 'Ordinary_{}'.format(str(i))
 
-        new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
+        new_process = multiprocessing.Process(name = 'Ordinary_{}'.format(str(i)),target=processing_message, args=(logging_queue, worker_configurer,
         process_name, tasks_normal,input_bucket, output_bucket))
 
         new_process.start()
@@ -457,7 +457,7 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
 
         process_name = 'Priority_{}'.format(str(i))
 
-        new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
+        new_process = multiprocessing.Process(name = 'Priority_{}'.format(str(i)), target=processing_message, args=(logging_queue, worker_configurer,
         process_name, tasks_priority,input_bucket, output_bucket))
 
         new_process.start()    
