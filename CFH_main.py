@@ -10,19 +10,13 @@ import time
 import logging
 import logging.handlers
 import moviepy
-import string 
 import redis 
 import urllib
 import requests
 import multiprocessing 
 import pandas as pd
-try:
-    from urllib.parse import unquote 
-except ImportError:
-     from urlparse import unquote 
 
 
-from video_upload import youtube_video_upload, processing_youtube_url
 from logging.handlers import QueueHandler, QueueListener
 from shutil import copyfile
 from string import punctuation 
@@ -32,7 +26,13 @@ from People_processing_CC import *
 from moviepy.editor import *
 
 
+try:
+    from urllib.parse import unquote 
+except ImportError:
+     from urlparse import unquote 
+
 #Defining global variables
+
 s3 = boto3.resource('s3')
 r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on non-standard port 6378[]
 youtube_privacy_status = 'private'
@@ -303,37 +303,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     print(f'{process_name} failed to update Redis')
 
 
-
-            try:
-               upload_to_youtube = int(r.hget(key,'upload_to_youtube'))
-               if upload_to_youtube == 1:
-                   try:
-                       youtube_upload = youtube_video_upload(file=file_location + 'edited_videos/' + message,title= title_for_videos,
-                        description= description,keywords='AJM F',category='22',privacyStatus=youtube_privacy_status)
-                       youtube_url = processing_youtube_url(youtube_upload)
-
-                       try:
-
-                           r.hset(key,'youtube_link', youtube_url)
-
-                       except Exception as e:
-                           logging.error(f'{process_name} failed to update Redis with youtube link')
-                           print(f'{process_name} failed to update Redis with youtube link')
-                        
-
-                   except Exception as e:
-                        logging.error(f'{process_name} failed to upload to youtube')
-                        print(f'{process_name} failed to upload to youtube')   
-
-               else:
-                    youtube_url = 'Not available'
-                    r.hset(key,'youtube_link', youtube_url)
-
-
-            except Exception as e:
-                logging.error(f'{process_name} failed to get youtube upload flag')
-                youtube_url = 'Not available'
-                pass
 
             try:
                 post_to_s3(file_location,message, f'{uuid}_{title}.mp4',output_bucket)  ####CFH Need to fix this This needs to be changed for the input files
