@@ -427,7 +427,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                 pass
 
             try:
-                post_to_s3(file_location,message, f'{uuid}_{title}.mp4',output_bucket)
+                post_to_s3(file_location,message, f'{uuid}_{title}.mp4',output_bucket)  ####CFH Need to fix this This needs to be changed for the input files
                 print('Successfully posted to S3') 
                 
                 
@@ -455,7 +455,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
             try:
-                #os.remove(file_location + message)
+                #os.remove(file_location + message)  ###CFH Need to fix this
                 #os.remove(file_location + 'edited_videos/' + message)
                 #os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
                 print('removed local files')
@@ -488,22 +488,12 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
             try:   
                 s3_link_public = f'https://s3-eu-west-1.amazonaws.com/{output_bucket}/{uuid}_{title}.mp4'
-                print(s3_link_public)
-                print(youtube_url)
-                print(uuid)
                 message_attributes = processing_output_message(youtube_url, s3_link_public, uuid, vimeo_url)
-                print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
-                print('Resourse made')
                 youtube_queue = sqs.get_queue_by_name(QueueName='Talkbot_output')
-                print('Queue got')
                 data = {}
                 data['Body'] = message_attributes
                 data = json.dumps(data)
-                print('data')
-                print(data)
-                print('message_attributes')
-                print(message_attributes)
                 youtube_queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
                 print('Queue populated')
 
