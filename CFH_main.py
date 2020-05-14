@@ -21,8 +21,6 @@ from logging.handlers import QueueHandler, QueueListener
 from shutil import copyfile
 from string import punctuation 
 from vimeo_library import *
-from Email_processing import *
-from People_processing_CC import *
 from moviepy.editor import *
 
 
@@ -35,7 +33,6 @@ except ImportError:
 
 s3 = boto3.resource('s3')
 r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #Listening on non-standard port 6378[]
-youtube_privacy_status = 'private'
 
 
 def listener_configurer():
@@ -360,9 +357,6 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
                     logging.error(f'{process_name} failed to update sheets')
                     print(f'{process_name} failed to update sheets')
 
-
-            #This is where we get the video url for the facebook video and email it
-            #to the speakers
 
             try:   
                 s3_link_public = f'https://s3-eu-west-1.amazonaws.com/{output_bucket}/{uuid}_{title}.mp4'
