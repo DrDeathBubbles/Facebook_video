@@ -148,7 +148,7 @@ def processing_output_message(youtube_url, s3_url, uuid, vimeo_url):
     return message_attributes
 
 
-def processing_message(queue, configurer, process_name, tasks, speaker_email_data, sting, watermark, sheet_id, sheet_name, input_bucket, output_bucket, audio_files_bucket):
+def processing_message(queue, configurer, process_name, tasks, input_bucket, output_bucket):
     """
     Processes the message which is sent 
     """
@@ -411,8 +411,7 @@ def processing_message(queue, configurer, process_name, tasks, speaker_email_dat
 
 
 
-def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, watermark='./watermarks/MC_watermark.png',sting='./sting/MC_intro.mp4',sheet_name =
-'WS_18_stages',sheet_id = '1LafAM4Ru3fZYEyt44J-Pixul0VV4Yfxmvu7hr5te-vg',free_cores=5, priority_cores = 15 ):
+def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
     """
     Manages SQS and the multiprocessing section of the code
 
@@ -456,7 +455,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
         process_name = 'Ordinary_{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks_normal, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
+        process_name, tasks_normal,input_bucket, output_bucket))
 
         new_process.start()
 
@@ -466,7 +465,7 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
         process_name = 'Priority_{}'.format(str(i))
 
         new_process = multiprocessing.Process(target=processing_message, args=(logging_queue, worker_configurer,
-        process_name, tasks_priority, speaker_email_data, sting, watermark, sheet_id, sheet_name,input_bucket, output_bucket, audio_files_bucket))
+        process_name, tasks_priority,input_bucket, output_bucket))
 
         new_process.start()    
 
@@ -552,24 +551,10 @@ def main(speaker_email_data,input_bucket, output_bucket, audio_files_bucket, wat
 
 
 if __name__ == '__main__':
-    presets = eval(input('Would you like to continue with DEFAULTS(0) or user defined INPUTS(1)?:'))
+    input_bucket = 'ws19-raw-videos'
+    output_bucket = 'ws19-processed-videos'
+    file_location = '/home/ubuntu/AJM/video_files/'
+    
+    
 
-    if presets == 0:
-        speaker_email_data = './stages_speakers/WS19_emails.csv'
-        watermark = './watermarks/Web_summit_logo_stacked_colour.png'
-        sting = './sting/WS19_sting01.mp4'
-        input_bucket = 'ws19-raw-videos'
-        output_bucket = 'ws19-processed-videos'
-        audio_files_bucket = 'ws19-audio'
-        file_location = '/home/ubuntu/AJM/video_files/'
-
-    elif presets == 1:
-        speaker_email_data = input('Enter the full string path for the speaker email list:')
-        sting = input('Enter the full string path for the sting:')
-        watermark = input('Enter the full string path for the watermark:')
-
-    else:
-        print('Error - must enter eithe DEFAULTS or INPUTS')        
-        exit()
-
-    main(speaker_email_data, watermark=watermark, sting = sting, input_bucket = input_bucket, output_bucket = output_bucket, audio_files_bucket = audio_files_bucket)
+    main(input_bucket = input_bucket, output_bucket = output_bucket, audio_files_bucket = audio_files_bucket)
