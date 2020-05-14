@@ -434,7 +434,6 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
 
 #Setting up the multiprocess processing part
     
-    speaker_email_data = pd.read_csv(speaker_email_data)
 
     tasks_normal = multiprocessing.Queue(-1) #was multiprocess
     tasks_priority = multiprocessing.Queue(-1)
