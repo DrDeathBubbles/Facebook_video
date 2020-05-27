@@ -130,11 +130,8 @@ if __name__ == '__main__':
     with open('schedule_query.gql') as f:
         query = f.read()
     query = ''.join(query.split('\n'))    
-       
    
-
-   
-   main(query)
+    main(query)
 
 
 
