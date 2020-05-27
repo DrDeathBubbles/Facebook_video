@@ -62,7 +62,7 @@ def speaker_name_processing(speakers):
 
 def run_query(query):
     headers = {'x-event-id': 'cc20'}
-    request = requests.post('https://api.cilabs.com/graphql', json={'query': query})
+    request = requests.post('https://api.cilabs.com/graphql', headers = headers, json={'query': query})
     if request.status_code == 200:
         return request.json()
     else:
