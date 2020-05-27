@@ -123,8 +123,17 @@ def main(query):
 
 
 if __name__ == '__main__':
-   slug = input('Please enter conference slug:')
-   query = ''' {conference(id: "%s") {  id schedule { days { timeslots { nodes { tracks { nodes { id } } id title description startsAt endsAt location { name id } participants { nodes { attendee { lastName firstName } } } } } } } } } ''' % (slug) 
+   #slug = input('Please enter conference slug:')
+   #query = ''' {conference(id: "%s") {  id schedule { days { timeslots { nodes { tracks { nodes { id } } id title description startsAt endsAt location { name id } participants { nodes { attendee { lastName firstName } } } } } } } } } ''' % (slug) 
+   #query_new = ''' {conference(id: "%s") {  id schedule { days { timeslots { edges { nodes { tracks { nodes { id } } id title description startsAt endsAt location { name id } participants { nodes { attendee { lastName firstName } } } } } } } } } } ''' % (slug) 
+   
+    with open('schedule_query.gql') as f:
+        query = f.read()
+    query = ''.join(query.split('\n'))    
+       
+   
+
+   
    main(query)
 
 

@@ -1,0 +1,49 @@
+{
+  conference(id: "cc20") {
+    id
+    schedule {
+      days {
+        timeslots {
+          
+        	edges{
+          node {
+            tracks {
+              edges
+              {
+              node {
+                id
+              }
+              }  
+            }
+          }
+            
+            node{
+              
+              
+            
+            id
+            title
+            description
+            startsAt
+            endsAt
+            location {
+              name
+              id
+            }
+            participants {
+              edges{
+              node {
+                attendee {
+                  lastName
+                  firstName
+                }
+              }
+            }
+          }
+          }
+        }
+      }
+    }
+    }
+  }
+}
