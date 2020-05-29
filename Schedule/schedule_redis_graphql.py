@@ -97,7 +97,7 @@ def time_schedule_aquisition_3(talks):
     for i in talks['conference']['schedule']['days']:
         strip_nodes = i['timeslots']['edges']
         nodes = [i['node'] for i in strip_nodes]
-        temp.append(pd.DataFrame(nodes)
+        temp.append(pd.DataFrame(nodes))
     total = pd.concat(temp, ignore_index = True)
     total.fillna('', inplace = True)   
     total['location'] = total['location'].apply(get_locations)
