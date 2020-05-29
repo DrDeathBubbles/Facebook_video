@@ -129,7 +129,7 @@ if __name__ == '__main__':
       query = f.read()
       query = ''.join(query.split('\n'))    
    
-    main(query, slug)
+   main(query, slug)
 
 
 
