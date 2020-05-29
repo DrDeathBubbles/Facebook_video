@@ -90,6 +90,29 @@ def time_schedule_aquisition_2(talks):
     total = total[['title','description','start_time','end_time','location','id','speakers','speakers_for_emails','uuid']]
     return total
 
+
+def time_schedule_aquisition_3(talks):
+    talks = pd.DataFrame(talks['data'])
+    temp = []
+    for i in talks['conference']['schedule']['days']:
+        strip_nodes = i['timeslots']['edges']
+        nodes = [i['node'] for i in strip_nodes]
+        temp.append(pd.DataFrame(nodes)
+    total = pd.concat(temp, ignore_index = True)
+    total.fillna('', inplace = True)   
+    total['location'] = total['location'].apply(get_locations)
+    total['speakers_seed'] = total['participants'].apply(get_participants)
+    total['speakers'] = total['speakers_seed'].apply(speaker_name_processing)
+    total['speakers_for_emails'] = total['speakers_seed'].apply(','.join)
+
+    total['start_time'] = total['startsAt'].apply(convert_time_zone)
+    total['end_time'] = total['endsAt'].apply(convert_time_zone)
+    
+    
+    total['uuid'] = total['id'] 
+    total = total[['title','description','start_time','end_time','location','id','speakers','speakers_for_emails','uuid']]
+    return total    
+
 def redis_import(row,r):
     r_key = row['uuid'] 
     for key in row.keys():
