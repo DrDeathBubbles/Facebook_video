@@ -107,7 +107,7 @@ def redis_import(row,r):
     r.hsetnx(r_key,'IGNORE_Emails_resent',0)        
 
 
-def main(query):
+def main(query, slug):
     r = redis.Redis(host='localhost', port = 6379, db=0)
     old_talks = ''
     while True:
