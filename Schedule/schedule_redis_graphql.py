@@ -60,8 +60,8 @@ def speaker_name_processing(speakers):
 
 
 
-def run_query(query):
-    headers = {'x-event-id': 'cc20'}
+def run_query(query, slug):
+    headers = {'x-event-id': slug}
     request = requests.post('https://api.cilabs.com/graphql', headers = headers, json={'query': query})
     if request.status_code == 200:
         return request.json()
@@ -111,7 +111,7 @@ def main(query):
     r = redis.Redis(host='localhost', port = 6379, db=0)
     old_talks = ''
     while True:
-        new_talks = run_query(query)
+        new_talks = run_query(query, slug)
         if new_talks != old_talks:
             time_schedule = time_schedule_aquisition_2(new_talks)
             time_schedule.fillna('',inplace = True)
@@ -124,7 +124,7 @@ def main(query):
 
 
 if __name__ == '__main__':
-   #slug = input('Please enter conference slug:')
+   slug = input('Please enter conference slug:')
    #query = ''' {conference(id: "%s") {  id schedule { days { timeslots { nodes { tracks { nodes { id } } id title description startsAt endsAt location { name id } participants { nodes { attendee { lastName firstName } } } } } } } } } ''' % (slug) 
    #query_new = ''' {conference(id: "%s") {  id schedule { days { timeslots { edges { nodes { tracks { nodes { id } } id title description startsAt endsAt location { name id } participants { nodes { attendee { lastName firstName } } } } } } } } } } ''' % (slug) 
    
@@ -132,7 +132,7 @@ if __name__ == '__main__':
         query = f.read()
     query = ''.join(query.split('\n'))    
    
-    main(query)
+    main(query, slug)
 
 
 
