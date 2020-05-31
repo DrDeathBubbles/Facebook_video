@@ -242,6 +242,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             try:
                 privacy = int(r.hget(key,'set_private'))
+                privacy = 1
                 print(privacy)
 
 
@@ -547,4 +548,4 @@ if __name__ == '__main__':
     
     
 
-    main(input_bucket = input_bucket, output_bucket = output_bucket, audio_files_bucket = audio_files_bucket)
+    main(input_bucket = input_bucket, output_bucket = output_bucket)
