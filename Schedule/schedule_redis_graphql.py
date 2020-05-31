@@ -38,6 +38,19 @@ def get_participants(participants):
          out.append('') 
     return out
 
+def get_participants_2(participants):
+    out = []
+    for part in participants['edges']:
+      try:
+        if part['node']['attendee']['firstName'] is not None and part['node']['attendee']['lastName'] is not None:
+          out.append(part['node']['attendee']['firstName'] + ' ' + part['node']['attendee']['lastName'])
+        else:
+          out.append(' ')  
+      except:
+         out.append('') 
+    return out
+
+
 def get_locations(location):
     return location['name']
 
