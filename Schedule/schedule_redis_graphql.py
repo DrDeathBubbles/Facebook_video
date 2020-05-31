@@ -114,7 +114,7 @@ def time_schedule_aquisition_3(talks):
     total = pd.concat(temp, ignore_index = True)
     total.fillna('', inplace = True)   
     total['location'] = total['location'].apply(get_locations)
-    total['speakers_seed'] = total['participants'].apply(get_participants_3)
+    total['speakers_seed'] = total['participants'].apply(get_participants_2)
     total['speakers'] = total['speakers_seed'].apply(speaker_name_processing)
     total['speakers_for_emails'] = total['speakers_seed'].apply(','.join)
 
