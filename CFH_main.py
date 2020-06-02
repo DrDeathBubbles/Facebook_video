@@ -34,6 +34,8 @@ except ImportError:
 
 s3 = boto3.resource('s3')
 r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #NOTE :Listening on non-standard port 6378]
+transcript_outbucket = 'talkbot-transcription-output'
+languages = ['pt','es','de','fr']
 
 def listener_configurer():
     root = logging.getLogger()
@@ -239,7 +241,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     logging.error(f'Failed to update sheets for {process_name}')
                     print(f'{process_name} failed to update redis')
 
-
+            try:
+                transcriptions = generate_transcription_translate('eu-west-1',input_bucket,message,transcript_outbucket,process_name, languages, translate = False)
 
 
             try:
