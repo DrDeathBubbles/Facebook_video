@@ -1,6 +1,7 @@
 import sys
 sys.path.append('./logging/')
 sys.path.append('./additional_processing/')
+sys.path.append('/home/ubuntu/Transcription/talkbot_transcription/source/')
 
 import os 
 import logging
@@ -19,7 +20,8 @@ import pandas as pd
 
 from logging.handlers import QueueHandler, QueueListener
 from shutil import copyfile
-from string import punctuation 
+from string import punctuation
+from Transcription_control import generate_transcription_translate 
 from vimeo_library import *
 from moviepy.editor import *
 
@@ -242,7 +244,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             try:
                 privacy = int(r.hget(key,'set_private'))
-                privacy = 1
+                privacy = 1 ### AJM CFH forcing private during upload
                 print(privacy)
 
 
