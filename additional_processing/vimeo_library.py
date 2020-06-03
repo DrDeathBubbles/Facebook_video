@@ -40,6 +40,7 @@ def vimeo_upload(file_name, title, description,privacy='anybody'):
 
 def subtitle_upload(video_uri,file_name,language, track_type = 'subtitles'):
     client.subtitle_upload(video_uri,track_type,language,file_name)
+    print('Force')
 
     
 
