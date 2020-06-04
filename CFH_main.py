@@ -155,7 +155,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
     Processes the message which is sent 
     """
     while True:
-        process_name = name
+        process_name 
         configurer(queue)
         logger = logging.getLogger(__name__)
         vimeo_url = 'Not Available'
@@ -244,6 +244,27 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
             try:
                 transcriptions = generate_transcription_translate('eu-west-1',input_bucket,message,transcript_outbucket,process_name, languages, translate = False)
 
+            except:
+                print('Transcription failed')
+
+
+
+
+            try:
+                region = 'eu-west-1'
+                inbucket = 'talkbot-transcription/'
+                infile = message
+                outbucket = 'talkbot-transcription-output' 
+                
+                file_link = f'https://s3-eu-west-1.amazonaws.com/{input_bucket}/{message}'
+                vtt_files = generate_transcription_translate(region, input_bucket, infile, outbucket, input_bucket, languages, translate = False)
+            except:
+
+                print('Problem making subtitle files')
+
+
+
+
 
             try:
                 privacy = int(r.hget(key,'set_private'))
@@ -304,7 +325,13 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     logging.error(f'Failed to update Redis for {process_name}')
                     print(f'{process_name} failed to update Redis')
 
+            try:
+                subtitle_upload_response = subtitle_upload(vimeo_url,subtitle_track_file)
 
+
+            except:
+
+                print('Failed to upload subtitles')
 
             try:
                 post_to_s3(file_location,message, f'{uuid}_{title}.mp4',output_bucket)  ####CFH Need to fix this This needs to be changed for the input files
