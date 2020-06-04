@@ -34,8 +34,9 @@ def vimeo_upload(file_name, title, description,privacy='anybody'):
 
 
     response = client.get(uri + '?fields=link').json()
-    return response['link']
 
+    #return response['link']
+    return response
 
 
 def subtitle_upload(video_uri,file_name,language, track_type = 'subtitles'):
