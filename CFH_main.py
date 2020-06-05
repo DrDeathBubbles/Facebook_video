@@ -251,6 +251,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     post_to_s3('./', trans_file, trans_file ,output_bucket)
 
             except:    
+                pass
 
 
             try:
