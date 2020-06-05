@@ -241,12 +241,16 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     print(f'{process_name} failed to update redis')
 
             try:
-                transcription_file = generate_transcription_translate('eu-west-1',input_bucket,message,transcript_outbucket,process_name, languages, translate = False)
+                transcription_file = generate_transcription_translate('eu-west-1',input_bucket,message,transcript_outbucket,languages, translate = False)
 
             except:
                 print('Transcription failed')
 
+            try:
+                for trans_file in transcription_file:
+                    post_to_s3('./', trans_file, trans_file , output_bucket)
 
+            except:    
 
 
             try:
