@@ -248,7 +248,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             try:
                 for trans_file in transcription_file:
-                    post_to_s3('./', trans_file, trans_file , output_bucket)
+                    post_to_s3('./', trans_file, trans_file ,output_bucket)
 
             except:    
 
