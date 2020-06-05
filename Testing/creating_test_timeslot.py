@@ -11,3 +11,7 @@ test_slot = {'title':'DS TEST TITLE', 'description':'DS TEST DESCRIPTION', 'star
 
 
 r.hmset('5947c6f6-7d35-4ade-a961-855c9762428f', test_slot)
+
+
+
+print('Finished')
