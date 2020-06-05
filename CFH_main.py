@@ -242,7 +242,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     print(f'{process_name} failed to update redis')
 
             try:
-                transcriptions = generate_transcription_translate('eu-west-1',input_bucket,message,transcript_outbucket,process_name, languages, translate = False)
+                transcription_file = generate_transcription_translate('eu-west-1',input_bucket,message,transcript_outbucket,process_name, languages, translate = False)
 
             except:
                 print('Transcription failed')
@@ -326,7 +326,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     print(f'{process_name} failed to update Redis')
 
             try:
-                subtitle_upload_response = subtitle_upload(vimeo_url,subtitle_track_file)
+                for subtitle_track_file in transcription_file:
+                    subtitle_upload_response = subtitle_upload(vimeo_url,subtitle_track_file)
 
 
             except:
@@ -574,8 +575,8 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
 
 
 if __name__ == '__main__':
-    input_bucket = 'ws19-raw-videos'
-    output_bucket = 'ws19-processed-videos'
+    input_bucket = 'cfh-input'
+    output_bucket = 'cfh-output'
     file_location = '/home/ubuntu/AJM/video_files/'
     
     
