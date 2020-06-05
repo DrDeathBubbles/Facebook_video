@@ -87,8 +87,7 @@ def retrieve_from_s3(filename, input_bucket):
 
 def post_to_s3(file_location, message, output_file_name, output_bucket):
     my_bucket = s3.Bucket(output_bucket)
-    a = my_bucket.upload_file(file_location +'edited_videos/'+message, output_file_name)
-
+    a = my_bucket.upload_file(file_location + message, output_file_name)
     return a
 
 
