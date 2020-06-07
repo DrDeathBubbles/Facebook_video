@@ -255,7 +255,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 region = 'eu-west-1'
                 infile = message
                 file_link = f'https://s3-eu-west-1.amazonaws.com/{input_bucket}/{message}'
-                sub_files = generate_transcription_translate(region, input_bucket, infile, languages, translate = False)
+                sub_files = generate_transcription_translate(region, input_bucket + '/', infile, languages, translate = False)
             except:
 
                 print('Problem making subtitle files')
