@@ -468,7 +468,7 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
 
     """
 
-
+    logger = logging.getLogger(__name__)
     tasks_normal = multiprocessing.Queue(-1) 
     tasks_priority = multiprocessing.Queue(-1)
 
