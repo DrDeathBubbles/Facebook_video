@@ -451,7 +451,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
 
-def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
+def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
     """
     Manages SQS and the multiprocessing section of the code
 
@@ -524,7 +524,7 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
             messages.append(temp)
 
         for message in messages:
-            print(message)
+           print(message) 
 
             try:
                 message = message.lstrip(input_bucket + '/') 
