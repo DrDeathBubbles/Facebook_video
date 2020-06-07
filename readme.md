@@ -5,7 +5,7 @@
 # Deployment
 
 1. Start processing system
-    python3 CFH_main.py 
+        python3 CFH_main.py 
 
 1. Open tunnel between processing system and scheduling system
     1. 
