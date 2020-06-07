@@ -527,7 +527,8 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
 
             try:
                 message = message.lstrip(input_bucket + '/') 
-                uuid = message.split('_')[-3]
+                #uuid = message.split('_')[-3]
+                uuid = message.rstrip('.mp4')
                 keys = r.keys()
                 keys = [c for c in keys if uuid in c]
 
