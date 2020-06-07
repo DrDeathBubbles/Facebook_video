@@ -91,6 +91,9 @@ def post_to_s3(file_location, message, output_file_name, output_bucket):
     return a
 
 
+def upload_to_s3(upload_file, bucket, upload_file_name):
+    out = s3.meta.client.upload_file(upload_file,bucket,upload_file_name)
+    return out
 
 
 def initialise_connection():
@@ -240,19 +243,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     logging.error(f'Failed to update sheets for {process_name}')
                     print(f'{process_name} failed to update redis')
 
-            try:
-                transcription_file = generate_transcription_translate('eu-west-1',input_bucket,message,transcript_outbucket,languages, translate = False)
-
-            except:
-                print('Transcription failed')
-
-            try:
-                for trans_file in transcription_file:
-                    post_to_s3('./', trans_file, trans_file ,output_bucket)
-
-            except:    
-                pass
-
 
             try:
                 region = 'eu-west-1'
@@ -261,14 +251,21 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 outbucket = 'talkbot-transcription-output' 
                 
                 file_link = f'https://s3-eu-west-1.amazonaws.com/{input_bucket}/{message}'
-                vtt_files = generate_transcription_translate(region, input_bucket, infile, outbucket, input_bucket, languages, translate = False)
+                sub_files = generate_transcription_translate(region, input_bucket, infile, outbucket, input_bucket, languages, translate = False)
             except:
 
                 print('Problem making subtitle files')
 
+            try:
+                for sub in sub_files[0].values():
+                    upload_to_s3(sub, output_bucket ,'vtt/' + upload_file_name)
 
+                for sub in sub_files[1].values():
+                    upload_to_s3(sub, output_bucket ,'srt/' + upload_file_name)    
 
-
+            except:
+                print('Sub files not uploaded')
+                pass    
 
             try:
                 privacy = int(r.hget(key,'set_private'))
