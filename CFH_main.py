@@ -524,6 +524,7 @@ def main(input_bucket, output_bucket,free_cores=5, priority_cores = 15 ):
             messages.append(temp)
 
         for message in messages:
+            print(message)
 
             try:
                 message = message.lstrip(input_bucket + '/') 
