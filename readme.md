@@ -1,3 +1,24 @@
+
+# Talkbot
+
+
+# Deployment
+
+1. Start processing system
+    python3 CFH_main.py 
+
+1. Open tunnel between processing system and scheduling system
+    1. 
+
+
+
+
+
+
+
+
+
+
 # Talkbot
 This is a program for the automated processing and upload of videos to Facebook. It is composed of several files, but most notably Multiprocessing\_master\_control.py, People\_processing.py and Email\_processing.py
 
@@ -15,6 +36,15 @@ Install the python requirements using pip3 install -r requirements.txt in the vi
     2. Go into events.
     3. Add notifications and add Put Post, send to SQS queue and select the created queue from above.
 3.  
+
+
+
+
+
+
+
+
+
 
 
 ## Getting facebook page access tokens
