@@ -168,6 +168,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
         configurer(queue)
         logger = logging.getLogger(__name__)
         vimeo_url = 'Not Available'
+        youtube_url = 'Not Available'
 
 
         task = tasks.get()
