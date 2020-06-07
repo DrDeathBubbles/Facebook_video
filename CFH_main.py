@@ -254,7 +254,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
             try:
                 region = 'eu-west-1'
                 infile = message
-                file_link = f'https://s3-eu-west-1.amazonaws.com/{input_bucket}/{message}'
                 sub_files = generate_transcription_translate(region, input_bucket + '/', infile, languages, translate = False)
             except:
 
@@ -334,6 +333,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             try:
                 sub = sub_files[0]['en']
+                print(sub)
                 subtitle_upload_response = subtitle_upload(vimeo_url,sub)
 
 
@@ -371,7 +371,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             try:
                 file_locations = [file_location, './']
-                clean_up(file_locations, key)
+                #clean_up(file_locations, key)
                 print('removed local files')
 
 
