@@ -246,22 +246,21 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             try:
                 region = 'eu-west-1'
-                inbucket = 'talkbot-transcription/'
                 infile = message
-                outbucket = 'talkbot-transcription-output' 
-                
                 file_link = f'https://s3-eu-west-1.amazonaws.com/{input_bucket}/{message}'
-                sub_files = generate_transcription_translate(region, input_bucket, infile, outbucket, input_bucket, languages, translate = False)
+                sub_files = generate_transcription_translate(region, input_bucket, infile, output_bucket, languages, translate = False)
             except:
 
                 print('Problem making subtitle files')
 
             try:
+                upload_to_s3(sub_files[2], output_bucket,'transcription/' + sub_files[2])
+
                 for sub in sub_files[0].values():
-                    upload_to_s3(sub, output_bucket ,'vtt/' + upload_file_name)
+                    upload_to_s3(sub, output_bucket ,'vtt/' + sub)
 
                 for sub in sub_files[1].values():
-                    upload_to_s3(sub, output_bucket ,'srt/' + upload_file_name)    
+                    upload_to_s3(sub, output_bucket ,'srt/' + sub)    
 
             except:
                 print('Sub files not uploaded')
