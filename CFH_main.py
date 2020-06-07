@@ -334,6 +334,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
             try:
                 sub = sub_files[0]['en']
                 print(sub)
+                print(vimeo_url)
                 subtitle_upload_response = subtitle_upload(vimeo_url,sub)
 
 
