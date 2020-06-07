@@ -483,7 +483,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
     num_processes = multiprocessing.cpu_count() - free_cores - priority_cores 
 
     for i in range(num_processes):
-         process_name = 'Ordinary_{}'.format(str(i))
+        process_name = 'Ordinary_{}'.format(str(i))
 
 
         new_process = multiprocessing.Process(name = process_name ,target=processing_message, args=(logging_queue, worker_configurer,
