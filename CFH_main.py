@@ -16,6 +16,7 @@ import urllib
 import requests
 import multiprocessing 
 import pandas as pd
+import glob
 
 
 from logging.handlers import QueueHandler, QueueListener
@@ -151,6 +152,13 @@ def processing_output_message(youtube_url, s3_url, uuid, vimeo_url):
     'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
 
+def clean_up(file_locations, key):
+    for file_location in file_locations:
+        files = glob.glob(file_location + f'*{key}*')
+        for f in files:
+            os.remove(f)
+
+
 
 def processing_message(queue, configurer, process_name, tasks, input_bucket, output_bucket):
     """
@@ -248,7 +256,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 region = 'eu-west-1'
                 infile = message
                 file_link = f'https://s3-eu-west-1.amazonaws.com/{input_bucket}/{message}'
-                sub_files = generate_transcription_translate(region, input_bucket, infile, output_bucket, languages, translate = False)
+                sub_files = generate_transcription_translate(region, input_bucket, infile, languages, translate = False)
             except:
 
                 print('Problem making subtitle files')
@@ -275,7 +283,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
                 if privacy == 1:
                     print('uploading to vimeo')
-                    vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
+                    vimeo_url = vimeo_upload(file_location + message, title_for_videos, description, privacy = 'unlisted')
                     print('Uploaded to vimeo')
                     
                     try: 
@@ -295,7 +303,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
                 elif privacy == 0:
-                    vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_videos, description)
+                    vimeo_url = vimeo_upload(file_location + message, title_for_videos, description)
                     
                     try: 
                         r.hset(key,'status','Posted publicly on Vimeo')
@@ -363,9 +371,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
             try:
-                #os.remove(file_location + message)  ###CFH Need to fix this
-                #os.remove(file_location + 'edited_videos/' + message)
-                #os.remove(file_location +'edited_videos/audio/'+message.rstrip('.mp4') + '.mp3')
+                file_locations = [file_location, './']
+                clean_up(file_locations, key)
                 print('removed local files')
 
 
