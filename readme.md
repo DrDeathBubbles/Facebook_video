@@ -4,12 +4,22 @@
 
 # Deployment
 
-1. Start processing system
+1. Start processing on processing instance
 
         python3 CFH_main.py 
 
+2. Start scheduling on scheduling instance
+    1. Redis running on 6379
+    2. Rediscommander running on 8081
+
+        python3 ./Schedule/schedule_redis_graphql.py
+
+
 1. Open tunnel between processing system and scheduling system
-    1. 
+
+        autossh -i ~/.ssh/steven_tobin.pem -N -f -L localhost:6378:localhost:6379 
+
+        autossh -i ~/.ssh/steven_tobin.pem -N -f -L localhost:6378:localhost:6379 ubuntu@ec2-18-203-222-202.eu-west-1.compute.amazonaws.co
 
 
 
