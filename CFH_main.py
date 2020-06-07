@@ -327,8 +327,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     print(f'{process_name} failed to update Redis')
 
             try:
-                for subtitle_track_file in transcription_file:
-                    subtitle_upload_response = subtitle_upload(vimeo_url,subtitle_track_file)
+                sub = sub_files[0]['en']
+                subtitle_upload_response = subtitle_upload(vimeo_url,sub)
 
 
             except:
