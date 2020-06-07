@@ -373,7 +373,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             try:
                 file_locations = [file_location, './']
-                #clean_up(file_locations, key)
+                clean_up(file_locations, key)
                 print('removed local files')
 
 
