@@ -448,7 +448,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             except Exception  as e:
                 print('Failed to populate Babble queue')
-                logging.error(f'Failed to populate Babble queue for {message}'                
+                logging.error(f'Failed to populate Babble queue for {message}')                
 
 
           
