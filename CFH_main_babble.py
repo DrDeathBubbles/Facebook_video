@@ -437,7 +437,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
             print(s3_link_public)
             print(uuid)
             print(vimeo_url)
-
+            print(sub_files[3]['results']['transcripts'][0]['transcript'])
             try: 
 
                 message_attributes = processing_output_babble(s3_link_public, uuid, vimeo_url,speakers,sub_files[3]['results']['transcripts'][0]['transcript'])
