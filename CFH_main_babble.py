@@ -156,9 +156,9 @@ def processing_output_babble(s3_url, uuid, vimeo_url, speakers, text):
     message_attributes = {
     'vimeo_url':{'DataType':'String','StringValue': vimeo_url},
     's3_url':{'DataType':'String','StringValue': s3_url},
-    'uid':{'DataType':'String', 'StringValue': uuid}},
+    'uid':{'DataType':'String', 'StringValue': uuid},
     'speakers':{'DataType':'String','StringValue': speakers},
-    'text':{'DataType':'String','StringValue': text}
+    'text':{'DataType':'String','StringValue': text}}
     return message_attributes    
 
 def clean_up(file_locations, key):
