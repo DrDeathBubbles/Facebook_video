@@ -436,7 +436,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
             try:  
-                message_attributes = processing_output_babble(s3_link_public, uuid, vimeo_url,speakers,sub_file[3])
+                message_attributes = processing_output_babble(s3_link_public, uuid, vimeo_url,speakers,sub_files[3])
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 youtube_queue = sqs.get_queue_by_name(QueueName='Babble')
                 data = {}
