@@ -151,6 +151,16 @@ def processing_output_message(youtube_url, s3_url, uuid, vimeo_url):
     'uid':{'DataType':'String', 'StringValue': uuid}}
     return message_attributes
 
+
+def processing_output_babble(s3_url, uuid, vimeo_url, speakers, text):
+    message_attributes = {
+    'vimeo_url':{'DataType':'String','StringValue': vimeo_url},
+    's3_url':{'DataType':'String','StringValue': s3_url},
+    'uid':{'DataType':'String', 'StringValue': uuid}},
+    'speakers':{'DataType':'String','StringValue': speakers},
+    'text':{'DataType':'String','StringValue': text}
+    return message_attributes    
+
 def clean_up(file_locations, key):
     for file_location in file_locations:
         files = glob.glob(file_location + f'*{key}*')
@@ -425,13 +435,23 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 logging.error(f'Failed to populate avenger queue for {message}')
 
 
-                try:
-                    r.hset(key,'status','Avenger queue failed to populate')
+            try:  
+                message_attributes = processing_output_babble(s3_link_public, uuid, vimeo_url,speakers,sub_file[3])
+                sqs = boto3.resource('sqs',region_name='eu-west-1')
+                youtube_queue = sqs.get_queue_by_name(QueueName='Babble')
+                data = {}
+                data['Body'] = message_attributes
+                data = json.dumps(data)
+                youtube_queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
 
-                except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
-                    print(f'{process_name} failed to update sheets')
 
+
+            except Exception  as e:
+                print('Failed to populate Babble queue')
+                logging.error(f'Failed to populate Babble queue for {message}'                
+
+
+          
 
 
             print(f'{process_name} process finishes {message}')
