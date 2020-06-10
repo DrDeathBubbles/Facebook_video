@@ -152,13 +152,14 @@ def processing_output_message(youtube_url, s3_url, uuid, vimeo_url):
     return message_attributes
 
 
-def processing_output_babble(s3_url, uuid, vimeo_url, speakers, text):
+def processing_output_babble(s3_url, uuid, vimeo_url, speakers, text, title):
     message_attributes = {
     'vimeo_url':{'DataType':'String','StringValue': vimeo_url},
     's3_url':{'DataType':'String','StringValue': s3_url},
     'uid':{'DataType':'String', 'StringValue': uuid},
     'speakers':{'DataType':'String','StringValue': speakers},
-    'text':{'DataType':'String','StringValue': text}}
+    'text':{'DataType':'String','StringValue': text},
+    'title':{'DataType':'String','StringValue': title}}
     return message_attributes    
 
 def clean_up(file_locations, key):
@@ -440,7 +441,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
             print(sub_files[3]['results']['transcripts'][0]['transcript'])
             try: 
 
-                message_attributes = processing_output_babble(s3_link_public, uuid, vimeo_url,speakers,sub_files[3]['results']['transcripts'][0]['transcript'])
+                message_attributes = processing_output_babble(s3_link_public, uuid, vimeo_url,speakers,sub_files[3], title)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
                 youtube_queue = sqs.get_queue_by_name(QueueName='Babble')
