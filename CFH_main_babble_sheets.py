@@ -36,6 +36,15 @@ except ImportError:
 s3 = boto3.resource('s3')
 r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #NOTE :Listening on non-standard port 6378]
 languages = ['pt','es','de','fr']
+sheet_data = pd.read_excel('./CFH_data.xlsx', sheet_name = None)
+
+def sheets_processing_uid(sheet_data, message):
+    index = message.split('_')[0]
+    sheet_data['INDEX_RO']['Indec_number'] = sheet_data['INDEX_RO']['Index'].str.split(' ', expand = True)[0]
+    out = sheet_data['INDEX_RO'][sheet_data['INDEX_RO']['Indec_number'] == index]
+    return out['Title (55 Characters)'].values[0]
+
+
 
 def listener_configurer():
     root = logging.getLogger()
@@ -239,6 +248,13 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 title = string_processing(title)
                 description = speakers + ' \n' + description 
                 print(title)
+
+
+                description = ""
+                speakers = ""
+                speakers_for_emails = ""
+                speakers_for_youtube_tag = ""
+                title = sheets_processing_uid(sheet_data, message)
 
                 try:
                     r.hset(key,'status','Metadata acquired')
