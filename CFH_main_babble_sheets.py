@@ -459,7 +459,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 logging.error(f'Failed to populate avenger queue for {message}')
 
             try: 
-
+                sub_files[3] = 'Blah'
                 message_attributes = processing_output_babble(s3_link_public, uuid, vimeo_url,speakers,sub_files[3], title)
                 print(message_attributes)
                 sqs = boto3.resource('sqs',region_name='eu-west-1')
