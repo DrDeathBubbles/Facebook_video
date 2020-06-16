@@ -358,6 +358,9 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     logging.error(f'Failed to update Redis for {process_name}')
                     print(f'{process_name} failed to update Redis')
 
+            r.hsetnx(title,'title',title)
+            r.hsetnx(title,'vimeo_url',vimeo_url)
+
             try:
                 sub = sub_files[0]['en']
                 print(sub)
@@ -367,7 +370,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             except:
 
-                print('Failed to upload subtitles')
+                print('Failed to upload subtitles')     
 
             try:
                 post_to_s3(file_location,message, f'{uuid}_{title}.mp4',output_bucket)  ####CFH Need to fix this This needs to be changed for the input files

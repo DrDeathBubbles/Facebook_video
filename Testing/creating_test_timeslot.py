@@ -9,8 +9,13 @@ test_slot = {'title':'DS TEST TITLE', 'description':'DS TEST DESCRIPTION', 'star
 'resend_emails':0,'set_private':0,'vimeo_link':'','youtube_link':'','s3_link_public':'','s3_link_raw':'','IGNORE_Emails_resent':0,
 'status': 'Unprocessed','speakers_for_emails': 'Aaron Meagher'}
 
+test_slot = {'title':'', 'description':'', 'start_time':'', 'end_time':'',
+'timeslot_location_id':'','id':'','uuid':'', 'speakers': '', 'priority':'0', 'block': '0',
+'resend_emails':0,'set_private':0,'vimeo_link':'','youtube_link':'','s3_link_public':'','s3_link_raw':'','IGNORE_Emails_resent':0,
+'status': 'Unprocessed','speakers_for_emails': ''
 
-r.hmset('5947c6f6-7d35-4ade-a961-855c9762428f', test_slot)
+
+r.hmset('blank', test_slot)
 
 
 
