@@ -254,7 +254,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 speakers = ""
                 speakers_for_emails = ""
                 speakers_for_youtube_tag = ""
-                title = sheets_processing_uid(sheet_data, message)
+                title_for_videos = sheets_processing_uid(sheet_data, message)
+                title = title_for_videos
 
                 try:
                     r.hset(key,'status','Metadata acquired')
