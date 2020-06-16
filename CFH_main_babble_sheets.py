@@ -250,15 +250,14 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 print(title)
 
 
-                description = ""
-                speakers = ""
-                speakers_for_emails = ""
-                speakers_for_youtube_tag = ""
+                description = " "
+                speakers = " "
+                speakers_for_emails = " "
+                speakers_for_youtube_tag = " "
                 temp =sheets_processing_uid(sheet_data, message) 
                 title_for_videos = temp[0]
                 uuid = temp[1]
                 
-                sheets_processing_uid(sheet_data, message)
                 title = title_for_videos
 
                 try:
