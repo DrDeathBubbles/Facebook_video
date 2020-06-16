@@ -569,7 +569,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
             print(message) 
 
             try:
-                message = message.lstrip(input_bucket + '/') 
+                message = message.lstrip(input_bucket + '/').replace('+',' ') 
                 #uuid = message.split('_')[-3]
                 uuid = 'blank' 
                 keys = r.keys()
