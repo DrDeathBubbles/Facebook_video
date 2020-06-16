@@ -42,7 +42,7 @@ def sheets_processing_uid(sheet_data, message):
     index = message.split('_')[0]
     sheet_data['INDEX_RO']['Indec_number'] = sheet_data['INDEX_RO']['Index'].str.split(' ', expand = True)[0]
     out = sheet_data['INDEX_RO'][sheet_data['INDEX_RO']['Indec_number'] == index]
-    return out['Title (55 Characters)'].values[0]
+    return [out['Title (55 Characters)'].values[0],index]
 
 
 
@@ -254,7 +254,11 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 speakers = ""
                 speakers_for_emails = ""
                 speakers_for_youtube_tag = ""
-                title_for_videos = sheets_processing_uid(sheet_data, message)
+                temp =sheets_processing_uid(sheet_data, message) 
+                title_for_videos = temp[0]
+                uuid = temp[1]
+                
+                sheets_processing_uid(sheet_data, message)
                 title = title_for_videos
 
                 try:
