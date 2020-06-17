@@ -44,7 +44,11 @@ def sheets_processing_uid(sheet_data, message):
     out = sheet_data['INDEX_RO'][sheet_data['INDEX_RO']['Indec_number'] == index]
     return [out['Title (55 Characters)'].values[0],index]
 
-
+def sheets_processing_uid_master(sheet_data, message):
+    index = message.split('_')[0]
+    sheet_data['Master']['Indec_number'] = sheet_data['Master']['Index'].str.split(' ', expand = True)[0]
+    out = sheet_data['Master'][sheet_data['Master']['Indec_number'] == index]
+    return [out['Title (55 Characters)'].values[0],out['Description'].values[0] ,index]
 
 def listener_configurer():
     root = logging.getLogger()
@@ -256,7 +260,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 speakers_for_youtube_tag = " "
                 temp =sheets_processing_uid(sheet_data, message) 
                 title_for_videos = temp[0]
-                uuid = temp[1]
+                description = temp[1]
+                uuid = temp[2]
                 
                 title = title_for_videos
 
