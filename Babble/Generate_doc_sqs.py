@@ -161,7 +161,7 @@ def doc_generation( drive_service,service,vimeo_url, s3_url, uid, speakers, text
 
 
 if __name__ == '__main__':
-    ser =service_generation()
+    ser =get_credentials()
 
     sqs = boto3.resource('sqs',region_name = 'eu-west-1')
     q = sqs.get_queue_by_name(QueueName='Babble')    
