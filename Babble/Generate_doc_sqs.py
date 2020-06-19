@@ -13,6 +13,7 @@ import io
 import oauth2client
 from oauth2client import client
 from oauth2client import tools
+from oauth2client import file
 # If modifying these scopes, delete the file token.pickle
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -81,7 +82,8 @@ def get_credentials():
         else:  # Needed only for compatibility with Python 2.6
             credentials = tools.run(flow, store)
         print('Storing credentials to ' + credential_path)
-    
+
+    creds = credentials
     service = build('docs', 'v1', credentials=creds)
     drive_service = build('drive', 'v3', credentials=creds)
 
