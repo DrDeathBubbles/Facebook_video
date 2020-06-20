@@ -290,7 +290,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
             try:
                 region = 'eu-west-1'
                 infile = message
-                sub_files = generate_transcription_translate(region, input_bucket + '/', infile, languages, process = uuid, translate = False)
+                sub_files = generate_transcription_translate(region, input_bucket + '/', infile, languages, translate = False)
             except:
 
                 print('Problem making subtitle files')
