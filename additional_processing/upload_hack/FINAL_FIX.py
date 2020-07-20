@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../additional_processing/')
 
 import pandas as pd
 import redis
@@ -6,8 +8,7 @@ import multiprocessing
 from vimeo_library import *
 import pickle
 import os
-import sys
-sys.path.append('../additional_processing/')
+
     
 
 
