@@ -58,7 +58,7 @@ def mp_worker(inputs):
     uuid = data[3]
     gdd.download_file_from_google_drive(file_id=file_id,
                                     dest_path= dest_path)
-    vimeo_url = vimeo_upload(dest_path, title_for_videos, description, privacy = 'unlisted')
+    vimeo_url = vimeo_upload(dest_path, title, description, privacy = 'unlisted')
     r.hset(uuid,'vimeo_url', vimeo_url)
     os.remove(dest_path)
 
