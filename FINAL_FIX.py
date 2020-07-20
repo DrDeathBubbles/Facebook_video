@@ -44,10 +44,9 @@ links_to_be_processed = pd.merge(avenger_to_be_uploaded, df, on = 'title_2')
 
 links_to_be_processed.head()
 
-links_to_be_processed[['title','description','Finished Link']].values.tolist()[0]
 
 
-data = links_to_be_processed[['title','description','Finished Link','uuid']].values.tolist()[0]
+data = links_to_be_processed[['title','description','Finished Link','uuid']].values.tolist()
 saving_folder = '/home/ubuntu/AJM/video_files/'
 
 def mp_worker(inputs):
