@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../additional_processing/')
+sys.path.append('./additional_processing/')
 
 import pandas as pd
 import redis
