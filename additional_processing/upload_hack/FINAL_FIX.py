@@ -61,6 +61,8 @@ def mp_worker(inputs):
     r.hset(uuid,'vimeo_url', vimeo_url)
     os.remove(dest_path)
 
+    print(f'{uuid}:{vimeo_url} \n')
+
     return [uuid,vimeo_url]
 
 def mp_handler():
