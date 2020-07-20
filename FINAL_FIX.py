@@ -56,6 +56,10 @@ def mp_worker(inputs):
     title = data[0]
     description = data[1]
     uuid = data[3]
+
+    print(title)
+
+
     gdd.download_file_from_google_drive(file_id=file_id,
                                     dest_path= dest_path)
     vimeo_url = vimeo_upload(dest_path, title, description, privacy = 'unlisted')
