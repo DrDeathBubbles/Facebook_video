@@ -53,9 +53,9 @@ saving_folder = '/home/ubuntu/AJM/video_files/'
 def mp_worker(inputs):
     file_id = inputs[2].lstrip('https://drive.google.com/open?id=')
     dest_path = saving_folder +  file_id + '.mp4'
-    title = data[0]
-    description = data[1]
-    uuid = data[3]
+    title = inputs[0]
+    description = inputs[1]
+    uuid = inputs[3]
 
     print(title)
 
@@ -71,7 +71,7 @@ def mp_worker(inputs):
     return [uuid,vimeo_url]
 
 def mp_handler():
-    p = multiprocessing.Pool(5)
+    p = multiprocessing.Pool(7)
     a = p.map(mp_worker, data)
     return a
 
