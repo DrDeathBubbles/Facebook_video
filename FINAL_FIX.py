@@ -93,9 +93,14 @@ links_to_be_processed = pd.merge(avenger_to_be_uploaded, df, on = 'title_2')
 
 links_to_be_processed.head()
 
-
+done_keys = r.keys()
 links_to_be_processed  = links_to_be_processed[~links_to_be_processed['uuid'].isin(done_keys)]
 data = links_to_be_processed[['title','description','Finished Link','uuid']].values.tolist()
+
+for i in range(0,len(data)):
+    if data[i][3] == '1S4FE1C9UITAB_6yiTgm_HV6KZCV2sBd2':
+        data.pop(i)
+
 saving_folder = '/home/ubuntu/AJM/video_files/'
 
 def mp_worker(inputs):
