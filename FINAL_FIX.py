@@ -98,7 +98,7 @@ links_to_be_processed  = links_to_be_processed[~links_to_be_processed['uuid'].is
 data = links_to_be_processed[['title','description','Finished Link','uuid']].values.tolist()
 
 for i in range(0,len(data)):
-    if data[i][3] == '1S4FE1C9UITAB_6yiTgm_HV6KZCV2sBd2':
+    if data[i][3] in ['1S4FE1C9UITAB_6yiTgm_HV6KZCV2sBd2','13AmvwHAM2RP7xBJ-27ip4DYLAVatB96v']:
         data.pop(i)
 
 saving_folder = '/home/ubuntu/AJM/video_files/'
