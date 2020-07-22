@@ -99,7 +99,7 @@ links_to_be_processed  = links_to_be_processed[~links_to_be_processed['uuid'].is
 data = links_to_be_processed[['title','description','Finished Link','uuid']].values.tolist()
 
 for i in range(0,len(data)):
-    if data[i][3] in ['1S4FE1C9UITAB_6yiTgm_HV6KZCV2sBd2','13AmvwHAM2RP7xBJ-27ip4DYLAVatB96v','1kQww3LULTeQAh36UGDkO7DQuDy0z_PlJ','1fNTerQobUQX8mZrrzhsNeppnOYq9w8hP']:
+    if data[i][3] in ['1S4FE1C9UITAB_6yiTgm_HV6KZCV2sBd2','13AmvwHAM2RP7xBJ-27ip4DYLAVatB96v','1kQww3LULTeQAh36UGDkO7DQuDy0z_PlJ','1fNTerQobUQX8mZrrzhsNeppnOYq9w8hP','1yPfDqKy8I1qGU8-bN9tg6Kp2BuoY_y6p']:
         data.pop(i)
 random.shuffle(data)
 
@@ -116,12 +116,18 @@ def mp_worker(inputs):
 
     request = drive_service.files().get_media(fileId=file_id)
     fh = io.FileIO(dest_path, mode='wb')
-    downloader = MediaIoBaseDownload(fh, request)
-    done = False
-    while done is False:
-        status, done = downloader.next_chunk()
-        print("Download %d%%." % int(status.progress() * 100))
+    try:
+        downloader = MediaIoBaseDownload(fh, request)
+        done = False
+        while done is False:
+            status, done = downloader.next_chunk()
+            print("Download %d%%." % int(status.progress() * 100))
 
+    except:
+        r.hset(uuid,'vimeo_url', 'Not available')
+        return
+
+       
     vimeo_url = vimeo_upload(dest_path, title, description, privacy = 'unlisted')
     r.hset(uuid,'vimeo_url', vimeo_url)
     os.remove(dest_path)
