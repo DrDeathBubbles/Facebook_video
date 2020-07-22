@@ -106,7 +106,7 @@ random.shuffle(data)
 saving_folder = '/home/ubuntu/AJM/video_files/'
 
 def mp_worker(inputs):
-    print(file_id)
+    print(inputs[2])
     file_id = inputs[2].lstrip('https://drive.google.com/open?id=')
     dest_path = saving_folder +  file_id + '.mp4'
     title = inputs[0]
