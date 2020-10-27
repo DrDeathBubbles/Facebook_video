@@ -8,7 +8,7 @@ cloud-init==0.7.9
 colorama==0.3.7
 command-not-found==0.3
 configobj==5.0.6
-cryptography==1.2.3
+cryptography==3.2
 decorator==4.0.11
 docutils==0.12
 fuzzywuzzy==0.15.1
