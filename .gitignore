@@ -92,6 +92,8 @@ ENV/
 venvnew/
 venv3pip install --upgrade setuptools/
 venv3/
+WS20venv/
+venvmove/
 
 
 # Spyder project settings
