@@ -597,8 +597,8 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
 
 
 if __name__ == '__main__':
-    input_bucket = 'cfh-input'
-    output_bucket = 'cfh-output'
+    input_bucket = 'ws20-input'
+    output_bucket = 'ws20-output'
     file_location = '/home/ubuntu/AJM/video_files/'
     
     
