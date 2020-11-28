@@ -539,7 +539,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
                 key = uuid 
 
             except Exception as e:
-                logger.exception(f'Failed to find unique key for {uuid}')        
+                logger.exception(f'Failed to find unique key for {message}')        
 
             try:
                 r.hset(uuid, 'status','UUID processed')
