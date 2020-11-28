@@ -550,7 +550,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
 
 
             try:
-                if lookup_data[lookup_data['Screen record UUID'] = uuid]:
+                if lookup_data[lookup_data['Screen record UUID'] == uuid]:
                     data = lookup_data['Screen record UUID'] 
                     tasks_normal.put([key,uuid,message, data])
                 else:
