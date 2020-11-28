@@ -259,7 +259,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
             except:    
-
+                print(f'{process_name} failed to process_video')
 
             try:
                 description = data['Description'].values[0]
@@ -288,26 +288,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     logging.error(f'Failed to update sheets for {process_name}')
                     print(f'{process_name} failed to update redis')
 
-
-            try:
-                region = 'eu-west-1'
-                infile = message
-                sub_files = generate_transcription_translate(region, input_bucket + '/', infile, languages, translate = False)
-            except:
-                print('Problem making subtitle files')
-
-            try:
-                upload_to_s3(sub_files[2], output_bucket,'transcription/' + sub_files[2])
-
-                for sub in sub_files[0].values():
-                    upload_to_s3(sub, output_bucket ,'vtt/' + sub)
-
-                for sub in sub_files[1].values():
-                    upload_to_s3(sub, output_bucket ,'srt/' + sub)    
-
-            except:
-                print('Sub files not uploaded')
-                pass    
 
             try:
                 privacy = int(r.hget(key,'set_private'))
@@ -368,19 +348,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     logging.error(f'Failed to update Redis for {process_name}')
                     print(f'{process_name} failed to update Redis')
 
-            r.hsetnx(title,'title',title)
-            r.hsetnx(title,'vimeo_url',vimeo_url)
-
-            try:
-                sub = sub_files[0]['en']
-                print(sub)
-                print(vimeo_url)
-                subtitle_upload_response = subtitle_upload(vimeo_url,sub)
-
-
-            except:
-
-                print('Failed to upload subtitles')     
 
             try:
                 post_to_s3(file_location,message, f'{uuid}_{title}.mp4',output_bucket)  ####CFH Need to fix this This needs to be changed for the input files
