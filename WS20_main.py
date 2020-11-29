@@ -208,7 +208,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
         logger = logging.getLogger(__name__)
         vimeo_url = 'Not Available'
         youtube_url = 'Not Available'
-        watermark = './watermark/Web_Summit_2018_watermark.png'
+        watermark = './watermarks/Web_summit_logo_stacked_colour.png'
 
         task = tasks.get()
         message = task[0]
