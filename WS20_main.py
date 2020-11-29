@@ -550,7 +550,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
 
 
             try:
-                if lookup_data[lookup_data['UUID_extracted'] == uuid]:
+                if len(lookup_data[lookup_data['UUID_extracted'] == uuid]) == 1:
                     data = lookup_data[lookup_data['UUID_extracted'] == uuid] 
                     tasks_normal.put([key,uuid,message, data])
                 else:
