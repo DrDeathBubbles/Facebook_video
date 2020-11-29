@@ -255,11 +255,11 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                continue 
 
             try:
-                video_processing_WS20(process_name,video_file, watermark, message)
+                video_processing_WS20(process_name,file_location + video_file, watermark, file_location + 'edited_videos/' +message)
 
 
             except:    
-                print(f'{process_name} failed to process_video')
+                print(f'{process_name} failed to process_video'):while
 
             try:
                 description = data['Description'].values[0]
@@ -298,7 +298,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
                 if privacy == 1:
                     print('uploading to vimeo')
-                    vimeo_url = vimeo_upload(file_location + message, title_for_videos, description, privacy = 'unlisted')
+                    vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
                     print('Uploaded to vimeo')
                     
                     try: 
