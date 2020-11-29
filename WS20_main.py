@@ -208,13 +208,13 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
         logger = logging.getLogger(__name__)
         vimeo_url = 'Not Available'
         youtube_url = 'Not Available'
-        watermark = './watermakr/Web_Summit_2018_watermark.png'
+        watermark = './watermark/Web_Summit_2018_watermark.png'
 
         task = tasks.get()
         message = task[0]
 
 
-:while
+
         if message == 0:
             print('{} process quits'.format(process_name))
         else:
