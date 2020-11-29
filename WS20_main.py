@@ -289,7 +289,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     logging.error(f'Failed to update sheets for {process_name}')
                     print(f'{process_name} failed to update redis')
 
-
+            vimeo_url = vimeo_upload(file_location +'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
             try:
                 privacy = int(r.hget(key,'set_private'))
                 privacy = 1 ### AJM CFH forcing private during upload
