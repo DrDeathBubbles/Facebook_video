@@ -259,7 +259,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
             except:    
-                print(f'{process_name} failed to process_video'):while
+                print(f'{process_name} failed to process_video')
 
             try:
                 description = data['Description'].values[0]
@@ -298,7 +298,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
                 if privacy == 1:
                     print('uploading to vimeo')
-                    vimeo_url = vimeo_upload(file_location + 'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
+                    vimeo_url = vimeo_upload(file_location +'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
                     print('Uploaded to vimeo')
                     
                     try: 
