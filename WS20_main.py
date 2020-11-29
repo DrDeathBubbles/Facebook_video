@@ -266,7 +266,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 title = data['Title'].values[0]
 
                 title_for_videos = title
-
+                print(description)
+                print(title)
                 try:
                     r.hset(key,'status','Metadata acquired')
                     print(f"{process_name} aquired metadata")
