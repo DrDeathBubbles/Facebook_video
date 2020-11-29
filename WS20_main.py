@@ -534,8 +534,8 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
             try:
                 ##This is message processing to get uuid 
                 #message = message.lstrip(input_bucket + '/').replace('+',' ') 
-                #uuid = message.split('_')[-3]
-                uuid = message.rstrip('.mp4')
+                uuid = message.split('_')[1]
+                #uuid = message.rstrip('.mp4')
                 key = uuid 
 
             except Exception as e:
