@@ -163,7 +163,7 @@ def video_processing_WS20(process_name,video_file, watermark, output):
           .set_duration(clip.duration)
           .resize(height=50) 
           .margin(right=8, top=8,bottom =8, left = 8, opacity=0) 
-          .set_pos(("right","bottom")))
+          .set_pos(("right","top")))
 
     clip = CompositeVideoClip([clip, logo])
 
@@ -208,13 +208,13 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
         logger = logging.getLogger(__name__)
         vimeo_url = 'Not Available'
         youtube_url = 'Not Available'
-
+        watermark = './watermakr/Web_Summit_2018_watermark.png'
 
         task = tasks.get()
         message = task[0]
 
 
-
+:while
         if message == 0:
             print('{} process quits'.format(process_name))
         else:
@@ -255,7 +255,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                continue 
 
             try:
-                video_processing_WS20(process_name,file_location + video_file, watermark, file_location + 'edited_videos/' +message)
+                video_processing_WS20(process_name,file_location + message, watermark, file_location + 'edited_videos/' +message)
 
 
             except:    
