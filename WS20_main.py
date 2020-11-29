@@ -289,13 +289,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     logging.error(f'Failed to update sheets for {process_name}')
                     print(f'{process_name} failed to update redis')
 
-            vimeo_url = vimeo_upload(file_location +'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
             try:
-                privacy = int(r.hget(key,'set_private'))
                 privacy = 1 ### AJM CFH forcing private during upload
-                print(privacy)
-
-
 
                 if privacy == 1:
                     print('uploading to vimeo')
@@ -430,27 +425,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             except Exception  as e:
                 print('Failed to populate avenger queue')
-                logging.error(f'Failed to populate avenger queue for {message}')
-
-            try: 
-                #sub_files[3] = 'Blah'
-                message_attributes = processing_output_babble(s3_link_public, uuid, vimeo_url,speakers,sub_files[3], title)
-                print(message_attributes)
-                sqs = boto3.resource('sqs',region_name='eu-west-1')
-                youtube_queue = sqs.get_queue_by_name(QueueName='Babble')
-                data = {}
-                data['Body'] = message_attributes
-                data = json.dumps(data)
-                youtube_queue.send_message(MessageBody=data, MessageAttributes=message_attributes)
-
-
-
-            except Exception  as e:
-                print('Failed to populate Babble queue')
-                logging.error(f'Failed to populate Babble queue for {message}')                
-
-
-          
+                logging.error(f'Failed to populate avenger queue for {message}')    
 
 
             print(f'{process_name} process finishes {message}')
@@ -463,7 +438,11 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 logging.error(f'{process_name} failed to update sheets')
                 print(f'{process_name} failed to update sheets')
 
-
+            try:
+                with open(f'output_data/data_{message}.csv') as f:
+                    f.write(f"{uuid},{title},{s3_link_public},{vimeo_url}")
+            except:
+                print('Failed to write data')
 
     return
 
