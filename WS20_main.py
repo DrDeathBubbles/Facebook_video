@@ -34,7 +34,7 @@ except ImportError:
 
 
 s3 = boto3.resource('s3')
-r = redis.Redis(host='localhost', port = 6378, db=0,decode_responses=True) #NOTE :Listening on non-standard port 6378]
+r = redis.Redis(host='localhost', port = 6379, db=0,decode_responses=True) #NOTE :Listening on non-standard port 6378]
 languages = ['pt','es','de','fr']
 sheet_data = pd.read_excel('./CFH_data.xlsx', sheet_name = None)
 
