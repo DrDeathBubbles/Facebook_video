@@ -439,7 +439,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 print(f'{process_name} failed to update sheets')
 
             try:
-                with open(f'output_data/data_{message}.csv') as f:
+                with open(f'output_data/data_{message}.csv','a') as f:
                     f.write(f"{uuid},{title},{s3_link_public},{vimeo_url}")
             except:
                 print('Failed to write data')
