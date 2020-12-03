@@ -90,6 +90,7 @@ def extract_data(data,uuid):
     return [download_url, file_name] 
 
 if __name__ == '__main__':
+    data = pd.read_csv('WS20_data/finally_merged_data.csv')
     #speaker_schedule = pd.read_csv('./WS20_data_Speaker_Schedule.csv')
     #frame_io_data = pd.DataFrame(frameio_content())
     #merged_data = pd.merge(frame_io_data, speaker_schedule, left_on='monday_uuid', right_on='UUID')
