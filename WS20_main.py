@@ -526,7 +526,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
             try:
                 ##This is message processing to get uuid 
                 #message = message.lstrip(input_bucket + '/').replace('+',' ') 
-                uuid = extract_uuid_from_filename(message)
+                uuid = int(extract_uuid_from_filename(message))
                 #uuid = message.rstrip('.mp4')
                 key = uuid 
 
@@ -542,7 +542,9 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
 
 
             try:
-                if len(lookup_data[lookup_data['UUID'] == uuid]) == 1:
+                temp = lookup_data[lookup_data['UUID'] == uuid]
+                temp = temp[temp['file_name'].str.contains('FIN')] 
+                if len(temp) == 1:
                     data = lookup_data[lookup_data['UUID'] == uuid] 
                     tasks_normal.put([key,uuid,message, data])
                 else:
