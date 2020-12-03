@@ -477,7 +477,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
         None
 
     """
-    lookup_data = pd.read_csv('./WS20_data/finally_unfucked_mark.csv')
+    lookup_data = pd.read_csv('./WS20_data/finally_merged_data.csv')
     logger = logging.getLogger(__name__)
     tasks_normal = multiprocessing.Queue(-1) 
 
