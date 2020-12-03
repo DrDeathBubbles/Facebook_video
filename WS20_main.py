@@ -170,7 +170,7 @@ def video_processing(process_name,video_file,sting, watermark, output):
 def video_processing_WS20(process_name,video_file, watermark, output):
     clip = VideoFileClip(video_file)
     try:
-        clip.audio.write_audiofile("/home/ubuntu/AJM/video_files/edited_videos/audio/" + output.rstrip('.mp4') +'.mp3',codec='pcm_s16le')
+        clip.audio.write_audiofile("/home/ubuntu/AJM/video_files/edited_videos/audio/" + output.rstrip('.mp4') +'.mp3')
     except:
         print('Failed to save audio')    
     logo = (ImageClip(watermark)
@@ -399,6 +399,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
             try:
                 file_locations = [file_location, './']
                 clean_up(file_locations, uuid)
+                clean_up(file_location + 'edited_videos/',uuid)
                 print('removed local files')
 
 
@@ -462,7 +463,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 print(f'{process_name} failed to update sheets')
 
             try:
-                with open(f'output_data/data_{message}.csv','a') as f:
+                with open(f'output_data/data_{messagem}.csv','a') as f:
                     f.write(f"{uuid},{title},{s3_link_public},{vimeo_url}")
             except:
                 print('Failed to write data')
