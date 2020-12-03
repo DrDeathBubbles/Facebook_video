@@ -283,6 +283,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     title = ''
                 else:
                     title = data['Talk Title'].values[0]    
+                description = data['Description'].values[0]
+                title = data['Talk Title'].values[0]
 
                 title_for_videos = title
                 print(description)
