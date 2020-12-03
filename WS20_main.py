@@ -19,7 +19,7 @@ import pandas as pd
 import glob
 import math
 
-
+file_location = '/home/ubuntu/AJM/video_files/'
 from logging.handlers import QueueHandler, QueueListener
 from shutil import copyfile
 from string import punctuation
@@ -170,7 +170,8 @@ def video_processing(process_name,video_file,sting, watermark, output):
 def video_processing_WS20(process_name,video_file, watermark, output):
     clip = VideoFileClip(video_file)
     try:
-        clip.audio.write_audiofile("/home/ubuntu/AJM/video_files/edited_videos/audio/" + output.rstrip('.mp4') +'.mp3')
+        audio_file_name = video_file.lstrip(file_location) + '.mp3'
+        clip.audio.write_audiofile("/home/ubuntu/AJM/video_files/edited_videos/audio/" + audio_file_name)
     except:
         print('Failed to save audio')    
     logo = (ImageClip(watermark)
