@@ -38,6 +38,15 @@ r = redis.Redis(host='localhost', port = 6379, db=0,decode_responses=True) #NOTE
 languages = ['pt','es','de','fr']
 sheet_data = pd.read_excel('./CFH_data.xlsx', sheet_name = None)
 
+def extract_uuid_from_filename(filename):
+    temp = filename.split('_')
+    out = 0 
+    for t in temp:
+        if len(t) == 9 and t.isnumeric():
+            out = t
+    return out
+
+
 def sheets_processing_uid(sheet_data, message):
     index = message.split('_')[0]
     sheet_data['INDEX_RO']['Indec_number'] = sheet_data['INDEX_RO']['Index'].str.split(' ', expand = True)[0]
@@ -266,7 +275,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
             try:
                 description = data['Description'].values[0]
-                title = data['Title'].values[0]
+                title = data['Title Talk'].values[0]
 
                 title_for_videos = title
                 print(description)
@@ -377,9 +386,9 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
             try:
-                #file_locations = [file_location, './']
-                #clean_up(file_locations, uuid)
-                #print('removed local files')
+                file_locations = [file_location, './']
+                clean_up(file_locations, uuid)
+                print('removed local files')
 
 
                 try:
@@ -468,7 +477,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
         None
 
     """
-    lookup_data = pd.read_csv('./WS20_data/WS20_partner_data.csv')
+    lookup_data = pd.read_csv('./WS20_data/finally_unfucked_mark.csv)
     logger = logging.getLogger(__name__)
     tasks_normal = multiprocessing.Queue(-1) 
 
@@ -517,7 +526,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
             try:
                 ##This is message processing to get uuid 
                 #message = message.lstrip(input_bucket + '/').replace('+',' ') 
-                uuid = message.split('_')[1]
+                uuid = extract_uuid_from_filename(message)
                 #uuid = message.rstrip('.mp4')
                 key = uuid 
 
@@ -533,8 +542,8 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
 
 
             try:
-                if len(lookup_data[lookup_data['UUID_extracted'] == uuid]) == 1:
-                    data = lookup_data[lookup_data['UUID_extracted'] == uuid] 
+                if len(lookup_data[lookup_data['UUID'] == uuid]) == 1:
+                    data = lookup_data[lookup_data['UUID'] == uuid] 
                     tasks_normal.put([key,uuid,message, data])
                 else:
                     pass    
