@@ -169,7 +169,7 @@ def video_processing(process_name,video_file,sting, watermark, output):
 def video_processing_WS20(process_name,video_file, watermark, output):
     clip = VideoFileClip(video_file)
     try:
-        clip.audio.write_audiofile("/home/ubuntu/AJM/video_files/edited_videos/audio." + output.rstrip('.mp4') +'.mp3',codec='pcm_s16le')
+        clip.audio.write_audiofile("/home/ubuntu/AJM/video_files/edited_videos/audio/" + output.rstrip('.mp4') +'.mp3',codec='pcm_s16le')
     except:
         print('Failed to save audio')    
     logo = (ImageClip(watermark)
@@ -274,8 +274,15 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 print(f'{process_name} failed to process_video')
 
             try:
-                description = data['Description'].values[0]
-                title = data['Title Talk'].values[0]
+                if math.isnan(data['Description'].values[0]):
+                    description = ''
+                else:
+                    description = data['Description'].values[0]    
+                
+                if math.isnan(data['Talk Title'].values[0]):
+                    title = ''
+                else:
+                    title = data['Talk Title'].values[0]    
 
                 title_for_videos = title
                 print(description)
