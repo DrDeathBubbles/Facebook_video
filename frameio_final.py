@@ -22,6 +22,7 @@ def save_asset_to_s3(download_url, file_name):
     file_download = requests.get(url = download_url)
     client = boto3.client('s3')
     client.put_object(Body=file_download.content, Bucket=my_bucket, Key=file_name)
+    print(f'{file_name} is finished')
 
 
 
