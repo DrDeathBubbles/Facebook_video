@@ -275,17 +275,17 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 print(f'{process_name} failed to process_video')
 
             try:
-                if math.isnan(data['Description'].values[0]):
+                if isinstance(data['Description'].values[0], str):
+                    description = data['Description'].values[0] 
+
+                else:
                     description = ''
-                else:
-                    description = data['Description'].values[0]    
                 
-                if math.isnan(data['Talk Title'].values[0]):
-                    title = ''
+                if isinstance(data['Talk Title'].values[0],str):
+                    title = data['Talk Title'].values[0] 
                 else:
-                    title = data['Talk Title'].values[0]    
-                description = data['Description'].values[0]
-                title = data['Talk Title'].values[0]
+                    title = ''
+
 
                 title_for_videos = title
                 print(description)
@@ -368,7 +368,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
             try:
-                post_to_s3(file_location,message, f'{uuid}_{title}.mp4',output_bucket)  ####CFH Need to fix this This needs to be changed for the input files
+                title = title.replace(' ','_')
+                post_to_s3(file_location + 'edited_videos/',message, f'{uuid}_{title}.mp4',output_bucket)  ####CFH Need to fix this This needs to be changed for the input files
                 print('Successfully posted to S3') 
                 
                 
