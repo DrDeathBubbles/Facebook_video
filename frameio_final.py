@@ -91,10 +91,18 @@ def extract_data(data,uuid):
     return [download_url, file_name] 
 
 if __name__ == '__main__':
-    data = pd.read_csv('WS20_data/finally_merged_data.csv')
+    data = pd.read_csv('./WS20_data/finally_merged_data.csv')
+    data['file_name_match_frameio'] = data['file_name'].str.rstrip('.mp4').str.lower()
+    data['file_name_match_mark'] = data['FILE NAME'].str.rstrip('.mp4').str.lower()
     data = data[data['file_name_match_frameio']==data['file_name_match_mark']]
     data['file_name_2'] = data['file_name'].str.replace(' ','_')
-    data[['download_link','file_name_2']][0:50].apply(lambda x: save_asset_to_s3(x['download_link'],x['file_name_2']), axis = 1)
+    #partner = pd.read_csv('./WS20_data/WS20_partner_data.csv')
+    #partner =  partner[partner['UUID_extracted'] == partner['UUID_extracted']]
+    #f = lambda x: x[0:9]
+    #partner['UUID_final'] = partner['UUID_extracted'].apply(f)
+    #partner['UUID_final'] =partner['UUID_final'].astype('int64')
+    
+    data[['download_link','file_name_2']][50:].apply(lambda x: save_asset_to_s3(x['download_link'],x['file_name_2']), axis = 1)
     #speaker_schedule = pd.read_csv('./WS20_data_Speaker_Schedule.csv')
     #frame_io_data = pd.DataFrame(frameio_content())
     #merged_data = pd.merge(frame_io_data, speaker_schedule, left_on='monday_uuid', right_on='UUID')
