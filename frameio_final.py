@@ -91,6 +91,8 @@ def extract_data(data,uuid):
 
 if __name__ == '__main__':
     data = pd.read_csv('WS20_data/finally_merged_data.csv')
+    data['file_name_2'] = data['file_name'].str.replace(' ','_')
+    data_processed[['download_link','file_name_2']][0:50].apply(lambda x: save_asset_to_s3(x['download_link'],x['file_name_2']), axis = 1)
     #speaker_schedule = pd.read_csv('./WS20_data_Speaker_Schedule.csv')
     #frame_io_data = pd.DataFrame(frameio_content())
     #merged_data = pd.merge(frame_io_data, speaker_schedule, left_on='monday_uuid', right_on='UUID')
