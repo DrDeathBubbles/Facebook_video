@@ -5,6 +5,7 @@ import pandas as pd
 
 s3 = boto3.resource('s3')
 token = 'fio-u-mTMmGXevbXIDnTsFlGmC2MQgTvISaSQfLZPrQzI_nKwwB0tfEfZfTJkHDQ3Nzf-C'
+token = 'fio-u-g5Ls98NOufRLocdaXKNHOIYUZDwkJrGh7Uv9-7wHPS67J-Fn_E7hiRlbpKV6d9c0'
 account_id_team = '27c611aa-21bd-4952-905a-7d7749140bb4'
 websummit_id = '27c611aa-21bd-4952-905a-7d7749140bb4'
 my_bucket = 'ws20-input' 
@@ -20,7 +21,7 @@ def download_file(download_url, download_name, download_folder):
 def save_asset_to_s3(download_url, file_name):
     file_download = requests.get(url = download_url)
     client = boto3.client('s3')
-    client.put_object(Body=file_download.content, Bucket=my_bucket, Key=filename)
+    client.put_object(Body=file_download.content, Bucket=my_bucket, Key=file_name)
 
 
 
@@ -80,14 +81,18 @@ def make_data_frame(data):
     frame_io_data['UUID'] = frame_io_data['UUID'].astype('int64')
     data_merge = pd.merge(mark_data,frame_io_data, on = 'UUID') 
     
-    pd_data = pd.DataFrame(data)
-    pd_data['monday_uuid'] = pd_data.apply(extract_uuid_from_filename)
 
+def extract_data(data,uuid):
+    temp = data[data['UUID'] == uuid]
+    temp = temp[temp['file_name_2'].str.contains('FIN')]
+    download_url = temp['download_link'].values[0]
+    file_name = temp['file_name_2'].values[0]
+    return [download_url, file_name] 
 
 if __name__ == '__main__':
-    speaker_schedule = pd.read_csv('./WS20_data_Speaker_Schedule.csv')
-    frame_io_data = pd.DataFrame(frameio_content())
-    merged_data = pd.merge(frame_io_data, speaker_schedule, left_on='monday_uuid', right_on='UUID')
+    #speaker_schedule = pd.read_csv('./WS20_data_Speaker_Schedule.csv')
+    #frame_io_data = pd.DataFrame(frameio_content())
+    #merged_data = pd.merge(frame_io_data, speaker_schedule, left_on='monday_uuid', right_on='UUID')
 
 
 #account_id = 'f7bb64c1-1bd2-4229-b4cd-e70b02c10502'

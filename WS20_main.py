@@ -17,6 +17,7 @@ import requests
 import multiprocessing 
 import pandas as pd
 import glob
+import math
 
 
 from logging.handlers import QueueHandler, QueueListener
@@ -101,7 +102,7 @@ def retrieve_from_s3(filename, input_bucket):
     Returns
         bucket object
     """
-
+    file_location = '/home/ubuntu/AJM/video_files/'
     my_bucket = s3.Bucket(input_bucket)
     a = my_bucket.download_file(filename,file_location + filename.lstrip(input_bucket + '/'))
     return a    
