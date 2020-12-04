@@ -10,7 +10,7 @@ account_id_team = '27c611aa-21bd-4952-905a-7d7749140bb4'
 websummit_id = '27c611aa-21bd-4952-905a-7d7749140bb4'
 my_bucket = 'ws20-input'
 token = 'fio-u-JrpW3fElj7m-LeLm8BF73Fs8QSTFLQDPAxlvRutHpKKuATWp3m7-VNPuvhsBV-Yc' 
-headers = headers_id = {"Accept": "application/json","Authorization": f"Bearer {token}"} 
+headers = {"Accept": "application/json","Authorization": f"Bearer {token}"} 
 
 
 
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     mark_data = pd.read_csv('WS20_data_mark.csv')
     data['file_name_match'] = data['file_name'].str.rstrip('.mp4').str.lower()
     mark_data['file_name_match'] = mark_dat['file_name'].str.rstrip('.mp4').str.lower()
-    merged_data = pd.merge(data,mark_data, on = 'file_name_match')
+    merged_data = pd.merge(data,mark_data on = 'file_name_match')
 
 
 
