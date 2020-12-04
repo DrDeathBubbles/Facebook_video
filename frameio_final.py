@@ -24,6 +24,8 @@ def save_asset_to_s3(download_url, file_name):
     client = boto3.client('s3')
     client.put_object(Body=file_download.content, Bucket=my_bucket, Key=file_name)
     print(f'{file_name} is finished')
+    with open('done_files.csv','a') as f:
+        f.write(f'{file_name} + "\n")
 
 
 
