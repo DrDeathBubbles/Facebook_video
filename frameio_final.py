@@ -107,7 +107,17 @@ if __name__ == '__main__':
     #speaker_schedule = pd.read_csv('./WS20_data_Speaker_Schedule.csv')
     #frame_io_data = pd.DataFrame(frameio_content())
     #merged_data = pd.merge(frame_io_data, speaker_schedule, left_on='monday_uuid', right_on='UUID')
+    frame_io_data = pd.DataFrame(frameio_content())
+    data = frame_io_data
+    mark_data = pd.read_csv('WS20_data_mark.csv')
+    data['file_name_match'] = data['file_name'].str.rstrip('.mp4').str.lower()
+    mark_data['file_name_match'] = mark_dat['file_name'].str.rstrip('.mp4').str.lower()
+    merged_data = pd.merge(data,mark_data, on = 'file_name_match')
 
 
+
+#B28.2_WS20_711369444_TLK_EDT_V2_FIN.mp4 is finished                                                                                             
+#B29.2_WS20_710234977_TLK_EDT_V2_FIN.mp4 is finished                                                                                             
+#B30.2_WS20_712266979_TLK_EDT_V3_FIN.mp4 is finished   
 #account_id = 'f7bb64c1-1bd2-4229-b4cd-e70b02c10502'
 #account_id_team = '27c611aa-21bd-4952-905a-7d7749140bb4'
