@@ -8,7 +8,8 @@ token = 'fio-u-mTMmGXevbXIDnTsFlGmC2MQgTvISaSQfLZPrQzI_nKwwB0tfEfZfTJkHDQ3Nzf-C'
 token = 'fio-u-g5Ls98NOufRLocdaXKNHOIYUZDwkJrGh7Uv9-7wHPS67J-Fn_E7hiRlbpKV6d9c0'
 account_id_team = '27c611aa-21bd-4952-905a-7d7749140bb4'
 websummit_id = '27c611aa-21bd-4952-905a-7d7749140bb4'
-my_bucket = 'ws20-input' 
+my_bucket = 'ws20-input'
+token = 'fio-u-JrpW3fElj7m-LeLm8BF73Fs8QSTFLQDPAxlvRutHpKKuATWp3m7-VNPuvhsBV-Yc' 
 headers = headers_id = {"Accept": "application/json","Authorization": f"Bearer {token}"} 
 
 
@@ -102,7 +103,7 @@ if __name__ == '__main__':
     #partner['UUID_final'] = partner['UUID_extracted'].apply(f)
     #partner['UUID_final'] =partner['UUID_final'].astype('int64')
     
-    data[['download_link','file_name_2']][50:].apply(lambda x: save_asset_to_s3(x['download_link'],x['file_name_2']), axis = 1)
+    data[['download_link','file_name_2']].apply(lambda x: save_asset_to_s3(x['download_link'],x['file_name_2']), axis = 1)
     #speaker_schedule = pd.read_csv('./WS20_data_Speaker_Schedule.csv')
     #frame_io_data = pd.DataFrame(frameio_content())
     #merged_data = pd.merge(frame_io_data, speaker_schedule, left_on='monday_uuid', right_on='UUID')
