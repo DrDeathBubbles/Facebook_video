@@ -23,9 +23,8 @@ def save_asset_to_s3(download_url, file_name):
     file_download = requests.get(url = download_url)
     client = boto3.client('s3')
     client.put_object(Body=file_download.content, Bucket=my_bucket, Key=file_name)
-    print(f'{file_name} is finished')
-    with open('done_files.csv','a') as f:
-        f.write(f'{file_name} + "\n"')
+    print( file_name + 'is finished')
+
 
 
 
@@ -105,7 +104,7 @@ if __name__ == '__main__':
     #partner['UUID_final'] = partner['UUID_extracted'].apply(f)
     #partner['UUID_final'] =partner['UUID_final'].astype('int64')
     
-    data[['download_link','file_name_2']].apply(lambda x: save_asset_to_s3(x['download_link'],x['file_name_2']), axis = 1)
+    data[['download_link','file_name_2']][57:].apply(lambda x: save_asset_to_s3(x['download_link'],x['file_name']), axis = 1)
     #speaker_schedule = pd.read_csv('./WS20_data_Speaker_Schedule.csv')
     #frame_io_data = pd.DataFrame(frameio_content())
     #merged_data = pd.merge(frame_io_data, speaker_schedule, left_on='monday_uuid', right_on='UUID')

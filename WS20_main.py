@@ -316,8 +316,8 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 privacy = 1 ### AJM CFH forcing private during upload
 
                 if privacy == 1:
-                    print('uploading to vimeo')
-                    vimeo_url = vimeo_upload(file_location +'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
+                    print('Skipping vimeo')
+                    #vimeo_url = vimeo_upload(file_location +'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
                     print('Uploaded to vimeo')
                     
                     try: 
@@ -337,7 +337,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
                 elif privacy == 0:
-                    vimeo_url = vimeo_upload(file_location + message, title_for_videos, description)
+                    #vimeo_url = vimeo_upload(file_location + message, title_for_videos, description)
                     
                     try: 
                         r.hset(key,'status','Posted publicly on Vimeo')
