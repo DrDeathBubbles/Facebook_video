@@ -23,7 +23,7 @@ file_location = '/home/ubuntu/AJM/video_files/'
 from logging.handlers import QueueHandler, QueueListener
 from shutil import copyfile
 from string import punctuation
-from Transcription_control import generate_transcription_translate 
+#from Transcription_control import generate_transcription_translate 
 from vimeo_library import *
 from moviepy.editor import *
 
