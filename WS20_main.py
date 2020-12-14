@@ -23,7 +23,7 @@ file_location = '/home/ubuntu/AJM/video_files/'
 from logging.handlers import QueueHandler, QueueListener
 from shutil import copyfile
 from string import punctuation
-#from Transcription_control import generate_transcription_translate 
+from Transcription_control import generate_transcription_translate 
 from vimeo_library import *
 from moviepy.editor import *
 
@@ -316,7 +316,7 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 privacy = 1 ### AJM CFH forcing private during upload
 
                 if privacy == 1:
-                    print('Skipping vimeo')
+                    print('Skippingvimeo')
                     #vimeo_url = vimeo_upload(file_location +'edited_videos/' + message, title_for_videos, description, privacy = 'unlisted')
                     print('Uploaded to vimeo')
                     
@@ -561,6 +561,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
                     data = lookup_data[lookup_data['UUID'] == uuid] 
                     tasks_normal.put([key,uuid,message, data])
                 else:
+                    print('Fail to process')
                     pass    
 
             except Exception as e:
