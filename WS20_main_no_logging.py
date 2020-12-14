@@ -127,7 +127,7 @@ def initialise_connection():
         aws_secret_access_key=os.environ['AWS_SECRET_KEY'])
 
     except KeyError as ke:
-        logging.error('A keyerror {} has occured'.format(ke))
+        print('No key Found')
 
     return conn
 
@@ -250,7 +250,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     print(f'Recieved {uuid} from S3 for {process_name}')
 
                 except Exception as e:
-                    logging.error(f'Failed to update Redis for {process_name}')
                     print(f'{process_name} failed to update Redis')
 
 
@@ -263,7 +262,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                    print(f'{process_name} failed to retrieve video from S3')
 
                except Exception as e:
-                   logging.error(f'{process_name} failed to update Redis for {uuid}')
                    print(f'{process_name} failed to update Redis')
 
                continue 
@@ -306,7 +304,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     r.hset(key,'status','Failed to obtain metadata')
 
                 except Exception as e:
-                    logging.error(f'Failed to update sheets for {process_name}')
                     print(f'{process_name} failed to update redis')
 
             try:
@@ -321,14 +318,12 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                         r.hset(key,'status','Posted privately on Vimeo')
 
                     except Exception as e:
-                        logging.error(f'Failed to update Redis for {process_name}')
                         print(f'{process_name} failed to update Redis')
 
                     try:
                         r.hset(key,'vimeo_link', vimeo_url)
 
                     except Exception as e:
-                        logging.error(f'Failed to update sheets for {process_name}')
                         print(f'{process_name} failed to update sheets')        
 
 
@@ -340,14 +335,12 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                         r.hset(key,'status','Posted publicly on Vimeo')
 
                     except Exception as e:
-                        logging.error(f'Failed to update Redis for {process_name}')
                         print(f'{porcess_name} failed to update Redis')
 
                     try:
                         r.hset(key,'vimeo_link', vimeo_url)
 
                     except Exception as e:
-                        logging.error(f'Failed to update sheets for {process_name}')
                         print(f'{process_name} failed to update sheets')                           
 
                 
@@ -360,7 +353,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     r.hset(key,'status','Failed to post to Vimeo')
 
                 except Exception as e:
-                    logging.error(f'Failed to update Redis for {process_name}')
                     print(f'{process_name} failed to update Redis')
 
 
@@ -374,7 +366,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     r.hset(key,'status','Posted to S3')
 
                 except Exception as e:
-                    logging.error(f'{process_name} failed to update Redis for S3 post')
                     print(f'{process_name} failed to update Redis for S3 post')
           
           
@@ -386,7 +377,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     r.hset(key,'status','Failed to post to S3')
 
                 except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
                     print(f'{process_name} failed to update sheets')
 
 
@@ -403,7 +393,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     r.hset(key, 'status', 'Removed local files')
 
                 except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
                     print(f'{process_name} failed to update sheets')
 
 
@@ -416,7 +405,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                     r.hset(key, 'status', 'Failed to remove local files')
 
                 except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
                     print(f'{process_name} failed to update sheets')
 
 
@@ -437,14 +425,12 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
 
 
                 except Exception as e:
-                    logging.error(f'{process_name} failed to update sheets')
                     print(f'{process_name} failed to update sheets')
 
 
 
             except Exception  as e:
                 print('Failed to populate avenger queue')
-                logging.error(f'Failed to populate avenger queue for {message}')    
 
 
             print(f'{process_name} process finishes {message}')
@@ -454,7 +440,6 @@ def processing_message(queue, configurer, process_name, tasks, input_bucket, out
                 r.hset(key,'status','Finished')
 
             except Exception as e:
-                logging.error(f'{process_name} failed to update sheets')
                 print(f'{process_name} failed to update sheets')
 
             try:
@@ -523,8 +508,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
                 temp = temp['Records'][0]['s3']['object']['key']
                 temp = unquote(temp)
             except KeyError as ke:
-                logging.error('A key error {} has occured while trying\
-                to access the S3 filename.')
+                print('No Key Found')
             messages.append(temp)
 
         for message in messages:
