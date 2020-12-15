@@ -60,5 +60,5 @@ if __name__ == '__main__':
             download_file(key)
             vimeo_url = vimeo_upload(file_location + key, title, description, privacy = 'unlisted')
             with open(f'/home/ubuntu/Talkbot/Facebook_video/output_data/data_{uuid}.csv','a') as f:
-                f.write(f"{uuid},{title},{vimeo_url}"
+                f.write(f"{uuid},{title},{vimeo_url}")
             os.remove(file_location + key)
