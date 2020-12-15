@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     to_be_processed = output_pd[~output_pd['UUID'].isin(processed_vimeo_uuids)]
 
-    for row in to_be_processed[0:5].iterrows():
+    for row in to_be_processed.iterrows():
         key = row[1]['Key']
         print(f'{key} is started')
         uuid = uuid_get(key)
@@ -61,6 +61,6 @@ if __name__ == '__main__':
             download_file(key)
             vimeo_url = vimeo_upload(file_location + key, title, description, privacy = 'unlisted')
             with open(f'/home/ubuntu/Talkbot/Facebook_video/output_data/data_{uuid}.csv','a') as f:
-                f.write(f"{uuid},{title},{vimeo_url}")
+                f.write(f"{uuid},{vimeo_url}")
             os.remove(file_location + key)
         print(f'{key} is ended')    
