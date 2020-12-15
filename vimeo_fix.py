@@ -52,6 +52,7 @@ if __name__ == '__main__':
 
     for row in to_be_processed[0:5].iterrows():
         key = row[1]['Key']
+        print(f'{key} is started')
         uuid = uuid_get(key)
         match = new_lookup_data[new_lookup_data['UUID'] == uuid]
         if len(match) == 1:
@@ -62,3 +63,4 @@ if __name__ == '__main__':
             with open(f'/home/ubuntu/Talkbot/Facebook_video/output_data/data_{uuid}.csv','a') as f:
                 f.write(f"{uuid},{title},{vimeo_url}")
             os.remove(file_location + key)
+        print(f'{key} is ended')    
