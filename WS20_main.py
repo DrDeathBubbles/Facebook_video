@@ -560,7 +560,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
 
             try:
                 temp = lookup_data[lookup_data['UUID'] == int(uuid)]
-                temp = temp[temp['file_name'].str.contains('FIN')][0:1] 
+                #temp = temp[temp['file_name'].str.contains('FIN')][0:1] 
                 if len(temp) == 1:
                     data = lookup_data[lookup_data['UUID'] == uuid][0:1] 
                     tasks_normal.put([key,uuid,message, data])
