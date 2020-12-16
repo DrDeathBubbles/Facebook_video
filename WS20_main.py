@@ -1,7 +1,7 @@
 import sys
 sys.path.append('./logging/')
 sys.path.append('./additional_processing/')
-
+import re
 import os 
 import logging
 import boto3
@@ -45,6 +45,12 @@ def extract_uuid_from_filename(filename):
             out = t
     return out
 
+def uuid_get(x):
+    out = re.findall(r'\d{9}', x)
+    if len(out) > 0:
+        return out[0]
+    else:
+        return 0  
 
 def sheets_processing_uid(sheet_data, message):
     index = message.split('_')[0]
@@ -553,7 +559,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
 
 
             try:
-                temp = lookup_data[lookup_data['UUID'] == uuid]
+                temp = lookup_data[lookup_data['UUID'] == int(uuid)]
                 temp = temp[temp['file_name'].str.contains('FIN')][0:1] 
                 if len(temp) == 1:
                     data = lookup_data[lookup_data['UUID'] == uuid][0:1] 
