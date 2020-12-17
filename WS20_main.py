@@ -543,7 +543,7 @@ def main(input_bucket, output_bucket,free_cores= 0, priority_cores = 1):
             try:
                 ##This is message processing to get uuid 
                 #message = message.lstrip(input_bucket + '/').replace('+',' ') 
-                uuid = int(extract_uuid_from_filename(message))
+                uuid = int(uuid_get(message))
                 #uuid = message.rstrip('.mp4')
                 key = uuid 
 
