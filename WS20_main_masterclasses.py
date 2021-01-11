@@ -108,7 +108,7 @@ def retrieve_from_s3(filename, input_bucket):
     """
     file_location = '/home/ubuntu/AJM/video_files/'
     my_bucket = s3.Bucket(input_bucket)
-    a = my_bucket.download_file(filename,file_location + filename.lstrip(input_bucket + '/'))
+    a = my_bucket.download_file(filename,file_location + filename)
     return a    
 
 
