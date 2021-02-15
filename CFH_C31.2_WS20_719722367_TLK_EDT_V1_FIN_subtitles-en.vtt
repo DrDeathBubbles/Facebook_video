@@ -1,0 +1,955 @@
+WEBVTT
+
+00:03.439 --> 00:08.619
+right. Let's talk about how Salesforce has weathered this
+
+00:08.619 --> 00:16.050
+pandemic in this economic crisis. Um, everyone went
+
+00:16.050 --> 00:20.050
+through an accelerated digital transformation, and I assume even
+
+00:20.050 --> 00:22.969
+a digital company like Salesforce had to do it.
+
+00:24.039 --> 00:25.609
+How long did it tell you? Take you to
+
+00:25.609 --> 00:29.140
+get on your feet to get your bearings? Yeah
+
+00:29.140 --> 00:30.429
+, that's absolutely right. I mean, it's It's
+
+00:30.429 --> 00:35.229
+almost embarrassing when you're a technology company and you encounter
+
+00:35.229 --> 00:37.789
+your like this because it shows all the cracks in
+
+00:37.789 --> 00:40.560
+the foundation, right? All the all the ways
+
+00:40.560 --> 00:43.909
+you depended on your office space and all the all
+
+00:43.909 --> 00:45.979
+the parts of your business that weren't digital. You
+
+00:45.979 --> 00:47.509
+know, the term that I use for the for
+
+00:47.509 --> 00:50.030
+that feeling in marches, paralysis, you know,
+
+00:50.030 --> 00:52.390
+we just you know, as you know, we're
+
+00:52.390 --> 00:55.750
+in event oriented company. We have 200,000 people descend
+
+00:55.750 --> 00:58.310
+on San Francisco for Dream Force. Every year we're
+
+00:58.320 --> 01:02.340
+on airplanes in our customers offices, and I think
+
+01:02.340 --> 01:07.030
+it was the that sense of unfamiliarity that really lead
+
+01:07.030 --> 01:10.269
+Thio. I think a paralysis particularly for our customer
+
+01:10.269 --> 01:11.930
+facing teams, you know, that are used to
+
+01:11.930 --> 01:12.879
+being, you know, face to face with our
+
+01:12.879 --> 01:15.689
+customers on board, you know, I don't know
+
+01:15.689 --> 01:18.310
+if it was a month or a few weeks.
+
+01:18.319 --> 01:19.549
+It felt like forever. At the time, I
+
+01:19.549 --> 01:23.340
+could tell you that. Andi, I think that
+
+01:23.349 --> 01:26.700
+we we really had to be intentional about transforming our
+
+01:26.700 --> 01:30.140
+culture in the face of what we've been calling this
+
+01:30.150 --> 01:33.269
+all digital work anywhere world that we're in right now
+
+01:33.939 --> 01:36.260
+. Andi, when I say intentional kind of goes
+
+01:36.260 --> 01:38.920
+back to our roots, we do in all hands
+
+01:38.930 --> 01:42.349
+with all 54,000 employees every week. And we have
+
+01:42.349 --> 01:44.430
+since the beginning, the pandemic. We literally have
+
+01:44.430 --> 01:47.319
+not done that since Mark and Parker started this place
+
+01:47.319 --> 01:48.989
+21 years ago, you know, But we have
+
+01:49.000 --> 01:51.469
+54,000 people on the zoom call. You know,
+
+01:51.469 --> 01:53.799
+it's crazy and we're really focused on, you know
+
+01:53.810 --> 01:57.180
+, how do you work today? We have this
+
+01:57.180 --> 02:00.900
+small we call participation, which means just get on
+
+02:00.900 --> 02:01.640
+the phone, ask your customer how they can help
+
+02:01.650 --> 02:04.980
+. How can you help them right now? It's
+
+02:04.980 --> 02:07.069
+about relevance, you know, it's saying, Hey
+
+02:07.140 --> 02:08.479
+, all these technologies we've had for a long time
+
+02:08.479 --> 02:12.229
+, but what's a relevant conversation today is pretty different
+
+02:12.229 --> 02:14.229
+than it. Waas. Ah, few weeks ago
+
+02:14.229 --> 02:16.060
+, a few months ago. And it's about enablement
+
+02:16.069 --> 02:17.550
+, you know, which is really saying, How
+
+02:17.550 --> 02:21.819
+could we train every single employee in the new way
+
+02:21.830 --> 02:23.469
+that they have to work on? Do we really
+
+02:23.469 --> 02:28.870
+adopted those principles? Participation, relevance, enablement And
+
+02:28.870 --> 02:30.780
+again, this kind of operating cadence that is very
+
+02:30.780 --> 02:34.729
+intentional, very active kind of a culture of action
+
+02:34.729 --> 02:36.819
+is way I describe it, and I think it's
+
+02:36.819 --> 02:38.069
+really helped us get through the initial stages, the
+
+02:38.069 --> 02:40.400
+pandemic. And now I feel like we're really firing
+
+02:40.400 --> 02:47.009
+on all cylinders. What was the most surprising barrier
+
+02:47.009 --> 02:52.780
+that you encountered in this process? You know,
+
+02:52.780 --> 02:58.830
+I think, um, mhm the every single department
+
+02:58.840 --> 03:00.300
+, every single function had to change at the same
+
+03:00.300 --> 03:02.990
+time. And so, you know, you really
+
+03:02.990 --> 03:08.020
+realized where people were sort of dependent on the machinery
+
+03:08.030 --> 03:10.009
+of a large company. You know, whether it
+
+03:10.009 --> 03:15.879
+was your sales executive and you're dependent on showing up
+
+03:15.879 --> 03:17.090
+to these events to engage with your customers, and
+
+03:17.090 --> 03:20.430
+all of a sudden that's gone and you need to
+
+03:20.430 --> 03:23.400
+have you know, you need to be personally proactive
+
+03:23.400 --> 03:24.930
+to do it. You're a marketer, depending on
+
+03:24.930 --> 03:30.120
+the standard ways that you generate leads on all of
+
+03:30.120 --> 03:31.990
+a sudden. All of those channels are not available
+
+03:31.990 --> 03:34.370
+to you, and the one channel left, which
+
+03:34.370 --> 03:37.800
+is digital, is completely saturated because every company in
+
+03:37.800 --> 03:39.729
+the world went there overnight. And what I would
+
+03:39.729 --> 03:44.900
+say is that really demands a beginner's mind and it
+
+03:44.900 --> 03:47.990
+creativity that I don't think every individual at every company
+
+03:47.990 --> 03:52.360
+really has. And and I think it's fascinating.
+
+03:53.340 --> 03:54.080
+Yeah, so it's a principle. I think Marc
+
+03:54.090 --> 03:57.300
+Benioff really embraces that I love. I love that
+
+03:57.300 --> 04:00.110
+principle, you know, and sort of an expert
+
+04:00.110 --> 04:02.090
+mind, you know, on Lee knows one possibility
+
+04:02.099 --> 04:05.960
+for an a beginner's mind. Everything's a possibility.
+
+04:06.039 --> 04:09.439
+And I think in the age of you know,
+
+04:09.449 --> 04:12.419
+covid-ninteen, it's really multiple crises at the same time
+
+04:12.419 --> 04:15.520
+a health crisis, an economic crisis, a social
+
+04:15.520 --> 04:17.259
+justice crisis, a leadership crisis in this country.
+
+04:17.839 --> 04:19.800
+You know, you need to show up and say
+
+04:19.800 --> 04:23.470
+, Okay, I need to re imagine how how
+
+04:23.470 --> 04:26.149
+we do business on bond. That's what I really
+
+04:26.149 --> 04:27.639
+think it was. A big in his mind is
+
+04:27.639 --> 04:29.800
+you know, we know what really differentiates us as
+
+04:29.800 --> 04:31.879
+a company. Our customers know what differentiates us,
+
+04:31.879 --> 04:36.740
+and we're enabling a digital transformation where we're exactly what
+
+04:36.740 --> 04:40.589
+our customers need in this moment. But how we
+
+04:40.589 --> 04:43.689
+engage with our customers needed to completely transform. And
+
+04:43.699 --> 04:46.509
+if you'd asked me last year could you run the
+
+04:46.509 --> 04:48.399
+business from home with no events, I would have
+
+04:48.399 --> 04:50.879
+laughed at you. Not only did we do that
+
+04:50.879 --> 04:53.730
+, we did it with no preparation, you know
+
+04:53.730 --> 04:56.579
+, and that's what's really remarkable right now for us
+
+04:56.579 --> 04:59.269
+and for all of our customers. I think it's
+
+04:59.269 --> 05:02.410
+proof that this new digital way of working is possible
+
+05:02.420 --> 05:04.459
+, and I think what's exciting about that when the
+
+05:04.459 --> 05:06.579
+spirit of this beginner's mind does, it really begs
+
+05:06.589 --> 05:09.870
+the question. How are we gonna work on the
+
+05:09.870 --> 05:11.360
+other side of this? You know, when it's
+
+05:11.360 --> 05:14.220
+not imposed on us and we got stuck in our
+
+05:14.220 --> 05:15.680
+home office is because we have to be, You
+
+05:15.680 --> 05:18.720
+know, now that we've proven as a society that
+
+05:18.730 --> 05:21.209
+hey, I can order groceries online and you know
+
+05:21.209 --> 05:25.509
+meetings don't necessarily need to be in person when that
+
+05:25.509 --> 05:28.649
+all becomes optional. What is the transform version of
+
+05:28.649 --> 05:30.480
+ourselves on the other side? And that's what I'm
+
+05:30.480 --> 05:33.829
+really excited about across our customer base actually is really
+
+05:33.829 --> 05:38.279
+seeing the leaders who are treating this as an opportunity
+
+05:38.279 --> 05:40.930
+to transform rather than just a crisis to respond.
+
+05:40.930 --> 05:45.649
+Thio. So what do you see on the other
+
+05:45.649 --> 05:47.540
+side of this for? For Salesforce in particular?
+
+05:47.540 --> 05:49.149
+I mean, how how is it going to change
+
+05:49.149 --> 05:50.959
+the way you operate, the way you get your
+
+05:50.959 --> 05:55.759
+work done? It's a great question. It is
+
+05:55.759 --> 05:58.149
+the most challenging question to answer. I laughed,
+
+05:58.149 --> 06:00.009
+predicting the future of this year feels sort of comically
+
+06:00.009 --> 06:01.879
+hard, because I wouldn't have been right at any
+
+06:01.879 --> 06:03.649
+point. You know, it's every every time I
+
+06:03.649 --> 06:05.680
+think I've figured out this year. Some new crazy
+
+06:05.680 --> 06:09.290
+thing happens. But with that caveat, you know
+
+06:09.290 --> 06:11.879
+, right now, I would say it has proven
+
+06:11.879 --> 06:15.649
+that this all digital work anywhere world can work like
+
+06:15.649 --> 06:17.290
+we can work in this environment. So it does
+
+06:17.300 --> 06:19.350
+beg the question about what is the role of the
+
+06:19.350 --> 06:24.050
+office? What is the role of a headquarters on
+
+06:24.050 --> 06:27.610
+Bond? I'll start with a few sort of sober
+
+06:27.610 --> 06:29.319
+realities. One is, I think this year is
+
+06:29.319 --> 06:30.769
+not sustainable for a lot of our employees. We
+
+06:30.769 --> 06:34.060
+measure this, and on average, our employees have
+
+06:34.060 --> 06:39.300
+1.7 more hours of meetings on their calendar every day
+
+06:39.310 --> 06:42.449
+. Uh, this pandemic than before. In June
+
+06:42.449 --> 06:45.149
+, we surveyed our customers, and only 23% of
+
+06:45.149 --> 06:47.069
+people want to return to the office. We today
+
+06:47.069 --> 06:50.759
+that 72% people are clamoring for, you know,
+
+06:50.769 --> 06:56.610
+some semblance of normalcy. Other hand, I think
+
+06:56.620 --> 06:58.319
+, you know, I was talking to Matt Mullen
+
+06:58.329 --> 07:00.089
+because the CEO of WordPress, which is one of
+
+07:00.089 --> 07:02.269
+the largest content management systems in the world, but
+
+07:02.269 --> 07:05.470
+notably it's a company that's been distributed from day one
+
+07:05.480 --> 07:08.300
+s. I laugh all of a sudden he is
+
+07:08.300 --> 07:11.100
+the expert on what we're all experiencing, and he
+
+07:11.100 --> 07:12.399
+made a really good point to me. What you
+
+07:12.399 --> 07:15.709
+said. We're not really experiencing distributed work in the
+
+07:15.709 --> 07:17.149
+way that I thought of when I created WordPress.
+
+07:17.139 --> 07:20.009
+We're experience of pandemic i e. It's been imposed
+
+07:20.009 --> 07:23.839
+upon us as opposed to an intentional design of our
+
+07:23.839 --> 07:26.420
+culture. And so what I would say is on
+
+07:26.420 --> 07:29.370
+the other side of this, now that we've really
+
+07:29.370 --> 07:31.790
+learned that we can operate in this distributed way,
+
+07:31.800 --> 07:33.709
+I think it's going to really change the way we
+
+07:33.709 --> 07:36.240
+think about our physical spaces, you know, maybe
+
+07:36.240 --> 07:40.180
+more purpose driven. Maybe people don't We have assigned
+
+07:40.180 --> 07:43.810
+desks. Maybe it's more neighborhood seating. Maybe instead
+
+07:43.810 --> 07:45.759
+of saying, you know, we're gonna work away
+
+07:45.759 --> 07:47.220
+from the office on Fridays were to say, Hey
+
+07:47.230 --> 07:49.470
+, everyone's gonna work in the office on Thursday so
+
+07:49.470 --> 07:53.790
+that we really are focused on teaming rather than treating
+
+07:53.790 --> 07:56.839
+remote work is an individual decision. E think all
+
+07:56.839 --> 07:58.730
+of these things will, I think, for the
+
+07:58.730 --> 08:03.000
+companies that really are intentional about building their cultures.
+
+08:03.009 --> 08:05.250
+Um, I think it's really amazing opportunity because one
+
+08:05.250 --> 08:07.930
+of the things that I think it does mean is
+
+08:07.930 --> 08:09.569
+you can recruit from, or geography ease. It
+
+08:09.569 --> 08:13.920
+can get you know, your employees working parents just
+
+08:13.920 --> 08:16.550
+a ton more flexibility if we do it right,
+
+08:16.560 --> 08:18.050
+s. So I'm kind of looking forward to the
+
+08:18.050 --> 08:20.089
+day where you don't have the stress of it feeling
+
+08:20.089 --> 08:22.399
+imposed on you. And you could really say,
+
+08:22.399 --> 08:26.300
+How do we treat the lessons of 2020 as an
+
+08:26.300 --> 08:28.970
+asset that we can use to transform our culture going
+
+08:28.970 --> 08:31.889
+forward? That is definitely a lot of us are
+
+08:31.889 --> 08:35.950
+thinking about that. And it will be fascinating when
+
+08:35.639 --> 08:41.269
+the context isn't as frightening as it is now to
+
+08:41.269 --> 08:45.049
+think about it with a clearer head. Um,
+
+08:45.539 --> 08:48.000
+you know, you said that you mentioned the culture
+
+08:48.000 --> 08:52.779
+a couple of times. Salesforce has 50,000 plus employees
+
+08:52.789 --> 08:58.440
+. How how do you shift your culture when you're
+
+08:58.440 --> 09:01.929
+50,000 plus employees in what must be dozens and dozens
+
+09:01.940 --> 09:05.259
+of markets, all all of your employees working from
+
+09:05.259 --> 09:09.159
+home? How do you How do you align and
+
+09:09.159 --> 09:13.840
+how do you ship your culture? It is a
+
+09:13.840 --> 09:16.279
+really interesting question, and, um well, first
+
+09:16.279 --> 09:18.799
+, I'll say that we've been really intentional about building
+
+09:18.799 --> 09:22.350
+our culture. I think every great company is and
+
+09:22.350 --> 09:24.620
+should be on DWI really take great pride that our
+
+09:24.620 --> 09:28.639
+culture isn't just, um, looking inwards at our
+
+09:28.639 --> 09:31.320
+employees. It's really something that we express to our
+
+09:31.320 --> 09:35.250
+customers into our partners into our communities. And it's
+
+09:35.250 --> 09:37.460
+why, from day one, every salesforce tower across
+
+09:37.460 --> 09:39.129
+the globe, we have many of them. In
+
+09:39.129 --> 09:43.590
+many major cities, we have the top floor is
+
+09:43.590 --> 09:46.250
+called the Ohana floor, and it's a floor that
+
+09:46.250 --> 09:48.860
+is actually available not just us but to our partners
+
+09:48.860 --> 09:50.350
+into the community, to use for, for example
+
+09:50.350 --> 09:54.240
+, for charity fundraisers. It's the reason why you
+
+09:54.240 --> 09:56.860
+go to ah Salesforce event like one of our world
+
+09:56.860 --> 09:58.929
+tours or dream force. It looks like our offices
+
+09:58.929 --> 10:01.960
+and our offices look like our events, you know
+
+10:01.960 --> 10:03.610
+? And it's, uh, we really try to
+
+10:03.610 --> 10:05.740
+say that our culture is something that we want to
+
+10:05.740 --> 10:07.200
+be, not a poster on the cafeteria wall,
+
+10:07.200 --> 10:09.850
+and that's something superficial, like our culture is something
+
+10:09.850 --> 10:11.960
+that is part of our events. It's a part
+
+10:11.960 --> 10:15.149
+of the way we express ourselves to our community.
+
+10:15.639 --> 10:16.659
+Um, and it's interesting when I gave all those
+
+10:16.659 --> 10:20.240
+examples those events, the office space is a lot
+
+10:20.240 --> 10:22.289
+of those have gone away. And so it really
+
+10:22.289 --> 10:24.399
+begs the question in this, you know, distributed
+
+10:24.399 --> 10:26.500
+, all digital world were in. How do you
+
+10:26.500 --> 10:28.539
+imbue culture? How do you onboard new employees to
+
+10:28.539 --> 10:31.779
+our culture? I think we've done a good job
+
+10:31.779 --> 10:33.409
+. As I said, just by being intentional,
+
+10:33.419 --> 10:35.129
+you know, we've spent a lot of time really
+
+10:35.129 --> 10:37.419
+focusing on, you know, culture not being again
+
+10:37.419 --> 10:41.840
+from the superficial values on the on the coffee next
+
+10:41.840 --> 10:43.399
+to the coffee machine. This is something I think
+
+10:43.409 --> 10:46.730
+all of our employees can really articulate. You also
+
+10:46.730 --> 10:50.889
+wonder how much are we borrowing from culture that we've
+
+10:50.889 --> 10:52.720
+built pre pandemic. You know, if this continued
+
+10:52.720 --> 10:56.139
+on for five more years, would your culture start
+
+10:56.139 --> 10:58.679
+toe have cracks in the foundation, and I can't
+
+10:58.679 --> 11:01.120
+say that I have. You know, I think
+
+11:01.120 --> 11:01.549
+that's part of it. I really dio you know
+
+11:01.549 --> 11:05.429
+. And so I really think when I think about
+
+11:05.429 --> 11:05.879
+culture going forward, I think one of the things
+
+11:05.879 --> 11:09.230
+I would say is it's really inclusive concept. You
+
+11:09.230 --> 11:11.269
+know, culture is something that you need to really
+
+11:11.269 --> 11:13.710
+authentically live, because culture is not something in posting
+
+11:13.710 --> 11:16.909
+the top culture is something that you experience when you
+
+11:16.909 --> 11:20.789
+interact with your colleagues and that your customers experience when
+
+11:20.789 --> 11:24.179
+they interact with you on DSO. I do believe
+
+11:24.179 --> 11:26.629
+that we maintain that, you know, really inclusive
+
+11:26.629 --> 11:28.080
+view of culture or something we can maintain even in
+
+11:28.080 --> 11:31.889
+this in this new way of working, I wonder
+
+11:31.889 --> 11:35.659
+if you'd be willing to share with our audience.
+
+11:35.669 --> 11:37.690
+Um, some of the mistakes you may have made
+
+11:37.690 --> 11:41.139
+along the way. You know, if we ever
+
+11:41.139 --> 11:46.850
+face another crisis again of the breath of the one
+
+11:46.850 --> 11:48.710
+we're facing now, what will you know not to
+
+11:48.710 --> 11:54.360
+dio It is a great question and it's something I've
+
+11:54.360 --> 11:56.460
+actually talked to a lot of our customers about as
+
+11:56.460 --> 11:58.200
+well What high level pattern I will give you some
+
+11:58.200 --> 12:03.080
+examples is where we didn't change fast enough. You
+
+12:03.080 --> 12:03.470
+know, I think that in the beginning of this
+
+12:03.470 --> 12:07.179
+pandemic, every CEO I talked Thio would talk about
+
+12:07.179 --> 12:09.389
+the crisis is something that they would weather, you
+
+12:09.389 --> 12:13.330
+know, something that they would get through so that
+
+12:13.330 --> 12:15.450
+on the other side they could go back to business
+
+12:15.450 --> 12:18.250
+as usual. All of the customers in our customer
+
+12:18.250 --> 12:22.809
+base and all areas where we've done better to or
+
+12:22.809 --> 12:26.320
+where we lean into the change. There was a
+
+12:26.320 --> 12:30.750
+wonderful quote from the chief digital officer of Loreal who
+
+12:30.750 --> 12:33.190
+said something along lines of we accomplished in three months
+
+12:33.190 --> 12:35.269
+. What would have taken us three years to Dio
+
+12:35.340 --> 12:39.080
+? And I think that that there's, you know
+
+12:39.080 --> 12:41.889
+, that old colloquialism like Don't let a good crisis
+
+12:41.889 --> 12:45.330
+go to waste. I think that's right mentality in
+
+12:45.330 --> 12:46.769
+these, which is, you know, um and
+
+12:46.779 --> 12:50.590
+Thio answer your question more directly at the beginning.
+
+12:50.590 --> 12:54.350
+In our particular customer facing parts of our company,
+
+12:54.840 --> 12:58.500
+we treated as something toe wait out and we didn't
+
+12:58.500 --> 13:01.509
+lean into Okay, how do we show up for
+
+13:01.509 --> 13:05.820
+our customers digitally in a way that's actually compatible this
+
+13:05.820 --> 13:07.649
+pandemic? And you know that means that, you
+
+13:07.649 --> 13:11.120
+know, we're challenging our teams to say if you're
+
+13:11.120 --> 13:13.990
+not on zoom every day with your customers, what
+
+13:13.990 --> 13:15.100
+are you doing? You know what? We should
+
+13:15.100 --> 13:16.340
+be here to help them in their time of greatest
+
+13:16.340 --> 13:20.360
+need. Um, and I think that we didn't
+
+13:20.360 --> 13:22.419
+do that right away. We were too cautious,
+
+13:22.429 --> 13:26.740
+Andi And I think if we I Your question almost
+
+13:26.740 --> 13:28.169
+gives me PTSD because I don't want to experience another
+
+13:28.169 --> 13:31.320
+year like this. But if we ever encounter something
+
+13:31.320 --> 13:35.659
+like this, I think we're gonna really lean into
+
+13:35.659 --> 13:37.740
+the changes implied by the crisis rather than treating the
+
+13:37.740 --> 13:41.250
+crisis. Is something temporary, Andi, even if
+
+13:41.250 --> 13:43.809
+it is temporary, it just might. We use
+
+13:43.809 --> 13:48.809
+is on transform our business. And based on you
+
+13:48.809 --> 13:52.080
+know what, you still when we began this conversation
+
+13:52.090 --> 13:54.950
+, you said you were in events oriented company and
+
+13:54.950 --> 13:58.399
+that, you know, dream Force. If anyone
+
+13:58.399 --> 14:00.950
+has ever been in San Francisco for dream force,
+
+14:01.440 --> 14:07.159
+it's in San Francisco, right? It iss Yeah
+
+14:07.539 --> 14:09.570
+, yeah, it's crazy event. How are you
+
+14:09.570 --> 14:13.389
+going to think about events in the future? Yeah
+
+14:13.389 --> 14:15.100
+. You know, I think it's going to end
+
+14:15.100 --> 14:16.070
+up in and not in, or you know,
+
+14:16.070 --> 14:20.820
+I think I'm looking for the welcoming 200,000 people to
+
+14:20.820 --> 14:22.360
+San Francisco next year. Knock on wood. Uh
+
+14:22.370 --> 14:24.250
+, if this vaccine does what we all hope it
+
+14:24.250 --> 14:28.129
+will dio. But what we've really learned is how
+
+14:28.129 --> 14:30.059
+to do digital events like the one we're doing right
+
+14:30.059 --> 14:31.960
+now. Incredibly valuable, right? You can watch
+
+14:31.960 --> 14:35.659
+it in a time shifted way. You can watch
+
+14:35.659 --> 14:37.570
+it on your own schedule. Um, the two
+
+14:37.570 --> 14:39.809
+of us didn't need to travel to have this conversation
+
+14:39.809 --> 14:41.259
+right now, and it probably lowered some of the
+
+14:41.259 --> 14:45.490
+barriers to us having this conversation. So I think
+
+14:45.490 --> 14:46.919
+when I think about it, and actually I've had
+
+14:46.919 --> 14:48.059
+this experience. I've heard this from many executives.
+
+14:48.440 --> 14:52.269
+I have conversations with so many CEOs every week,
+
+14:52.279 --> 14:54.820
+and I wonder if I would have had that same
+
+14:54.830 --> 14:58.549
+level of conversation if we felt like we had to
+
+14:58.549 --> 15:01.580
+be in person to have them. So, in
+
+15:01.580 --> 15:03.399
+general, what I hope on the other side of
+
+15:03.399 --> 15:05.350
+this, for our events and our culture broadly is
+
+15:05.350 --> 15:09.139
+embracing what we've learned and making it not snap back
+
+15:09.139 --> 15:11.889
+to the way it was, but really augment the
+
+15:11.889 --> 15:16.470
+way we run the company. But this has been
+
+15:16.470 --> 15:18.500
+so interesting. I wish we could talk for a
+
+15:18.500 --> 15:20.340
+now, er, but But unfortunately, unfortunately,
+
+15:20.340 --> 15:22.309
+we can't. So I want to thank you.
+
+15:22.309 --> 15:24.600
+And I want to thank everyone in our audience for

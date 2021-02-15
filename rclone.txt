@@ -1,0 +1,3 @@
+rclone ls "AJM1 S3":ws20-input
+rclone ls "AJM1 Google Drive":'WS20_Live Masterclasses'
+rclone -P copy GDrive:folder S3:bucket
