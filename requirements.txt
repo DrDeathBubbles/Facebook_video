@@ -17,7 +17,7 @@ gspread==0.6.2
 httplib2==0.10.3
 idna==2.0
 imageio==2.1.2
-ipython==2.4.1
+ipython==7.16.3
 Jinja2==2.8
 jmespath==0.9.0
 jsonpatch==1.10
