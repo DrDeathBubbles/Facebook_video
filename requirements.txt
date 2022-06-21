@@ -25,7 +25,7 @@ jsonpointer==1.9
 language-selector==0.1
 MarkupSafe==0.23
 moviepy==0.2.3.2
-numpy==1.13.3
+numpy==1.22.0
 oauth2client==4.1.2
 oauthlib==1.0.3
 pandas==0.21.0
